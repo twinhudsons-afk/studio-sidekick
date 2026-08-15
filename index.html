@@ -621,18 +621,19 @@
     <span class="nav-label">Making sound</span>
     <a class="nav-link" href="#keyboard"><span class="nav-num">04</span> Playing the keyboard</a>
     <a class="nav-link" href="#voice"><span class="nav-num">05</span> Recording your voice</a>
-    <a class="nav-link" href="#song"><span class="nav-num">06</span> Building a song</a>
+    <a class="nav-link" href="#voicefx"><span class="nav-num">06</span> Shaping your voice</a>
+    <a class="nav-link" href="#song"><span class="nav-num">07</span> Building a song</a>
 
     <span class="nav-label">Parts &amp; patterns</span>
-    <a class="nav-link" href="#beats"><span class="nav-num">07</span> Making beats</a>
-    <a class="nav-link" href="#keys"><span class="nav-num">08</span> Keys &amp; chords</a>
+    <a class="nav-link" href="#beats"><span class="nav-num">08</span> Making beats</a>
+    <a class="nav-link" href="#keys"><span class="nav-num">09</span> Keys &amp; chords</a>
 
     <span class="nav-label">When it goes wrong</span>
-    <a class="nav-link" href="#fix"><span class="nav-num">09</span> Fix it</a>
+    <a class="nav-link" href="#fix"><span class="nav-num">10</span> Fix it</a>
 
     <span class="nav-label">Reference</span>
-    <a class="nav-link" href="#words"><span class="nav-num">10</span> Words explained</a>
-    <a class="nav-link" href="#cheat"><span class="nav-num">11</span> Cheat sheet</a>
+    <a class="nav-link" href="#words"><span class="nav-num">11</span> Words explained</a>
+    <a class="nav-link" href="#cheat"><span class="nav-num">12</span> Cheat sheet</a>
   </nav>
   <div class="scrim" id="scrim"></div>
 
@@ -696,6 +697,11 @@
               <span class="fc-kicker">Guided walk</span>
               <span class="fc-title">Play piano sounds (MIDI)</span>
               <span class="fc-sub">Add an instrument, pick a sound, play or draw the notes — and fix them afterwards.</span>
+            </button>
+            <button class="flowcard" data-flow="voicefx">
+              <span class="fc-kicker">Guided walk</span>
+              <span class="fc-title">Shape my voice</span>
+              <span class="fc-sub">Reverb halls and rooms, echo, polish, tuning, doubles — pick the sound, I'll set it up with you.</span>
             </button>
             <button class="flowcard fix" data-flow="nosound">
               <span class="fc-kicker">Fix it</span>
@@ -1044,9 +1050,114 @@
           </div>
         </section>
 
+        <!-- ============================================ 06 VOICE FX -->
+        <section id="voicefx">
+          <div class="sec-head"><span class="sec-num">06</span><h2>Shaping your voice</h2></div>
+          <p class="sec-intro">A recorded vocal is raw material. These are all the ways FL Studio can shape it — from a barely-there polish to a completely different voice. The <strong>Shape my voice</strong> card at the top walks any of them with you.</p>
+
+          <div class="cards">
+
+            <div class="card">
+              <span class="eyebrow">Learn this order once — it never changes</span>
+              <h3>The vocal chain</h3>
+              <figure class="diagram" data-svg="vocalChain"></figure>
+              <p>All vocal effects live on the vocal's <strong>mixer track</strong> — press <span class="path">F9</span>, click the vocal track, and load effects into its slots on the right, top to bottom in the order above:</p>
+              <figure class="diagram" data-svg="mixerVocal"></figure>
+              <div class="note tip">
+                <b>Why this order</b>
+                EQ fixes the tone, compression evens the level, and only then does reverb put the finished voice into a space. Reverb applied to a muddy, uneven voice just gives you muddy, uneven echoes.
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>EQ — tidy the tone first</h3>
+              <figure class="diagram" data-svg="eqCurve"></figure>
+              <p>Load <strong>Fruity parametric EQ 2</strong> into slot 1. Four moves cover almost every voice:</p>
+              <ul>
+                <li><strong>Cut everything below ~90 Hz.</strong> There's no voice down there — only mic-stand rumble and room boom.</li>
+                <li><strong>A small dip around 250 Hz</strong> if the voice sounds boxy or muddy.</li>
+                <li><strong>A gentle lift around 3 kHz</strong> for presence — the "closer to the speaker" frequencies.</li>
+                <li><strong>A small shelf up from 10 kHz</strong> for air. (If you recorded with the Scarlett's AIR button on, you may already have enough.)</li>
+              </ul>
+              <div class="note watch"><b>Small moves</b>2–3 dB is a real EQ move. If you can hear the change instantly and obviously, it's probably too much.</div>
+            </div>
+
+            <div class="card">
+              <h3>Compression — even it out</h3>
+              <figure class="diagram" data-svg="compDiagram"></figure>
+              <p>A compressor automatically turns down the loud moments so the whole take sits at a steady level — it's why record vocals feel like they're resting on top of the music without ever disappearing.</p>
+              <ul>
+                <li>Load <strong>Fruity Limiter</strong> in slot 2 and switch it to <strong>COMP</strong> mode.</li>
+                <li>Lower the threshold until the meter shows about <strong>3–4 dB</strong> of reduction on loud lines.</li>
+                <li>If the voice starts audibly "pumping", back the threshold off.</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">Room · plate · hall</span>
+              <h3>Reverb — put the voice in a space</h3>
+              <figure class="diagram" data-svg="reverbWindow"></figure>
+              <p>Load <strong>Fruity Reeverb 2</strong> in slot 3. The <strong>WET knob is the one that matters</strong> — it sets how much of the effect you hear. Vocals usually sit between 15% and 25%: you should <em>feel</em> the space more than hear it.</p>
+              <ul>
+                <li><strong>Verses drier, choruses wetter</strong> — automate WET up for the chorus and the song opens like a door.</li>
+                <li><strong>PRE-DELAY around 20 ms</strong> keeps the words clear by letting each syllable land before its reverb starts.</li>
+                <li><strong>Fast songs need short decays</strong> (under ~1.5 s) or the reverb smears over the next line. Slow ballads can carry 2.5 s+ hall tails.</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Delay — echoes in time</h3>
+              <figure class="diagram" data-svg="delayTaps"></figure>
+              <p>Load <strong>Fruity Delay 3</strong> in slot 4 when you want echo as an <em>effect</em> rather than a space. Two settings cover most songs: a single fast <strong>slapback</strong> for attitude, or a tempo-synced <strong>1/4-note echo</strong> for size and dreaminess.</p>
+              <div class="note tip"><b>The throw</b> The pro move: automate the delay's mix up for just the <em>last word</em> of a phrase, so that one word echoes off into the gap. Instant record-sounding production.</div>
+            </div>
+
+            <div class="card">
+              <h3>Pitch — correction and the tuned-pop sound</h3>
+              <p>Two different jobs, two tools:</p>
+              <ul>
+                <li><strong>Fixing a note or two:</strong> <strong>NewTone</strong> — opens the recording as editable notes; drag the flat one up. Surgical, invisible.</li>
+                <li><strong>The modern pop sheen:</strong> <strong>Pitcher</strong> on the mixer track, set to your song's key. Slow correction speed = invisible polish; fast = the hard, quantised pop shimmer, as a deliberate style.</li>
+              </ul>
+              <div class="note watch">
+                <b>Edition check</b>
+                Pitcher and NewTone come with <strong>Signature Edition and up</strong> — Producer Edition doesn't include them (<span class="path">Help → About</span> to check). They can be bought individually, or the upgrade is priced as the difference.
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Character effects — a different voice entirely</h3>
+              <div class="tw">
+                <table>
+                  <thead><tr><th>Sound</th><th>How</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Telephone / radio</strong></td><td><strong>Fruity Filter</strong> or EQ: cut everything below 500 Hz and above 3 kHz. Classic for one verse or an intro line.</td></tr>
+                    <tr><td><strong>Megaphone / grit</strong></td><td><strong>Fruity Blood Overdrive</strong>, gently — adds fur and aggression. Great doubled quietly under a clean take.</td></tr>
+                    <tr><td><strong>Robot / vocoder</strong></td><td><strong>Vocodex</strong> (Signature) with a synth as the carrier — the Daft Punk voice.</td></tr>
+                    <tr><td><strong>Whisper double</strong></td><td>Record the line again <em>whispered</em>, lay it exactly under the sung take, quietly. Intimacy on demand.</td></tr>
+                    <tr><td><strong>Dreamy wash</strong></td><td>Reverb WET at 50%+ with a long decay — the voice dissolves into the room. Bridges, outros.</td></tr>
+                    <tr><td><strong>Shimmer width</strong></td><td><strong>Fruity Chorus</strong>, subtle — thickens and widens a thin-feeling take.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Doubles &amp; harmonies — the free upgrade</h3>
+              <p>The biggest chorus-thickener costs nothing but a second take:</p>
+              <ul>
+                <li><strong>The double:</strong> record the same line again, as identically as you can. Pan one take left, one right, both slightly quieter than the lead. This is THE sound of a pop chorus.</li>
+                <li><strong>The harmony:</strong> sing the line again a third higher (two letter-names up the scale — C melody → E harmony). Sit it clearly below the lead in volume.</li>
+                <li><strong>Only in the chorus.</strong> Verses stay one voice — the arrival of the doubles IS the chorus lift.</li>
+              </ul>
+            </div>
+
+          </div>
+        </section>
+
         <!-- ============================================ 06 SONG -->
         <section id="song">
-          <div class="sec-head"><span class="sec-num">06</span><h2>Building a song</h2></div>
+          <div class="sec-head"><span class="sec-num">07</span><h2>Building a song</h2></div>
           <p class="sec-intro">You sing and you play. That's already the hard part. This is the order that makes the rest fall into place.</p>
 
           <div class="cards">
@@ -1148,7 +1259,7 @@
 
         <!-- ============================================ 07 BEATS -->
         <section id="beats">
-          <div class="sec-head"><span class="sec-num">07</span><h2>Making beats</h2></div>
+          <div class="sec-head"><span class="sec-num">08</span><h2>Making beats</h2></div>
           <p class="sec-intro">Everything about building the drums and low end under your songs — the tool, the patterns, and the tricks that make a beat feel human. Or let the <strong>Make me a beat</strong> wizard at the top build one with you.</p>
 
           <div class="cards">
@@ -1244,7 +1355,7 @@
 
         <!-- ============================================ 08 KEYS -->
         <section id="keys">
-          <div class="sec-head"><span class="sec-num">08</span><h2>Keys &amp; chords</h2></div>
+          <div class="sec-head"><span class="sec-num">09</span><h2>Keys &amp; chords</h2></div>
           <p class="sec-intro">Choosing a key that flatters your voice, and knowing which chords belong in it.</p>
 
           <div class="cards">
@@ -1321,7 +1432,7 @@
 
         <!-- ============================================ 09 FIX -->
         <section id="fix">
-          <div class="sec-head"><span class="sec-num">09</span><h2>Fix it</h2></div>
+          <div class="sec-head"><span class="sec-num">10</span><h2>Fix it</h2></div>
           <p class="sec-intro">The guided fixers at the top of the page ask you questions and narrow down — these are the same fixes flat on the page, causes most-likely first.</p>
 
           <div class="cards">
@@ -1433,7 +1544,7 @@
 
         <!-- ============================================ 10 WORDS -->
         <section id="words">
-          <div class="sec-head"><span class="sec-num">10</span><h2>Words explained</h2></div>
+          <div class="sec-head"><span class="sec-num">11</span><h2>Words explained</h2></div>
           <p class="sec-intro">Every term you'll run into, in plain English.</p>
 
           <div class="cards">
@@ -1456,6 +1567,8 @@
                 <div class="gterm"><dt>Half-time</dt><dd>A drum feel where the snare lands half as often, making the same tempo feel slow and heavy. Trap is built on it.</dd></div>
                 <div class="gterm"><dt>Headroom</dt><dd>The gap between your loudest moment and the point of distortion. Leaving some is what stops a great take being ruined.</dd></div>
                 <div class="gterm"><dt>Key</dt><dd>The home note of a song and the family of chords built around it. Choose it to suit your voice.</dd></div>
+                <div class="gterm"><dt>Compression</dt><dd>Automatically turning down the loud moments so the whole performance sits at an even level. The reason record vocals never disappear behind the band.</dd></div>
+                <div class="gterm"><dt>Delay</dt><dd>Distinct echoes of the voice, usually timed to the song’s tempo. An effect you hear, where reverb is a space you feel.</dd></div>
                 <div class="gterm"><dt>Latency</dt><dd>The delay between doing something and hearing it. Set by the buffer. Under 10 ms feels instant; over 20 ms feels wrong.</dd></div>
                 <div class="gterm"><dt>Limiter</dt><dd>An effect that stops sound going past a ceiling, letting you raise the overall loudness safely. The last thing on the Master when mastering — Fruity Limiter in FL.</dd></div>
                 <div class="gterm"><dt>Mastering</dt><dd>The final polish on the finished song — gentle EQ and limiting on the Master strip so it's loud and even enough to sit beside other records. Minutes, not hours, at this level.</dd></div>
@@ -1468,6 +1581,8 @@
                 <div class="gterm"><dt>Playlist</dt><dd>FL's timeline, where patterns and audio are arranged into the finished song.</dd></div>
                 <div class="gterm"><dt>Plugin</dt><dd>Software that makes or changes sound. FLEX and FPC are instruments; reverb and compressors are effects.</dd></div>
                 <div class="gterm"><dt>Preset / patch</dt><dd>A specific saved sound inside a plugin — "Grand Piano", "Warm Pad".</dd></div>
+                <div class="gterm"><dt>Reverb</dt><dd>The sound of a space — room, plate or hall — around the voice. The WET knob sets how much; vocals usually want 15–25%.</dd></div>
+                <div class="gterm"><dt>Pitch correction</dt><dd>Nudging sung notes onto exact pitch — invisibly (slow, NewTone/Pitcher) or as the hard quantised pop effect (fast Pitcher).</dd></div>
                 <div class="gterm"><dt>Sample rate</dt><dd>How many times per second the sound is measured. 44100 or 48000. Pick one, don't change it mid-project.</dd></div>
                 <div class="gterm"><dt>Step sequencer</dt><dd>The rows of 16 squares in the Channel Rack. Click a square, the drum plays there. How most beats get made.</dd></div>
                 <div class="gterm"><dt>Swing</dt><dd>Pushing the off-beats slightly late so a rigid beat grooves. A knob at the top of the Channel Rack.</dd></div>
@@ -1481,7 +1596,7 @@
 
         <!-- ============================================ 11 CHEAT -->
         <section id="cheat">
-          <div class="sec-head"><span class="sec-num">11</span><h2>Cheat sheet</h2></div>
+          <div class="sec-head"><span class="sec-num">12</span><h2>Cheat sheet</h2></div>
           <p class="sec-intro">The settings and shortcuts worth having in one place.</p>
 
           <div class="cards">
@@ -2034,6 +2149,7 @@
   SVGX.flMixer = function (hl) {
     var inner = "";
     var masterSel = hl === "master";
+    var vocalSel = hl === "vocal";
     var top = 44, stripH = 300;
     // dB scale sliver + Current strip
     inner += '<rect x="34" y="' + top + '" width="20" height="' + stripH + '" fill="' + FLC.dark + '"/>';
@@ -2045,7 +2161,7 @@
 
     var strips = [
       { name: "Master", master: true },
-      { name: "Insert 1", active: hl === "input" || hl === "arm" },
+      { name: vocalSel ? "1 — Vocal" : "Insert 1", active: hl === "input" || hl === "arm" || vocalSel },
       { name: "Insert 2" }, { name: "Insert 3" }, { name: "Insert 4" }
     ];
     strips.forEach(function (st, i) {
@@ -2088,10 +2204,12 @@
     // FX slots
     var slotNames = masterSel
       ? ["Fruity parametric EQ 2", "Fruity Limiter", "Slot 3", "Slot 4", "Slot 5", "Slot 6", "Slot 7", "Slot 8"]
+      : vocalSel
+      ? ["Fruity parametric EQ 2", "Fruity Limiter", "Fruity Reeverb 2", "Fruity Delay 3", "Slot 5", "Slot 6", "Slot 7", "Slot 8"]
       : ["Slot 1", "Slot 2", "Slot 3", "Slot 4", "Slot 5", "Slot 6", "Slot 7", "Slot 8"];
     slotNames.forEach(function (nm, k) {
       var sy = top + 40 + k * 28;
-      var lit = masterSel && k < 2;
+      var lit = (masterSel && k < 2) || (vocalSel && k < 4);
       inner += '<rect x="' + (px + 8) + '" y="' + sy + '" width="' + (pw - 46) + '" height="22" rx="3" fill="' + (lit ? "#3D4650" : FLC.body) + '"/>';
       inner += '<path d="M ' + (px + 16) + ' ' + (sy + 7) + ' l 0 8 l 5 -4 Z" fill="' + FLC.dim + '"/>';
       inner += '<text x="' + (px + 28) + '" y="' + (sy + 15) + '" font-family="var(--body)" font-size="9.5" font-style="' + (lit ? "normal" : "italic") + '" fill="' + (lit ? FLC.txt : FLC.dim) + '">' + esc(nm) + '</text>';
@@ -2099,13 +2217,15 @@
       inner += '<circle cx="' + (px + pw - 10) + '" cy="' + (sy + 11) + '" r="3" fill="' + (lit ? "#C3E14E" : FLC.well) + '"/>';
     });
     if (masterSel) inner += '<rect x="' + (px + 3) + '" y="' + (top + 36) + '" width="' + (pw - 6) + '" height="60" rx="7" fill="none" stroke="var(--focus)" stroke-width="3" stroke-dasharray="7 5"/>' + pill(px + pw / 2, 368, "The mastering chain lives here");
+    if (vocalSel) inner += '<rect x="' + (px + 3) + '" y="' + (top + 36) + '" width="' + (pw - 6) + '" height="116" rx="7" fill="none" stroke="var(--focus)" stroke-width="3" stroke-dasharray="7 5"/>' + pill(px + pw / 2, 368, "Your vocal chain — top to bottom, in this order");
     // routing line at the bottom
     inner += '<rect x="' + (px + 8) + '" y="' + (top + stripH - 30) + '" width="' + (pw - 16) + '" height="22" rx="3" fill="' + FLC.well + '"/>';
     inner += '<text x="' + (px + 20) + '" y="' + (top + stripH - 15) + '" font-family="var(--body)" font-size="9.5" fill="' + FLC.dim + '">Out 1 - Out 2  (the Scarlett)</text>';
-    return flWindow(760, 386, "Mixer - " + (masterSel ? "Master" : "Insert 1"), inner);
+    return flWindow(760, 386, "Mixer - " + (masterSel ? "Master" : vocalSel ? "Insert 1 (Vocal)" : "Insert 1"), inner);
   };
   SVGX.mixerArm = function () { return SVGX.flMixer("input"); };
   SVGX.mixerMaster = function () { return SVGX.flMixer("master"); };
+  SVGX.mixerVocal = function () { return SVGX.flMixer("vocal"); };
 
   /* Toolbar — the real transport cluster: menu row, PAT/SONG, play/stop/rec,
      BPM + time LCDs, pattern selector, metronome, MIDI light.
@@ -2368,6 +2488,139 @@
     return s;
   };
 
+  /* ---------- The vocal chain: order matters ---------- */
+  SVGX.vocalChain = function () {
+    var s = '<svg viewBox="0 0 760 210" role="img" aria-label="The vocal effects chain in order">';
+    var steps = [
+      { n: "Your voice", sub: "recorded dry", tone: "red" },
+      { n: "1 · EQ", sub: "tidy the tone" },
+      { n: "2 · Compress", sub: "even the volume" },
+      { n: "3 · Reverb", sub: "put it in a space" },
+      { n: "4 · Delay", sub: "echoes, if wanted" }
+    ];
+    var x = 20;
+    steps.forEach(function (st, i) {
+      var w = i === 0 ? 130 : 142;
+      s += nodeBox(x, 60, w, 64, st.n, st.sub, st.tone);
+      if (i < steps.length - 1) s += wire(x + w, 92, x + w + 10, 92, "");
+      x += w + 10;
+    });
+    s += '<text x="380" y="170" text-anchor="middle" font-family="var(--body)" font-size="12.5" fill="var(--ink-soft)">The order is the recipe: fix the tone <em>before</em> evening it out, and add space <em>after</em> both —</text>';
+    s += '<text x="380" y="192" text-anchor="middle" font-family="var(--body)" font-size="12.5" fill="var(--ink-soft)">reverb applied to a muddy, uneven voice just makes muddy, uneven echoes.</text>';
+    s += '</svg>';
+    return s;
+  };
+
+  /* ---------- Fruity Reeverb 2: the space knobs, and room vs plate vs hall ---------- */
+  SVGX.reverbWindow = function () {
+    var inner = "";
+    var top = 44;
+    // preset row
+    inner += '<rect x="34" y="' + top + '" width="' + (700 - 68) + '" height="26" fill="' + FLC.dark + '"/>';
+    inner += '<rect x="42" y="' + (top + 4) + '" width="180" height="18" rx="3" fill="' + FLC.well + '"/>';
+    inner += '<text x="54" y="' + (top + 17) + '" font-family="var(--body)" font-size="10" fill="' + FLC.txt + '">Presets ▾  Vocal Plate</text>';
+    // knob row
+    var knobs = [
+      { n: "ROOM SIZE", v: "medium" }, { n: "DECAY", v: "1.8 s" }, { n: "PRE-DELAY", v: "20 ms" }, { n: "DAMPING", v: "gentle" }, { n: "WET", v: "20%" }
+    ];
+    knobs.forEach(function (k, i) {
+      var kx = 100 + i * 120;
+      inner += miniKnob(kx, top + 78, 22);
+      inner += '<text x="' + kx + '" y="' + (top + 118) + '" text-anchor="middle" font-family="var(--body)" font-size="9" letter-spacing=".06em" fill="' + FLC.dim + '">' + k.n + '</text>';
+      inner += '<text x="' + kx + '" y="' + (top + 134) + '" text-anchor="middle" font-family="var(--mono)" font-size="9.5" font-weight="700" fill="' + FLC.or + '">' + k.v + '</text>';
+    });
+    inner += '<rect x="560" y="' + (top + 50) + '" width="86" height="94" rx="7" fill="none" stroke="var(--focus)" stroke-width="2.5" stroke-dasharray="6 4"/>';
+    inner += '<text x="603" y="' + (top + 160) + '" text-anchor="middle" font-family="var(--body)" font-size="9" font-weight="700" fill="var(--focus)">the one that matters most</text>';
+    var s = flWindow(700, 240, "Fruity Reeverb 2   (on the mixer track, slot 3)", inner);
+    // room/plate/hall chips under the window
+    s += '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">';
+    [["Room", "small, intimate — barely-there polish for verses"],
+     ["Plate", "smooth and flattering — THE classic vocal reverb"],
+     ["Hall", "big and dramatic — ballad choruses, held notes"]].forEach(function (c) {
+      s += '<div style="flex:1 1 180px;background:var(--surface-sunk);border:1px solid var(--line-strong);border-radius:9px;padding:10px 14px">' +
+           '<b style="color:var(--accent-deep)">' + c[0] + '</b><br><span style="font-size:var(--fs-xs);color:var(--ink-soft)">' + c[1] + "</span></div>";
+    });
+    s += "</div>";
+    return s;
+  };
+
+  /* ---------- EQ curve for a voice ---------- */
+  SVGX.eqCurve = function () {
+    var inner = "";
+    var top = 50, gx = 60, gw = 600, gy = 190, gh = 120;
+    inner += '<rect x="' + gx + '" y="' + (gy - gh) + '" width="' + gw + '" height="' + gh + '" fill="' + FLC.lcdBg + '"/>';
+    // freq gridlines + labels
+    [["100", 0.18], ["250", 0.33], ["1k", 0.55], ["3k", 0.72], ["10k", 0.9]].forEach(function (f) {
+      var fx = gx + f[1] * gw;
+      inner += '<line x1="' + fx + '" y1="' + (gy - gh) + '" x2="' + fx + '" y2="' + gy + '" stroke="#333B44" stroke-width="0.8"/>';
+      inner += '<text x="' + fx + '" y="' + (gy + 16) + '" text-anchor="middle" font-family="var(--mono)" font-size="9" fill="' + FLC.dim + '">' + f[0] + '</text>';
+    });
+    inner += '<line x1="' + gx + '" y1="' + (gy - gh / 2) + '" x2="' + (gx + gw) + '" y2="' + (gy - gh / 2) + '" stroke="#3A424B" stroke-width="1"/>';
+    // the curve: HP below 90, dip at 250, presence rise 3k, air shelf 10k
+    var mid = gy - gh / 2;
+    inner += '<path d="M ' + gx + " " + gy + " C " + (gx + 40) + " " + gy + ", " + (gx + 60) + " " + mid + ", " + (gx + 105) + " " + mid +
+             " C " + (gx + 150) + " " + mid + ", " + (gx + 155) + " " + (mid + 22) + ", " + (gx + 198) + " " + (mid + 22) +
+             " C " + (gx + 245) + " " + (mid + 22) + ", " + (gx + 260) + " " + mid + ", " + (gx + 330) + " " + mid +
+             " C " + (gx + 390) + " " + mid + ", " + (gx + 400) + " " + (mid - 16) + ", " + (gx + 445) + " " + (mid - 16) +
+             " C " + (gx + 490) + " " + (mid - 16) + ", " + (gx + 500) + " " + (mid - 24) + ", " + (gx + gw) + " " + (mid - 26) +
+             '" fill="none" stroke="' + FLC.or + '" stroke-width="3" stroke-linecap="round"/>';
+    // labels
+    function tag(x, y, t) {
+      return '<text x="' + x + '" y="' + y + '" text-anchor="middle" font-family="var(--body)" font-size="9.5" font-weight="700" fill="' + FLC.txt + '">' + t + "</text>";
+    }
+    inner += tag(gx + 70, gy - gh + 20, "cut the rumble");
+    inner += tag(gx + 198, mid + 46, "less mud (250 Hz)");
+    inner += tag(gx + 445, mid - 32, "presence (3 kHz)");
+    inner += tag(gx + 560, mid - 44, "air (10 kHz+)");
+    return flWindow(720, 230, "Fruity parametric EQ 2 — a vocal curve", inner);
+  };
+
+  /* ---------- compression: before / after ---------- */
+  SVGX.compDiagram = function () {
+    var s = '<svg viewBox="0 0 760 210" role="img" aria-label="What compression does">';
+    function wave(x0, heights, col) {
+      var w = "";
+      heights.forEach(function (hh, i) {
+        w += '<rect x="' + (x0 + i * 14) + '" y="' + (120 - hh) + '" width="9" height="' + (hh * 2) + '" rx="3" fill="' + col + '"/>';
+      });
+      return w;
+    }
+    var before = [18, 44, 12, 30, 55, 15, 38, 10, 52, 20, 33, 14];
+    var after = before.map(function (h) { return 22 + h * 0.45; });
+    s += '<text x="150" y="34" text-anchor="middle" font-family="var(--display)" font-size="14" font-weight="700" fill="var(--ink)">Before</text>';
+    s += wave(70, before, "var(--ink-faint)");
+    s += '<text x="150" y="188" text-anchor="middle" font-family="var(--body)" font-size="11.5" fill="var(--ink-soft)">quiet words vanish, loud notes poke out</text>';
+    s += '<path d="M 280 105 L 330 105" stroke="var(--accent)" stroke-width="3" marker-end="none"/><path d="M 322 97 L 336 105 L 322 113 Z" fill="var(--accent)"/>';
+    s += '<text x="308" y="88" text-anchor="middle" font-family="var(--body)" font-size="10.5" font-weight="700" fill="var(--accent-deep)">compressor</text>';
+    s += '<text x="480" y="34" text-anchor="middle" font-family="var(--display)" font-size="14" font-weight="700" fill="var(--ink)">After</text>';
+    s += wave(400, after, "var(--accent)");
+    s += '<text x="480" y="188" text-anchor="middle" font-family="var(--body)" font-size="11.5" fill="var(--ink-soft)">every word sits at a steady, present level</text>';
+    s += '<text x="672" y="105" text-anchor="middle" font-family="var(--body)" font-size="11" fill="var(--ink-soft)">= the vocal stays</text>';
+    s += '<text x="672" y="122" text-anchor="middle" font-family="var(--body)" font-size="11" fill="var(--ink-soft)">on top of the beat</text>';
+    s += '</svg>';
+    return s;
+  };
+
+  /* ---------- delay taps: slapback vs quarter-note ---------- */
+  SVGX.delayTaps = function () {
+    var s = '<svg viewBox="0 0 760 230" role="img" aria-label="Delay types">';
+    function row(y, label, taps, sub) {
+      var r = '<text x="26" y="' + (y + 5) + '" font-family="var(--display)" font-size="13" font-weight="700" fill="var(--ink)">' + label + "</text>";
+      r += '<rect x="170" y="' + (y - 16) + '" width="18" height="32" rx="4" fill="var(--accent)"/>';
+      r += '<text x="179" y="' + (y + 42) + '" text-anchor="middle" font-family="var(--body)" font-size="9.5" fill="var(--ink-faint)">you sing</text>';
+      taps.forEach(function (t) {
+        r += '<rect x="' + (170 + t[0]) + '" y="' + (y - 16 * t[1]) + '" width="14" height="' + (32 * t[1]) + '" rx="4" fill="var(--accent)" opacity="' + (0.25 + t[1] * 0.5) + '"/>';
+      });
+      r += '<text x="' + 640 + '" y="' + (y + 5) + '" font-family="var(--body)" font-size="11" fill="var(--ink-soft)">' + sub + "</text>";
+      return r;
+    }
+    s += row(60, "Slapback", [[52, 0.7]], "one fast echo — rock'n'roll, instant attitude");
+    s += row(150, "1/4-note echo", [[110, 0.72], [220, 0.5], [330, 0.32]], "echoes in time with the song — dreamy, big");
+    s += '<text x="380" y="215" text-anchor="middle" font-family="var(--body)" font-size="12" fill="var(--ink-soft)">In Fruity Delay 3, set TIME by clicking the tempo-sync icon so echoes always land on the beat. Keep FEEDBACK low — two or three repeats.</text>';
+    s += '</svg>';
+    return s;
+  };
+
   /* ---------- Piano roll: notes as blocks + velocity lane ----------
      hl: 'draw' | 'vel' | null */
   SVGX.flPianoRoll = function (hl) {
@@ -2612,7 +2865,13 @@
     mixerMaster: function () { return SVGX.mixerMaster(); },
     flPianoRoll: function () { return SVGX.flPianoRoll(null); },
     flexWindow: function () { return SVGX.flexWindow(); },
-    rackHumanise: function () { return SVGX.rackHumanise(); }
+    rackHumanise: function () { return SVGX.rackHumanise(); },
+    vocalChain: function () { return SVGX.vocalChain(); },
+    reverbWindow: function () { return SVGX.reverbWindow(); },
+    eqCurve: function () { return SVGX.eqCurve(); },
+    compDiagram: function () { return SVGX.compDiagram(); },
+    delayTaps: function () { return SVGX.delayTaps(); },
+    mixerVocal: function () { return SVGX.mixerVocal(); }
   };
 
   SVGX.injectAll = function () {
@@ -3747,6 +4006,251 @@
   });
 
   /* ============================================================
+     FLOW: shape my voice
+     ============================================================ */
+
+  N("v0", {
+    q: "What should your voice sound like?",
+    d: "<p>Pick the destination — I'll set up the exact effects with you. If this is your first time here, start with the polish: it's the foundation every other sound builds on.</p>",
+    opts: [
+      { t: "Polished, like a record", s: "The standard vocal chain: EQ → compression → reverb → delay. Start here", cls: "primary", next: "vs1" },
+      { t: "Big ballad space", s: "Long hall reverb, dreamy echoes — the held-note chorus sound", next: "vbal1" },
+      { t: "Modern pop sheen", s: "Pitch correction — from invisible polish to the hard tuned effect", next: "vpop1" },
+      { t: "A character voice", s: "Telephone, megaphone, robot, whisper — a different voice for one section", next: "vch1" },
+      { t: "Doubles & harmonies", s: "The free chorus-thickener every record uses", next: "vdh1" }
+    ]
+  });
+
+  /* ---- A: the standard chain ---- */
+  N("vs1", {
+    step: "Polish · step 1 of 5", q: "Where vocal effects live",
+    v: function () { return SVGX.mixerVocal(); },
+    d: "<p>Every effect goes on the vocal's <strong>mixer track</strong>, stacked in its slots — top to bottom is the order the voice passes through them, and the order is the recipe.</p>" +
+      act([
+        "Press <kbd>F9</kbd> — the Mixer opens",
+        "Click the track your vocal is on (the one you armed when recording)",
+        "The <strong>slots panel on the right</strong> is where the next four steps load their effects — slot 1 at the top, downwards in order"
+      ]),
+    opts: [{ t: "I'm on the vocal track — next", cls: "primary", next: "vs2" }]
+  });
+  N("vs2", {
+    step: "Polish · step 2 of 5", q: "Slot 1: EQ — tidy the tone",
+    v: function () { return SVGX.eqCurve(); },
+    d: "<p>Four small moves cover almost every voice — the curve below is the whole recipe.</p>" +
+      act([
+        "Click the <strong>arrow on Slot 1</strong> → <span class='path'>Select</span> → <strong>Fruity parametric EQ 2</strong>",
+        "Drag the leftmost band to <strong>cut everything below ~90 Hz</strong> (rumble, not voice)",
+        "Pull a small <strong>dip around 250 Hz</strong> if it sounds boxy",
+        "Lift <strong>3 kHz gently</strong> for presence, and a small <strong>shelf up at 10 kHz</strong> for air",
+        "Keep every move at 2–3 dB — obvious means too much"
+      ]),
+    opts: [{ t: "EQ set — next", cls: "primary", next: "vs3" }]
+  });
+  N("vs3", {
+    step: "Polish · step 3 of 5", q: "Slot 2: compression — even it out",
+    v: function () { return SVGX.compDiagram(); },
+    d: "<p>The compressor turns loud moments down automatically so every word sits at a steady level — the reason record vocals never vanish behind the music.</p>" +
+      act([
+        "Slot 2 → <strong>Fruity Limiter</strong>, and click its <strong>COMP</strong> tab",
+        "Sing/play the loudest chorus line and <strong>lower THRES</strong> until the meter dips by about <strong>3–4 dB</strong> on the big moments",
+        "If the voice audibly \"pumps\" or breathes, raise THRES back a little"
+      ]),
+    opts: [{ t: "Evened — next", cls: "primary", next: "vs4" }]
+  });
+  N("vs4", {
+    step: "Polish · step 4 of 5", q: "Slot 3: reverb — the space",
+    v: function () { return SVGX.reverbWindow(); },
+    d: "<p>Room = intimate. <strong>Plate = the classic vocal choice.</strong> Hall = big and dramatic. The <strong>WET</strong> knob decides how much space you hear — and it's the knob that matters.</p>" +
+      act([
+        "Slot 3 → <strong>Fruity Reeverb 2</strong>",
+        "Open its <strong>presets</strong> and pick a vocal plate (or a hall for a ballad)",
+        "Set <strong>WET to ~20%</strong> — you should <em>feel</em> the space, not hear an obvious effect",
+        "Set <strong>PRE-DELAY ~20 ms</strong> so each word lands clearly before its reverb blooms",
+        "Fast song? Keep <strong>DECAY under 1.5 s</strong> so lines don't smear together"
+      ]),
+    opts: [{ t: "In its space — next", cls: "primary", next: "vs5" }]
+  });
+  N("vs5", {
+    step: "Polish · step 5 of 5", q: "Slot 4: delay — optional echoes",
+    v: function () { return SVGX.delayTaps(); },
+    d: "<p>Delay is an effect you <em>hear</em>, where reverb is a space you <em>feel</em>. Plenty of songs stop at reverb — add this when you want it.</p>" +
+      act([
+        "Slot 4 → <strong>Fruity Delay 3</strong>",
+        "Click the <strong>tempo-sync icon</strong> on TIME and set <strong>1/4</strong> — echoes now land on the beat",
+        "Keep <strong>FEEDBACK low</strong> (two or three repeats) and the mix subtle",
+        "The pro move: automate the delay's mix up for just the <strong>last word</strong> of a phrase, so it echoes into the gap"
+      ]),
+    opts: [{ t: "Chain complete — quick quiz", cls: "primary", next: "vfq1" }]
+  });
+  N("vfq1", {
+    step: "Polish · check 1 of 3", q: "Which comes first on the vocal track?",
+    opts: [
+      { t: "EQ, then compression, then reverb", next: "vfq1y" },
+      { t: "Reverb first — set the mood early", next: "vfq1n" },
+      { t: "Order doesn't matter", next: "vfq1n" }
+    ]
+  });
+  N("vfq1y", { q: "Right.", d: "<p>Fix the tone, even the level, <em>then</em> add space. Reverb on a muddy voice is muddy echoes.</p>", opts: [{ t: "Next question", cls: "primary", next: "vfq2" }] });
+  N("vfq1n", { q: "Not this one.", d: "<p><strong>EQ → compression → reverb.</strong> The space goes on a voice that's already tidy and even — reverb applied to mud just gives you spacious mud.</p>", opts: [{ t: "Back to the question", cls: "primary", next: "vfq1" }] });
+  N("vfq2", {
+    step: "Polish · check 2 of 3", q: "How much reverb on a lead vocal, usually?",
+    opts: [
+      { t: "WET around 15–25% — felt more than heard", next: "vfq2y" },
+      { t: "50%+ — more space is more professional", next: "vfq2n" },
+      { t: "None — reverb is old-fashioned", next: "vfq2n" }
+    ]
+  });
+  N("vfq2y", { q: "Right.", d: "<p>If a listener would <em>notice</em> the reverb, it's usually too loud. (50%+ is a deliberate dreamy effect — bridges and outros.)</p>", opts: [{ t: "Last question", cls: "primary", next: "vfq3" }] });
+  N("vfq2n", { q: "Not this one.", d: "<p><strong>15–25% WET</strong> for a lead. Big washes are a deliberate special effect, not the default — and bone-dry vocals are their own deliberate style, not the safe choice.</p>", opts: [{ t: "Back to the question", cls: "primary", next: "vfq2" }] });
+  N("vfq3", {
+    step: "Polish · check 3 of 3", q: "Verses and choruses get…",
+    opts: [
+      { t: "Drier verses, wetter choruses", next: "vfq3y" },
+      { t: "Identical settings — consistency matters", next: "vfq3n" },
+      { t: "Wetter verses, drier choruses", next: "vfq3n" }
+    ]
+  });
+  N("vfq3y", { q: "Exactly.", d: "<p>Automating the reverb up into the chorus opens the song like a door — same trick as thinning the verse beat.</p>", opts: [{ t: "Finish", cls: "good", next: "vsDone" }] });
+  N("vfq3n", { q: "Not this one.", d: "<p><strong>Drier verses, wetter choruses.</strong> Intimacy up close, then space when the song opens — contrast again, the same rule as everywhere else in arranging.</p>", opts: [{ t: "Back to the question", cls: "primary", next: "vfq3" }] });
+  N("vsDone", {
+    done: true, q: "That's a produced vocal.",
+    d: "<p>EQ → compression → reverb → delay, in that order, forever. Save the mixer track as a preset (arrow at the top of the track → <em>File → Save mixer track state</em>) and every future song starts from here. The other voices — ballad space, tuning, characters, doubles — are back on the chooser.</p>",
+    goFlows: ["voicefx", "record"]
+  });
+
+  /* ---- B: big ballad space ---- */
+  N("vbal1", {
+    step: "Ballad space · step 1 of 2", q: "The long hall",
+    v: function () { return SVGX.reverbWindow(); },
+    d: "<p>This is the held-note, lighters-up sound — the voice singing inside a huge room.</p>" +
+      act([
+        "Build the polish chain first if you haven't (EQ → compression) — big reverb on an untidy voice turns to soup",
+        "In <strong>Fruity Reeverb 2</strong>: pick a <strong>Hall</strong> preset, <strong>DECAY 2.5–3.5 s</strong>, <strong>PRE-DELAY 30–40 ms</strong> so words stay clear inside all that space",
+        "<strong>WET 25–35%</strong> — further than pop, still under half",
+        "Add <strong>Fruity Delay 3</strong> after it: 1/4 note, feedback low, mix low — echoes swimming inside the hall"
+      ]),
+    opts: [{ t: "It's huge — next", cls: "primary", next: "vbal2" }]
+  });
+  N("vbal2", {
+    step: "Ballad space · step 2 of 2", q: "Keep the verses close",
+    v: function () { return SVGX.sweepCurve(); },
+    d: "<p>If the whole song lives in the hall, the hall stops being special. The trick is contrast:</p>" +
+      act([
+        "<strong>Right-click the reverb's WET knob → Create automation clip</strong>",
+        "Draw it <strong>low (~10%) through the verses</strong>, rising through the pre-chorus, <strong>full (~30%) in the chorus</strong>",
+        "The last held note of the final chorus can go further — 50%+ as everything else drops away"
+      ]),
+    opts: [{ t: "Done", cls: "good", next: "vbalDone" }]
+  });
+  N("vbalDone", {
+    done: true, q: "That's the ballad sound.",
+    d: "<p>Close and dry when it's intimate, cathedral when it opens. The reverb automation IS the emotional arc.</p>",
+    goFlows: ["voicefx"]
+  });
+
+  /* ---- C: modern pop sheen ---- */
+  N("vpop1", {
+    step: "Pop sheen · step 1 of 3", q: "First: which FL edition do you have?",
+    d: "<p><span class='path'>Help → About</span>. The tuning tools — <strong>Pitcher</strong> and <strong>NewTone</strong> — come with <strong>Signature Edition and up</strong>. Producer Edition doesn't include them (they can be bought individually, or the upgrade is priced as the difference).</p>",
+    opts: [
+      { t: "Signature or higher — carry on", cls: "primary", next: "vpop2" },
+      { t: "Producer — what are my options?", next: "vpop1b" }
+    ]
+  });
+  N("vpop1b", {
+    q: "Producer Edition options",
+    d: "<p>Three routes, honestly ranked:</p><ul><li><strong>Sing it again.</strong> Unfashionable answer, best result — three more takes usually beats software.</li><li><strong>Buy Pitcher or NewTone individually</strong> from Image-Line's site — cheaper than the full upgrade.</li><li><strong>Free third-party autotune</strong> plugins exist (search \"free autotune VST Mac\") and load into FL like any effect — quality varies, fine for the hard robotic effect, less good for invisible correction.</li></ul>",
+    opts: [{ t: "Understood", cls: "good", next: "vpopDone" }]
+  });
+  N("vpop2", {
+    step: "Pop sheen · step 2 of 3", q: "Pitcher: from invisible to iconic",
+    d: "<p>Pitcher listens to the voice and pulls every note toward the nearest note of your key — the <strong>correction speed</strong> decides the character.</p>" +
+      act([
+        "On the vocal's mixer track, load <strong>Pitcher</strong> in the slot <strong>after</strong> EQ and compression, <strong>before</strong> reverb",
+        "Set the <strong>key</strong> to your song's key — this matters most; the wrong key pulls notes to wrong places",
+        "<strong>Slow-ish speed</strong> = invisible polish — nobody hears the tool, the voice just sounds confident",
+        "<strong>Fastest speed</strong> = the hard quantised shimmer — the deliberate modern-pop/hip-hop vocal effect. It's a style, not a fix",
+        "A/B it with the slot's green light — if the slow setting is audible as an effect, ease it further back"
+      ]),
+    opts: [{ t: "Tuned — next", cls: "primary", next: "vpop3" }]
+  });
+  N("vpop3", {
+    step: "Pop sheen · step 3 of 3", q: "Fixing single notes instead: NewTone",
+    d: "<p>When the take is great except <em>one flat note</em>, don't tune the whole performance:</p>" +
+      act([
+        "Open <strong>NewTone</strong> and drag your vocal clip into it — the recording appears as editable note blobs",
+        "<strong>Drag the flat note</strong> up to the right pitch — just that one",
+        "Small timing slips fix the same way — slide the blob left or right",
+        "Export back to the playlist. Nobody will ever know"
+      ]),
+    opts: [{ t: "Done", cls: "good", next: "vpopDone" }]
+  });
+  N("vpopDone", {
+    done: true, q: "That's the tuned sound, both flavours.",
+    d: "<p>Slow Pitcher = confidence. Fast Pitcher = a genre. NewTone = surgery. And all three sit <em>between</em> compression and reverb in the chain.</p>",
+    goFlows: ["voicefx"]
+  });
+
+  /* ---- D: character voices ---- */
+  N("vch1", {
+    step: "Characters · step 1 of 2", q: "Pick a character",
+    d: "<p>These are section effects — one verse, an intro, a bridge — not whole-song sounds. The contrast with the normal voice is the point.</p><div class='tw'><table><thead><tr><th>Sound</th><th>Recipe</th></tr></thead><tbody>" +
+      "<tr><td><strong>Telephone / old radio</strong></td><td><strong>Fruity Filter</strong> (or EQ): cut below 500 Hz and above 3 kHz</td></tr>" +
+      "<tr><td><strong>Megaphone / grit</strong></td><td><strong>Fruity Blood Overdrive</strong>, drive low — fur and attitude</td></tr>" +
+      "<tr><td><strong>Robot</strong></td><td><strong>Vocodex</strong> (Signature) with a synth carrier</td></tr>" +
+      "<tr><td><strong>Whisper layer</strong></td><td>No plugin — record the line again <em>whispered</em>, hide it under the sung take</td></tr>" +
+      "<tr><td><strong>Dream dissolve</strong></td><td>Reverb WET 50%+, long decay — voice melts into the room</td></tr>" +
+      "</tbody></table></div>",
+    opts: [{ t: "Chosen — how do I apply it to only one section?", cls: "primary", next: "vch2" }]
+  });
+  N("vch2", {
+    step: "Characters · step 2 of 2", q: "Only where you want it",
+    d: "<p>The effect must switch on for its section and vanish afterwards. Cleanest way for a beginner:</p>" +
+      act([
+        "In the playlist, <strong>cut the section's vocal audio</strong> (<kbd>C</kbd> slices at the cursor) so the character section is its own clip",
+        "<strong>Drag that clip to a different mixer track</strong> and build the character effect there",
+        "The normal chain stays untouched on the main vocal track — the song flips between the two automatically",
+        "Check the character section's <strong>volume</strong> against the normal voice — filtered voices read quieter; nudge the fader up"
+      ]),
+    opts: [{ t: "Done", cls: "good", next: "vchDone" }]
+  });
+  N("vchDone", {
+    done: true, q: "One voice, many characters.",
+    d: "<p>Used once or twice a song, a character voice is a production signature. Used everywhere, it's a gimmick — the contrast is the whole trick.</p>",
+    goFlows: ["voicefx"]
+  });
+
+  /* ---- E: doubles & harmonies ---- */
+  N("vdh1", {
+    step: "Doubles · step 1 of 2", q: "The double — the sound of a pop chorus",
+    d: "<p>Not an effect: a second performance. This is the biggest free upgrade in vocal production.</p>" +
+      act([
+        "Record the chorus line again, matching the first take as <strong>exactly</strong> as you can — phrasing, breaths, endings",
+        "And once more — two doubles, three takes total",
+        "In the Mixer: <strong>pan one double hard left, the other hard right</strong> (the pan knob at the top of each track)",
+        "Pull both doubles down until they <strong>support</strong> the lead rather than compete — you feel them more than hear them",
+        "Verses stay single-voice: the doubles <em>arriving</em> is the chorus lift"
+      ]),
+    opts: [{ t: "Doubled — next", cls: "primary", next: "vdh2" }]
+  });
+  N("vdh2", {
+    step: "Doubles · step 2 of 2", q: "The harmony",
+    d: "<p>One harmony line, used sparingly, sounds like a band. The easiest one to find:</p>" +
+      act([
+        "Play your melody's notes on the keyboard, then play the same shape <strong>two letter-names higher in the key</strong> (melody on C → harmony on E) — that's \"a third up\"",
+        "<strong>Sing along with those keyboard notes</strong> until the harmony sits in your voice, then record it",
+        "Mix it clearly <strong>below the lead</strong> — the lead tells the story, the harmony colours it",
+        "Chorus last line only is a classic place to start; everywhere is soup"
+      ]),
+    opts: [{ t: "Done", cls: "good", next: "vdhDone" }]
+  });
+  N("vdhDone", {
+    done: true, q: "That's the thick-chorus secret.",
+    d: "<p>Doubles panned wide, a third-harmony under the last line, all of it quieter than the lead. Costs nothing but takes — and it's most of the difference between a demo chorus and a record one.</p>",
+    goFlows: ["voicefx", "record"]
+  });
+
+  /* ============================================================
      FLOW registry
      ============================================================ */
 
@@ -3759,6 +4263,7 @@
     songA:   { name: "Build a song — Advanced", start: "a_1", steps: ["a_1", "a_2", "a_3", "a_4", "a_5", "a_6", "a_7", "a_8", "aq1", "aq2", "aq3"] },
     record:  { name: "Record my voice", start: "r1", steps: ["r1", "r2", "r3", "r4", "r5", "r6"] },
     piano:   { name: "Play piano sounds (MIDI)", start: "p_1", steps: ["p_1", "p_2", "p_3", "p_4", "p_5"] },
+    voicefx: { name: "Shape my voice", start: "v0", steps: ["vs1", "vs2", "vs3", "vs4", "vs5", "vfq1", "vfq2", "vfq3"] },
     nosound: { name: "I can't hear anything", start: "ns0" },
     kbd:     { name: "Keyboard isn't working", start: "k1" },
     mic:     { name: "Mic problems", start: "m0" },
@@ -3962,6 +4467,7 @@
     { flow: "kbd",     rx: /\b(keyboard (not|isn|dead|broken)|not working|no midi)\b/ },
     { flow: "piano",   rx: /\b(piano|keys?|keyboard|midi|instrument|preset|sound|flex|notes?|draw|velocity|quantis|quantiz)\b/ },
     { flow: "mic",     rx: /\b(mic|microphone|echo|twice|doubled|distort\w*|quiet|hiss\w*)\b/ },
+    { flow: "voicefx", rx: /\b(reverb|hall|room|plate|delay|echo\w*|effects?|autotune|auto-tune|tune[ds]?|tuning|pitch\w*|harmon\w*|doubl\w*|polish\w*|compress\w*|eq|telephone|robot|vocoder|shimmer|voice|vocal\w*)\b/ },
     { flow: "glitch",  rx: /\b(crackl\w*|pop(s|ping)?|stutter\w*|delay|lag\w*|latency|glitch\w*)\b/ }
   ];
 
