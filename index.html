@@ -1144,12 +1144,36 @@
 
             <div class="card">
               <h3>Doubles &amp; harmonies — the free upgrade</h3>
-              <p>The biggest chorus-thickener costs nothing but a second take:</p>
+              <p>The biggest chorus-thickener costs nothing but a second take. Where every voice sits:</p>
+              <figure class="diagram" data-svg="stackDiagram"></figure>
               <ul>
                 <li><strong>The double:</strong> record the same line again, as identically as you can. Pan one take left, one right, both slightly quieter than the lead. This is THE sound of a pop chorus.</li>
-                <li><strong>The harmony:</strong> sing the line again a third higher (two letter-names up the scale — C melody → E harmony). Sit it clearly below the lead in volume.</li>
+                <li><strong>The harmony:</strong> sing the line again a third higher — every note moved two letter-names up the scale:</li>
+              </ul>
+              <figure class="diagram" data-svg="harmonyRoll"></figure>
+              <ul>
                 <li><strong>Only in the chorus.</strong> Verses stay one voice — the arrival of the doubles IS the chorus lift.</li>
               </ul>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">Three flavours, one foundation</span>
+              <h3>R&amp;B vocals — the three recipes</h3>
+              <p>All three sit on the polish chain plus the vocal stack above; the flavour is what changes. The <strong>Shape my voice</strong> walk builds each one with you.</p>
+              <div class="tw">
+                <table>
+                  <thead><tr><th>Flavour</th><th>The recipe in one line</th><th>Sounds like</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Silky classic</strong></td><td>Deeper compression (5–6 dB), warm EQ with no air shelf, short plate at ~12–15%, a disciplined 5-voice stack — runs on the lead only</td><td>Brandy, H.E.R.</td></tr>
+                    <tr><td><strong>Airy neo-soul</strong></td><td>Light compression (2–3 dB), breaths kept in, plate with 30–40 ms pre-delay, subtle chorus width, a whispered layer under the lead</td><td>SZA, Erykah Badu</td></tr>
+                    <tr><td><strong>Dark trap-soul</strong></td><td>Pitcher gloss, no air at all, long-decay/low-wet damped hall, nervous 1/8 delays with thrown words, an octave-down shadow double, wide ad-libs</td><td>The Weeknd, Brent Faiyaz</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="note tip">
+                <b>What makes any of them R&amp;B</b>
+                The stack. Pop doubles a chorus; R&amp;B <em>builds architecture</em> out of voices — unisons, thirds, fifths, whispers, octaves, ad-libs in every gap. Master the stack once and all three flavours are settings on top of it.
+              </div>
             </div>
 
           </div>
@@ -2788,6 +2812,173 @@
     return flWindow(760, h, "Channel rack — graph editor open", inner);
   };
 
+  /* ---------- the R&B vocal stack: who sits where ---------- */
+  SVGX.stackDiagram = function () {
+    var s = '<svg viewBox="0 0 760 300" role="img" aria-label="The vocal stack — where each voice sits">';
+    // stereo field: x = pan, y = pitch height
+    s += '<line x1="80" y1="250" x2="680" y2="250" stroke="var(--line-strong)" stroke-width="1.5"/>';
+    ["L", "CENTRE", "R"].forEach(function (t, i) {
+      s += '<text x="' + (110 + i * 270) + '" y="272" text-anchor="middle" font-family="var(--mono)" font-size="10.5" font-weight="700" fill="var(--ink-faint)">' + t + "</text>";
+    });
+    function voice(x, y, w, h, label, sub, main) {
+      var r = '<rect x="' + (x - w / 2) + '" y="' + (y - h / 2) + '" width="' + w + '" height="' + h + '" rx="9" fill="' + (main ? "var(--accent)" : "var(--accent-wash)") + '" stroke="' + (main ? "var(--accent-deep)" : "var(--accent)") + '" stroke-width="1.6"/>';
+      r += '<text x="' + x + '" y="' + (y + (sub ? -2 : 5)) + '" text-anchor="middle" font-family="var(--body)" font-size="' + (main ? 14 : 11.5) + '" font-weight="700" fill="' + (main ? "#fff" : "var(--accent-deep)") + '">' + label + "</text>";
+      if (sub) r += '<text x="' + x + '" y="' + (y + 15) + '" text-anchor="middle" font-family="var(--body)" font-size="9.5" fill="' + (main ? "rgba(255,255,255,.85)" : "var(--ink-soft)") + '">' + sub + "</text>";
+      return r;
+    }
+    s += voice(380, 150, 170, 62, "LEAD", "tells the story — loudest", true);
+    s += voice(200, 150, 130, 46, "Double", "same line, panned L");
+    s += voice(560, 150, 130, 46, "Double", "same line, panned R");
+    s += voice(380, 222, 150, 40, "Octave under", "very quiet — adds weight");
+    s += voice(290, 78, 130, 42, "Harmony · 3rd", "clearly under the lead");
+    s += voice(470, 78, 130, 42, "Harmony · 5th", "chorus only");
+    s += voice(120, 60, 88, 38, "Ad-lib", "in the gaps");
+    s += voice(640, 60, 88, 38, "Ad-lib", "in the gaps");
+    s += '<text x="380" y="292" text-anchor="middle" font-family="var(--body)" font-size="12" fill="var(--ink-soft)">Left–right is pan; height is pitch. Everything except the lead sits QUIETER than you think it should.</text>';
+    s += '</svg>';
+    return s;
+  };
+
+  /* ---------- Pitcher: the correction-speed knob is the whole story ---------- */
+  SVGX.pitcherWindow = function () {
+    var inner = "";
+    var top = 44;
+    inner += '<rect x="34" y="' + top + '" width="' + (700 - 68) + '" height="26" fill="' + FLC.dark + '"/>';
+    inner += '<rect x="42" y="' + (top + 4) + '" width="170" height="18" rx="3" fill="' + FLC.well + '"/>';
+    inner += '<text x="54" y="' + (top + 17) + '" font-family="var(--body)" font-size="10.5" fill="' + FLC.txt + '">KEY:  G major  ▾</text>';
+    inner += '<text x="230" y="' + (top + 17) + '" font-family="var(--body)" font-size="9.5" fill="' + FLC.or + '">← set this to YOUR song’s key first — it matters most</text>';
+    var kx = 350, ky = top + 130;
+    inner += '<circle cx="' + kx + '" cy="' + ky + '" r="52" fill="' + FLC.knob + '" stroke="' + FLC.ring + '" stroke-width="2.5"/>';
+    inner += '<line x1="' + kx + '" y1="' + ky + '" x2="' + (kx - 30) + '" y2="' + (ky - 38) + '" stroke="' + FLC.txt + '" stroke-width="4" stroke-linecap="round"/>';
+    inner += '<text x="' + kx + '" y="' + (ky + 78) + '" text-anchor="middle" font-family="var(--body)" font-size="12" font-weight="700" letter-spacing=".08em" fill="' + FLC.txt + '">SPEED</text>';
+    inner += '<text x="' + (kx - 128) + '" y="' + (ky - 34) + '" text-anchor="middle" font-family="var(--body)" font-size="10.5" font-weight="700" fill="' + FLC.green + '">SLOW</text>';
+    inner += '<text x="' + (kx - 128) + '" y="' + (ky - 20) + '" text-anchor="middle" font-family="var(--body)" font-size="9" fill="' + FLC.dim + '">invisible polish</text>';
+    inner += '<text x="' + (kx + 128) + '" y="' + (ky - 34) + '" text-anchor="middle" font-family="var(--body)" font-size="10.5" font-weight="700" fill="' + FLC.or + '">FAST</text>';
+    inner += '<text x="' + (kx + 128) + '" y="' + (ky - 20) + '" text-anchor="middle" font-family="var(--body)" font-size="9" fill="' + FLC.dim + '">the hard tuned effect</text>';
+    inner += '<rect x="' + (kx - 62) + '" y="' + (ky - 62) + '" width="124" height="124" rx="62" fill="none" stroke="var(--focus)" stroke-width="3" stroke-dasharray="8 6"/>';
+    inner += miniKnob(590, ky, 20);
+    inner += '<text x="590" y="' + (ky + 40) + '" text-anchor="middle" font-family="var(--body)" font-size="9.5" fill="' + FLC.dim + '">MIX — keep at 100%</text>';
+    inner += pill(350, top + 246, "One knob decides the style: slow = confidence, fast = a genre");
+    return flWindow(700, 320, "Pitcher   (Signature — after compression, before reverb)", inner);
+  };
+
+  /* ---------- NewTone: drag the flat note up ---------- */
+  SVGX.newtoneWindow = function () {
+    var inner = "";
+    var rows = ["D4", "C4", "B3", "A3", "G3"];
+    var top = 60, rowH = 34, gx = 90, gw = 560;
+    rows.forEach(function (nm, r) {
+      var y = top + r * rowH;
+      inner += '<rect x="' + gx + '" y="' + y + '" width="' + gw + '" height="' + (rowH - 2) + '" fill="' + (r % 2 ? "#2B333B" : "#2F373F") + '"/>';
+      inner += '<text x="' + (gx - 10) + '" y="' + (y + 21) + '" text-anchor="end" font-family="var(--mono)" font-size="10" fill="' + FLC.dim + '">' + nm + "</text>";
+      inner += '<line x1="' + gx + '" y1="' + (y + rowH / 2) + '" x2="' + (gx + gw) + '" y2="' + (y + rowH / 2) + '" stroke="#454F59" stroke-width="0.8"/>';
+    });
+    function blob(x, w, row, offset, col) {
+      var cy = top + row * rowH + rowH / 2 + (offset || 0);
+      var r2 = '<rect x="' + x + '" y="' + (cy - 8) + '" width="' + w + '" height="16" rx="8" fill="' + col + '" opacity=".85"/>';
+      r2 += '<path d="M ' + (x + 6) + " " + cy + " q 8 -4 16 0 t 16 0 t 16 0" + '" fill="none" stroke="#1E3318" stroke-width="1.4" opacity=".6"/>';
+      return r2;
+    }
+    inner += blob(gx + 14, 88, 1, 0, "#7DBF6E");
+    inner += blob(gx + 116, 74, 0, 0, "#7DBF6E");
+    inner += blob(gx + 204, 96, 1, 0, "#7DBF6E");
+    inner += blob(gx + 316, 90, 2, 12, "#D9A24C");
+    inner += blob(gx + 422, 118, 3, 0, "#7DBF6E");
+    var fx = gx + 316 + 45, fy = top + 2 * rowH + rowH / 2 + 12;
+    inner += '<rect x="' + (gx + 308) + '" y="' + (fy - 16) + '" width="112" height="32" rx="9" fill="none" stroke="var(--focus)" stroke-width="3" stroke-dasharray="7 5"/>';
+    inner += '<path d="M ' + fx + " " + (fy - 24) + " L " + fx + " " + (fy - 48) + '" stroke="var(--focus)" stroke-width="2.5"/><path d="M ' + (fx - 7) + " " + (fy - 42) + " L " + fx + " " + (fy - 52) + " L " + (fx + 7) + " " + (fy - 42) + ' Z" fill="var(--focus)"/>';
+    inner += pill(380, 34, "The sagging note is the flat one — drag JUST that one up onto its line");
+    return flWindow(720, 270, "NewTone   (Signature — fixes single notes invisibly)", inner);
+  };
+
+  /* ---------- telephone band: what you cut, what you keep ---------- */
+  SVGX.charFilter = function () {
+    var s = '<svg viewBox="0 0 760 250" role="img" aria-label="The telephone effect — keep only the middle band">';
+    var gx = 70, gw = 620, gy = 170;
+    s += '<path d="M ' + gx + " " + gy + " C " + (gx + 60) + " " + (gy - 60) + ", " + (gx + 120) + " " + (gy - 86) + ", " + (gx + 280) + " " + (gy - 82) +
+         " C " + (gx + 440) + " " + (gy - 78) + ", " + (gx + 520) + " " + (gy - 40) + ", " + (gx + gw) + " " + gy +
+         ' Z" fill="var(--accent)" opacity=".18"/>';
+    s += '<rect x="' + (gx + 205) + '" y="' + (gy - 96) + '" width="215" height="108" rx="8" fill="var(--accent)" opacity=".30"/>';
+    s += '<rect x="' + (gx + 205) + '" y="' + (gy - 96) + '" width="215" height="108" rx="8" fill="none" stroke="var(--accent-deep)" stroke-width="2.5"/>';
+    s += '<line x1="' + (gx + 40) + '" y1="' + (gy - 70) + '" x2="' + (gx + 150) + '" y2="' + (gy - 10) + '" stroke="var(--ink-faint)" stroke-width="3"/>';
+    s += '<line x1="' + (gx + 40) + '" y1="' + (gy - 10) + '" x2="' + (gx + 150) + '" y2="' + (gy - 70) + '" stroke="var(--ink-faint)" stroke-width="3"/>';
+    s += '<line x1="' + (gx + 470) + '" y1="' + (gy - 66) + '" x2="' + (gx + 580) + '" y2="' + (gy - 8) + '" stroke="var(--ink-faint)" stroke-width="3"/>';
+    s += '<line x1="' + (gx + 470) + '" y1="' + (gy - 8) + '" x2="' + (gx + 580) + '" y2="' + (gy - 66) + '" stroke="var(--ink-faint)" stroke-width="3"/>';
+    s += '<line x1="' + gx + '" y1="' + gy + '" x2="' + (gx + gw) + '" y2="' + gy + '" stroke="var(--line-strong)" stroke-width="1.6"/>';
+    [["100 Hz", 60], ["500 Hz", 205], ["3 kHz", 420], ["10 kHz", 570]].forEach(function (f) {
+      s += '<text x="' + (gx + f[1]) + '" y="' + (gy + 22) + '" text-anchor="middle" font-family="var(--mono)" font-size="10.5" fill="var(--ink-faint)">' + f[0] + "</text>";
+    });
+    s += '<text x="' + (gx + 95) + '" y="' + (gy - 106) + '" text-anchor="middle" font-family="var(--body)" font-size="11.5" font-weight="700" fill="var(--ink-soft)">CUT the warmth</text>';
+    s += '<text x="' + (gx + 312) + '" y="' + (gy - 108) + '" text-anchor="middle" font-family="var(--body)" font-size="12.5" font-weight="800" fill="var(--accent-deep)">KEEP — the telephone band</text>';
+    s += '<text x="' + (gx + 525) + '" y="' + (gy - 106) + '" text-anchor="middle" font-family="var(--body)" font-size="11.5" font-weight="700" fill="var(--ink-soft)">CUT the air</text>';
+    s += '<text x="380" y="240" text-anchor="middle" font-family="var(--body)" font-size="12" fill="var(--ink-soft)">In Fruity Filter or EQ 2: high-pass at 500 Hz + low-pass at 3 kHz. What’s left is a voice down a phone line.</text>';
+    s += '</svg>';
+    return s;
+  };
+
+  /* ---------- one section on its own effect track ---------- */
+  SVGX.splitTrack = function () {
+    var top = 42, x0 = 34, trackW = 168, gridX = x0 + trackW, gridW = 760 - 68 - trackW;
+    var rowH = 52, barW = gridW / 16;
+    var h = top + 26 + 2 * rowH + 56;
+    var inner = "";
+    inner += '<rect x="' + x0 + '" y="' + top + '" width="' + (760 - 68) + '" height="24" fill="' + FLC.dark + '"/>';
+    for (var bnum = 1; bnum <= 16; bnum += 4) {
+      inner += '<text x="' + (gridX + (bnum - 1) * barW + 4) + '" y="' + (top + 16) + '" font-family="var(--mono)" font-size="9" fill="' + FLC.dim + '">' + bnum + "</text>";
+    }
+    var names = ["Vocal — normal chain", "Telephone track"];
+    for (var r = 0; r < 2; r++) {
+      var y = top + 26 + r * rowH;
+      inner += '<rect x="' + x0 + '" y="' + y + '" width="' + trackW + '" height="' + (rowH - 2) + '" fill="#333B44"/>';
+      inner += '<text x="' + (x0 + 10) + '" y="' + (y + 30) + '" font-family="var(--body)" font-size="10.5" fill="' + FLC.txt + '">' + names[r] + "</text>";
+      for (var b4 = 0; b4 < 4; b4++) {
+        inner += '<rect x="' + (gridX + b4 * 4 * barW) + '" y="' + y + '" width="' + (4 * barW) + '" height="' + (rowH - 2) + '" fill="' + (b4 % 2 ? "#2B3641" : "#26313B") + '"/>';
+      }
+    }
+    function vclip(track, fromBar, toBar, name, col) {
+      var y = top + 26 + track * rowH + 4;
+      var cx = gridX + (fromBar - 1) * barW, cw = (toBar - fromBar + 1) * barW - 3;
+      return '<rect x="' + cx + '" y="' + y + '" width="' + cw + '" height="' + (rowH - 12) + '" rx="3" fill="' + col + '" opacity=".38"/>' +
+             '<rect x="' + cx + '" y="' + y + '" width="' + cw + '" height="12" rx="3" fill="' + col + '"/>' +
+             '<text x="' + (cx + 5) + '" y="' + (y + 9.5) + '" font-family="var(--body)" font-size="8.5" font-weight="600" fill="#F2F4F6">' + esc(name) + "</text>";
+    }
+    inner += vclip(0, 1, 8, "Verse 1 + chorus", "#B05A5E");
+    inner += vclip(1, 9, 12, "Verse 2 — telephone", "#B58A3E");
+    inner += vclip(0, 13, 16, "Chorus", "#B05A5E");
+    [9, 13].forEach(function (bar) {
+      var sx = gridX + (bar - 1) * barW;
+      inner += '<line x1="' + sx + '" y1="' + (top + 26) + '" x2="' + sx + '" y2="' + (top + 26 + 2 * rowH) + '" stroke="var(--focus)" stroke-width="2.5" stroke-dasharray="6 4"/>';
+      inner += '<text x="' + sx + '" y="' + (top + 26 + 2 * rowH + 16) + '" text-anchor="middle" font-size="12">✂</text>';
+    });
+    inner += pill(400, h - 12, "Slice at the section edges, drag the middle piece to its own track — the song swaps voices automatically");
+    return flWindow(760, h, "Playlist — one section, different voice", inner);
+  };
+
+  /* ---------- harmony: two letter-names up ---------- */
+  SVGX.harmonyRoll = function () {
+    var rows = ["A4", "G4", "F4", "E4", "D4", "C4"];
+    var top = 56, rowH = 24, gx = 84, gw = 560, cell = gw / 8;
+    var h = top + rows.length * rowH + 66;
+    var inner = "";
+    rows.forEach(function (nm, r) {
+      var y = top + r * rowH;
+      inner += '<rect x="' + gx + '" y="' + y + '" width="' + gw + '" height="' + (rowH - 1) + '" fill="' + (r % 2 ? "#2B333B" : "#2F373F") + '"/>';
+      inner += '<text x="' + (gx - 10) + '" y="' + (y + 16) + '" text-anchor="end" font-family="var(--mono)" font-size="9.5" fill="' + FLC.dim + '">' + nm + "</text>";
+    });
+    var mel = [[0, 5], [2, 4], [4, 3], [6, 5]];
+    mel.forEach(function (n) {
+      var x = gx + n[0] * cell + 3, y = top + n[1] * rowH + 2;
+      inner += '<rect x="' + x + '" y="' + y + '" width="' + (cell * 2 - 8) + '" height="' + (rowH - 5) + '" rx="4" fill="#7DBF6E" stroke="#4E8A44" stroke-width="1.2"/>';
+      var hy = top + (n[1] - 2) * rowH + 2;
+      inner += '<rect x="' + x + '" y="' + hy + '" width="' + (cell * 2 - 8) + '" height="' + (rowH - 5) + '" rx="4" fill="#D9A24C" stroke="#A87A2E" stroke-width="1.2"/>';
+      inner += '<line x1="' + (x + 14) + '" y1="' + (y + 2) + '" x2="' + (x + 14) + '" y2="' + (hy + rowH - 4) + '" stroke="var(--focus)" stroke-width="1.6" stroke-dasharray="4 3" opacity=".7"/>';
+    });
+    inner += '<rect x="' + (gx + gw + 8) + '" y="' + (top + 8) + '" width="14" height="14" rx="3" fill="#7DBF6E"/><text x="' + (gx + gw + 28) + '" y="' + (top + 19) + '" font-family="var(--body)" font-size="9.5" fill="' + FLC.txt + '">melody</text>';
+    inner += '<rect x="' + (gx + gw + 8) + '" y="' + (top + 32) + '" width="14" height="14" rx="3" fill="#D9A24C"/><text x="' + (gx + gw + 28) + '" y="' + (top + 43) + '" font-family="var(--body)" font-size="9.5" fill="' + FLC.txt + '">harmony</text>';
+    inner += pill(380, h - 12, "Every harmony note = the melody note moved TWO letter-names up. C→E, D→F, E→G.");
+    return flWindow(760, h, "The harmony, drawn — a third above the melody", inner);
+  };
+
   /* ---------- tempo automation curve ---------- */
 
   SVGX.tempoCurve = function () {
@@ -2871,7 +3062,13 @@
     eqCurve: function () { return SVGX.eqCurve(); },
     compDiagram: function () { return SVGX.compDiagram(); },
     delayTaps: function () { return SVGX.delayTaps(); },
-    mixerVocal: function () { return SVGX.mixerVocal(); }
+    mixerVocal: function () { return SVGX.mixerVocal(); },
+    stackDiagram: function () { return SVGX.stackDiagram(); },
+    harmonyRoll: function () { return SVGX.harmonyRoll(); },
+    charFilter: function () { return SVGX.charFilter(); },
+    pitcherWindow: function () { return SVGX.pitcherWindow(); },
+    newtoneWindow: function () { return SVGX.newtoneWindow(); },
+    splitTrack: function () { return SVGX.splitTrack(); }
   };
 
   SVGX.injectAll = function () {
@@ -4011,13 +4208,15 @@
 
   N("v0", {
     q: "What should your voice sound like?",
-    d: "<p>Pick the destination — I'll set up the exact effects with you. If this is your first time here, start with the polish: it's the foundation every other sound builds on.</p>",
+    v: function () { return SVGX.vocalChain(); },
+    d: "<p>Pick the destination — I'll set up the exact effects with you. If this is your first time here, start with the polish: it's the chain above, and it's the foundation every other sound builds on.</p>",
     opts: [
       { t: "Polished, like a record", s: "The standard vocal chain: EQ → compression → reverb → delay. Start here", cls: "primary", next: "vs1" },
       { t: "Big ballad space", s: "Long hall reverb, dreamy echoes — the held-note chorus sound", next: "vbal1" },
       { t: "Modern pop sheen", s: "Pitch correction — from invisible polish to the hard tuned effect", next: "vpop1" },
       { t: "A character voice", s: "Telephone, megaphone, robot, whisper — a different voice for one section", next: "vch1" },
-      { t: "Doubles & harmonies", s: "The free chorus-thickener every record uses", next: "vdh1" }
+      { t: "Doubles & harmonies", s: "The free chorus-thickener every record uses", next: "vdh1" },
+      { t: "R&B vocals — three flavours", s: "Silky classic, airy neo-soul, dark trap-soul", next: "rb0" }
     ]
   });
 
@@ -4151,6 +4350,7 @@
   /* ---- C: modern pop sheen ---- */
   N("vpop1", {
     step: "Pop sheen · step 1 of 3", q: "First: which FL edition do you have?",
+    v: function () { return SVGX.pitcherWindow(); },
     d: "<p><span class='path'>Help → About</span>. The tuning tools — <strong>Pitcher</strong> and <strong>NewTone</strong> — come with <strong>Signature Edition and up</strong>. Producer Edition doesn't include them (they can be bought individually, or the upgrade is priced as the difference).</p>",
     opts: [
       { t: "Signature or higher — carry on", cls: "primary", next: "vpop2" },
@@ -4164,6 +4364,7 @@
   });
   N("vpop2", {
     step: "Pop sheen · step 2 of 3", q: "Pitcher: from invisible to iconic",
+    v: function () { return SVGX.pitcherWindow(); },
     d: "<p>Pitcher listens to the voice and pulls every note toward the nearest note of your key — the <strong>correction speed</strong> decides the character.</p>" +
       act([
         "On the vocal's mixer track, load <strong>Pitcher</strong> in the slot <strong>after</strong> EQ and compression, <strong>before</strong> reverb",
@@ -4176,6 +4377,7 @@
   });
   N("vpop3", {
     step: "Pop sheen · step 3 of 3", q: "Fixing single notes instead: NewTone",
+    v: function () { return SVGX.newtoneWindow(); },
     d: "<p>When the take is great except <em>one flat note</em>, don't tune the whole performance:</p>" +
       act([
         "Open <strong>NewTone</strong> and drag your vocal clip into it — the recording appears as editable note blobs",
@@ -4194,6 +4396,7 @@
   /* ---- D: character voices ---- */
   N("vch1", {
     step: "Characters · step 1 of 2", q: "Pick a character",
+    v: function () { return SVGX.charFilter(); },
     d: "<p>These are section effects — one verse, an intro, a bridge — not whole-song sounds. The contrast with the normal voice is the point.</p><div class='tw'><table><thead><tr><th>Sound</th><th>Recipe</th></tr></thead><tbody>" +
       "<tr><td><strong>Telephone / old radio</strong></td><td><strong>Fruity Filter</strong> (or EQ): cut below 500 Hz and above 3 kHz</td></tr>" +
       "<tr><td><strong>Megaphone / grit</strong></td><td><strong>Fruity Blood Overdrive</strong>, drive low — fur and attitude</td></tr>" +
@@ -4205,6 +4408,7 @@
   });
   N("vch2", {
     step: "Characters · step 2 of 2", q: "Only where you want it",
+    v: function () { return SVGX.splitTrack(); },
     d: "<p>The effect must switch on for its section and vanish afterwards. Cleanest way for a beginner:</p>" +
       act([
         "In the playlist, <strong>cut the section's vocal audio</strong> (<kbd>C</kbd> slices at the cursor) so the character section is its own clip",
@@ -4223,6 +4427,7 @@
   /* ---- E: doubles & harmonies ---- */
   N("vdh1", {
     step: "Doubles · step 1 of 2", q: "The double — the sound of a pop chorus",
+    v: function () { return SVGX.stackDiagram(); },
     d: "<p>Not an effect: a second performance. This is the biggest free upgrade in vocal production.</p>" +
       act([
         "Record the chorus line again, matching the first take as <strong>exactly</strong> as you can — phrasing, breaths, endings",
@@ -4235,6 +4440,7 @@
   });
   N("vdh2", {
     step: "Doubles · step 2 of 2", q: "The harmony",
+    v: function () { return SVGX.harmonyRoll(); },
     d: "<p>One harmony line, used sparingly, sounds like a band. The easiest one to find:</p>" +
       act([
         "Play your melody's notes on the keyboard, then play the same shape <strong>two letter-names higher in the key</strong> (melody on C → harmony on E) — that's \"a third up\"",
@@ -4248,6 +4454,110 @@
     done: true, q: "That's the thick-chorus secret.",
     d: "<p>Doubles panned wide, a third-harmony under the last line, all of it quieter than the lead. Costs nothing but takes — and it's most of the difference between a demo chorus and a record one.</p>",
     goFlows: ["voicefx", "record"]
+  });
+
+  /* ---- F: R&B vocals, three flavours ---- */
+  N("rb0", {
+    q: "Which R&B are we making?",
+    v: function () { return SVGX.stackDiagram(); },
+    d: "<p>All three are built on the polish chain plus the <strong>stack</strong> above — R&B is stacked-vocal music before it's anything else. The flavour comes from what you do on top.</p>",
+    opts: [
+      { t: "Silky classic R&B", s: "Warm, close, effortless — the smooth 90s/2000s lead", next: "rbs1" },
+      { t: "Airy neo-soul", s: "Breathy, wide, floating — space and air around the voice", next: "rba1" },
+      { t: "Dark trap-soul", s: "Tuned, moody, echoing — the modern late-night sound", next: "rbd1" }
+    ]
+  });
+
+  N("rbs1", {
+    step: "Silky · step 1 of 2", q: "The silk: closer and more even than pop",
+    v: function () { return SVGX.compDiagram(); },
+    d: "<p>The silky lead sounds effortless because the level is <em>immaculately</em> even and the tone is warm rather than bright.</p>" +
+      act([
+        "Build the polish chain first (EQ → compressor → reverb) — this lane changes its settings",
+        "<strong>Compression harder:</strong> lower THRES until the meter shows <strong>5–6 dB</strong> on big lines — deeper than pop. The evenness IS the silk",
+        "<strong>EQ warmer:</strong> skip the 10 kHz air shelf, and make the 3 kHz presence lift smaller — R&B silk is smooth, not shiny",
+        "<strong>Reverb smaller:</strong> a short plate, WET ~12–15%, DECAY ~1.2 s. The voice stays close to the ear",
+        "Sing closer to the mic than usual — that chest warmth is the genre"
+      ]),
+    opts: [{ t: "Silky — next", cls: "primary", next: "rbs2" }]
+  });
+  N("rbs2", {
+    step: "Silky · step 2 of 2", q: "The stack does the rest",
+    v: function () { return SVGX.stackDiagram(); },
+    d: "<p>Classic R&B choruses are 5–8 voices deep, all singing precisely together.</p>" +
+      act([
+        "Record the chorus <strong>four more times</strong>: two unison doubles (pan hard L and R), a <strong>third-up harmony</strong>, and a <strong>fifth-up harmony</strong>",
+        "Pull every stacked voice down until the lead clearly carries — the stack is a cushion, not a choir",
+        "Runs and riffs stay on the <strong>lead only</strong> — the stack holds long simple notes underneath",
+        "Verses drop back to lead + one quiet double at most. The stack arriving is the chorus"
+      ]),
+    opts: [{ t: "Stacked — done", cls: "good", next: "rbsDone" }]
+  });
+  N("rbsDone", {
+    done: true, q: "That's the silk.",
+    d: "<p>Deep compression, warm EQ, short plate, and a disciplined stack. Brandy and H.E.R. records live exactly here.</p>",
+    goFlows: ["voicefx"]
+  });
+
+  N("rba1", {
+    step: "Airy · step 1 of 2", q: "Air is breath, kept — not brightness added",
+    v: function () { return SVGX.reverbWindow(); },
+    d: "<p>Neo-soul air comes from <em>keeping</em> the human texture pop usually scrubs off.</p>" +
+      act([
+        "<strong>Compression lighter:</strong> only 2–3 dB — the natural rise and fall of the voice is the style",
+        "<strong>Don't edit out the breaths.</strong> Those inhales between lines are the intimacy",
+        "<strong>Reverb:</strong> a plate with <strong>PRE-DELAY up at 30–40 ms</strong> and WET ~20% — the voice floats in front of the space rather than inside it",
+        "Add <strong>Fruity Chorus</strong>, subtle, after the reverb — a gentle shimmer-widening",
+        "Sing softer than feels right, slightly behind the beat. Laid-back timing is half this genre"
+      ]),
+    opts: [{ t: "Floating — next", cls: "primary", next: "rba2" }]
+  });
+  N("rba2", {
+    step: "Airy · step 2 of 2", q: "The whisper layer",
+    v: function () { return SVGX.stackDiagram(); },
+    d: "<p>The signature neo-soul move: a voice you feel on your ear rather than hear.</p>" +
+      act([
+        "Record the chorus line again, <strong>fully whispered</strong> — actually whisper it, close to the mic",
+        "Lay it exactly under the sung lead, and pull it down until you only <em>sense</em> it",
+        "Pan two soft sung doubles wide L/R as usual — but keep them gentler than the silky lane",
+        "Harmonies here can be <strong>oohs and aahs</strong> instead of words — clouds, not text"
+      ]),
+    opts: [{ t: "Breathing — done", cls: "good", next: "rbaDone" }]
+  });
+  N("rbaDone", {
+    done: true, q: "That's the air.",
+    d: "<p>Light compression, kept breaths, floating plate, whisper layer. SZA and Erykah territory — intimacy as production.</p>",
+    goFlows: ["voicefx"]
+  });
+
+  N("rbd1", {
+    step: "Dark · step 1 of 2", q: "Tuned and dimmed",
+    v: function () { return SVGX.pitcherWindow(); },
+    d: "<p>The late-night sound: pitch-perfect, slightly unreal, sitting in shadow rather than light.</p>" +
+      act([
+        "<strong>Pitcher</strong> (Signature) set to your key, speed on the <strong>faster side of subtle</strong> — audibly tuned but not full robot. This gloss is the genre's signature",
+        "<strong>EQ darker:</strong> no air shelf at all; even tilt the top slightly down",
+        "<strong>Reverb:</strong> a hall with <strong>long DECAY (2.5 s+) but LOW WET (~12%)</strong> — darkness behind the voice, not wash over it, with DAMPING turned up",
+        "No Pitcher? Run the polish chain darker and lean on the next step's echoes — most of the mood survives"
+      ]),
+    opts: [{ t: "Moody — next", cls: "primary", next: "rbd2" }]
+  });
+  N("rbd2", {
+    step: "Dark · step 2 of 2", q: "Echoes and ghosts",
+    v: function () { return SVGX.delayTaps(); },
+    d: "<p>Trap-soul space is made of delays and low ghosts more than reverb.</p>" +
+      act([
+        "<strong>Fruity Delay 3:</strong> tempo-synced <strong>1/8 or dotted-1/8</strong>, feedback low, mix low — a nervous, close echo",
+        "<strong>Throw the last word</strong> of key lines: automate the delay mix up for just that word, let it ring into the gap",
+        "Record an <strong>octave-down double</strong> of the hook line, very quiet under the lead — the shadow voice",
+        "Ad-libs (yeah / ooh / echoes of the lyric) panned wide, drenched in the delay, in the gaps between phrases"
+      ]),
+    opts: [{ t: "In the shadows — done", cls: "good", next: "rbdDone" }]
+  });
+  N("rbdDone", {
+    done: true, q: "That's the dark one.",
+    d: "<p>Tuned gloss, no air, long-dark-low reverb, nervous echoes, shadow octave, wide ad-libs. The Weeknd and Brent Faiyaz build from exactly these parts.</p>",
+    goFlows: ["voicefx"]
   });
 
   /* ============================================================
@@ -4467,7 +4777,7 @@
     { flow: "kbd",     rx: /\b(keyboard (not|isn|dead|broken)|not working|no midi)\b/ },
     { flow: "piano",   rx: /\b(piano|keys?|keyboard|midi|instrument|preset|sound|flex|notes?|draw|velocity|quantis|quantiz)\b/ },
     { flow: "mic",     rx: /\b(mic|microphone|echo|twice|doubled|distort\w*|quiet|hiss\w*)\b/ },
-    { flow: "voicefx", rx: /\b(reverb|hall|room|plate|delay|echo\w*|effects?|autotune|auto-tune|tune[ds]?|tuning|pitch\w*|harmon\w*|doubl\w*|polish\w*|compress\w*|eq|telephone|robot|vocoder|shimmer|voice|vocal\w*)\b/ },
+    { flow: "voicefx", rx: /\b(reverb|hall|room|plate|delay|echo\w*|effects?|autotune|auto-tune|tune[ds]?|tuning|pitch\w*|harmon\w*|doubl\w*|polish\w*|compress\w*|eq|telephone|robot|vocoder|shimmer|voice|vocal\w*|r&b|rnb|neo-?soul|soul|ad-?libs?|stacks?|whisper|breathy|silky|trap-?soul)\b/ },
     { flow: "glitch",  rx: /\b(crackl\w*|pop(s|ping)?|stutter\w*|delay|lag\w*|latency|glitch\w*)\b/ }
   ];
 
