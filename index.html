@@ -228,6 +228,11 @@
     border-radius: 999px; padding: 3px 9px;
   }
   .flowcard.done-flow { border-color: color-mix(in srgb, var(--good) 40%, var(--line)); }
+  .flowcard.featured {
+    border: 1.5px solid var(--accent);
+    background: linear-gradient(180deg, var(--surface), var(--accent-wash));
+  }
+  .flowcard.featured .fc-title { color: var(--accent-deep); }
 
   /* ---- the first-song roadmap ---- */
   .roadmap {
@@ -733,6 +738,11 @@
             </div>
           </div>
           <div class="hub-grid" id="hubgrid">
+            <button class="flowcard featured" data-flow="project1">
+              <span class="fc-kicker">Build-along · start to finish</span>
+              <span class="fc-title">Project One — an R&amp;B song</span>
+              <span class="fc-sub">We build one whole song together: drums, piano, bass, guitar, extras, then your voice stacked on top — ending with a real exported file. Every decision already made.</span>
+            </button>
             <button class="flowcard" data-flow="setup">
               <span class="fc-kicker">Guided walk</span>
               <span class="fc-title">Set everything up</span>
@@ -1298,6 +1308,32 @@
           <p class="sec-intro">You sing and you play. That's already the hard part. This is the order that makes the rest fall into place.</p>
 
           <div class="cards">
+
+            <div class="card">
+              <span class="eyebrow">The worked example — every decision already made</span>
+              <h3>Project One: a whole R&amp;B song, start to finish</h3>
+              <figure class="diagram" data-svg="projectMap"></figure>
+              <p>The <strong>Project One</strong> card at the top of the page builds one complete silky R&amp;B slow jam with you — 70 BPM, A minor, four white-key chords (Am7 → Fmaj7 → Cmaj7 → Em7) — through all eight stages above, ending with a balanced, exported WAV on your phone. The session plan it follows:</p>
+              <div class="tw">
+                <table>
+                  <thead><tr><th>Stage</th><th>What gets made</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Drums</strong></td><td>The slow-jam pattern, humanised, in three versions: verse · chorus · fill</td></tr>
+                    <tr><td><strong>Piano</strong></td><td>The four chords, exact notes given, drawn or played, then humanised</td></tr>
+                    <tr><td><strong>Bass</strong></td><td>An 808 on the chord roots (A · F · C · E), locked to the kick</td></tr>
+                    <tr><td><strong>Guitar</strong></td><td>A picked arpeggio for verse 2, off-beat chops for the choruses</td></tr>
+                    <tr><td><strong>Extras</strong></td><td>A low warm pad (choruses) and one music-box sparkle in the gaps</td></tr>
+                    <tr><td><strong>Arrange</strong></td><td>Intro → verses → choruses → bridge → final chorus → outro, with fills, a crash, and one bar of silence</td></tr>
+                    <tr><td><strong>Voice</strong></td><td>Lead, doubles L/R, a third-up harmony, a whisper layer, ad-libs — then the silky chain</td></tr>
+                    <tr><td><strong>Ship</strong></td><td>Balance (voice on top, master out of the red), Cmd+S, export to WAV, AirDrop to the phone</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="note tip">
+                <b>Then Project Two is yours</b>
+                Same eight stages, your key, your tempo, your words. The point of Project One is that the second time, the process is already in your hands.
+              </div>
+            </div>
 
             <div class="card">
               <span class="eyebrow">This order is the point</span>
@@ -3309,9 +3345,29 @@
     return s;
   };
 
+  /* ---------- the Project One session map: where you are in the build ---------- */
+  SVGX.projectMap = function (cur) {
+    var stages = ["Drums", "Piano", "Bass", "Guitar", "Extras", "Arrange", "Voice", "Ship"];
+    var s = '<svg viewBox="0 0 760 96" role="img" aria-label="Project One — the build order">';
+    var w = 82, gap = 8, x0 = 14, y = 22, h = 42;
+    stages.forEach(function (st, i) {
+      var x = x0 + i * (w + gap);
+      var state = i < cur ? "done" : i === cur ? "now" : "todo";
+      var fill = state === "now" ? "var(--accent)" : state === "done" ? "color-mix(in srgb, var(--good) 18%, var(--surface-sunk))" : "var(--surface-sunk)";
+      var stroke = state === "now" ? "var(--accent-deep)" : state === "done" ? "color-mix(in srgb, var(--good) 55%, var(--line-strong))" : "var(--line-strong)";
+      if (state === "now") s += '<rect x="' + (x + 2) + '" y="' + (y + 3) + '" width="' + w + '" height="' + h + '" rx="10" fill="var(--ink)" opacity=".14"/>';
+      s += '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="10" fill="' + fill + '" stroke="' + stroke + '" stroke-width="' + (state === "now" ? 2 : 1.3) + '"/>';
+      s += '<text x="' + (x + w / 2) + '" y="' + (y + h / 2 + 4.5) + '" text-anchor="middle" font-family="var(--body)" font-size="12" font-weight="' + (state === "now" ? 800 : 600) + '" fill="' + (state === "now" ? "#fff" : state === "done" ? "var(--ink-mid)" : "var(--ink-soft)") + '">' + st + '</text>';
+      if (state === "done") s += '<text x="' + (x + w - 11) + '" y="' + (y + 14) + '" text-anchor="middle" font-size="10" fill="var(--good)" font-weight="800">✓</text>';
+      if (i < stages.length - 1) s += '<path d="M ' + (x + w + 1) + ' ' + (y + h / 2) + ' l ' + (gap - 3) + ' 0" stroke="var(--ink-faint)" stroke-width="2"/>';
+    });
+    s += '<text x="380" y="88" text-anchor="middle" font-family="var(--body)" font-size="11" fill="var(--ink-soft)">Project One — the same eight stages every producer walks, in this order.</text>';
+    return s + '</svg>';
+  };
+
   /* ---------- Piano roll: notes as blocks + velocity lane ----------
-     hl: 'draw' | 'vel' | null */
-  SVGX.flPianoRoll = function (hl) {
+     hl: 'draw' | 'vel' | null · chords: optional override · cap: optional pill text */
+  SVGX.flPianoRoll = function (hl, chords, cap) {
     var rows = ["C5", "B4", "A4", "G4", "F4", "E4", "D4", "C4", "B3", "A3", "G3", "F3"];
     var top = 74, rowH = 15, keysX = 34, keysW = 50, gridX = 84, barW = 158;
     var gridBottom = top + rows.length * rowH;
@@ -3348,8 +3404,8 @@
       inner += '<text x="' + (gridX + bb * barW + 5) + '" y="' + (top - 5) + '" font-family="var(--mono)" font-size="9" fill="' + FLC.dim + '">Bar ' + (bb + 1) + "</text>";
       for (var q = 1; q < 4; q++) inner += '<line x1="' + (gridX + bb * barW + q * barW / 4) + '" y1="' + top + '" x2="' + (gridX + bb * barW + q * barW / 4) + '" y2="' + gridBottom + '" stroke="#3A424B" stroke-width="0.6"/>';
     }
-    // chord notes: C — Am — F — G, one bar each, green FL-style blocks
-    var CH = [
+    // chord notes: C — Am — F — G, one bar each, green FL-style blocks (or caller-supplied chords)
+    var CH = chords || [
       { bar: 0, notes: ["C4", "E4", "G4"], lab: "C" },
       { bar: 1, notes: ["A3", "C4", "E4"], lab: "Am" },
       { bar: 2, notes: ["F3", "A3", "C4"], lab: "F" },
@@ -3386,7 +3442,7 @@
       inner += '<rect x="' + (gridX - 4) + '" y="' + (velTop - 4) + '" width="' + (barW * 4 + 8) + '" height="' + (velH + 8) + '" rx="6" fill="none" stroke="var(--focus)" stroke-width="3" stroke-dasharray="7 5"/>';
       inner += pill(420, h - 8, "Each bar = how hard that note plays. Drag some lower — evenness is what sounds robotic");
     }
-    if (!hl) inner += pill(420, h - 8, "Notes are blocks on a grid — this is one bar each of C, Am, F, G");
+    if (!hl) inner += pill(420, h - 8, cap || "Notes are blocks on a grid — this is one bar each of C, Am, F, G");
     return flWindow(760, h, "Piano roll - FLEX   (F7)", inner);
   };
 
@@ -3725,6 +3781,7 @@
     freqMap: function () { return SVGX.freqMap(); },
     reverbAnatomy: function () { return SVGX.reverbAnatomy(); },
     kbZones: function () { return SVGX.kbZones(); },
+    projectMap: function () { return SVGX.projectMap(0); },
     drumKitFull: function () { return SVGX.drumKitFull(); },
     chorusLift: function () { return SVGX.chorusLift(); },
     reverbWindow: function () { return SVGX.reverbWindow(); },
@@ -5406,6 +5463,318 @@
   });
 
   /* ============================================================
+     FLOW: PROJECT ONE — one whole R&B song, start to finish
+     ============================================================ */
+
+  var PJ_CHORDS = [
+    { bar: 0, notes: ["A3", "C4", "E4", "G4"], lab: "Am7" },
+    { bar: 1, notes: ["F3", "A3", "C4", "E4"], lab: "Fmaj7" },
+    { bar: 2, notes: ["C4", "E4", "G4", "B4"], lab: "Cmaj7" },
+    { bar: 3, notes: ["G3", "B3", "D4", "E4"], lab: "Em7" }
+  ];
+
+  N("pj0", {
+    q: "Project One: we're building a real song together",
+    v: function () { return SVGX.projectMap(0); },
+    d: "<p>Not a lesson about songs — an actual song, finished and exported, that you'll play off your phone tonight. Every decision is already made so you can just build:</p>" +
+      "<ul><li><strong>Style:</strong> silky R&B slow jam — warm keys, soft drums, stacked vocals</li>" +
+      "<li><strong>Tempo:</strong> 70 BPM &nbsp;·&nbsp; <strong>Key:</strong> A minor (every note we use is a white key)</li>" +
+      "<li><strong>The four chords:</strong> Am7 → Fmaj7 → Cmaj7 → Em7, one bar each, looping forever. This loop IS the song</li>" +
+      "<li><strong>Structure:</strong> intro · verse · chorus · verse · chorus · bridge · final chorus · outro</li></ul>" +
+      "<p>The map above is the build order — the same eight stages every producer walks. About an hour if you don't rush, and you shouldn't.</p>" +
+      act([
+        "Open FL Studio → <span class='path'>File → New</span>",
+        "<kbd>Cmd+S</kbd> immediately — name it <strong>Project One v1</strong>",
+        "From here on: <kbd>Cmd+S</kbd> every time you make something you like"
+      ]),
+    opts: [{ t: "Let's build it", cls: "primary", next: "pj1" }]
+  });
+
+  /* ---- DRUMS ---- */
+  N("pj1", {
+    step: "Project One · step 1 of 17 — drums", q: "Tempo first: 70 BPM",
+    v: function () { return SVGX.projectMap(0) + '<div style="margin-top:14px">' + SVGX.flToolbar("bpm") + "</div>"; },
+    d: "<p>70 BPM is the slow-jam heartland — slow enough to feel expensive, quick enough to groove. Setting it first means every note you record from now on lands on a grid that's already right.</p>" +
+      act([
+        "Find the orange BPM number at the top (ringed below) — <strong>right-click → Type in value → 70</strong>",
+        "Press <kbd>F6</kbd> — the Channel Rack opens with Kick, Clap, Hat, Snare channels ready",
+        "Add a shaker: <span class='path'>Browser → Packs → Drums</span>, find a shaker, drag it onto the rack"
+      ]),
+    opts: [{ t: "70 on the clock — next", cls: "primary", next: "pj2" }]
+  });
+  N("pj2", {
+    step: "Project One · step 2 of 17 — drums", q: "Click in the slow-jam pattern",
+    v: function () {
+      var chans = PATTERNS.rnb_slowjam.rows.map(function (r) { return { name: r.label, led: false, steps: r.steps }; });
+      chans.push({ name: "Shaker", led: false, steps: [] });
+      return '<div style="margin-bottom:14px">' + SVGX.flRack("steps", chans) + "</div>" + patternGridHTML("rnb_slowjam", false);
+    },
+    d: "<p>This is the half-time slow jam from the library — one snare per bar carrying everything. Copy the grid below into the rack, cell by cell:</p>" +
+      act([
+        "<strong>Kick</strong> row: left-click cells <strong>1</strong> and <strong>8</strong>",
+        "<strong>Snare</strong> row: cell <strong>9</strong> only — that lone backbeat is the genre",
+        "<strong>Hat</strong> row: every other cell — <strong>1, 3, 5, 7, 9, 11, 13, 15</strong>",
+        "Press <kbd>Space</kbd> — it loops. Right-click any wrong cell to clear it",
+        "Sounds wrong for the mood? <strong>Right-click a channel name → Replace</strong> and audition until it feels late-night"
+      ]),
+    opts: [{ t: "It's looping — next", cls: "primary", next: "pj3" }]
+  });
+  N("pj3", {
+    step: "Project One · step 3 of 17 — drums", q: "Make it breathe: ghosts, velocity, swing",
+    v: function () { return SVGX.rackHumanise(); },
+    d: "<p>Right now it's a machine. Three moves make it a drummer:</p>" +
+      act([
+        "Add a <strong>ghost snare</strong> on cell <strong>15</strong>, then open the <strong>graph editor</strong> (button at the rack's top-right, ringed below), click the Snare channel, and drag cell 15's bar down to about <strong>25%</strong> — barely heard, strongly felt",
+        "Still in the graph editor, click the <strong>Hat</strong> channel and drag <strong>alternate bars lower</strong> — tall, short, tall, short",
+        "Find the <strong>SWING</strong> slider at the top of the rack and push it to about <strong>20%</strong> — listen to it start leaning back",
+        "<kbd>Cmd+S</kbd>"
+      ]),
+    opts: [{ t: "It grooves — next", cls: "primary", next: "pj4" }]
+  });
+  N("pj4", {
+    step: "Project One · step 4 of 17 — drums", q: "Three drum patterns: verse, chorus, fill",
+    v: function () { return SVGX.chorusLift(); },
+    d: "<p>One beat all the way through is the #1 beginner tell. You need a thinner verse, a fuller chorus, and a fill to announce the change — all clones of what you just made:</p>" +
+      act([
+        "Toolbar: <strong>right-click Pattern 1 → Clone</strong>, twice — you now have three copies",
+        "<strong>Pattern 1 = verse:</strong> delete the hat row entirely; add the <strong>shaker on every other cell</strong> instead. Rename it (right-click → Rename) \"Drums — verse\"",
+        "<strong>Pattern 2 = chorus:</strong> keep everything, add <strong>shaker on EVERY cell</strong>, and add a <strong>Crash channel</strong> (Browser → Packs) hitting <strong>cell 1</strong>. Rename \"Drums — chorus\"",
+        "<strong>Pattern 3 = fill:</strong> like the verse, plus quiet snares on <strong>13-14-15-16</strong> (drag their velocities to ~40%). Rename \"Drums — fill\"",
+        "Slow-jam rule: the chorus lifts <em>gently</em> — the vocal stack will do the real lifting later"
+      ]),
+    opts: [{ t: "Three patterns named — next", cls: "primary", next: "pj5" }]
+  });
+
+  /* ---- PIANO ---- */
+  N("pj5", {
+    step: "Project One · step 5 of 17 — piano", q: "The four chords — exact notes, all white keys",
+    v: function () {
+      return SVGX.projectMap(1) + '<div style="margin-top:14px">' +
+        SVGX.flPianoRoll(null, PJ_CHORDS, "One bar each: Am7 — Fmaj7 — Cmaj7 — Em7. Loop it forever — this IS the song.") + "</div>";
+    },
+    d: "<p>These four chords are the entire harmony of Project One. Each is four white keys under one hand:</p>" +
+      "<div class='tw'><table><thead><tr><th>Bar</th><th>Chord</th><th>Exact notes</th><th>Hand shape</th></tr></thead><tbody>" +
+      "<tr><td>1</td><td><strong>Am7</strong></td><td class='num'>A3 · C4 · E4 · G4</td><td>start on the A below middle C</td></tr>" +
+      "<tr><td>2</td><td><strong>Fmaj7</strong></td><td class='num'>F3 · A3 · C4 · E4</td><td>same shape, two keys down</td></tr>" +
+      "<tr><td>3</td><td><strong>Cmaj7</strong></td><td class='num'>C4 · E4 · G4 · B4</td><td>starts ON middle C</td></tr>" +
+      "<tr><td>4</td><td><strong>Em7</strong></td><td class='num'>G3 · B3 · D4 · E4</td><td>a cosy E-minor voicing</td></tr>" +
+      "</tbody></table></div>" +
+      act([
+        "Channel Rack → <strong>+</strong> → <strong>FLEX</strong> → search <strong>keys</strong> or <strong>piano</strong> — pick something warm and felt-like (single-click auditions, double-click loads)",
+        "New pattern (toolbar <strong>+</strong>), rename it \"Keys\"",
+        "Press <kbd>F7</kbd> for the Piano roll and <strong>draw</strong> the blocks exactly as below — each chord fills its whole bar",
+        "Or <strong>play</strong> them: record with the metronome, one chord per bar. Wrong notes drag into place afterwards",
+        "<kbd>Space</kbd> with the chorus drums playing — this is the moment it starts sounding like a record"
+      ]),
+    opts: [{ t: "Four chords in — next", cls: "primary", next: "pj6" }]
+  });
+  N("pj6", {
+    step: "Project One · step 6 of 17 — piano", q: "Humanise the keys",
+    v: function () { return SVGX.flPianoRoll("vel"); },
+    d: "<p>A real pianist never plays four notes at identical volume or at the exact same instant:</p>" +
+      act([
+        "In the Piano roll, look at the <strong>velocity lane</strong> at the bottom — drag the bars so they vary between roughly <strong>70 and 100</strong>, top notes slightly louder than bottom ones",
+        "If you played them in and the timing is loose: <kbd>Alt+Q</kbd> (quantize) and set strength around <strong>50%</strong> — tightened, not robotic",
+        "Drag each chord's <strong>right edge</strong> a touch past the bar line so the chords melt into each other",
+        "<kbd>Cmd+S</kbd>"
+      ]),
+    opts: [{ t: "It sounds human — next", cls: "primary", next: "pj7" }]
+  });
+
+  /* ---- BASS ---- */
+  N("pj7", {
+    step: "Project One · step 7 of 17 — bass", q: "The 808 plays the roots, with the kick",
+    v: function () { return SVGX.projectMap(2) + '<div style="margin-top:14px">' + SVGX.interlock() + "</div>"; },
+    d: "<p>The bass line is already decided — it's the bottom note of each chord: <strong>A, F, C, E</strong>. One long note per bar, landing exactly with the kick.</p>" +
+      act([
+        "Channel Rack → <strong>+</strong> → <strong>FLEX</strong> → search <strong>808</strong> — pick a smooth one, not a distorted one",
+        "In the \"Keys\" pattern (or its own \"Bass\" pattern — cleaner), press <kbd>F7</kbd> on the 808 channel",
+        "Draw: bar 1 = <strong>A1</strong>, bar 2 = <strong>F1</strong>, bar 3 = <strong>C2</strong>, bar 4 = <strong>E1</strong> — down in the bass zone, ONE note at a time",
+        "Start each note exactly on <strong>step 1</strong> (with the kick) and end it around step <strong>13</strong> — if the low end turns muddy, shorten the notes further",
+        "Loop everything together. Kick and 808 should feel like one instrument"
+      ]),
+    opts: [{ t: "The floor moves — next", cls: "primary", next: "pj8" }]
+  });
+
+  /* ---- GUITAR ---- */
+  N("pj8", {
+    step: "Project One · step 8 of 17 — guitar", q: "Two guitar parts, both tiny on purpose",
+    v: function () { return SVGX.projectMap(3) + '<div style="margin-top:14px">' + patternGridHTML("gtr_arp", false) + patternGridHTML("gtr_chop", false) + "</div>"; },
+    d: "<p>R&B guitar is seasoning, not a meal — small clean phrases that answer the keys. Two parts, used in different sections later:</p>" +
+      act([
+        "Channel Rack → <strong>+</strong> → <strong>FLEX</strong> → <strong>Guitar</strong> category — pick a <strong>clean electric</strong> (nothing distorted)",
+        "<strong>Part 1 — the arpeggio</strong> (for verse 2): new pattern \"Gtr arp\". Pick each chord's notes one at a time, low → middle → high → middle, following the top grid below. Same four chords, same bars",
+        "<strong>Part 2 — the chops</strong> (for choruses): new pattern \"Gtr chops\". The whole chord, very short, on the off-beats — cells <strong>3, 7, 11, 15</strong>, released immediately. The gap is the groove",
+        "Turn the guitar channel's volume knob DOWN until it tucks under the piano — you should miss it when it's gone, barely notice it when it's there"
+      ]),
+    opts: [{ t: "Seasoned — next", cls: "primary", next: "pj9" }]
+  });
+
+  /* ---- EXTRAS ---- */
+  N("pj9", {
+    step: "Project One · step 9 of 17 — extras", q: "Colour: a pad, and one sparkle",
+    v: function () { return SVGX.projectMap(4) + '<div style="margin-top:14px">' + SVGX.vocalSpace() + "</div>"; },
+    d: "<p>Two more layers finish the bed — both live at the edges of the picture so the middle stays clear for your voice:</p>" +
+      act([
+        "<strong>The pad:</strong> FLEX → <strong>Pads</strong> → something warm. New pattern \"Pad\": the same four chords as long, held whole-bar notes. Volume LOW — it's felt, not heard. Choruses only",
+        "<strong>The sparkle:</strong> FLEX → search <strong>music box</strong> or <strong>bell</strong>. New pattern \"Sparkle\": a tiny 3-note answer — try <strong>E5 · C5 · A4</strong> — placed in bar 4 only, in the gap where a vocal line will end",
+        "Play everything together and mute/unmute layers with each channel's <strong>green light</strong>. Every layer should earn its place — if you can't hear what one adds, it goes",
+        "<kbd>Cmd+S</kbd> — the bed is finished"
+      ]),
+    opts: [{ t: "Bed finished — arrange it", cls: "primary", next: "pj10" }]
+  });
+
+  /* ---- ARRANGE ---- */
+  N("pj10", {
+    step: "Project One · step 10 of 17 — arrange", q: "Paint the song onto the Playlist",
+    v: function () { return SVGX.projectMap(5) + '<div style="margin-top:14px">' + SVGX.flPlaylist() + '<div style="margin-top:14px">' + SVGX.songArc() + "</div></div>"; },
+    d: "<p>Press <kbd>F5</kbd> — the Playlist is the song's timeline. Paint your patterns onto it following this plan (every count is in bars):</p>" +
+      "<div class='tw'><table><thead><tr><th>Section</th><th>Bars</th><th>What plays</th></tr></thead><tbody>" +
+      "<tr><td><strong>Intro</strong></td><td class='num'>4</td><td>Keys alone (+ Sparkle in bar 4)</td></tr>" +
+      "<tr><td><strong>Verse 1</strong></td><td class='num'>16</td><td>Drums — verse · Keys · Bass</td></tr>" +
+      "<tr><td><strong>Chorus</strong></td><td class='num'>16</td><td>Drums — chorus · Keys · Bass · Gtr chops · Pad</td></tr>" +
+      "<tr><td><strong>Verse 2</strong></td><td class='num'>16</td><td>Verse layers <em>+ Gtr arp</em></td></tr>" +
+      "<tr><td><strong>Chorus</strong></td><td class='num'>16</td><td>Same as chorus 1</td></tr>" +
+      "<tr><td><strong>Bridge</strong></td><td class='num'>8</td><td>Keys only (space for the voice to shine)</td></tr>" +
+      "<tr><td><strong>Final chorus</strong></td><td class='num'>16</td><td>Everything at once (+ Sparkle)</td></tr>" +
+      "<tr><td><strong>Outro</strong></td><td class='num'>4</td><td>Keys — let the last Am7 ring out</td></tr>" +
+      "</tbody></table></div>" +
+      act([
+        "Make sure the toolbar says <strong>SONG</strong>, not PAT, or you'll only ever hear one pattern",
+        "Left-click paints a pattern block; right-click erases; drag a block's right edge to repeat it",
+        "Paint the whole table, then press <kbd>Space</kbd> from the top and just listen"
+      ]),
+    opts: [{ t: "The song exists — next", cls: "primary", next: "pj11" }]
+  });
+  N("pj11", {
+    step: "Project One · step 11 of 17 — arrange", q: "The three transition moments",
+    v: function () { return patternGridHTML("fill_bar", false); },
+    d: "<p>Sections that just butt together sound like a playlist; transitions make them one song. Three edits:</p>" +
+      act([
+        "Swap the <strong>last bar of each verse</strong> for the \"Drums — fill\" pattern",
+        "Check the <strong>crash</strong> lands on bar 1 of every chorus (it's inside Drums — chorus already)",
+        "The showstopper: <strong>delete every block in the last half-bar before the final chorus</strong> — one beat of total silence, then everything lands at once. Free goosebumps",
+        "<kbd>Cmd+S</kbd>"
+      ]),
+    opts: [{ t: "It flows — time for the voice", cls: "primary", next: "pj12" }]
+  });
+
+  /* ---- VOICE ---- */
+  N("pj12", {
+    step: "Project One · step 12 of 17 — voice", q: "Record the lead vocal",
+    v: function () { return SVGX.projectMap(6) + '<div style="margin-top:14px">' + SVGX.flMixer("input") + "</div>"; },
+    d: "<p>Write or hum your melody over the loop first — the four chords will pull you somewhere good. Then the take:</p>" +
+      act([
+        "Mic checks: <strong>48V on</strong>, gain ring <strong>green</strong> on your loudest line, <strong>DIRECT MONITOR on</strong>",
+        "Mixer (<kbd>F9</kbd>): vocal track → input <strong>Solo Input 1</strong>, <strong>arm</strong> the red dot",
+        "Record the <strong>chorus first</strong> — three takes, keep the best",
+        "Then verses, then the bridge. Stand a fixed hand's width from the mic for all of it",
+        "Full detail lives in the <strong>Record my voice</strong> walk if anything fights you"
+      ]),
+    opts: [{ t: "Lead vocal down — next", cls: "primary", next: "pj13" }]
+  });
+  N("pj13", {
+    step: "Project One · step 13 of 17 — voice", q: "The stack — this is what makes it R&B",
+    v: function () { return SVGX.stackDiagram(); },
+    d: "<p>Pop doubles a chorus; R&B builds architecture out of voices. For each chorus:</p>" +
+      act([
+        "Record the chorus line <strong>twice more</strong>, matching the lead as exactly as you can — drag one clip's pan hard <strong>left</strong>, the other hard <strong>right</strong>, both quieter than the lead",
+        "Record a <strong>harmony a third up</strong> — every note two white keys higher. Sing it against the keys if it helps",
+        "Optional: a <strong>fifth up</strong> on the last chorus only",
+        "The silk move: one take <strong>fully whispered</strong>, laid exactly under the lead, so quiet you only sense it",
+        "Verses: lead + ONE quiet double. The stack ARRIVING is the chorus lift"
+      ]),
+    opts: [{ t: "Stacked — next", cls: "primary", next: "pj14" }]
+  });
+  N("pj14", {
+    step: "Project One · step 14 of 17 — voice", q: "Ad-libs in the gaps",
+    d: "<p>Listen for the holes between vocal phrases — end of a line, the bar before a chorus, the silence you built before the final chorus. Those belong to ad-libs:</p>" +
+      act([
+        "Record a pass of <strong>yeah / mmm / oh</strong> and echoes of your own last words, reacting to the song like a listener",
+        "Keep the <strong>three best moments</strong>, delete the rest — restraint reads as expensive",
+        "Pan them wide (one left, one right), volume low",
+        "Bridge + final chorus get the most; verse 1 gets none"
+      ]),
+    opts: [{ t: "Ad-libs placed — next", cls: "primary", next: "pj15" }]
+  });
+  N("pj15", {
+    step: "Project One · step 15 of 17 — voice", q: "The silky chain on the lead",
+    v: function () { return SVGX.mixerVocal(); },
+    d: "<p>The silky-classic settings, on the lead vocal's mixer track, top to bottom:</p>" +
+      act([
+        "Slot 1 — <strong>Parametric EQ 2</strong>: cut below 90 Hz, small dip at 250 Hz, gentle 3 kHz lift. <strong>No air shelf</strong> — silk is smooth, not shiny",
+        "Slot 2 — <strong>Fruity Limiter (COMP)</strong>: lower THRES until the loudest chorus line dips <strong>5–6 dB</strong> — deeper than pop; the evenness IS the silk",
+        "Slot 3 — <strong>Fruity Reeverb 2</strong>: short plate, <strong>WET 12–15%</strong>, DECAY ~1.2 s — close and warm, not spacious",
+        "Stacked voices and ad-libs: same chain, or simply route them to the lead's track. The whisper layer takes NO reverb",
+        "The full silky walkthrough lives in <strong>Shape my voice → R&B → Silky</strong> if you want it knob by knob"
+      ]),
+    opts: [{ t: "It's silk — finish the song", cls: "primary", next: "pj16" }]
+  });
+
+  /* ---- SHIP ---- */
+  N("pj16", {
+    step: "Project One · step 16 of 17 — ship", q: "The balance pass",
+    v: function () { return SVGX.projectMap(7) + '<div style="margin-top:14px">' + SVGX.flMixer("vocal") + "</div>"; },
+    d: "<p>Loop the final chorus — the busiest 16 bars — and balance with ears only:</p>" +
+      act([
+        "<kbd>F9</kbd>: push the <strong>lead vocal fader</strong> up until the voice clearly rides on top",
+        "Anything fighting it comes <strong>down</strong> — usually the pad and the guitar first",
+        "<strong>Master meter never touches red.</strong> If it does, drag all faders down together and re-balance",
+        "Play it on your <strong>phone speaker</strong>: if the voice and the groove both survive, the balance is right"
+      ]),
+    opts: [{ t: "Voice on top — next", cls: "primary", next: "pj17" }]
+  });
+  N("pj17", {
+    step: "Project One · step 17 of 17 — ship", q: "Save it. Export it. Play it.",
+    d: act([
+        "<kbd>Cmd+S</kbd> — Project One v1, saved",
+        "<span class='path'>File → Export → WAV file…</span> (<kbd>Cmd+R</kbd>) → name it → <strong>Start</strong>",
+        "AirDrop the WAV to your phone",
+        "Tonight: play it in the place you normally listen to music, full attention, no editing allowed. Just listen to a song YOU built"
+      ]) +
+      "<p>Write down the one thing that bothers you most — that's the first job of Project Two.</p>",
+    opts: [{ t: "Exported — quick quiz", cls: "primary", next: "pjq1" }]
+  });
+
+  /* ---- quiz ---- */
+  N("pjq1", {
+    step: "Project One · check 1 of 3", q: "Why did the drums come first?",
+    opts: [
+      { t: "They set the tempo and groove everything else lands on", next: "pjq1y" },
+      { t: "Drums are the most important instrument", next: "pjq1n" },
+      { t: "They're the easiest, so you warm up on them", next: "pjq1n" }
+    ]
+  });
+  N("pjq1y", { q: "Right.", d: "<p>The drums are the skeleton — every later part (bass on the kick, chops between the hats, vocals in the pockets) was placed <em>relative to them</em>. Build the skeleton first and everything after it has somewhere to stand.</p>", opts: [{ t: "Next question", cls: "primary", next: "pjq2" }] });
+  N("pjq1n", { q: "Not this one.", d: "<p>They came first because they're the <strong>skeleton</strong> — the tempo and groove that every other part was placed against. The bass locked to the kick, the chops filled the hat gaps, the vocal sat in the pockets. No skeleton, nowhere to stand.</p>", opts: [{ t: "Back to the question", cls: "primary", next: "pjq1" }] });
+  N("pjq2", {
+    step: "Project One · check 2 of 3", q: "In this slow jam, the chorus lift came mostly from…",
+    opts: [
+      { t: "The vocal stack arriving, plus gentle additions", next: "pjq2y" },
+      { t: "The tempo jumping up", next: "pjq2n" },
+      { t: "Doubling the hi-hats like a pop song", next: "pjq2n" }
+    ]
+  });
+  N("pjq2y", { q: "Exactly.", d: "<p>At 70 BPM a full pop lift tramples the mood — so the chorus got <em>fuller</em>, not faster: doubles, harmonies, the whisper, the pad, the crash. In slow R&B the voices are the fireworks.</p>", opts: [{ t: "Last question", cls: "primary", next: "pjq3" }] });
+  N("pjq2n", { q: "Not this one.", d: "<p>The tempo never moved and the hats stayed gentle. The lift was the <strong>vocal stack arriving</strong> — doubles, harmonies, whisper — plus pad and crash. Slow R&B choruses get fuller, not faster.</p>", opts: [{ t: "Back to the question", cls: "primary", next: "pjq2" }] });
+  N("pjq3", {
+    step: "Project One · check 3 of 3", q: "Before exporting, the one non-negotiable check was…",
+    opts: [
+      { t: "Vocal clearly on top, master never in the red", next: "pjq3y" },
+      { t: "Every fader as loud as possible", next: "pjq3n" },
+      { t: "Adding one more layer to be safe", next: "pjq3n" }
+    ]
+  });
+  N("pjq3y", { q: "Right.", d: "<p>Balance is the difference between \"beginner track\" and \"record\". Voice on top, master out of the red, and the phone-speaker test as the tie-breaker.</p>", opts: [{ t: "Finish Project One", cls: "good", next: "pjDone" }] });
+  N("pjq3n", { q: "Not this one.", d: "<p><strong>Voice on top, master never red</strong> — a red master distorts the export, and a buried vocal wastes everything you stacked. More layers is the opposite of the fix.</p>", opts: [{ t: "Back to the question", cls: "primary", next: "pjq3" }] });
+  N("pjDone", {
+    done: true, q: "Project One: shipped.",
+    d: "<p>Drums you programmed, chords you voiced, a bass line locked to your kick, guitar seasoning, a bed with space in the middle — and your own stacked voice on top, balanced and exported. That's not an exercise. That's a record.</p>" +
+      "<p><strong>Project Two is yours:</strong> same eight stages, your key (find it in <a href='#keys' style='color:var(--accent-deep)'>Keys &amp; chords</a>), your tempo, your words. Change one thing at a time and the process will hold you the whole way.</p>",
+    goFlows: ["song", "voicefx"]
+  });
+
+  /* ============================================================
      FLOW registry
      ============================================================ */
 
@@ -5413,6 +5782,8 @@
     setup:   { name: "Set everything up", start: "su1", steps: ["su1", "su2", "su3", "su4", "su5", "su6", "su7", "su8", "su9", "su10"] },
     beat:    { name: "Make me a beat", start: "b0" },
     song:    { name: "Build a song", start: "so0" },
+    project1: { name: "Project One — an R&B song, start to finish", start: "pj0",
+      steps: ["pj0", "pj1", "pj2", "pj3", "pj4", "pj5", "pj6", "pj7", "pj8", "pj9", "pj10", "pj11", "pj12", "pj13", "pj14", "pj15", "pj16", "pj17", "pjq1", "pjq2", "pjq3"] },
     songB:   { name: "Build a song — Beginner", start: "b_1", steps: ["b_1", "b_2", "b_3", "b_4", "b_5", "b_6", "bMix", "bExp", "bq1", "bq2", "bq3"] },
     songI:   { name: "Build a song — Intermediate", start: "i_1", steps: ["i_1", "i_2", "i_3", "i_4", "i_5", "i_6", "i_7", "iMix", "iExp", "iq1", "iq2", "iq3"] },
     songA:   { name: "Build a song — Advanced", start: "a_1", steps: ["a_1", "a_2", "a_3", "a_4", "a_5", "a_6", "a_7", "a_8", "aq1", "aq2", "aq3"] },
@@ -5544,7 +5915,7 @@
   });
 
   /* ---- progress memory: badge completed walks on the hub ---- */
-  var GUIDED = ["setup", "beat", "song", "record", "piano", "voicefx"];
+  var GUIDED = ["setup", "beat", "song", "project1", "record", "piano", "voicefx"];
   function flowDone(f) {
     if (f === "song") return ["songB", "songI", "songA"].some(function (x) { return read("ss-done-" + x) === "1"; });
     return read("ss-done-" + f) === "1";
@@ -5645,6 +6016,7 @@
   }
 
   var FLOW_HINTS = [
+    { flow: "project1", rx: /\b(project\s*(one|1)|walk\s*-?through|example\s*song|whole\s*song|complete\s*song|start\s*to\s*finish|build\s*along)\b/ },
     { flow: "beat",    rx: /\b(beat|drum|drums|hat|hats|snare|kick|808|trap|drill|groove|rhythm|percussion|fill|fills|shaker|rim|ghost|crash|cymbal\w*|tom|toms|clap|slow\W*jam\w*|quiet\W*storm)\b/ },
     { flow: "record",  rx: /\b(record|recording|vocal|vocals|sing|singing|voice|take|takes)\b/ },
     { flow: "song",    rx: /\b(song|songs|chord|chords|write|writing|tempo|arrange|arranging|melody|bass|beginner|intermediate|advanced|level|speed|faster|slower|build|master\w*|limiter|export|finish\w*)\b/ },
