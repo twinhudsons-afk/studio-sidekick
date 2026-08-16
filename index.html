@@ -234,6 +234,23 @@
   }
   .flowcard.featured .fc-title { color: var(--accent-deep); }
 
+  /* ---- advanced tiers ---- */
+  .adv-banner {
+    grid-column: 1 / -1;
+    background: color-mix(in srgb, #C99A2E 10%, var(--surface));
+    border: 1.5px solid #C99A2E;
+    border-radius: 13px;
+    padding: 14px 20px;
+    display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+  }
+  .adv-banner b {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .12em;
+    color: #8A5F1E; font-weight: 800;
+  }
+  .adv-banner span { font-size: var(--fs-xs); color: var(--ink-soft); }
+  .card.advanced { border-top: 3px solid #C99A2E; }
+  .card.advanced .eyebrow { color: #8A5F1E; }
+
   /* ---- the first-song roadmap ---- */
   .roadmap {
     background: var(--accent-wash);
@@ -982,6 +999,31 @@
               <p>44100 Hz or 48000 Hz. Either is fine. <strong>Pick one and never change it mid-project</strong> — changing it can throw your recordings out of sync.</p>
             </div>
 
+            <div class="adv-banner"><b>ADVANCED</b><span>Come back to this one when the basics feel easy — it's here when you need it.</span></div>
+
+            <div class="card advanced">
+              <span class="eyebrow">Two ears aren't enough</span>
+              <h3>Listening together: a second pair of headphones</h3>
+              <p>The Scarlett has exactly one headphone socket. When a friend, a parent, or a collaborator wants to hear what you're making, the Mac can send the same music to <strong>two places at once</strong> — the Scarlett (your headphones) and the Mac's own headphone jack or speakers (the listener). The trick is a special virtual device you build yourself, in a Mac utility most people never open:</p>
+              <figure class="diagram" data-svg="macAudioMidi"></figure>
+              <ol class="steps">
+                <li><p>Open <strong>Audio MIDI Setup</strong> — it lives in <span class="path">Applications → Utilities</span> (or press <span class="path">Cmd+Space</span> and type "audio midi").</p></li>
+                <li><p>Click the <strong>+</strong> button at the <strong>bottom-left</strong> of the device list → <strong>Create Multi-Output Device</strong>.</p></li>
+                <li><p>In the right-hand pane, tick <strong>Use</strong> on BOTH: <strong>Scarlett Solo USB</strong> and <strong>External Headphones</strong> (or MacBook Speakers, if the listener is just in the room).</p></li>
+                <li><p>Tick <strong>Drift Correction</strong> on every device <em>except</em> the Scarlett — this stops the two outputs slowly slipping out of time with each other.</p></li>
+                <li><p>Check both devices show the <strong>same sample rate</strong> (44.1 kHz on both, or 48 on both — mixed rates is the #1 reason this setup crackles).</p></li>
+                <li><p>Now point the sound at it: <span class="path">System Settings → Sound → Output → Multi-Output Device</span>, and in FL Studio's <span class="path">Options → Audio Settings</span> pick the Multi-Output Device too.</p></li>
+              </ol>
+              <div class="note watch">
+                <b>Two things that surprise everyone</b>
+                The Mac's <strong>volume keys stop working</strong> on a multi-output — that's normal, not broken. Set each side's volume on its own device: the Scarlett's MONITOR knob for you, and set the Mac jack's level <em>before</em> switching (or in Audio MIDI Setup). And when you go back to recording vocals, <strong>switch FL back to plain "Scarlett Solo USB"</strong> — record through the multi-output and you may add crackles and latency.
+              </div>
+              <div class="note tip">
+                <b>The same trick, pointed the other way</b>
+                The <strong>+</strong> button's other option, <strong>Create Aggregate Device</strong>, merges two USB audio devices' <em>inputs</em> into one — that's how you'd record two mics through two interfaces at once. One sentence to remember the difference: <strong>Aggregate = more inputs in · Multi-Output = the same sound to more ears.</strong>
+              </div>
+            </div>
+
           </div>
         </section>
 
@@ -1009,6 +1051,23 @@
               <div class="note tip">
                 <b>One channel is one sound</b>
                 A song with piano, bass, drums and strings is four channels, played one at a time. You record each part separately and they stack up.
+              </div>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">The question everyone has and nobody asks</span>
+              <h3>What a "plugin" is — and where FLEX actually lives</h3>
+              <p>A <strong>plugin</strong> is an instrument program that runs <em>inside</em> FL Studio. FLEX, FPC, 3x Osc — they're all already installed as part of FL itself. <strong>Nothing to download, nothing to buy, no website involved.</strong> They're just hiding behind one button:</p>
+              <figure class="diagram" data-svg="pluginPicker"></figure>
+              <ol class="steps calm">
+                <li><p>Press <code>F6</code> — the Channel Rack opens.</p></li>
+                <li><p>Look at the rack's <strong>bottom-left corner</strong> — there's a small <strong>+</strong> button under the last channel. Click it.</p></li>
+                <li><p>A list of every instrument plugin appears (drawn above). Click <strong>FLEX</strong> — a new channel appears in the rack holding it, and FLEX's window opens.</p></li>
+                <li><p>Same list, other doors: the <span class="path">Add</span> menu at the very top of FL shows the identical list, and the Browser's <span class="path">Plugin database → Generators</span> folder lets you drag them in. All three end in the same place.</p></li>
+              </ol>
+              <div class="note tip">
+                <b>First time FLEX opens</b>
+                It may offer to download free sound packs — say yes, they're free and they're the actual pianos, guitars and 808s this whole app uses. (This is the one moment internet is involved, and it's a one-off.)
               </div>
             </div>
 
@@ -1096,6 +1155,58 @@
               </div>
             </div>
 
+            <div class="adv-banner"><b>ADVANCED</b><span>MIDI beyond the basics: shaping presets into new sounds, and building a sound from nothing. Come back when the routine above feels easy.</span></div>
+
+            <div class="card advanced">
+              <span class="eyebrow">One preset, a hundred sounds</span>
+              <h3>The FLEX macro knobs</h3>
+              <p>You never have to accept a preset as-is. The row of big knobs along the bottom of FLEX reshapes whatever's loaded — same preset, completely different instrument:</p>
+              <figure class="diagram" data-svg="flexMacros"></figure>
+              <ul>
+                <li><strong>FILTER</strong> is the big one — turn it down and any bright sound turns dark and moody; sweep it while a note holds and the sound comes alive.</li>
+                <li><strong>ATTACK</strong> turns a piano-like pluck into a swelling pad (and back). <strong>RELEASE</strong> decides whether letting go cuts the note dead or lets it ring.</li>
+                <li><strong>SPACE</strong> and <strong>MOTION</strong> add built-in room and movement — try them before reaching for mixer effects.</li>
+                <li>The reliable experiment: load any Keys preset, slow the ATTACK right down, add SPACE — you've just made a pad that matches your piano perfectly, for layering under choruses.</li>
+              </ul>
+              <div class="note tip">
+                <b>Hear what a knob does in three seconds</b>
+                Hold one key down with your left hand and sweep the knob with the mouse. If you can't hear a difference, that knob doesn't matter for this preset — move on.
+              </div>
+            </div>
+
+            <div class="card advanced">
+              <span class="eyebrow">Sound design, first flight</span>
+              <h3>Build a spaceship from nothing (3x Osc)</h3>
+              <p>Every synth sound you've ever heard is layered waves plus an envelope plus effects. You can prove it in ten minutes with <strong>3x Osc</strong> — the simplest synth in FL. Three oscillators, three waves, one spaceship:</p>
+              <figure class="diagram" data-svg="osc3Window"></figure>
+              <ol class="steps">
+                <li><p>Channel Rack <strong>+</strong> → <strong>3x Osc</strong>. Play a low key (around <strong>A2</strong>) — it starts as a plain dull tone. Good: that's raw material.</p></li>
+                <li><p>Set the waves as drawn above: <strong>OSC 1 sine</strong> (the body), <strong>OSC 2 saw with CRS at −12</strong> (an octave-down engine rumble), <strong>OSC 3 saw with FINE at +7</strong> (a slight out-of-tuneness that makes it shimmer).</p></li>
+                <li><p>Now the envelope — the spaceship part. Click the channel's name to open <strong>Channel settings → INS tab</strong>. Under <strong>Volume</strong>, drag <strong>ATT (attack)</strong> to about a third — the sound now <em>swells in</em> instead of starting. Drag <strong>REL (release)</strong> up too, so it fades out after you let go:</p></li>
+              </ol>
+              <figure class="diagram" data-svg="envCurve"></figure>
+              <ol class="steps" start="4">
+                <li><p>On its mixer track: <strong>Fruity Reeverb 2</strong>, a big hall, WET around 40% — much wetter than a vocal. The ship is now in a hangar.</p></li>
+                <li><p>The fly-by: add <strong>Fruity Filter</strong> after the reverb, then <span class="path">right-click its Cutoff knob → Create automation clip</span> and draw a slow rise-and-fall. That whoosh sweeping open and closed IS the spaceship passing overhead.</p></li>
+                <li><p>Play one low note and hold it for four bars. Congratulations — you designed a sound that exists nowhere else.</p></li>
+              </ol>
+              <div class="note tip">
+                <b>Why this matters beyond spaceships</b>
+                Attack, waves, filter, space — those four dials are the whole grammar of synthesis. Slow attack + big reverb = cinematic pad for your bridges. Fast attack + closed filter = a bass pluck. Same recipe, different settings, every time.
+              </div>
+            </div>
+
+            <div class="card advanced">
+              <span class="eyebrow">The keyboard's hidden controls</span>
+              <h3>Wheels, layers, and knobs that move themselves</h3>
+              <ul>
+                <li><strong>The pitch wheel</strong> (left-most wheel on most keyboards) bends notes — small nudges at the end of a bass note is the R&amp;B slide. It springs back to centre on its own.</li>
+                <li><strong>The mod wheel</strong> (next to it) adds movement — usually vibrato or brightness, depending on the preset. Push it in slowly during held chorus notes.</li>
+                <li><strong>Layering:</strong> two channels playing the same notes = one fatter instrument. Record your piano part, then in the Channel Rack <span class="path">right-click the piano channel → Clone</span>, load a pad preset into the clone, and drag the same piano-roll notes onto it (or copy-paste them with <span class="path">Cmd+C / Cmd+V</span> in the Piano roll). Pull the pad's volume well under the piano.</li>
+                <li><strong>Any knob can move itself:</strong> <span class="path">right-click any knob → Create automation clip</span> puts a drawable curve in the Playlist. Filter opening into a chorus, reverb rising in a bridge, the spaceship's sweep — it's all this one trick.</li>
+              </ul>
+            </div>
+
           </div>
         </section>
 
@@ -1158,6 +1269,24 @@
                 <li><strong>Soft furnishings beat bare rooms.</strong> Near a curtain or a wardrobe of clothes sounds noticeably better than the middle of an empty room.</li>
                 <li><strong>Record the loud chorus first.</strong> Set your gain for the loudest thing you'll sing — quiet parts always fit underneath, but a loud part set too hot is ruined.</li>
               </ul>
+            </div>
+
+            <div class="adv-banner"><b>ADVANCED</b><span>When single takes feel easy: how records are really assembled.</span></div>
+
+            <div class="card advanced">
+              <span class="eyebrow">The pros never use take one</span>
+              <h3>Comping — building the perfect take from three real ones</h3>
+              <p>Almost no released vocal is a single performance. It's a <strong>comp</strong>: the best line from take one, the best word from take three, stitched together. Yours works the same way:</p>
+              <ol class="steps calm">
+                <li><p>Record the same section <strong>three times in a row</strong>, without stopping to listen between takes — momentum beats judgement while the voice is warm.</p></li>
+                <li><p>Each take lands as its own audio clip in the Playlist. Stack them on three tracks, one above the other.</p></li>
+                <li><p>Listen line by line. For each line, <strong>mute the two versions you like less</strong> (click the clip → <span class="path">Cmd+M</span>, or slice with the razor at the line boundaries and delete).</p></li>
+                <li><p>Where two takes join mid-phrase, overlap them by a breath and add a tiny fade on each side so the seam is inaudible.</p></li>
+              </ol>
+              <div class="note tip">
+                <b>The rule that keeps comping honest</b>
+                Pick for <em>feeling</em>, not just accuracy — the slightly imperfect take that means it beats the clean take that doesn't, every single time.
+              </div>
             </div>
 
           </div>
@@ -1256,7 +1385,7 @@
                   <tbody>
                     <tr><td><strong>Telephone / radio</strong></td><td><strong>Fruity Filter</strong> or EQ: cut everything below 500 Hz and above 3 kHz. Classic for one verse or an intro line.</td></tr>
                     <tr><td><strong>Megaphone / grit</strong></td><td><strong>Fruity Blood Overdrive</strong>, gently — adds fur and aggression. Great doubled quietly under a clean take.</td></tr>
-                    <tr><td><strong>Robot / vocoder</strong></td><td><strong>Vocodex</strong> (Signature) with a synth as the carrier — the Daft Punk voice.</td></tr>
+                    <tr><td><strong>Robot / vocoder</strong></td><td><strong>Fruity Vocoder</strong> (included in your copy) with a 3x Osc chord as the carrier — the Daft Punk voice. Full wiring in the Advanced card below.</td></tr>
                     <tr><td><strong>Whisper double</strong></td><td>Record the line again <em>whispered</em>, lay it exactly under the sung take, quietly. Intimacy on demand.</td></tr>
                     <tr><td><strong>Dreamy wash</strong></td><td>Reverb WET at 50%+ with a long decay — the voice dissolves into the room. Bridges, outros.</td></tr>
                     <tr><td><strong>Shimmer width</strong></td><td><strong>Fruity Chorus</strong>, subtle — thickens and widens a thin-feeling take.</td></tr>
@@ -1296,6 +1425,29 @@
               <div class="note tip">
                 <b>What makes any of them R&amp;B</b>
                 The stack. Pop doubles a chorus; R&amp;B <em>builds architecture</em> out of voices — unisons, thirds, fifths, whispers, octaves, ad-libs in every gap. Master the stack once and all three flavours are settings on top of it.
+              </div>
+            </div>
+
+            <div class="adv-banner"><b>ADVANCED</b><span>Synthetic voices: sing something real, then turn a copy of it into a machine. Everything here uses plugins already in your copy.</span></div>
+
+            <div class="card advanced">
+              <span class="eyebrow">Sing it human, robotise the copy</span>
+              <h3>Synthetic backing voices — three levels of robot</h3>
+              <p>The trick behind almost every "robot voice" on a record: the <em>lead</em> stays human, and a <strong>copy</strong> of it gets transformed and tucked underneath as a backing texture. Three levels, from easy to full Daft Punk:</p>
+              <p><strong>Level 1 — the hard-tuned shadow (5 minutes).</strong> Duplicate the vocal clip onto its own mixer track. On that track, load your free tuner (Graillon / MAutoPitch — the ones from the Pitch card), set it to the song's key and <strong>maximum correction speed</strong>, and shift the formant knob down a touch. Instantly synthetic. Sit it just under the lead in the chorus, or pan two copies wide.</p>
+              <p><strong>Level 2 — the metallic ghost.</strong> On a vocal copy: the telephone EQ (cut below 500 Hz and above 3 kHz) → <strong>Fruity Blood Overdrive</strong> gently → <strong>Fruity Flanger</strong>. A radio-transmission voice that sounds great answering the lead in the gaps.</p>
+              <p><strong>Level 3 — the full vocoder.</strong> Your words pushed through a synth's tone — you speak, the chord talks:</p>
+              <figure class="diagram" data-svg="vocoderRoute"></figure>
+              <ol class="steps">
+                <li><p>Vocal clip on mixer track A. On another channel, a <strong>3x Osc</strong> (or FLEX synth) playing a <strong>held chord</strong> — your song's chords, long notes — routed to mixer track B.</p></li>
+                <li><p>In the Mixer, click track <strong>B</strong> (the synth), then <span class="path">right-click track A's routing arrow → Sidechain to this track</span> — the synth is now feeding track A invisibly.</p></li>
+                <li><p>Load <strong>Fruity Vocoder</strong> on track <strong>A</strong> (the voice). In its input settings, set the <strong>carrier to the sidechain</strong> — the voice is the modulator, the synth is the throat.</p></li>
+                <li><p>Press play and sing (or use the recorded clip): the chord speaks your words. Silence? Swap which input is MOD and which is CAR — it's the #1 gotcha.</p></li>
+                <li><p>Use it as a <strong>backing pad</strong>: vocoder singing the chorus hook, human lead on top. That's the modern synthetic-choir sound.</p></li>
+              </ol>
+              <div class="note tip">
+                <b>The synthetic choir recipe</b>
+                Whisper take + Level 1 tuned shadow + Level 3 vocoder pad, all quiet, all behind the human lead. Massive, futuristic, and every piece of it came from her own voice.
               </div>
             </div>
 
@@ -1596,6 +1748,19 @@
               </div>
             </div>
 
+            <div class="adv-banner"><b>ADVANCED</b><span>Beyond the grid: making drum sounds nobody else has.</span></div>
+
+            <div class="card advanced">
+              <span class="eyebrow">Your drums, actually yours</span>
+              <h3>Layering, resampling, and two-strength hats</h3>
+              <ul>
+                <li><strong>Layer two drums into one.</strong> The classic: a punchy kick for the thump plus a second kick (or a tom, low) for the boom — two channels, hits on the same steps, volumes balanced until they read as ONE drum. Same trick makes snare+clap the standard R&amp;B backbeat.</li>
+                <li><strong>Resample with Edison — the producer's photocopier.</strong> Load <strong>Edison</strong> on the master track, press its record button while your layered drum loops, then drag the recorded clip straight out of Edison into the Channel Rack: your layered stack is now ONE new drum sound, yours forever, reusable in any song.</li>
+                <li><strong>Two-strength hats.</strong> Duplicate the hat channel; make one copy quiet and slightly darker (channel volume down). Main hats on the beat from channel one, the in-between 16ths from the quiet channel — instant professional bounce that velocity alone can't quite reach.</li>
+                <li><strong>Any sound is a drum.</strong> Record yourself hitting a glass, a table, a zip — chop the hit out in Edison, drag it to the rack, sequence it like a shaker. R&amp;B records are full of exactly this.</li>
+              </ul>
+            </div>
+
           </div>
         </section>
 
@@ -1670,6 +1835,19 @@
                 <li><strong>Leave the bottom to the bass.</strong> If a bass part is playing the root note, your left hand doesn't need to. Play the chords higher up and the whole thing opens out.</li>
                 <li><strong>Hold chords through the bar</strong> in verses; play them more rhythmically in choruses. Same chords, more energy.</li>
                 <li><strong>Add the 7th for colour.</strong> Am7 instead of Am, Cmaj7 instead of C. One extra note, instantly more grown-up.</li>
+              </ul>
+            </div>
+
+            <div class="adv-banner"><b>ADVANCED</b><span>The chord colours that make R&amp;B sound like R&amp;B.</span></div>
+
+            <div class="card advanced">
+              <span class="eyebrow">One more note each</span>
+              <h3>9ths, slash chords, and the gospel move</h3>
+              <ul>
+                <li><strong>The 9th — the R&amp;B note.</strong> On any 7th chord, add the note <em>two above the root</em>: Am7 (A·C·E·G) becomes <strong>Am9</strong> by adding B. Cmaj7 becomes Cmaj9 by adding D. That soft cloudy lushness in neo-soul chords is mostly 9ths.</li>
+                <li><strong>Slash chords — a different bass under the same chord.</strong> Written C/E, meaning "C chord, but with E as the lowest note." In FL: keep the right-hand chord, move the BASS channel's note. Walking the bass down stepwise under held chords (C → C/B → Am7) is the smoothest sound in pop.</li>
+                <li><strong>The gospel slide.</strong> Approach any chord from one key below: the chord before lands a semitone under, then slides up. In the Piano roll, place a short copy of the chord one row down, right before the real one. Instant church.</li>
+                <li><strong>Try them safely:</strong> everything above works inside Project One's four chords — Am9, F/A, Cmaj9, the slide into Em7 — before you spend them on your own songs.</li>
               </ul>
             </div>
 
@@ -3746,6 +3924,187 @@
     return s;
   };
 
+  /* ---------- where plugins live: the Add-plugin picker ---------- */
+  SVGX.pluginPicker = function () {
+    var inner = "";
+    var top = 44;
+    // left: a fragment of the channel rack bottom with the + ringed
+    inner += '<rect x="34" y="' + top + '" width="200" height="150" rx="4" fill="' + FLC.well + '" stroke="' + FLC.edge + '" stroke-width="1.4"/>';
+    inner += '<text x="44" y="' + (top + 18) + '" font-family="var(--body)" font-size="10" fill="' + FLC.dim + '">Channel Rack (F6)</text>';
+    ["Kick", "Snare", "Hat"].forEach(function (nm, i) {
+      var y = top + 30 + i * 26;
+      inner += '<rect x="44" y="' + y + '" width="150" height="20" rx="3" fill="#5F6A94" opacity=".8"/>';
+      inner += '<text x="119" y="' + (y + 14) + '" text-anchor="middle" font-family="var(--body)" font-size="9.5" fill="#EFF2F5">' + nm + '</text>';
+    });
+    inner += '<circle cx="66" cy="' + (top + 126) + '" r="11" fill="' + FLC.dark + '" stroke="' + FLC.or + '" stroke-width="1.6"/>';
+    inner += '<text x="66" y="' + (top + 131) + '" text-anchor="middle" font-family="var(--body)" font-size="14" font-weight="800" fill="' + FLC.or + '">+</text>';
+    inner += ring(66, top + 126, 17);
+    inner += '<text x="120" y="' + (top + 131) + '" font-family="var(--body)" font-size="9.5" font-weight="700" fill="var(--focus)">click this…</text>';
+    // arrow to the picker
+    inner += '<path d="M 240 ' + (top + 100) + ' C 262 ' + (top + 100) + ', 262 ' + (top + 80) + ', 282 ' + (top + 80) + '" fill="none" stroke="var(--focus)" stroke-width="2.5"/>';
+    inner += '<path d="M 278 ' + (top + 74) + ' L 290 ' + (top + 80) + ' L 278 ' + (top + 86) + ' Z" fill="var(--focus)"/>';
+    // right: the picker list
+    inner += '<rect x="292" y="' + top + '" width="330" height="216" rx="4" fill="' + FLC.dark + '" stroke="' + FLC.edge + '" stroke-width="1.4"/>';
+    inner += '<text x="306" y="' + (top + 20) + '" font-family="var(--body)" font-size="10.5" font-weight="700" fill="' + FLC.txt + '">…and this list opens</text>';
+    var gens = ["3x Osc", "FLEX", "FPC", "Fruity Slicer", "GMS", "Sytrus", "BassDrum", "Plucked!"];
+    gens.forEach(function (g, i) {
+      var y = top + 32 + i * 22;
+      var sel = g === "FLEX";
+      if (sel) inner += '<rect x="298" y="' + (y - 3) + '" width="318" height="20" rx="3" fill="' + FLC.or + '"/>';
+      inner += '<path d="M 308 ' + (y + 3) + ' l 0 8 l 6 -4 Z" fill="' + (sel ? "#1E1503" : FLC.dim) + '"/>';
+      inner += '<text x="322" y="' + (y + 11) + '" font-family="var(--body)" font-size="11" font-weight="' + (sel ? 800 : 500) + '" fill="' + (sel ? "#1E1503" : FLC.dim) + '">' + g + (sel ? "   ← the sound library" : "") + '</text>';
+    });
+    inner += pill(330, 24, "Every instrument is already inside FL — nothing to download or buy");
+    return flWindow(660, 300, "Add a plugin   (the + at the bottom of the Channel Rack)", inner);
+  };
+
+  /* ---------- FLEX macro knobs: one preset, a hundred sounds ---------- */
+  SVGX.flexMacros = function () {
+    var inner = "";
+    var top = 46;
+    inner += '<rect x="34" y="' + top + '" width="' + (700 - 68) + '" height="34" rx="4" fill="' + FLC.dark + '"/>';
+    inner += '<text x="350" y="' + (top + 22) + '" text-anchor="middle" font-family="var(--display)" font-size="14" font-weight="700" fill="' + FLC.txt + '">Dreamy Keys</text>';
+    inner += '<text x="48" y="' + (top + 22) + '" font-family="var(--body)" font-size="10" fill="' + FLC.dim + '">◀ preset ▶</text>';
+    var macros = [
+      ["FILTER", "darker ↔ brighter"], ["RESO", "hollow ↔ whistly"], ["ATTACK", "pluck ↔ swell"], ["RELEASE", "dry ↔ ringing"],
+      ["SPACE", "close ↔ huge"], ["MOTION", "still ↔ alive"], ["DRIVE", "clean ↔ furry"], ["MASTER", "volume"]
+    ];
+    macros.forEach(function (m, i) {
+      var kx = 76 + i * 79, ky = top + 128;
+      inner += miniKnob(kx, ky, 19);
+      inner += '<text x="' + kx + '" y="' + (ky + 40) + '" text-anchor="middle" font-family="var(--body)" font-size="9" letter-spacing=".06em" font-weight="700" fill="' + FLC.txt + '">' + m[0] + '</text>';
+      inner += '<text x="' + kx + '" y="' + (ky + 55) + '" text-anchor="middle" font-family="var(--body)" font-size="8" fill="' + FLC.dim + '">' + m[1] + '</text>';
+    });
+    inner += '<rect x="42" y="' + (top + 96) + '" width="616" height="100" rx="8" fill="none" stroke="var(--focus)" stroke-width="2.5" stroke-dasharray="7 5"/>';
+    inner += pill(350, 24, "These knobs are the whole game — same preset, turned into a hundred different sounds");
+    return flWindow(700, 290, "FLEX — the macro knobs along the bottom", inner);
+  };
+
+  /* ---------- 3xOsc: the spaceship recipe ---------- */
+  SVGX.osc3Window = function () {
+    var inner = "";
+    var top = 48;
+    var oscs = [
+      { n: "OSC 1", shape: 0, note: "sine — the body" },
+      { n: "OSC 2", shape: 2, note: "saw, CRS −12 — engine" },
+      { n: "OSC 3", shape: 2, note: "saw, FINE +7 — shimmer" }
+    ];
+    oscs.forEach(function (o, i) {
+      var y = top + 10 + i * 74;
+      inner += '<rect x="34" y="' + y + '" width="' + (700 - 68) + '" height="64" rx="4" fill="' + (i % 2 ? FLC.well : "#333B44") + '" stroke="' + FLC.edge + '" stroke-width="1"/>';
+      inner += '<text x="48" y="' + (y + 24) + '" font-family="var(--body)" font-size="11" font-weight="800" fill="' + FLC.txt + '">' + o.n + '</text>';
+      // waveform shape buttons: sine, tri, saw, square, noise
+      for (var s2 = 0; s2 < 5; s2++) {
+        var bx = 110 + s2 * 34, sel = s2 === o.shape;
+        inner += '<rect x="' + bx + '" y="' + (y + 10) + '" width="28" height="22" rx="3" fill="' + (sel ? FLC.or : FLC.dark) + '" stroke="' + FLC.edge + '" stroke-width="1"/>';
+        var mid = y + 21, c = sel ? "#1E1503" : FLC.dim;
+        if (s2 === 0) inner += '<path d="M ' + (bx + 5) + ' ' + mid + ' q 4.5 -8 9 0 t 9 0" fill="none" stroke="' + c + '" stroke-width="1.6"/>';
+        if (s2 === 1) inner += '<path d="M ' + (bx + 5) + ' ' + (mid + 4) + ' l 4.5 -8 l 4.5 8 l 4.5 -8 l 4.5 8" fill="none" stroke="' + c + '" stroke-width="1.6"/>';
+        if (s2 === 2) inner += '<path d="M ' + (bx + 5) + ' ' + (mid + 4) + ' l 9 -8 l 0 8 l 9 -8 l 0 8" fill="none" stroke="' + c + '" stroke-width="1.6"/>';
+        if (s2 === 3) inner += '<path d="M ' + (bx + 5) + ' ' + (mid + 4) + ' l 0 -8 l 9 0 l 0 8 l 9 0 l 0 -8" fill="none" stroke="' + c + '" stroke-width="1.6"/>';
+        if (s2 === 4) inner += '<path d="M ' + (bx + 5) + ' ' + mid + ' l 2 -4 l 2 6 l 2 -7 l 2 5 l 2 -3 l 2 6 l 2 -5 l 2 3" fill="none" stroke="' + c + '" stroke-width="1.4"/>';
+      }
+      // knobs CRS FINE PAN VOL
+      ["CRS", "FINE", "PAN", "VOL"].forEach(function (k, ki) {
+        var kx = 320 + ki * 52;
+        inner += miniKnob(kx, y + 22, 12);
+        inner += '<text x="' + kx + '" y="' + (y + 48) + '" text-anchor="middle" font-family="var(--body)" font-size="7.5" fill="' + FLC.dim + '">' + k + '</text>';
+      });
+      inner += '<text x="540" y="' + (y + 26) + '" font-family="var(--body)" font-size="9" fill="' + FLC.or + '">' + o.note + '</text>';
+    });
+    inner += pill(350, 24, "Three oscillators = three voices humming together. This exact recipe is the spaceship");
+    return flWindow(700, 300, "3x Osc   (included in every FL edition)", inner);
+  };
+
+  /* ---------- attack/release: why slow attack = pad, fast = pluck ---------- */
+  SVGX.envCurve = function () {
+    var s = '<svg viewBox="0 0 760 250" role="img" aria-label="The volume envelope — attack and release">';
+    function env(x0, aw, label, sub, attackFrac) {
+      var base = 170, h = 100, w = 300;
+      var r = '<line x1="' + x0 + '" y1="' + base + '" x2="' + (x0 + w) + '" y2="' + base + '" stroke="var(--line-strong)" stroke-width="1.5"/>';
+      var ax = x0 + w * attackFrac;
+      r += '<path d="M ' + x0 + ' ' + base + ' C ' + (x0 + w * attackFrac * 0.6) + ' ' + base + ', ' + (x0 + w * attackFrac * 0.7) + ' ' + (base - h) + ', ' + ax + ' ' + (base - h) +
+           ' L ' + (x0 + w * 0.62) + ' ' + (base - h) +
+           ' C ' + (x0 + w * 0.8) + ' ' + (base - h) + ', ' + (x0 + w * 0.86) + ' ' + base + ', ' + (x0 + w * 0.98) + ' ' + base + '" fill="var(--accent)" opacity=".2"/>';
+      r += '<path d="M ' + x0 + ' ' + base + ' C ' + (x0 + w * attackFrac * 0.6) + ' ' + base + ', ' + (x0 + w * attackFrac * 0.7) + ' ' + (base - h) + ', ' + ax + ' ' + (base - h) +
+           ' L ' + (x0 + w * 0.62) + ' ' + (base - h) +
+           ' C ' + (x0 + w * 0.8) + ' ' + (base - h) + ', ' + (x0 + w * 0.86) + ' ' + base + ', ' + (x0 + w * 0.98) + ' ' + base + '" fill="none" stroke="var(--accent)" stroke-width="3"/>';
+      r += '<text x="' + (x0 + w / 2) + '" y="42" text-anchor="middle" font-family="var(--display)" font-size="15" font-weight="800" fill="var(--ink)">' + label + '</text>';
+      r += '<text x="' + (x0 + w / 2) + '" y="62" text-anchor="middle" font-family="var(--body)" font-size="11" fill="var(--ink-soft)">' + sub + '</text>';
+      // attack arrow
+      r += '<path d="M ' + x0 + ' ' + (base + 20) + ' L ' + ax + ' ' + (base + 20) + '" stroke="var(--accent-deep)" stroke-width="2"/>';
+      r += '<text x="' + ((x0 + ax) / 2) + '" y="' + (base + 38) + '" text-anchor="middle" font-family="var(--body)" font-size="10" font-weight="700" fill="var(--accent-deep)">ATTACK</text>';
+      r += '<text x="' + (x0 + w * 0.84) + '" y="' + (base + 38) + '" text-anchor="middle" font-family="var(--body)" font-size="10" font-weight="700" fill="var(--ink-faint)">RELEASE</text>';
+      return r;
+    }
+    s += env(50, 0, "Fast attack", "pluck, key, drum — the note hits instantly", 0.05);
+    s += env(420, 0, "Slow attack", "pad, strings, spaceship — the note swells in", 0.4);
+    s += '<text x="380" y="238" text-anchor="middle" font-family="var(--body)" font-size="12" fill="var(--ink-soft)">Same sound, different envelope, different instrument. In 3xOsc: channel settings → the INS envelope. In FLEX: the ATTACK and RELEASE macros.</text>';
+    return s + '</svg>';
+  };
+
+  /* ---------- the vocoder routing map ---------- */
+  SVGX.vocoderRoute = function () {
+    var s = '<svg viewBox="0 0 760 360" role="img" aria-label="How the vocoder is wired">';
+    s += nodeBox(30, 46, 200, 66, "Your voice", "the words & rhythm (MOD)");
+    s += nodeBox(30, 200, 200, 66, "3x Osc — held chord", "the robot's throat (CAR)");
+    s += nodeBox(320, 116, 210, 78, "Fruity Vocoder", "on the VOICE's mixer track", "red");
+    s += nodeBox(610, 128, 126, 60, "Robot voice");
+    s += wire(230, 79, 320, 140, "voice track");
+    s += wire(230, 233, 320, 172, "sidechain send", 12);
+    s += wire(530, 155, 610, 158, "");
+    s += '<text x="380" y="296" text-anchor="middle" font-family="var(--body)" font-size="12.5" font-weight="650" fill="var(--ink)">The vocoder pushes your WORDS through the synth’s TONE — you speak, the chord talks.</text>';
+    s += '<text x="380" y="318" text-anchor="middle" font-family="var(--body)" font-size="11.5" fill="var(--ink-soft)">Voice and synth sit on two mixer tracks; the synth is sent to the voice’s track as a sidechain,</text>';
+    s += '<text x="380" y="336" text-anchor="middle" font-family="var(--body)" font-size="11.5" fill="var(--ink-soft)">and Fruity Vocoder on the voice’s track listens to both. Silent robot? Swap which input is MOD and CAR.</text>';
+    return s + '</svg>';
+  };
+
+  /* ---------- Audio MIDI Setup: listening together ---------- */
+  SVGX.macAudioMidi = function () {
+    var s = '<svg viewBox="0 0 680 360" role="img" aria-label="Audio MIDI Setup — Multi-Output Device">';
+    s += '<rect x="10" y="8" width="660" height="340" rx="14" fill="#F5F4F2" stroke="#C9C6C1" stroke-width="1.6"/>';
+    s += '<circle cx="38" cy="32" r="6.5" fill="#FF5F57"/><circle cx="60" cy="32" r="6.5" fill="#FEBC2E"/><circle cx="82" cy="32" r="6.5" fill="#28C840"/>';
+    s += '<text x="340" y="37" text-anchor="middle" font-family="var(--body)" font-size="14" font-weight="700" fill="#3A3733">Audio MIDI Setup   (Applications → Utilities)</text>';
+    // left device list
+    s += '<rect x="10" y="52" width="240" height="296" fill="#EAE8E4"/>';
+    var devs = [
+      ["MacBook Microphone", false], ["MacBook Speakers", false], ["External Headphones", false],
+      ["Scarlett Solo USB", false], ["Multi-Output Device", true]
+    ];
+    devs.forEach(function (d, i) {
+      var y = 88 + i * 40;
+      if (d[1]) s += '<rect x="18" y="' + (y - 22) + '" width="224" height="32" rx="8" fill="#C6362C"/>';
+      s += '<text x="34" y="' + y + '" font-family="var(--body)" font-size="12.5" font-weight="' + (d[1] ? 700 : 500) + '" fill="' + (d[1] ? "#fff" : "#4A4741") + '">' + d[0] + '</text>';
+    });
+    // + button bottom-left, ringed
+    s += '<rect x="20" y="310" width="30" height="26" rx="6" fill="#FFFFFF" stroke="#C9C6C1" stroke-width="1.4"/>';
+    s += '<text x="35" y="329" text-anchor="middle" font-family="var(--body)" font-size="17" font-weight="700" fill="#3A3733">+</text>';
+    s += ring(35, 323, 22);
+    s += '<text x="130" y="330" font-family="var(--body)" font-size="10.5" font-weight="700" fill="var(--focus)">+ → Create Multi-Output Device</text>';
+    // right pane: use/drift table
+    s += '<text x="272" y="80" font-family="var(--body)" font-size="13" font-weight="700" fill="#2C2925">Multi-Output Device — tick both:</text>';
+    s += '<text x="560" y="104" font-family="var(--body)" font-size="10.5" font-weight="700" fill="#8A867F">USE</text>';
+    s += '<text x="605" y="104" font-family="var(--body)" font-size="10.5" font-weight="700" fill="#8A867F">DRIFT</text>';
+    var rows = [
+      ["Scarlett Solo USB", "her headphones, via the Solo", true, false],
+      ["External Headphones", "the listener, via the Mac’s jack", true, true],
+      ["MacBook Speakers", "or out loud instead", false, false]
+    ];
+    rows.forEach(function (r, i) {
+      var y = 128 + i * 52;
+      s += '<rect x="266" y="' + (y - 24) + '" width="388" height="44" rx="10" fill="#FFFFFF" stroke="#DBD8D3" stroke-width="1.2"/>';
+      s += '<text x="282" y="' + y + '" font-family="var(--body)" font-size="12.5" font-weight="600" fill="#2C2925">' + r[0] + '</text>';
+      s += '<text x="282" y="' + (y + 14) + '" font-family="var(--body)" font-size="10" fill="#8A867F">' + r[1] + '</text>';
+      s += '<rect x="556" y="' + (y - 10) + '" width="18" height="18" rx="4" fill="' + (r[2] ? "#C6362C" : "#FFFFFF") + '" stroke="#C9C6C1" stroke-width="1.2"/>';
+      if (r[2]) s += '<path d="M 560 ' + (y - 1) + ' l 4 4 l 7 -8" fill="none" stroke="#fff" stroke-width="2.2"/>';
+      s += '<rect x="604" y="' + (y - 10) + '" width="18" height="18" rx="4" fill="' + (r[3] ? "#C6362C" : "#FFFFFF") + '" stroke="#C9C6C1" stroke-width="1.2"/>';
+      if (r[3]) s += '<path d="M 608 ' + (y - 1) + ' l 4 4 l 7 -8" fill="none" stroke="#fff" stroke-width="2.2"/>';
+    });
+    s += '<text x="266" y="300" font-family="var(--body)" font-size="10.5" fill="#8A867F">Sample rate: 44.1 kHz on BOTH · Drift ticks on all EXCEPT the Scarlett</text>';
+    s += '<text x="266" y="318" font-family="var(--body)" font-size="10.5" fill="#8A867F">Volume keys stop working here — use each device’s own volume</text>';
+    return s + '</svg>';
+  };
+
   /* ============================================================
      Inject into reference cards: <figure data-svg="name">
      ============================================================ */
@@ -3782,6 +4141,12 @@
     reverbAnatomy: function () { return SVGX.reverbAnatomy(); },
     kbZones: function () { return SVGX.kbZones(); },
     projectMap: function () { return SVGX.projectMap(0); },
+    pluginPicker: function () { return SVGX.pluginPicker(); },
+    flexMacros: function () { return SVGX.flexMacros(); },
+    osc3Window: function () { return SVGX.osc3Window(); },
+    envCurve: function () { return SVGX.envCurve(); },
+    vocoderRoute: function () { return SVGX.vocoderRoute(); },
+    macAudioMidi: function () { return SVGX.macAudioMidi(); },
     drumKitFull: function () { return SVGX.drumKitFull(); },
     chorusLift: function () { return SVGX.chorusLift(); },
     reverbWindow: function () { return SVGX.reverbWindow(); },
@@ -4167,9 +4532,24 @@
     d: "<p>Open the Channel Rack (<strong>F6</strong>), click any instrument so its little light is on, and play a few keys.</p>",
     opts: [
       { t: "I hear it! 🎉", cls: "good", next: "suDone" },
+      { t: "Someone else wants to listen too", s: "Two headphones at once — a 3-minute Mac trick", next: "suShare" },
       { t: "No sound", s: "Straight into the sound fixer", next: "ns1" },
       { t: "Keys do nothing", s: "Straight into the keyboard fixer", next: "k1" }
     ]
+  });
+  N("suShare", {
+    q: "Listening together: the Multi-Output Device",
+    v: function () { return SVGX.macAudioMidi(); },
+    d: "<p>The Scarlett has one headphone socket — so the Mac itself will send the same music to two places at once. You build a small virtual device, once, and it's there forever:</p>" +
+      act([
+        "Open <strong>Audio MIDI Setup</strong> — <kbd>Cmd+Space</kbd>, type <em>audio midi</em>, Enter (it lives in Applications → Utilities)",
+        "Click the <strong>+</strong> at the bottom-left of the device list → <strong>Create Multi-Output Device</strong>",
+        "Tick <strong>Use</strong> on both <strong>Scarlett Solo USB</strong> and <strong>External Headphones</strong> (or MacBook Speakers)",
+        "Tick <strong>Drift Correction</strong> on everything EXCEPT the Scarlett, and check both devices show the <strong>same sample rate</strong>",
+        "<span class='path'>System Settings → Sound → Output → Multi-Output Device</span>, and the same pick in FL's <span class='path'>Options → Audio Settings</span>"
+      ]) +
+      "<p>Two normal surprises: the Mac's <strong>volume keys stop working</strong> on a multi-output (each device keeps its own volume — your MONITOR knob still works), and when you go back to <strong>recording vocals, switch FL back to plain Scarlett Solo USB</strong>. The full written version, plus the two-USB-inputs cousin (Aggregate Device), is in <a href='#setup' style='color:var(--accent-deep)'>First-time setup</a>.</p>",
+    opts: [{ t: "We're both hearing it — finish", cls: "good", next: "suDone" }]
   });
   N("suDone", {
     done: true, q: "That's the whole rig working.",
@@ -4601,7 +4981,51 @@
         "<strong>Too perfect now?</strong> The lane at the bottom (ringed) is <strong>velocity</strong> — how hard each note plays. Drag a few bars down so the part breathes like a human played it",
         "<strong>Whole part in the wrong key?</strong> <kbd>Cmd</kbd>+<kbd>A</kbd>, then <kbd>Shift</kbd>+<kbd>↑</kbd>/<kbd>↓</kbd> moves everything a semitone at a time"
       ]),
-    opts: [{ t: "Done", cls: "good", next: "pDone" }]
+    opts: [
+      { t: "Done", cls: "good", next: "pDone" },
+      { t: "Go further — design a sound from nothing", s: "The spaceship: your first synth patch, in 3x Osc", next: "pd1" }
+    ]
+  });
+  N("pd1", {
+    step: "Sound design · 1 of 3", q: "Three waves = the spaceship's engine",
+    v: function () { return SVGX.osc3Window(); },
+    d: "<p>Every synth sound ever is layered waves + an envelope + effects. Prove it with <strong>3x Osc</strong>, the simplest synth in FL (and included in every edition):</p>" +
+      act([
+        "Channel Rack <strong>+</strong> → <strong>3x Osc</strong> — play a low key around <strong>A2</strong>. Dull tone? Good — raw material",
+        "<strong>OSC 1: sine</strong>, leave it — the body",
+        "<strong>OSC 2: saw, CRS −12</strong> — an octave-down engine rumble",
+        "<strong>OSC 3: saw, FINE +7</strong> — slightly out of tune on purpose; that beating shimmer is the magic"
+      ]),
+    opts: [{ t: "It hums — next", cls: "primary", next: "pd2" }]
+  });
+  N("pd2", {
+    step: "Sound design · 2 of 3", q: "The envelope: make it swell",
+    v: function () { return SVGX.envCurve(); },
+    d: "<p>Right now it starts instantly, like a key press. Spaceships don't start — they <em>arrive</em>:</p>" +
+      act([
+        "Click the 3x Osc channel's <strong>name</strong> → Channel settings → <strong>INS</strong> tab",
+        "Under <strong>Volume</strong>: drag <strong>ATT</strong> (attack) to about a third — the sound now swells in",
+        "Drag <strong>REL</strong> (release) up too — letting go fades out instead of cutting dead",
+        "Hold one low note and listen to it bloom"
+      ]),
+    opts: [{ t: "It swells — next", cls: "primary", next: "pd3" }]
+  });
+  N("pd3", {
+    step: "Sound design · 3 of 3", q: "The hangar, and the fly-by",
+    d: "<p>Two effects finish it:</p>" +
+      act([
+        "On its mixer track: <strong>Fruity Reeverb 2</strong>, a big hall preset, <strong>WET ~40%</strong> — far wetter than a vocal ever gets",
+        "Add <strong>Fruity Filter</strong> after it → <span class='path'>right-click its Cutoff knob → Create automation clip</span>",
+        "In the Playlist, draw the automation as a slow <strong>rise and fall</strong> over four bars",
+        "Hold one low note for those four bars: the whoosh sweeping open and shut IS the spaceship passing overhead"
+      ]) +
+      "<p>And that's the whole grammar of synthesis: <strong>waves → envelope → filter → space</strong>. Fast attack + closed filter = bass pluck; slow attack + big hall = the cinematic pad under your next bridge. Same four dials forever.</p>",
+    opts: [{ t: "I made a sound that didn't exist", cls: "good", next: "pdDone" }]
+  });
+  N("pdDone", {
+    done: true, q: "Sound designer.",
+    d: "<p>You didn't pick a preset — you built the instrument. The written version (plus the FLEX macro-knob shortcut to the same ideas) is in <a href='#keyboard' style='color:var(--accent-deep)'>Playing the keyboard</a> under Advanced.</p>",
+    goFlows: ["piano", "song"]
   });
   N("pDone", {
     done: true, q: "That's the whole MIDI piano workflow.",
@@ -5055,7 +5479,8 @@
       { t: "Modern pop sheen", s: "Pitch correction — from invisible polish to the hard tuned effect", next: "vpop1" },
       { t: "A character voice", s: "Telephone, megaphone, robot, whisper — a different voice for one section", next: "vch1" },
       { t: "Doubles & harmonies", s: "The free chorus-thickener every record uses", next: "vdh1" },
-      { t: "R&B vocals — three flavours", s: "Silky classic, airy neo-soul, dark trap-soul", next: "rb0" }
+      { t: "R&B vocals — three flavours", s: "Silky classic, airy neo-soul, dark trap-soul", next: "rb0" },
+      { t: "Robot & synthetic voices", s: "Sing it human, robotise a copy — three levels, up to the full vocoder", next: "vrb1" }
     ]
   });
 
@@ -5356,6 +5781,62 @@
     done: true, q: "That's the thick-chorus secret.",
     d: "<p>Doubles panned wide, a third-harmony under the last line, all of it quieter than the lead. Costs nothing but takes — and it's most of the difference between a demo chorus and a record one.</p>",
     goFlows: ["voicefx", "record"]
+  });
+
+  /* ---- G: robot & synthetic voices (all stock Producer plugins) ---- */
+  N("vrb1", {
+    step: "Robot · level 1 of 3", q: "The rule first — then the hard-tuned shadow",
+    d: "<p>The rule behind every robot voice on a record: <strong>the lead stays human; a COPY gets transformed</strong> and tucked underneath. You always sing it real first.</p><p>Level 1 is five minutes:</p>" +
+      act([
+        "In the Playlist, <kbd>Cmd</kbd>+drag the vocal clip to duplicate it, and route the copy to its <strong>own mixer track</strong>",
+        "On that track, load your free tuner (Graillon / MAutoPitch — installed back in the Pitch card), set the song's <strong>KEY</strong>, and correction speed to <strong>maximum</strong>",
+        "Pull the <strong>formant</strong> knob down slightly — that's what tips it from \"tuned\" into \"synthetic\"",
+        "Sit it just under the lead in the chorus, or duplicate again and pan two copies hard L/R"
+      ]),
+    opts: [{ t: "Shadow made — level 2", cls: "primary", next: "vrb2" }]
+  });
+  N("vrb2", {
+    step: "Robot · level 2 of 3", q: "The metallic ghost",
+    v: function () { return SVGX.charFilter(); },
+    d: "<p>A radio-transmission voice for answering the lead in the gaps — three stock effects in a row on another vocal copy:</p>" +
+      act([
+        "<strong>Parametric EQ 2</strong>: the telephone band — cut everything below 500 Hz and above 3 kHz (drawn below)",
+        "<strong>Fruity Blood Overdrive</strong>, gently — fur and grit",
+        "<strong>Fruity Flanger</strong> — the metallic swirl that says \"machine\"",
+        "Use it on single answering words, not whole lines — a ghost that comments, not a second singer"
+      ]),
+    opts: [{ t: "Ghost made — the full robot", cls: "primary", next: "vrb3" }]
+  });
+  N("vrb3", {
+    step: "Robot · level 3 of 3", q: "The full vocoder — you speak, the chord talks",
+    v: function () { return SVGX.vocoderRoute(); },
+    d: "<p><strong>Fruity Vocoder</strong> (included in your copy) pushes your words through a synth's tone. It's the trickiest routing in this whole app — follow exactly:</p>" +
+      act([
+        "Vocal clip → mixer track <strong>A</strong>. A <strong>3x Osc</strong> (or FLEX synth) playing your song's chords as long held notes → mixer track <strong>B</strong>",
+        "In the Mixer: click track <strong>B</strong>, then <span class='path'>right-click track A's routing arrow → Sidechain to this track</span>",
+        "Load <strong>Fruity Vocoder</strong> on track <strong>A</strong>, and set its <strong>carrier input to the sidechain</strong> — voice = modulator, synth = throat",
+        "Play: the chord speaks your words. <strong>Silent?</strong> Swap which input is MOD and which is CAR — the #1 gotcha",
+        "Mute the plain synth channel's own output if you hear it twice"
+      ]),
+    opts: [{ t: "It talks! — the choir trick", cls: "primary", next: "vrb4" }]
+  });
+  N("vrb4", {
+    step: "Robot · the payoff", q: "The synthetic choir",
+    v: function () { return SVGX.stackDiagram(); },
+    d: "<p>Now combine everything into the modern futuristic-backing sound:</p>" +
+      act([
+        "Human lead on top — untouched",
+        "Level 1 <strong>tuned shadow</strong> just underneath",
+        "The <strong>vocoder pad</strong> singing the chorus hook, quiet and wide",
+        "A <strong>whisper take</strong> over the top of the pad",
+        "Everything except the lead sits LOW — you should feel the machine choir, not count its members"
+      ]),
+    opts: [{ t: "Done — that's the robot toolkit", cls: "good", next: "vrbDone" }]
+  });
+  N("vrbDone", {
+    done: true, q: "Three robots, one human.",
+    d: "<p>Hard-tuned shadow, metallic ghost, full vocoder choir — all built from your own voice, all with plugins already in your FL. The written version with the routing diagram lives in <a href='#voicefx' style='color:var(--accent-deep)'>Shaping your voice</a> under Advanced.</p>",
+    goFlows: ["voicefx"]
   });
 
   /* ---- F: R&B vocals, three flavours ---- */
@@ -6016,6 +6497,9 @@
   }
 
   var FLOW_HINTS = [
+    { flow: "voicefx", rx: /\b(robot\w*|vocoder|vocode\w*|synthetic|daft\s*punk)\b/ },
+    { flow: "piano", rx: /\b(spaceship|sound\s*design\w*|synth\w*|3x\s*osc|3xosc|oscillat\w*|macro\w*|plugin\w*|flex|envelope|attack|patch)\b/ },
+    { flow: "setup", rx: /\b(aggregate|multi-?output|second\s*(pair|person|listener)|listen\s*together|two\s*headphones|share\s*the\s*sound)\b/ },
     { flow: "project1", rx: /\b(project\s*(one|1)|walk\s*-?through|example\s*song|whole\s*song|complete\s*song|start\s*to\s*finish|build\s*along)\b/ },
     { flow: "beat",    rx: /\b(beat|drum|drums|hat|hats|snare|kick|808|trap|drill|groove|rhythm|percussion|fill|fills|shaker|rim|ghost|crash|cymbal\w*|tom|toms|clap|slow\W*jam\w*|quiet\W*storm)\b/ },
     { flow: "record",  rx: /\b(record|recording|vocal|vocals|sing|singing|voice|take|takes)\b/ },
