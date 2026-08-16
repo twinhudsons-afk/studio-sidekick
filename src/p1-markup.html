@@ -1,0 +1,2111 @@
+<title>Studio Sidekick</title>
+
+<style>
+  /* ============================================================
+     STUDIO SIDEKICK v2 — interactive edition
+     Palette drawn from the Scarlett's own anodised red chassis.
+     ============================================================ */
+
+  :root {
+    --ground:        #FBFAF9;
+    --surface:       #FFFFFF;
+    --surface-sunk:  #F4F1EF;
+    --surface-rail:  #F7F5F3;
+
+    --ink:           #1A1614;
+    --ink-mid:       #443C38;
+    --ink-soft:      #5F5651;
+    --ink-faint:     #8A7F79;
+
+    --line:          #E4DED9;
+    --line-strong:   #D2C9C3;
+
+    --accent:        #C4342B;
+    --accent-deep:   #8E211A;
+    --accent-wash:   #FDF1F0;
+    --accent-edge:   #F0CFCC;
+
+    --good:          #17734A;
+    --good-wash:     #EDF7F1;
+    --warn:          #9A5E00;
+    --warn-wash:     #FDF4E6;
+    --stop:          #B3261E;
+    --stop-wash:     #FCEFEE;
+
+    --focus:         #1F6FEB;
+
+    --display: "Avenir Next", "Avenir", ui-sans-serif, system-ui, sans-serif;
+    --body:    -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, sans-serif;
+    --mono:    ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+
+    --fs-xs: 14px; --fs-sm: 15px; --fs-base: 17px; --fs-md: 19px;
+    --fs-lg: 22px; --fs-xl: 28px; --fs-2xl: 36px; --fs-3xl: 46px;
+
+    --lh-tight: 1.22; --lh-base: 1.62;
+
+    --rail-w: 288px;
+    --shadow-card: 0 1px 2px rgba(26,22,20,.05), 0 6px 18px -10px rgba(26,22,20,.14);
+    --shadow-pop:  0 8px 34px -12px rgba(26,22,20,.30);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #14110F; --surface: #1D1917; --surface-sunk: #262120; --surface-rail: #191514;
+      --ink: #F5F1EE; --ink-mid: #D3CAC5; --ink-soft: #AFA49E; --ink-faint: #857A74;
+      --line: #322B29; --line-strong: #453C39;
+      --accent: #F0655A; --accent-deep: #FF8B80; --accent-wash: #2A1917; --accent-edge: #4A2A26;
+      --good: #56C48D; --good-wash: #16241D; --warn: #E0A040; --warn-wash: #2A2015;
+      --stop: #F0655A; --stop-wash: #2A1917;
+      --focus: #6BA5FF;
+      --shadow-card: 0 1px 2px rgba(0,0,0,.4), 0 6px 18px -10px rgba(0,0,0,.7);
+      --shadow-pop:  0 8px 34px -12px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #14110F; --surface: #1D1917; --surface-sunk: #262120; --surface-rail: #191514;
+    --ink: #F5F1EE; --ink-mid: #D3CAC5; --ink-soft: #AFA49E; --ink-faint: #857A74;
+    --line: #322B29; --line-strong: #453C39;
+    --accent: #F0655A; --accent-deep: #FF8B80; --accent-wash: #2A1917; --accent-edge: #4A2A26;
+    --good: #56C48D; --good-wash: #16241D; --warn: #E0A040; --warn-wash: #2A2015;
+    --stop: #F0655A; --stop-wash: #2A1917;
+    --focus: #6BA5FF;
+    --shadow-card: 0 1px 2px rgba(0,0,0,.4), 0 6px 18px -10px rgba(0,0,0,.7);
+    --shadow-pop:  0 8px 34px -12px rgba(0,0,0,.8);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: var(--fs-base);
+    line-height: var(--lh-base);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 3px; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+  /* ============================================================ SHELL */
+
+  .shell { display: grid; grid-template-columns: var(--rail-w) minmax(0, 1fr); min-height: 100vh; }
+
+  .rail {
+    background: var(--surface-rail);
+    border-right: 1px solid var(--line);
+    position: sticky; top: 0; height: 100vh; overflow-y: auto;
+    display: flex; flex-direction: column; gap: 4px;
+    padding: 26px 18px 40px;
+  }
+
+  .brand { display: flex; align-items: baseline; gap: 9px; padding: 0 8px 4px; }
+  .brand-mark {
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--accent); flex: none; align-self: center;
+    box-shadow: 0 0 0 3px var(--accent-wash);
+  }
+  .brand-name { font-family: var(--display); font-weight: 700; font-size: var(--fs-md); letter-spacing: -0.015em; }
+  .brand-sub { padding: 0 8px 20px; font-size: var(--fs-xs); color: var(--ink-faint); line-height: 1.45; }
+
+  .nav-label {
+    font-size: 11.5px; text-transform: uppercase; letter-spacing: .1em;
+    font-weight: 700; color: var(--ink-faint); padding: 18px 8px 7px;
+  }
+  .nav-link {
+    display: flex; align-items: center; gap: 11px;
+    padding: 9px 10px; border-radius: 8px;
+    color: var(--ink-mid); text-decoration: none;
+    font-size: var(--fs-sm); font-weight: 500; line-height: 1.3;
+    transition: background .12s ease, color .12s ease;
+  }
+  .nav-link:hover { background: var(--surface-sunk); color: var(--ink); }
+  .nav-link[aria-current="true"] { background: var(--accent-wash); color: var(--accent-deep); font-weight: 650; }
+  .nav-num { font-family: var(--mono); font-size: 12px; color: var(--ink-faint); min-width: 17px; font-variant-numeric: tabular-nums; }
+  .nav-link[aria-current="true"] .nav-num { color: var(--accent); }
+  .nav-link.helplink {
+    background: var(--accent); color: #fff; font-weight: 700; margin-bottom: 6px;
+  }
+  .nav-link.helplink:hover { background: var(--accent-deep); color: #fff; }
+  .nav-link.helplink .nav-num { color: rgba(255,255,255,.75); }
+
+  .main { min-width: 0; display: flex; flex-direction: column; }
+
+  .topbar {
+    position: sticky; top: 0; z-index: 30;
+    background: color-mix(in srgb, var(--ground) 88%, transparent);
+    backdrop-filter: saturate(160%) blur(12px);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 32px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .burger {
+    display: none; width: 40px; height: 40px; flex: none;
+    border: 1px solid var(--line-strong); background: var(--surface);
+    border-radius: 9px; color: var(--ink); font-size: 17px; cursor: pointer;
+    align-items: center; justify-content: center;
+  }
+  .search-wrap { position: relative; flex: 1 1 auto; min-width: 0; }
+  .search-wrap svg {
+    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+    width: 17px; height: 17px; color: var(--ink-faint); pointer-events: none;
+  }
+  #q {
+    width: 100%; padding: 12px 14px 12px 41px;
+    font-family: var(--body); font-size: var(--fs-base); color: var(--ink);
+    background: var(--surface); border: 1px solid var(--line-strong);
+    border-radius: 10px; box-shadow: var(--shadow-card);
+  }
+  #q::placeholder { color: var(--ink-faint); }
+  #q:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px var(--accent-wash); }
+  .theme-btn {
+    flex: none; width: 40px; height: 40px;
+    border: 1px solid var(--line-strong); background: var(--surface);
+    border-radius: 9px; color: var(--ink-soft); cursor: pointer; font-size: 16px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .theme-btn:hover { color: var(--ink); border-color: var(--ink-faint); }
+
+  .content { padding: 0 32px 120px; }
+  .measure { max-width: 1120px; margin: 0 auto; }
+
+  /* ============================================================ HERO + HUB */
+
+  .hero { padding: 44px 0 8px; }
+  .hero h1 {
+    font-family: var(--display); font-size: var(--fs-3xl); line-height: var(--lh-tight);
+    letter-spacing: -0.025em; font-weight: 700; margin: 0 0 12px; text-wrap: balance;
+  }
+  .hero p { font-size: var(--fs-md); color: var(--ink-soft); margin: 0; max-width: 62ch; }
+  .rig { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .rig span {
+    font-size: var(--fs-xs); font-weight: 600; padding: 6px 12px; border-radius: 999px;
+    background: var(--surface); border: 1px solid var(--line-strong); color: var(--ink-mid);
+  }
+
+  .hub { padding-top: 30px; }
+  .hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .flowcard {
+    text-align: left;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow-card);
+    cursor: pointer;
+    font-family: var(--body);
+    color: var(--ink);
+    display: flex; flex-direction: column; gap: 6px;
+    transition: border-color .12s ease, transform .12s ease, box-shadow .12s ease;
+  }
+  .flowcard:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow-pop); }
+  .flowcard .fc-kicker {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .09em;
+    font-weight: 700; color: var(--accent);
+  }
+  .flowcard .fc-title { font-family: var(--display); font-weight: 700; font-size: var(--fs-md); line-height: 1.25; }
+  .flowcard .fc-sub { font-size: var(--fs-xs); color: var(--ink-soft); line-height: 1.45; }
+  .flowcard.fix .fc-kicker { color: var(--stop); }
+  .flowcard { position: relative; }
+  .flowcard .fc-done {
+    position: absolute; top: 12px; right: 14px;
+    font-size: 11px; font-weight: 800; letter-spacing: .04em;
+    color: var(--good); background: color-mix(in srgb, var(--good) 12%, var(--surface));
+    border: 1px solid color-mix(in srgb, var(--good) 45%, var(--line));
+    border-radius: 999px; padding: 3px 9px;
+  }
+  .flowcard.done-flow { border-color: color-mix(in srgb, var(--good) 40%, var(--line)); }
+  .flowcard.featured {
+    border: 1.5px solid var(--accent);
+    background: linear-gradient(180deg, var(--surface), var(--accent-wash));
+  }
+  .flowcard.featured .fc-title { color: var(--accent-deep); }
+
+  /* ---- advanced tiers ---- */
+  .adv-banner {
+    grid-column: 1 / -1;
+    background: color-mix(in srgb, #C99A2E 10%, var(--surface));
+    border: 1.5px solid #C99A2E;
+    border-radius: 13px;
+    padding: 14px 20px;
+    display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+  }
+  .adv-banner b {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .12em;
+    color: #8A5F1E; font-weight: 800;
+  }
+  .adv-banner span { font-size: var(--fs-xs); color: var(--ink-soft); }
+  .card.advanced { border-top: 3px solid #C99A2E; }
+  .card.advanced .eyebrow { color: #8A5F1E; }
+
+  /* ---- the first-song roadmap ---- */
+  .roadmap {
+    background: var(--accent-wash);
+    border: 1.5px solid var(--accent);
+    border-radius: 15px;
+    padding: 20px 22px;
+    margin-bottom: 18px;
+    box-shadow: var(--shadow-card);
+  }
+  .roadmap .rm-kicker {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .09em;
+    font-weight: 800; color: var(--accent-deep);
+  }
+  .roadmap h2 {
+    font-family: var(--display); font-size: var(--fs-lg); font-weight: 700;
+    margin: 4px 0 2px; letter-spacing: -0.01em;
+  }
+  #hubprog { margin: 0 0 10px; font-size: var(--fs-xs); font-weight: 700; color: var(--good); min-height: 1em; }
+  .rm-steps { display: flex; flex-wrap: wrap; gap: 10px; }
+  .rm-step {
+    flex: 1 1 170px; display: flex; align-items: flex-start; gap: 10px;
+    background: var(--surface); border: 1px solid var(--line-strong); border-radius: 11px;
+    padding: 12px 14px; text-align: left; cursor: pointer;
+    font-family: var(--body); color: var(--ink);
+    transition: border-color .12s ease, transform .12s ease;
+  }
+  .rm-step:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .rm-step.last { cursor: default; }
+  .rm-step.last:hover { border-color: var(--line-strong); transform: none; }
+  .rm-step b {
+    flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%;
+    background: var(--accent); color: #fff; font-size: 13px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center; margin-top: 1px;
+  }
+  .rm-step.last b { background: var(--ink-faint); }
+  .rm-step span { display: block; font-size: var(--fs-xs); font-weight: 700; line-height: 1.35; }
+  .rm-step span i { display: block; font-style: normal; font-weight: 500; color: var(--ink-soft); margin-top: 2px; }
+  .wiz-aced { color: var(--good); font-weight: 700; font-size: var(--fs-xs); margin: 6px 0 0; }
+
+  /* ============================================================ SECTIONS */
+
+  section { padding-top: 52px; scroll-margin-top: 84px; }
+  .sec-head {
+    display: flex; align-items: baseline; gap: 14px;
+    padding-bottom: 6px; border-bottom: 2px solid var(--ink); margin-bottom: 22px;
+  }
+  .sec-num { font-family: var(--mono); font-size: var(--fs-sm); color: var(--accent); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .sec-head h2 {
+    font-family: var(--display); font-size: var(--fs-2xl); line-height: 1.15;
+    letter-spacing: -0.022em; font-weight: 700; margin: 0; flex: 1 1 auto; text-wrap: balance;
+  }
+  .sec-intro { color: var(--ink-soft); margin: 0 0 24px; max-width: 68ch; font-size: var(--fs-md); }
+
+  .cards { display: flex; flex-direction: column; gap: 18px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 13px; padding: 24px 26px; box-shadow: var(--shadow-card);
+  }
+  .card > :first-child { margin-top: 0; }
+  .card > :last-child { margin-bottom: 0; }
+  .card h3 {
+    font-family: var(--display); font-size: var(--fs-lg); line-height: 1.25;
+    letter-spacing: -0.012em; font-weight: 700; margin: 0 0 12px; text-wrap: balance;
+  }
+  .card h4 { font-family: var(--display); font-size: var(--fs-base); font-weight: 700; margin: 22px 0 8px; letter-spacing: -0.005em; }
+  .card p { margin: 0 0 13px; max-width: 74ch; }
+  .card ul, .card ol { margin: 0 0 13px; padding-left: 22px; max-width: 74ch; }
+  .card li { margin-bottom: 7px; }
+  .card li:last-child { margin-bottom: 0; }
+  strong { font-weight: 650; color: var(--ink); }
+
+  .eyebrow {
+    font-size: 11.5px; text-transform: uppercase; letter-spacing: .1em;
+    font-weight: 700; color: var(--ink-faint); display: block; margin-bottom: 7px;
+  }
+
+  code, .path {
+    font-family: var(--mono); font-size: 0.9em;
+    background: var(--surface-sunk); border: 1px solid var(--line);
+    padding: 1.5px 6px; border-radius: 5px; white-space: nowrap;
+  }
+  .path { color: var(--accent-deep); font-weight: 500; }
+
+  .note {
+    border-radius: 10px; padding: 15px 18px; margin: 16px 0;
+    font-size: var(--fs-sm); border: 1px solid; max-width: 74ch;
+  }
+  .note :first-child { margin-top: 0; }
+  .note :last-child { margin-bottom: 0; }
+  .note b { display: block; margin-bottom: 4px; font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: .07em; }
+  .note.tip   { background: var(--good-wash); border-color: var(--good); color: var(--ink); }
+  .note.tip b { color: var(--good); }
+  .note.watch { background: var(--warn-wash); border-color: var(--warn); color: var(--ink); }
+  .note.watch b { color: var(--warn); }
+  .note.stop  { background: var(--stop-wash); border-color: var(--stop); color: var(--ink); }
+  .note.stop b { color: var(--stop); }
+
+  /* diagrams */
+  .diagram { margin: 14px 0 18px; }
+  .diagram svg { width: 100%; height: auto; display: block; }
+  .diagram figcaption { font-size: var(--fs-xs); color: var(--ink-faint); margin-top: 8px; }
+  figure.diagram { margin-left: 0; margin-right: 0; }
+
+  .tw { overflow-x: auto; margin: 6px 0 18px; border: 1px solid var(--line); border-radius: 10px; }
+  table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); min-width: 480px; }
+  th {
+    text-align: left; padding: 11px 15px; background: var(--surface-sunk);
+    font-weight: 700; font-size: var(--fs-xs); text-transform: uppercase;
+    letter-spacing: .05em; color: var(--ink-soft);
+    border-bottom: 1px solid var(--line); white-space: nowrap;
+  }
+  td { padding: 12px 15px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  .check { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 2px; }
+  .check li { margin: 0; }
+  .check label {
+    display: flex; gap: 13px; align-items: flex-start;
+    padding: 12px 14px; border-radius: 9px; cursor: pointer;
+    transition: background .12s ease;
+  }
+  .check label:hover { background: var(--surface-sunk); }
+  .check input { margin-top: 5px; width: 17px; height: 17px; accent-color: var(--accent); flex: none; cursor: pointer; }
+  .check input:checked + .ck-text { color: var(--ink-faint); }
+  .check input:checked + .ck-text .ck-title { text-decoration: line-through; }
+  .ck-text { flex: 1 1 auto; }
+  .ck-title { font-weight: 650; display: block; }
+  .ck-body { font-size: var(--fs-sm); color: var(--ink-soft); display: block; margin-top: 2px; }
+  .check input:checked + .ck-text .ck-body { color: var(--ink-faint); }
+  .reset {
+    margin-top: 12px; background: none; border: none; color: var(--ink-faint);
+    font-family: var(--body); font-size: var(--fs-xs); cursor: pointer;
+    text-decoration: underline; padding: 4px;
+  }
+  .reset:hover { color: var(--accent); }
+
+  .fault { border-left: 3px solid var(--stop); }
+  .fault .symptom { font-family: var(--display); font-weight: 700; font-size: var(--fs-lg); letter-spacing: -0.012em; margin: 0 0 4px; }
+  .fault .odds { font-size: var(--fs-xs); color: var(--ink-faint); margin: 0 0 18px; }
+  .steps { list-style: none; padding: 0; margin: 0; counter-reset: s; }
+  .steps > li { position: relative; padding: 0 0 16px 40px; margin: 0; counter-increment: s; }
+  .steps > li::before {
+    content: counter(s);
+    position: absolute; left: 0; top: 1px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--stop-wash); color: var(--stop); border: 1px solid var(--stop);
+    font-family: var(--mono); font-size: 12.5px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .steps > li:last-child { padding-bottom: 0; }
+  .steps p { margin: 0 0 6px; }
+  .steps p:last-child { margin-bottom: 0; }
+  .steps.calm > li::before { background: var(--accent-wash); color: var(--accent-deep); border-color: var(--accent); }
+
+  /* drum grids (HTML version, reference + wizard both use these) */
+  .pattern { margin: 0 0 26px; }
+  .pattern:last-child { margin-bottom: 0; }
+  .pattern-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 2px; }
+  .pattern-name { font-family: var(--display); font-weight: 700; font-size: var(--fs-base); }
+  .pattern-bpm {
+    font-family: var(--mono); font-size: 11.5px; font-weight: 600;
+    color: var(--accent-deep); background: var(--accent-wash);
+    border: 1px solid var(--accent-edge); border-radius: 999px; padding: 2px 9px;
+  }
+  .pattern-use { font-size: var(--fs-xs); color: var(--ink-soft); flex-basis: 100%; }
+  .grid-scroll { overflow-x: auto; padding-bottom: 4px; }
+  .grid { display: inline-flex; flex-direction: column; gap: 4px; min-width: min-content; margin-top: 10px; }
+  .grid-row { display: flex; align-items: center; gap: 4px; }
+  .grid-label {
+    width: 96px; flex: none; font-size: 12.5px; font-weight: 650;
+    color: var(--ink-soft); text-align: right; padding-right: 8px;
+  }
+  .cell { width: 26px; height: 26px; flex: none; border-radius: 5px; background: var(--surface-sunk); border: 1px solid var(--line); }
+  .cell.on { background: var(--accent); border-color: var(--accent-deep); }
+  .cell.ghost { background: color-mix(in srgb, var(--accent) 38%, var(--surface-sunk)); border-color: var(--accent-edge); }
+  .cell.beat { border-color: var(--line-strong); }
+  .cell.on.beat { border-color: var(--accent-deep); }
+  .grid-nums { display: flex; align-items: center; gap: 4px; margin-top: 3px; }
+  .grid-nums .grid-label { color: var(--ink-faint); font-weight: 500; }
+  .numcell {
+    width: 26px; flex: none; text-align: center;
+    font-family: var(--mono); font-size: 10.5px; color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+  }
+  .numcell.beat { color: var(--ink); font-weight: 700; }
+  .pattern-note { font-size: var(--fs-xs); color: var(--ink-soft); margin-top: 8px; max-width: 74ch; }
+
+  .chordgrid { font-family: var(--mono); font-size: var(--fs-sm); }
+
+  .gloss { display: flex; flex-direction: column; gap: 0; }
+  .gterm { padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .gterm:last-child { border-bottom: none; }
+  .gterm:first-child { padding-top: 0; }
+  .gterm dt { font-family: var(--display); font-weight: 700; font-size: var(--fs-base); margin-bottom: 4px; }
+  .gterm dd { margin: 0; color: var(--ink-soft); max-width: 74ch; }
+
+  .fallback {
+    margin-top: 26px; background: var(--surface);
+    border: 1px dashed var(--line-strong); border-radius: 13px;
+    padding: 26px; text-align: center;
+  }
+  .fallback h3 { font-family: var(--display); font-size: var(--fs-lg); margin: 0 0 8px; font-weight: 700; }
+  .fallback p { color: var(--ink-soft); margin: 0 0 18px; font-size: var(--fs-sm); }
+  .btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 20px; border-radius: 9px;
+    font-family: var(--body); font-size: var(--fs-sm); font-weight: 650;
+    text-decoration: none; cursor: pointer;
+    border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink);
+    transition: border-color .12s ease, background .12s ease;
+  }
+  .btn:hover { border-color: var(--ink-faint); background: var(--surface-sunk); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn.primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+
+  .hidden { display: none !important; }
+
+  #searchinfo {
+    display: none; margin: 22px 0 0; padding: 13px 18px;
+    background: var(--accent-wash); border: 1px solid var(--accent-edge);
+    border-radius: 10px; font-size: var(--fs-sm); color: var(--ink-mid);
+  }
+  #searchinfo.on { display: block; }
+  #searchinfo b { color: var(--accent-deep); }
+  mark { background: color-mix(in srgb, var(--accent) 26%, transparent); color: inherit; border-radius: 2px; padding: 0 1px; }
+
+  #searchflows { display: none; margin: 14px 0 0; flex-wrap: wrap; gap: 10px; align-items: center; }
+  #searchflows.on { display: flex; }
+  .sf-lead { font-size: var(--fs-sm); font-weight: 650; color: var(--ink-soft); }
+  .suggest {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 18px; border-radius: 999px;
+    background: var(--accent); border: none; color: #fff;
+    font-family: var(--body); font-size: var(--fs-sm); font-weight: 700;
+    cursor: pointer; transition: background .12s ease;
+  }
+  .suggest:hover { background: var(--accent-deep); }
+  .noresults { display: none; }
+  .noresults.on { display: block; }
+
+  footer {
+    margin-top: 70px; padding-top: 26px; border-top: 1px solid var(--line);
+    color: var(--ink-faint); font-size: var(--fs-xs); max-width: 74ch;
+  }
+  footer p { margin: 0 0 8px; }
+
+  /* ============================================================ WIZARD */
+
+  .wiz-overlay {
+    position: fixed; inset: 0; z-index: 100;
+    background: color-mix(in srgb, var(--ground) 96%, transparent);
+    backdrop-filter: blur(6px);
+    display: flex; flex-direction: column;
+    overflow-y: auto;
+  }
+  .wiz-overlay[hidden] { display: none; }
+
+  .wiz-top {
+    position: sticky; top: 0; z-index: 5;
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px 22px;
+    background: color-mix(in srgb, var(--ground) 92%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .wiz-flowname { font-family: var(--display); font-weight: 700; font-size: var(--fs-base); flex: 1 1 auto; min-width: 0; }
+  .wiz-close, .wiz-back {
+    border: 1px solid var(--line-strong); background: var(--surface);
+    border-radius: 9px; padding: 9px 16px;
+    font-family: var(--body); font-size: var(--fs-sm); font-weight: 650;
+    color: var(--ink); cursor: pointer;
+  }
+  .wiz-close:hover, .wiz-back:hover { border-color: var(--ink-faint); background: var(--surface-sunk); }
+  .wiz-back:disabled { opacity: .4; cursor: default; }
+
+  .wiz-body {
+    width: 100%; max-width: 860px; margin: 0 auto;
+    padding: 30px 22px 90px;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .wiz-stepnum {
+    font-family: var(--mono); font-size: 12.5px; font-weight: 600;
+    color: var(--accent); text-transform: uppercase; letter-spacing: .08em;
+  }
+  .wiz-q {
+    font-family: var(--display); font-weight: 700;
+    font-size: var(--fs-xl); line-height: 1.22; letter-spacing: -0.018em;
+    margin: 0; text-wrap: balance;
+  }
+  .wiz-d { color: var(--ink-mid); margin: 0; max-width: 68ch; font-size: var(--fs-base); }
+  .wiz-d p { margin: 0 0 12px; }
+  .wiz-d p:last-child { margin-bottom: 0; }
+
+  .wiz-visual {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 13px; padding: 20px; box-shadow: var(--shadow-card);
+  }
+  .wiz-visual svg { width: 100%; height: auto; display: block; }
+  .wiz-visual .grid-scroll { margin: 0; }
+  .wiz-caption { font-size: var(--fs-xs); color: var(--ink-faint); margin: 10px 0 0; text-align: center; }
+
+  .wiz-opts { display: flex; flex-direction: column; gap: 10px; }
+  .wiz-opt {
+    text-align: left;
+    background: var(--surface); border: 1.5px solid var(--line-strong);
+    border-radius: 12px; padding: 16px 20px;
+    font-family: var(--body); font-size: var(--fs-base); font-weight: 650;
+    color: var(--ink); cursor: pointer;
+    display: flex; flex-direction: column; gap: 3px;
+    transition: border-color .12s ease, background .12s ease, transform .1s ease;
+    min-height: 44px;
+  }
+  .wiz-opt:hover { border-color: var(--accent); background: var(--accent-wash); transform: translateY(-1px); }
+  .wiz-opt .wo-sub { font-size: var(--fs-xs); font-weight: 500; color: var(--ink-soft); }
+  .wiz-opt.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .wiz-opt.primary .wo-sub { color: rgba(255,255,255,.85); }
+  .wiz-opt.primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+  .wiz-opt.good { border-color: var(--good); }
+  .wiz-opt.good:hover { background: var(--good-wash); }
+
+  .wiz-done {
+    background: var(--good-wash); border: 1px solid var(--good);
+    border-radius: 13px; padding: 24px;
+  }
+  .wiz-done h3 { font-family: var(--display); font-weight: 700; font-size: var(--fs-lg); margin: 0 0 8px; color: var(--good); }
+  .wiz-done p { margin: 0 0 8px; }
+  .wiz-done p:last-child { margin: 0; }
+
+  .wiz-progress { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .wiz-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line-strong); }
+  .wiz-dot.done { background: var(--accent); }
+  .wiz-dot.now { background: var(--accent); box-shadow: 0 0 0 3px var(--accent-wash); }
+
+  .wiz-reflink { font-size: var(--fs-sm); }
+  .wiz-reflink a { color: var(--accent-deep); }
+
+  /* "Do this" action boxes: the exact keys/clicks for a step */
+  kbd {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-bottom-width: 2.5px;
+    border-radius: 6px;
+    padding: 2px 7px;
+    white-space: nowrap;
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .do {
+    background: var(--surface-sunk);
+    border: 1px solid var(--line-strong);
+    border-left: 3px solid var(--accent);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 16px 0 4px;
+    max-width: 74ch;
+  }
+  .do > b {
+    display: block;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    color: var(--accent-deep);
+    margin-bottom: 8px;
+  }
+  .do ol { margin: 0; padding-left: 22px; }
+  .do li { margin-bottom: 8px; line-height: 1.55; }
+  .do li:last-child { margin-bottom: 0; }
+
+  /* ============================================================ RESPONSIVE */
+
+  .scrim { display: none; }
+
+  @media (max-width: 980px) {
+    .shell { grid-template-columns: minmax(0, 1fr); }
+    .rail {
+      position: fixed; top: 0; left: 0; bottom: 0;
+      width: min(310px, 84vw); z-index: 60;
+      transform: translateX(-102%); transition: transform .22s ease;
+      box-shadow: var(--shadow-pop); height: 100%;
+    }
+    .rail.open { transform: translateX(0); }
+    .burger { display: flex; }
+    .scrim {
+      display: block; position: fixed; inset: 0;
+      background: rgba(0,0,0,.42); z-index: 55;
+      opacity: 0; pointer-events: none; transition: opacity .22s ease;
+    }
+    .scrim.on { opacity: 1; pointer-events: auto; }
+    .topbar { padding: 12px 20px; }
+    .content { padding: 0 20px 100px; }
+  }
+
+  @media (max-width: 700px) {
+    code, .path { white-space: normal; overflow-wrap: anywhere; }
+  }
+
+  @media (max-width: 620px) {
+    :root { --fs-3xl: 32px; --fs-2xl: 27px; --fs-xl: 23px; --fs-lg: 20px; --fs-md: 18px; }
+    .hero { padding: 30px 0 4px; }
+    .card { padding: 20px 18px; }
+    .sec-head { flex-wrap: wrap; gap: 8px; }
+    .grid-label { width: 78px; font-size: 11.5px; }
+    .cell, .numcell { width: 22px; }
+    .cell { height: 22px; }
+    .wiz-body { padding: 22px 16px 80px; }
+    .wiz-visual { padding: 12px; }
+  }
+
+  @media (min-width: 1700px) {
+    :root { --rail-w: 330px; }
+    .measure { max-width: 1300px; }
+    .content, .topbar { padding-left: 56px; padding-right: 56px; }
+  }
+</style>
+
+
+<div class="shell">
+
+  <!-- ================================================== RAIL -->
+  <nav class="rail" id="rail" aria-label="Topics">
+    <div class="brand">
+      <span class="brand-mark"></span>
+      <span class="brand-name">Studio Sidekick</span>
+    </div>
+    <p class="brand-sub">Interactive help for your Mac, Scarlett Solo, keyboard and FL Studio.</p>
+
+    <a class="nav-link helplink" href="#help"><span class="nav-num">★</span> Guided help</a>
+
+    <span class="nav-label">Getting going</span>
+    <a class="nav-link" href="#start"><span class="nav-num">01</span> Start here</a>
+    <a class="nav-link" href="#gear"><span class="nav-num">02</span> Your gear, connected</a>
+    <a class="nav-link" href="#setup"><span class="nav-num">03</span> First-time setup</a>
+
+    <span class="nav-label">Making sound</span>
+    <a class="nav-link" href="#keyboard"><span class="nav-num">04</span> Playing the keyboard</a>
+    <a class="nav-link" href="#voice"><span class="nav-num">05</span> Recording your voice</a>
+    <a class="nav-link" href="#voicefx"><span class="nav-num">06</span> Shaping your voice</a>
+    <a class="nav-link" href="#song"><span class="nav-num">07</span> Building a song</a>
+
+    <span class="nav-label">Parts &amp; patterns</span>
+    <a class="nav-link" href="#beats"><span class="nav-num">08</span> Making beats</a>
+    <a class="nav-link" href="#keys"><span class="nav-num">09</span> Keys &amp; chords</a>
+
+    <span class="nav-label">When it goes wrong</span>
+    <a class="nav-link" href="#fix"><span class="nav-num">10</span> Fix it</a>
+
+    <span class="nav-label">Reference</span>
+    <a class="nav-link" href="#words"><span class="nav-num">11</span> Words explained</a>
+    <a class="nav-link" href="#cheat"><span class="nav-num">12</span> Cheat sheet</a>
+  </nav>
+  <div class="scrim" id="scrim"></div>
+
+  <!-- ================================================== MAIN -->
+  <div class="main">
+
+    <div class="topbar">
+      <button class="burger" id="burger" aria-label="Show topics" aria-expanded="false">☰</button>
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6"></path>
+        </svg>
+        <input id="q" type="search" placeholder="Ask anything — “no sound”, “48V”, “trap hats”, “buffer”…" autocomplete="off" aria-label="Search this guide">
+      </div>
+      <button class="theme-btn" id="theme" aria-label="Switch between light and dark">◐</button>
+    </div>
+
+    <div class="content">
+      <div class="measure">
+
+        <div class="hero" id="hero">
+          <h1>What do you need help with?</h1>
+          <p>Pick a card and I'll walk you through it step by step, with pictures of your exact gear — or search anything in the bar above.</p>
+          <div class="rig">
+            <span>Mac</span>
+            <span>FL Studio 2026</span>
+            <span>Scarlett Solo 3rd gen</span>
+            <span>RØDE condenser mic</span>
+            <span>MIDI keyboard</span>
+            <span>Piano</span>
+          </div>
+        </div>
+
+        <div id="searchinfo"></div>
+        <div id="searchflows"></div>
+
+        <!-- ============================================ HUB -->
+        <section id="help" class="hub">
+          <div class="roadmap">
+            <span class="rm-kicker">New here? This is the whole journey</span>
+            <h2>Your first song, step by step</h2>
+            <p id="hubprog"></p>
+            <div class="rm-steps">
+              <button class="rm-step" data-flow="setup"><b>1</b><span>Set everything up<i>one time, about 15 minutes</i></span></button>
+              <button class="rm-step" data-flow="record"><b>2</b><span>Record a rough vocal<i>phone-memo rough is fine</i></span></button>
+              <button class="rm-step" data-flow="song"><b>3</b><span>Build the song under it<i>Beginner level — drums, piano, arrange</i></span></button>
+              <button class="rm-step" data-flow="voicefx"><b>4</b><span>Shape your voice<i>the polish chain</i></span></button>
+              <span class="rm-step last"><b>5</b><span>Balance, save, export<i>built into the end of step 3 — you leave with a real song file</i></span></span>
+            </div>
+          </div>
+          <div class="hub-grid" id="hubgrid">
+            <button class="flowcard featured" data-flow="project1">
+              <span class="fc-kicker">Build-along · start to finish</span>
+              <span class="fc-title">Project One — an R&amp;B song</span>
+              <span class="fc-sub">We build one whole song together: drums, piano, bass, guitar, extras, then your voice stacked on top — ending with a real exported file. Every decision already made.</span>
+            </button>
+            <button class="flowcard" data-flow="setup">
+              <span class="fc-kicker">Guided walk</span>
+              <span class="fc-title">Set everything up</span>
+              <span class="fc-sub">First time, or after moving the gear. One step per screen, a picture for each.</span>
+            </button>
+            <button class="flowcard" data-flow="beat">
+              <span class="fc-kicker">Guided walk</span>
+              <span class="fc-title">Make me a beat</span>
+              <span class="fc-sub">Pick a feel, I'll suggest the tempo and build the drums with you, square by square.</span>
+            </button>
+            <button class="flowcard" data-flow="song">
+              <span class="fc-kicker">Guided walk · 3 levels</span>
+              <span class="fc-title">Build a song</span>
+              <span class="fc-sub">Beginner, intermediate, advanced — drums, piano, guitar, layers, and making the song move.</span>
+            </button>
+            <button class="flowcard" data-flow="record">
+              <span class="fc-kicker">Guided walk</span>
+              <span class="fc-title">Record my voice</span>
+              <span class="fc-sub">Mic, 48V, gain, monitoring, arming the track — through to a clean take.</span>
+            </button>
+            <button class="flowcard" data-flow="piano">
+              <span class="fc-kicker">Guided walk</span>
+              <span class="fc-title">Play piano sounds (MIDI)</span>
+              <span class="fc-sub">Add an instrument, pick a sound, play or draw the notes — and fix them afterwards.</span>
+            </button>
+            <button class="flowcard" data-flow="voicefx">
+              <span class="fc-kicker">Guided walk</span>
+              <span class="fc-title">Shape my voice</span>
+              <span class="fc-sub">Reverb halls and rooms, echo, polish, tuning, doubles — pick the sound, I'll set it up with you.</span>
+            </button>
+            <button class="flowcard fix" data-flow="nosound">
+              <span class="fc-kicker">Fix it</span>
+              <span class="fc-title">I can't hear anything</span>
+              <span class="fc-sub">We'll find where the sound stops, question by question.</span>
+            </button>
+            <button class="flowcard fix" data-flow="kbd">
+              <span class="fc-kicker">Fix it</span>
+              <span class="fc-title">My keyboard isn't working</span>
+              <span class="fc-sub">Playing keys and nothing happens. Usually a 30-second fix.</span>
+            </button>
+            <button class="flowcard fix" data-flow="mic">
+              <span class="fc-kicker">Fix it</span>
+              <span class="fc-title">Mic problems</span>
+              <span class="fc-sub">Silent, quiet, distorted, or you can hear yourself twice.</span>
+            </button>
+            <button class="flowcard fix" data-flow="glitch">
+              <span class="fc-kicker">Fix it</span>
+              <span class="fc-title">Crackles or delay</span>
+              <span class="fc-sub">Popping, stuttering sound — or a lag when you press a key.</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- ============================================ 01 START -->
+        <section id="start">
+          <div class="sec-head"><span class="sec-num">01</span><h2>Start here</h2></div>
+          <p class="sec-intro">If you read nothing else, read this section. It's the shape of the whole thing.</p>
+
+          <div class="cards">
+
+            <div class="card">
+              <h3>The one idea everything else hangs off</h3>
+              <p>Your rig makes sound in <strong>two completely different ways</strong>, and almost every question you'll have is really a question about which one you're in.</p>
+              <p><strong>Audio</strong> is recorded sound — your voice through the microphone, or the piano through a cable. It arrives through the Scarlett. Once it's recorded it's fixed, like a photograph.</p>
+              <p><strong>MIDI</strong> is not sound at all. It's a list of instructions: <em>this note, this hard, at this moment</em>. It arrives from your keyboard straight into the Mac, and the computer makes the actual sound. Because it's only instructions, you can change the notes, the tempo, the key, or swap a piano for a trumpet afterwards — and nothing has to be re-recorded.</p>
+              <div class="note tip">
+                <b>Why this matters</b>
+                Write your parts as MIDI wherever you can. It stays editable forever. Save audio recording for the things only you can make — your voice, mainly.
+              </div>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">The fastest route</span>
+              <h3>Let the wizard walk you through it</h3>
+              <p>The <strong>Set everything up</strong> card at the top of this page goes through the whole rig one screen at a time, with a picture at every step showing exactly which dial or menu you're touching. If you'd rather read it as a list, it's all in <a href="#setup" style="color:var(--accent-deep)">First-time setup</a> too.</p>
+            </div>
+
+            <div class="card">
+              <h3>Your FL Studio is Producer Edition — here's what that means</h3>
+              <p>Your copy (check any time under <span class="path">Help → About</span>) records audio fully — everything in this app works on it. The editions, for context:</p>
+              <div class="tw">
+                <table>
+                  <thead><tr><th>Edition</th><th>Can it record your voice?</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Fruity</strong></td><td>No — it cannot record audio at all</td></tr>
+                    <tr><td><strong>Producer</strong> ← you are here</td><td><strong>Yes</strong> — full recording, mixing, and every effect this app uses</td></tr>
+                    <tr><td><strong>Signature</strong></td><td>Yes, plus FL's own tuning tools (Pitcher, NewTone)</td></tr>
+                    <tr><td><strong>All Plugins</strong></td><td>Yes, plus everything else</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="note tip">
+                <b>The only gap, and its free fix</b>
+                Tuned-pop vocal effects (Pitcher/NewTone) are Signature-only — but free plugins cover it on Producer. The routes are in <a href="#voicefx" style="color:var(--accent-deep)">Shaping your voice</a> under Pitch.
+              </div>
+              <div class="note tip">
+                <b>What this app deliberately doesn't teach</b>
+                The words and melodies. You already sing and write — that part is yours. Everything here is the production side: getting your voice recorded beautifully and building the music underneath it.
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ============================================ 02 GEAR -->
+        <section id="gear">
+          <div class="sec-head"><span class="sec-num">02</span><h2>Your gear, connected</h2></div>
+          <p class="sec-intro">Two separate paths that only meet inside FL Studio. Once you can picture this, half the confusing problems explain themselves.</p>
+
+          <div class="cards">
+
+            <div class="card">
+              <h3>The whole rig on one picture</h3>
+              <figure class="diagram" data-svg="connectionMap"></figure>
+              <div class="note tip">
+                <b>The most common misunderstanding</b>
+                The MIDI keyboard does <em>not</em> go through the Scarlett. It has its own USB cable to the Mac. The Scarlett handles anything that makes a real sound in the room; the keyboard sends instructions only.
+              </div>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">Your interface</span>
+              <h3>The Scarlett Solo, control by control</h3>
+              <p>This is your box — a <strong>Scarlett Solo 3rd&nbsp;gen</strong>. Every control on it, labelled:</p>
+              <figure class="diagram" data-svg="frontFull"></figure>
+              <div class="tw">
+                <table>
+                  <thead><tr><th>Control</th><th>What it does</th><th>Your setting</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Input 1 (XLR)</strong></td><td>The microphone plugs in here</td><td>Mic cable clicked in</td></tr>
+                    <tr><td><strong>Gain 1</strong></td><td>How loud the mic signal is. The ring around it lights <span style="color:var(--good);font-weight:700">green</span> when healthy, <span style="color:var(--stop);font-weight:700">red</span> when too loud</td><td>Loudest singing = green, never red</td></tr>
+                    <tr><td><strong>48V</strong></td><td>Power for condenser mics, sent up the mic cable</td><td><strong>On</strong> — your RØDE is a condenser and is nearly silent without it</td></tr>
+                    <tr><td><strong>AIR</strong></td><td>A brightness lift designed for vocals — adds a little sparkle and presence</td><td>Try it both ways on your voice; many singers leave it on</td></tr>
+                    <tr><td><strong>Input 2 (jack)</strong></td><td>The piano's line-out plugs in here</td><td>One cable — this input is mono, which is fine</td></tr>
+                    <tr><td><strong>Gain 2</strong></td><td>Level for input 2, same green/red ring</td><td>Green while playing hard</td></tr>
+                    <tr><td><strong>INST</strong></td><td>Boost for electric guitars plugged straight in</td><td><strong>Off</strong> for the piano — on makes it distort</td></tr>
+                    <tr><td><strong>MONITOR</strong></td><td>Volume of the big outputs and overall listening level</td><td>To taste</td></tr>
+                    <tr><td><strong>DIRECT MONITOR</strong></td><td>Sends your voice straight to your headphones with zero delay, skipping the computer</td><td><strong>On</strong> when recording vocals</td></tr>
+                    <tr><td><strong>Headphones</strong></td><td>Your headphones go here — not into the Mac</td><td>Plugged in</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="note tip">
+                <b>Good news about your model</b>
+                The Solo needs no drivers on a Mac — plug in and it works. It has no Auto Gain button (that's the newer 4th gen), so you set levels by the coloured ring instead: sing your loudest line, turn the gain up until the ring flickers green steadily, and back it off if you ever see red.
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Round the back</h3>
+              <figure class="diagram" data-svg="backPanel"></figure>
+              <ul>
+                <li><strong>USB-C</strong> — the one cable to the Mac. Carries the audio both ways and powers the whole box.</li>
+                <li><strong>Line outputs L/R</strong> — for powered speakers, if you ever add them. Headphones are fine until then.</li>
+                <li>No MIDI sockets — and you don't need any, because the keyboard connects by its own USB.</li>
+              </ul>
+              <div class="note watch">
+                <b>If the Scarlett ever needs a new cable</b>
+                The 3rd gen shipped with a USB-C→USB-A cable, which doesn't fit a modern Mac. Yours is clearly already connected and working — but if the cable is ever lost or replaced, buy <strong>USB-C to USB-C</strong>, and make sure it's a data cable, not a charge-only one.
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>The three cable types you'll touch</h3>
+              <figure class="diagram" data-svg="cableTypes"></figure>
+              <ul>
+                <li><strong>XLR</strong> — three pins, locks with a click. Microphone → Scarlett input 1. Carries the 48V power too.</li>
+                <li><strong>Jack (¼-inch)</strong> — like a big headphone plug. Piano line-out → Scarlett input 2.</li>
+                <li><strong>USB</strong> — keyboard → Mac, and Scarlett → Mac. Data, not sound-in-a-wire — which is why the keyboard one can't "sound bad".</li>
+              </ul>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ============================================ 03 SETUP -->
+        <section id="setup">
+          <div class="sec-head"><span class="sec-num">03</span><h2>First-time setup</h2></div>
+          <p class="sec-intro">The wizard walks this same list one screen at a time with a picture per step — this is the flat version for re-checking later. Ticks are remembered.</p>
+
+          <div class="cards">
+
+            <div class="card">
+              <h3>The setup checklist</h3>
+              <ul class="check" id="checklist">
+                <li><label><input type="checkbox" data-ck="c1"><span class="ck-text"><span class="ck-title">Plug the Scarlett into the Mac</span><span class="ck-body">Straight into a USB-C port, not through a hub if you can help it. The logo lights up; no driver install needed.</span></span></label></li>
+                <li><label><input type="checkbox" data-ck="c2"><span class="ck-text"><span class="ck-title">Plug headphones into the Scarlett</span><span class="ck-body">The Scarlett's own headphone socket, front right — not the Mac's. Monitor knob low to start.</span></span></label></li>
+                <li><label><input type="checkbox" data-ck="c3"><span class="ck-text"><span class="ck-title">Mic into input 1, then 48V on</span><span class="ck-body">XLR clicks in. Your RØDE is a condenser — it needs the 48V button lit to make any sound.</span></span></label></li>
+                <li><label><input type="checkbox" data-ck="c4"><span class="ck-text"><span class="ck-title">Piano into input 2, INST off</span><span class="ck-body">Jack cable from the piano's line out. INST is for guitars — leave it unlit.</span></span></label></li>
+                <li><label><input type="checkbox" data-ck="c5"><span class="ck-text"><span class="ck-title">Plug the MIDI keyboard in by USB</span><span class="ck-body">Its own cable, straight to the Mac. Do this before you open FL Studio.</span></span></label></li>
+                <li><label><input type="checkbox" data-ck="c6"><span class="ck-text"><span class="ck-title">Set the Mac's sound output to the Scarlett</span><span class="ck-body">System Settings → Sound → Output → Scarlett Solo USB. Now everything, including YouTube, comes through your headphones.</span></span></label></li>
+                <li><label><input type="checkbox" data-ck="c7"><span class="ck-text"><span class="ck-title">Give FL Studio microphone permission</span><span class="ck-body">System Settings → Privacy &amp; Security → Microphone → switch FL Studio on. Then quit FL Studio and reopen it — the permission doesn't take effect until you do.</span></span></label></li>
+                <li><label><input type="checkbox" data-ck="c8"><span class="ck-text"><span class="ck-title">Open FL Studio and set the audio device</span><span class="ck-body">Options → Audio Settings → Device → Scarlett Solo USB. Buffer length 256 samples.</span></span></label></li>
+                <li><label><input type="checkbox" data-ck="c9"><span class="ck-text"><span class="ck-title">Enable the keyboard</span><span class="ck-body">Options → MIDI Settings → find it in the Input list → click it → click Enable so it lights up. If the Port column shows a dash, set it to 0.</span></span></label></li>
+                <li><label><input type="checkbox" data-ck="c10"><span class="ck-text"><span class="ck-title">Click a sound in the Channel Rack and play</span><span class="ck-body">If you hear it, everything works. Go and write something.</span></span></label></li>
+              </ul>
+              <button class="reset" id="resetck">Clear all ticks</button>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">Mac only — catches everyone</span>
+              <h3>Microphone permission, in detail</h3>
+              <p>macOS blocks every app from hearing any input device until you say yes. FL Studio doesn't warn you about this — it just records silence, which looks exactly like broken hardware.</p>
+              <figure class="diagram" data-svg="macMic"></figure>
+              <ol class="steps calm">
+                <li><p>Apple menu → <span class="path">System Settings</span></p></li>
+                <li><p><span class="path">Privacy &amp; Security</span> → <span class="path">Microphone</span></p></li>
+                <li><p>Find <strong>FL Studio</strong> and switch it on</p></li>
+                <li><p><strong>Quit FL Studio completely and open it again.</strong> This step is not optional.</p></li>
+              </ol>
+              <div class="note watch">
+                <b>If FL Studio isn't in that list at all</b>
+                On Apple Silicon Macs (M1–M4) FL Studio sometimes never asks for permission, so it never appears. The fix is to start FL Studio in <strong>Rosetta</strong> mode once — right-click the app in Applications, choose Get Info, tick <em>Open using Rosetta</em>, and launch it. macOS asks for microphone permission on startup. The permission is remembered separately for each mode, so if you switch back you may need to grant it again.
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Audio settings, and what the numbers mean</h3>
+              <p><span class="path">Options → Audio Settings</span>. On a Mac there's no ASIO — macOS uses Core Audio, which is built in and works out of the box.</p>
+              <figure class="diagram" data-svg="flAudioPlain"></figure>
+              <h4>Buffer length</h4>
+              <p>How big a chunk of sound the Mac works on at once. Small chunks mean less delay but more strain; big chunks mean more delay but smoother playback.</p>
+              <div class="tw">
+                <table>
+                  <thead><tr><th>What you're doing</th><th>Buffer</th><th>Roughly</th></tr></thead>
+                  <tbody>
+                    <tr><td>Playing or recording live</td><td class="num">128 – 256</td><td class="num">3 – 6 ms delay</td></tr>
+                    <tr><td>Mixing a busy project</td><td class="num">512 – 2048</td><td class="num">Delay stops mattering</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="note tip">
+                <b>How to find your best setting</b>
+                Start at 512. Play the project and watch the underrun counter in Audio Settings. If it stays on zero, halve it to 256 and try again. Your best buffer is the lowest number that keeps that counter on zero. Turn it back up when you're mixing.
+              </div>
+              <h4>Sample rate</h4>
+              <p>44100 Hz or 48000 Hz. Either is fine. <strong>Pick one and never change it mid-project</strong> — changing it can throw your recordings out of sync.</p>
+            </div>
+
+            <div class="adv-banner"><b>ADVANCED</b><span>Come back to this one when the basics feel easy — it's here when you need it.</span></div>
+
+            <div class="card advanced">
+              <span class="eyebrow">Two ears aren't enough</span>
+              <h3>Listening together: a second pair of headphones</h3>
+              <p>The Scarlett has exactly one headphone socket. When a friend, a parent, or a collaborator wants to hear what you're making, the Mac can send the same music to <strong>two places at once</strong> — the Scarlett (your headphones) and the Mac's own headphone jack or speakers (the listener). The trick is a special virtual device you build yourself, in a Mac utility most people never open:</p>
+              <figure class="diagram" data-svg="macAudioMidi"></figure>
+              <ol class="steps">
+                <li><p>Open <strong>Audio MIDI Setup</strong> — it lives in <span class="path">Applications → Utilities</span> (or press <span class="path">Cmd+Space</span> and type "audio midi").</p></li>
+                <li><p>Click the <strong>+</strong> button at the <strong>bottom-left</strong> of the device list → <strong>Create Multi-Output Device</strong>.</p></li>
+                <li><p>In the right-hand pane, tick <strong>Use</strong> on BOTH: <strong>Scarlett Solo USB</strong> and <strong>External Headphones</strong> (or MacBook Speakers, if the listener is just in the room).</p></li>
+                <li><p>Tick <strong>Drift Correction</strong> on every device <em>except</em> the Scarlett — this stops the two outputs slowly slipping out of time with each other.</p></li>
+                <li><p>Check both devices show the <strong>same sample rate</strong> (44.1 kHz on both, or 48 on both — mixed rates is the #1 reason this setup crackles).</p></li>
+                <li><p>Now point the sound at it: <span class="path">System Settings → Sound → Output → Multi-Output Device</span>, and in FL Studio's <span class="path">Options → Audio Settings</span> pick the Multi-Output Device too.</p></li>
+              </ol>
+              <div class="note watch">
+                <b>Two things that surprise everyone</b>
+                The Mac's <strong>volume keys stop working</strong> on a multi-output — that's normal, not broken. Set each side's volume on its own device: the Scarlett's MONITOR knob for you, and set the Mac jack's level <em>before</em> switching (or in Audio MIDI Setup). And when you go back to recording vocals, <strong>switch FL back to plain "Scarlett Solo USB"</strong> — record through the multi-output and you may add crackles and latency.
+              </div>
+              <div class="note tip">
+                <b>The same trick, pointed the other way</b>
+                The <strong>+</strong> button's other option, <strong>Create Aggregate Device</strong>, merges two USB audio devices' <em>inputs</em> into one — that's how you'd record two mics through two interfaces at once. One sentence to remember the difference: <strong>Aggregate = more inputs in · Multi-Output = the same sound to more ears.</strong>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ============================================ 04 KEYBOARD -->
+        <section id="keyboard">
+          <div class="sec-head"><span class="sec-num">04</span><h2>Playing the keyboard</h2></div>
+          <p class="sec-intro">How the keyboard becomes a piano, a trumpet, or a drum kit.</p>
+
+          <div class="cards">
+
+            <div class="card">
+              <h3>The Channel Rack, and the rule that governs it</h3>
+              <p>The Channel Rack is the list of instruments in your project. <strong>Your keyboard plays whichever one is currently selected.</strong> Click a different one and the same keys make a different sound. That's the entire routing system.</p>
+              <figure class="diagram" data-svg="rackSelect"></figure>
+              <div class="tw">
+                <table>
+                  <thead><tr><th>Word</th><th>Means</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Channel</strong></td><td>One slot in the rack, holding one instrument</td></tr>
+                    <tr><td><strong>Plugin</strong> (or virtual instrument)</td><td>The software that makes the sound — FLEX, FPC</td></tr>
+                    <tr><td><strong>Preset</strong> (or patch)</td><td>The specific sound inside it — Grand Piano, Trumpet Section</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="note tip">
+                <b>One channel is one sound</b>
+                A song with piano, bass, drums and strings is four channels, played one at a time. You record each part separately and they stack up.
+              </div>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">The question everyone has and nobody asks</span>
+              <h3>What a "plugin" is — and where FLEX actually lives</h3>
+              <p>A <strong>plugin</strong> is an instrument program that runs <em>inside</em> FL Studio. FLEX, FPC, 3x Osc — they're all already installed as part of FL itself. <strong>Nothing to download, nothing to buy, no website involved.</strong> They're just hiding behind one button:</p>
+              <figure class="diagram" data-svg="pluginPicker"></figure>
+              <ol class="steps calm">
+                <li><p>Press <code>F6</code> — the Channel Rack opens.</p></li>
+                <li><p>Look at the rack's <strong>bottom-left corner</strong> — there's a small <strong>+</strong> button under the last channel. Click it.</p></li>
+                <li><p>A list of every instrument plugin appears (drawn above). Click <strong>FLEX</strong> — a new channel appears in the rack holding it, and FLEX's window opens.</p></li>
+                <li><p>Same list, other doors: the <span class="path">Add</span> menu at the very top of FL shows the identical list, and the Browser's <span class="path">Plugin database → Generators</span> folder lets you drag them in. All three end in the same place.</p></li>
+              </ol>
+              <div class="note tip">
+                <b>First time FLEX opens</b>
+                It may offer to download free sound packs — say yes, they're free and they're the actual pianos, guitars and 808s this whole app uses. (This is the one moment internet is involved, and it's a one-off.)
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Where the sounds come from</h3>
+              <div class="tw">
+                <table>
+                  <thead><tr><th>Plugin</th><th>Use it for</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>FLEX</strong></td><td>Pianos, electric pianos, strings, brass, guitars, pads, bass, synths. Start here — it covers most of a song, and free sound packs download from inside it.</td></tr>
+                    <tr><td><strong>FPC</strong></td><td>Drum kits, laid out as pads. Your beat-making home.</td></tr>
+                    <tr><td><strong>Fruity Slicer 2</strong></td><td>Chopping up an audio loop so you can rearrange it.</td></tr>
+                    <tr><td><strong>Sytrus, Harmor</strong></td><td>Deep synthesis. Powerful, and not where to begin.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">Surprises everyone the first time</span>
+              <h3>Drums work completely differently</h3>
+              <p>On a trumpet or piano preset, every key is the same instrument at a different pitch. On a <strong>drum kit</strong>, every key is a <em>different drum</em>:</p>
+              <figure class="diagram" data-svg="drumMap"></figure>
+              <p>So you play drums with a small handful of low keys, not with melodies. Different kits shuffle this slightly — play up the bottom two octaves once and you'll learn any kit in about thirty seconds. The <strong>complete kit</strong> — every drum labelled with its job — is drawn out in <a href="#beats" style="color:var(--accent-deep)">Making beats</a>.</p>
+              <div class="note tip">
+                <b>You don't have to play drums at all</b>
+                The step sequencer lets you click drums in, one square at a time — see <a href="#beats" style="color:var(--accent-deep)">Making beats</a>. It's easier and more accurate than playing them.
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Recording what you play — or drawing it</h3>
+              <p>Notes get into FL two ways: play them on the keyboard, or draw them as blocks in the <strong>Piano roll</strong> (F7). Both end up identical and editable:</p>
+              <figure class="diagram" data-svg="flPianoRoll"></figure>
+              <figure class="diagram" data-svg="toolbarRec"></figure>
+              <ol class="steps calm">
+                <li><p>Click the channel you want to play, so it's selected.</p></li>
+                <li><p>Set the tempo (the BPM number at the top). <strong>Do this before you record</strong>, not after.</p></li>
+                <li><p>Turn the metronome on so you play in time.</p></li>
+                <li><p>Press the record button, then play. FL counts you in.</p></li>
+                <li><p>Wrong notes? Open the Piano roll and drag them where they should be. Nothing needs re-recording — this is the whole point of MIDI.</p></li>
+              </ol>
+              <div class="note tip">
+                <b>Slow it right down</b>
+                If a part is too fast to play cleanly, halve the tempo, record it comfortably, then put the tempo back. The notes speed up perfectly. Everybody does this and nobody mentions it.
+              </div>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">Pin this one — it's the map everything else uses</span>
+              <h3>The keyboard map: which keys do which job</h3>
+              <p>A full piano has 88 keys, but a song only uses them in <strong>three working zones</strong>. Learn the zones once and you always know where your hands belong:</p>
+              <figure class="diagram" data-svg="kbZones"></figure>
+              <ul>
+                <li><strong>BASS ZONE (the low left).</strong> One note at a time, played with the left hand — the roots of your chords, or a long 808. Two notes down here at once turns to mud; the low end is a one-note-at-a-time neighbourhood.</li>
+                <li><strong>CHORD ZONE (the middle).</strong> Where full chords sound rich without being boomy. Piano chords, warm pads, guitar strums — the bed of the song lives here, played around <strong>middle C and just below</strong>.</li>
+                <li><strong>MELODY ZONE (the upper right).</strong> Riffs, hooks, lead lines — and crucially, <strong>where a singer's voice already lives</strong>. Which cuts both ways, next point.</li>
+              </ul>
+              <div class="note watch">
+                <b>Matching the keys to her voice</b>
+                Sing a comfortable note, then hunt along the melody zone until a key plays the <em>same</em> note — that's where her voice sits on this map. Two rules follow: write melodies <strong>in that region</strong> so they're singable, and keep busy <em>instruments</em> out of it while she's singing — a piano riff on her exact notes fights her for the same space. Play instrumental answers an octave up, or save them for the gaps between vocal lines. (Choosing the whole song's key to flatter her voice is <a href="#keys" style="color:var(--accent-deep)">section 09</a>.)
+              </div>
+              <div class="note tip">
+                <b>Your keyboard is a window onto this map</b>
+                A 25- or 49-key keyboard shows only a slice of the picture above. The <strong>OCTAVE + / −</strong> buttons on it slide the window up and down the map — the same physical key can be bass, chord or melody depending on where the window sits. If a preset suddenly sounds like a chipmunk or an earthquake, the window is just parked in the wrong zone: tap OCTAVE the other way.
+              </div>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">Start to finish, no steps skipped</span>
+              <h3>Making a MIDI sound: the complete routine</h3>
+              <p>This is the full ritual for getting ANY instrument sound out of the keyboard — the same seven moves every time, whatever the sound. Once this is automatic, the whole instrument side of FL is yours:</p>
+              <ol class="steps">
+                <li><p><strong>Open the Channel Rack</strong> (<code>F6</code>) and click the <strong>+</strong> at the bottom → <strong>FLEX</strong>. A new channel appears holding FLEX.</p></li>
+                <li><p><strong>Pick the sound.</strong> In FLEX, browse the categories on the left (Keys, Guitar, Bass, Brass, Strings, Pads, Synth, 808) or type in the search box. <strong>Single-click a preset to hear it</strong> demoed; <strong>double-click to load it</strong>. The category names ARE the zone guide: Bass and 808 presets expect the bass zone, Keys/Pads expect the chord zone, most Lead/Synth presets expect the melody zone.</p></li>
+                <li><p><strong>Select the channel</strong> — click its name so the little lime strip to its right lights up. The keyboard plays <em>whichever channel carries that strip</em>, always. Silence when you play almost always means the wrong channel is selected.</p></li>
+                <li><p><strong>Find the zone.</strong> Play a few keys. Wrong register? <strong>OCTAVE + / −</strong> on the keyboard until the sound sits where it should (a bass preset down low, a lead up high).</p></li>
+                <li><p><strong>Play with dynamics.</strong> The keyboard senses how hard you press — <strong>velocity</strong>. On good presets soft playing doesn't just get quieter, it gets <em>warmer and rounder</em>, and hard playing gets brighter and sharper. A felt-piano pad stroked softly and hammered hard are two different instruments. Try both before deciding a preset is wrong.</p></li>
+                <li><p><strong>Record it:</strong> tempo first, metronome on, press record, play (the full checklist is the card above). Keep held notes held — the note lasts as long as your finger stays down, and short stabby presses on a pad or string sound is the most common beginner tell.</p></li>
+                <li><p><strong>Tidy in the Piano roll</strong> (<code>F7</code>): drag wrong notes onto the right ones, drag note ends to fix lengths — and if the timing is loose, press <code>Alt+Q</code> (<strong>quantize</strong>) to snap the starts to the grid. For anything that should feel human, quantize at strength ~50% rather than 100% so it tightens without going robotic.</p></li>
+              </ol>
+              <div class="note tip">
+                <b>Then repeat, one channel per sound</b>
+                Piano chords first (chord zone), bass next (bass zone, following the kick), melody line last (melody zone, in the gaps around the voice). Three passes of the same seven moves and you've built the whole instrumental bed of a song.
+              </div>
+            </div>
+
+            <div class="adv-banner"><b>ADVANCED</b><span>MIDI beyond the basics: shaping presets into new sounds, and building a sound from nothing. Come back when the routine above feels easy.</span></div>
+
+            <div class="card advanced">
+              <span class="eyebrow">One preset, a hundred sounds</span>
+              <h3>The FLEX macro knobs</h3>
+              <p>You never have to accept a preset as-is. The row of big knobs along the bottom of FLEX reshapes whatever's loaded — same preset, completely different instrument:</p>
+              <figure class="diagram" data-svg="flexMacros"></figure>
+              <ul>
+                <li><strong>FILTER</strong> is the big one — turn it down and any bright sound turns dark and moody; sweep it while a note holds and the sound comes alive.</li>
+                <li><strong>ATTACK</strong> turns a piano-like pluck into a swelling pad (and back). <strong>RELEASE</strong> decides whether letting go cuts the note dead or lets it ring.</li>
+                <li><strong>SPACE</strong> and <strong>MOTION</strong> add built-in room and movement — try them before reaching for mixer effects.</li>
+                <li>The reliable experiment: load any Keys preset, slow the ATTACK right down, add SPACE — you've just made a pad that matches your piano perfectly, for layering under choruses.</li>
+              </ul>
+              <div class="note tip">
+                <b>Hear what a knob does in three seconds</b>
+                Hold one key down with your left hand and sweep the knob with the mouse. If you can't hear a difference, that knob doesn't matter for this preset — move on.
+              </div>
+            </div>
+
+            <div class="card advanced">
+              <span class="eyebrow">Sound design, first flight</span>
+              <h3>Build a spaceship from nothing (3x Osc)</h3>
+              <p>Every synth sound you've ever heard is layered waves plus an envelope plus effects. You can prove it in ten minutes with <strong>3x Osc</strong> — the simplest synth in FL. Three oscillators, three waves, one spaceship:</p>
+              <figure class="diagram" data-svg="osc3Window"></figure>
+              <ol class="steps">
+                <li><p>Channel Rack <strong>+</strong> → <strong>3x Osc</strong>. Play a low key (around <strong>A2</strong>) — it starts as a plain dull tone. Good: that's raw material.</p></li>
+                <li><p>Set the waves as drawn above: <strong>OSC 1 sine</strong> (the body), <strong>OSC 2 saw with CRS at −12</strong> (an octave-down engine rumble), <strong>OSC 3 saw with FINE at +7</strong> (a slight out-of-tuneness that makes it shimmer).</p></li>
+                <li><p>Now the envelope — the spaceship part. Click the channel's name to open <strong>Channel settings → INS tab</strong>. Under <strong>Volume</strong>, drag <strong>ATT (attack)</strong> to about a third — the sound now <em>swells in</em> instead of starting. Drag <strong>REL (release)</strong> up too, so it fades out after you let go:</p></li>
+              </ol>
+              <figure class="diagram" data-svg="envCurve"></figure>
+              <ol class="steps" start="4">
+                <li><p>On its mixer track: <strong>Fruity Reeverb 2</strong>, a big hall, WET around 40% — much wetter than a vocal. The ship is now in a hangar.</p></li>
+                <li><p>The fly-by: add <strong>Fruity Filter</strong> after the reverb, then <span class="path">right-click its Cutoff knob → Create automation clip</span> and draw a slow rise-and-fall. That whoosh sweeping open and closed IS the spaceship passing overhead.</p></li>
+                <li><p>Play one low note and hold it for four bars. Congratulations — you designed a sound that exists nowhere else.</p></li>
+              </ol>
+              <div class="note tip">
+                <b>Why this matters beyond spaceships</b>
+                Attack, waves, filter, space — those four dials are the whole grammar of synthesis. Slow attack + big reverb = cinematic pad for your bridges. Fast attack + closed filter = a bass pluck. Same recipe, different settings, every time.
+              </div>
+            </div>
+
+            <div class="card advanced">
+              <span class="eyebrow">The keyboard's hidden controls</span>
+              <h3>Wheels, layers, and knobs that move themselves</h3>
+              <ul>
+                <li><strong>The pitch wheel</strong> (left-most wheel on most keyboards) bends notes — small nudges at the end of a bass note is the R&amp;B slide. It springs back to centre on its own.</li>
+                <li><strong>The mod wheel</strong> (next to it) adds movement — usually vibrato or brightness, depending on the preset. Push it in slowly during held chorus notes.</li>
+                <li><strong>Layering:</strong> two channels playing the same notes = one fatter instrument. Record your piano part, then in the Channel Rack <span class="path">right-click the piano channel → Clone</span>, load a pad preset into the clone, and drag the same piano-roll notes onto it (or copy-paste them with <span class="path">Cmd+C / Cmd+V</span> in the Piano roll). Pull the pad's volume well under the piano.</li>
+                <li><strong>Any knob can move itself:</strong> <span class="path">right-click any knob → Create automation clip</span> puts a drawable curve in the Playlist. Filter opening into a chorus, reverb rising in a bridge, the spaceship's sweep — it's all this one trick.</li>
+              </ul>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ============================================ 05 VOICE -->
+        <section id="voice">
+          <div class="sec-head"><span class="sec-num">05</span><h2>Recording your voice</h2></div>
+          <p class="sec-intro">Getting a clean, loud, undistorted vocal on your Solo and RØDE — and fixing the echo that catches everybody.</p>
+
+          <div class="cards">
+
+            <div class="card">
+              <h3>Setting up the microphone</h3>
+              <figure class="diagram" data-svg="frontVocal"></figure>
+              <div class="tw">
+                <table>
+                  <thead><tr><th>Control</th><th>Set it to</th><th>Because</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>48V</strong></td><td><strong>On</strong></td><td>Your RØDE is a condenser — without power it's almost silent. (If you ever borrow a dynamic stage mic like an SM58, switch it off.)</td></tr>
+                    <tr><td><strong>AIR</strong></td><td>Try it on</td><td>A built-in brightness lift made for vocals. Toggle it while singing and keep whichever you prefer.</td></tr>
+                    <tr><td><strong>INST</strong></td><td><strong>Off</strong></td><td>Guitar setting. It doesn't affect input 1, but keep it off for the piano on input 2.</td></tr>
+                    <tr><td><strong>Gain 1</strong></td><td>Ring stays <span style="color:var(--good);font-weight:700">green</span></td><td>Sing your loudest line while turning up. Green = healthy. <span style="color:var(--stop);font-weight:700">Red</span> = clipped, and clipping is permanent.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <figure class="diagram" data-svg="gainHalo"></figure>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">The problem everyone hits on day one</span>
+              <h3>Hearing yourself twice</h3>
+              <p>You sing, and your voice comes back doubled, hollow or slightly echoey. Nothing is broken — you're hearing yourself down <em>two</em> paths at once:</p>
+              <figure class="diagram" data-svg="echoPaths"></figure>
+              <div class="note tip">
+                <b>The fix</b>
+                Leave <strong>DIRECT MONITOR on</strong> at the Scarlett, and turn <strong>input monitoring off</strong> in FL Studio for that mixer track. Now you hear yourself with no delay at all, and the backing track through the same headphones.
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Actually recording a take</h3>
+              <figure class="diagram" data-svg="mixerArm"></figure>
+              <ol class="steps calm">
+                <li><p>In the Mixer, click an empty track. At the top, set its <strong>input</strong> to Solo Input 1.</p></li>
+                <li><p>Arm it — the record dot at the bottom of that mixer track.</p></li>
+                <li><p>Press record in the toolbar, choose <strong>Audio into the playlist</strong>, and sing.</p></li>
+                <li><p>Do it three or four times onto different tracks. Choose later. Nobody's first take is their best one.</p></li>
+              </ol>
+              <div class="note watch">
+                <b>Headphones, always</b>
+                Never record with speakers on. The microphone picks up the backing track and glues it permanently to your vocal, where it can never be removed.
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Small things that make a big difference</h3>
+              <ul>
+                <li><strong>Stand about a hand's width from the mic</strong>, and stay there. Moving closer and further changes your volume mid-take.</li>
+                <li><strong>Sing slightly across the mic rather than straight into it.</strong> Kills most popping <em>p</em> and <em>b</em> sounds for free.</li>
+                <li><strong>A pop shield costs very little</strong> and does the rest of that job.</li>
+                <li><strong>Soft furnishings beat bare rooms.</strong> Near a curtain or a wardrobe of clothes sounds noticeably better than the middle of an empty room.</li>
+                <li><strong>Record the loud chorus first.</strong> Set your gain for the loudest thing you'll sing — quiet parts always fit underneath, but a loud part set too hot is ruined.</li>
+              </ul>
+            </div>
+
+            <div class="adv-banner"><b>ADVANCED</b><span>When single takes feel easy: how records are really assembled.</span></div>
+
+            <div class="card advanced">
+              <span class="eyebrow">The pros never use take one</span>
+              <h3>Comping — building the perfect take from three real ones</h3>
+              <p>Almost no released vocal is a single performance. It's a <strong>comp</strong>: the best line from take one, the best word from take three, stitched together. Yours works the same way:</p>
+              <ol class="steps calm">
+                <li><p>Record the same section <strong>three times in a row</strong>, without stopping to listen between takes — momentum beats judgement while the voice is warm.</p></li>
+                <li><p>Each take lands as its own audio clip in the Playlist. Stack them on three tracks, one above the other.</p></li>
+                <li><p>Listen line by line. For each line, <strong>mute the two versions you like less</strong> (click the clip → <span class="path">Cmd+M</span>, or slice with the razor at the line boundaries and delete).</p></li>
+                <li><p>Where two takes join mid-phrase, overlap them by a breath and add a tiny fade on each side so the seam is inaudible.</p></li>
+              </ol>
+              <div class="note tip">
+                <b>The rule that keeps comping honest</b>
+                Pick for <em>feeling</em>, not just accuracy — the slightly imperfect take that means it beats the clean take that doesn't, every single time.
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ============================================ 06 VOICE FX -->
+        <section id="voicefx">
+          <div class="sec-head"><span class="sec-num">06</span><h2>Shaping your voice</h2></div>
+          <p class="sec-intro">A recorded vocal is raw material. These are all the ways FL Studio can shape it — from a barely-there polish to a completely different voice. The <strong>Shape my voice</strong> card at the top walks any of them with you.</p>
+
+          <div class="cards">
+
+            <div class="card">
+              <span class="eyebrow">Learn this order once — it never changes</span>
+              <h3>The vocal chain — what it is and why it exists</h3>
+              <p>A recording of your voice comes out of the mic <strong>dry</strong>: no space around it, loud notes loud, quiet words vanishing, the room rumble still in it. Nobody releases that. Every vocal you've ever heard on a record has passed through a row of small tools first — and that row is the <strong>chain</strong>. Think of water through pipes: the voice flows in one end, each tool changes exactly one thing, and it comes out the other end sounding like a record.</p>
+              <figure class="diagram" data-svg="vocalChain"></figure>
+              <p>Each stage fixes one problem, and each hands a cleaner voice to the next — which is why the order never changes: <strong>EQ</strong> fixes the <em>tone</em>, <strong>compression</strong> fixes the <em>evenness</em>, <strong>reverb</strong> adds the <em>space</em>, <strong>delay</strong> adds <em>echoes</em> when you want them. The four cards below take each stage apart properly.</p>
+              <p>Where it physically lives: press <span class="path">F9</span>, click the vocal's mixer track, and load each effect into the slots on the right — the voice enters at slot 1 and flows downward, so <strong>top-to-bottom is the order</strong>:</p>
+              <figure class="diagram" data-svg="mixerVocal"></figure>
+              <div class="note tip">
+                <b>Why this order — the one-line version</b>
+                Every tool reacts to what it's fed. Fix the tone first and the compressor squeezes <em>voice</em>, not rumble; even the level and the reverb echoes <em>clarity</em>, not mud. Reverb applied to a muddy, uneven voice just gives you muddy, uneven echoes — reverb is a photocopier for whatever you feed it.
+              </div>
+              <div class="note tip">
+                <b>Want it as a guided tour?</b>
+                The <strong>Shape my voice</strong> card at the top has a "What IS the vocal chain?" path — five screens, one per stage, in plain words, then it builds the whole chain on your actual vocal with you.
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>EQ — tidy the tone first</h3>
+              <p>Every sound is made of <strong>frequencies</strong> — lows you feel in your chest, highs that sparkle — and an EQ is a volume control for each region separately. A voice spreads across this whole map, and each region has its own personality:</p>
+              <figure class="diagram" data-svg="freqMap"></figure>
+              <figure class="diagram" data-svg="eqCurve"></figure>
+              <p>Load <strong>Fruity parametric EQ 2</strong> into slot 1. Four moves cover almost every voice — each one is a block on the map above:</p>
+              <ul>
+                <li><strong>Cut everything below ~90 Hz.</strong> There's no voice down there — only mic-stand rumble and room boom.</li>
+                <li><strong>A small dip around 250 Hz</strong> if the voice sounds boxy or muddy.</li>
+                <li><strong>A gentle lift around 3 kHz</strong> for presence — the "closer to the speaker" frequencies.</li>
+                <li><strong>A small shelf up from 10 kHz</strong> for air. (If you recorded with the Scarlett's AIR button on, you may already have enough.)</li>
+              </ul>
+              <div class="note watch"><b>Small moves</b>2–3 dB is a real EQ move. If you can hear the change instantly and obviously, it's probably too much.</div>
+            </div>
+
+            <div class="card">
+              <h3>Compression — even it out</h3>
+              <figure class="diagram" data-svg="compDiagram"></figure>
+              <p>A compressor automatically turns down the loud moments so the whole take sits at a steady level — it's why record vocals feel like they're resting on top of the music without ever disappearing.</p>
+              <ul>
+                <li>Load <strong>Fruity Limiter</strong> in slot 2 and switch it to <strong>COMP</strong> mode.</li>
+                <li>Lower the threshold until the meter shows about <strong>3–4 dB</strong> of reduction on loud lines.</li>
+                <li>If the voice starts audibly "pumping", back the threshold off.</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">Room · plate · hall</span>
+              <h3>Reverb — put the voice in a space</h3>
+              <p>Sing in a bathroom and thousands of tiny echoes blur into a wash — that wash is reverb, and the plugin fakes it so a bedroom recording can live in any room you like. This is what a reverb is actually made of, and what each knob controls:</p>
+              <figure class="diagram" data-svg="reverbAnatomy"></figure>
+              <figure class="diagram" data-svg="reverbWindow"></figure>
+              <p>Load <strong>Fruity Reeverb 2</strong> in slot 3. The <strong>WET knob is the one that matters</strong> — it sets how tall the reverb cloud is next to the dry voice. Vocals usually sit between 15% and 25%: you should <em>feel</em> the space more than hear it.</p>
+              <ul>
+                <li><strong>Verses drier, choruses wetter</strong> — automate WET up for the chorus and the song opens like a door.</li>
+                <li><strong>PRE-DELAY around 20 ms</strong> keeps the words clear by letting each syllable land before its reverb starts.</li>
+                <li><strong>Fast songs need short decays</strong> (under ~1.5 s) or the reverb smears over the next line. Slow ballads can carry 2.5 s+ hall tails.</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Delay — echoes in time</h3>
+              <figure class="diagram" data-svg="delayTaps"></figure>
+              <p>Load <strong>Fruity Delay 3</strong> in slot 4 when you want echo as an <em>effect</em> rather than a space. Two settings cover most songs: a single fast <strong>slapback</strong> for attitude, or a tempo-synced <strong>1/4-note echo</strong> for size and dreaminess.</p>
+              <div class="note tip"><b>The throw</b> The pro move: automate the delay's mix up for just the <em>last word</em> of a phrase, so that one word echoes off into the gap. Instant record-sounding production.</div>
+            </div>
+
+            <div class="card">
+              <h3>Pitch — correction and the tuned-pop sound</h3>
+              <p>Two different jobs, two tools:</p>
+              <ul>
+                <li><strong>Fixing a note or two:</strong> <strong>NewTone</strong> — opens the recording as editable notes; drag the flat one up. Surgical, invisible.</li>
+                <li><strong>The modern pop sheen:</strong> <strong>Pitcher</strong> on the mixer track, set to your song's key. Slow correction speed = invisible polish; fast = the hard, quantised pop shimmer, as a deliberate style.</li>
+              </ul>
+              <div class="note watch">
+                <b>Your copy is Producer Edition</b>
+                Pitcher and NewTone only come with <strong>Signature Edition and up</strong>, so they're not in your copy. The working routes on Producer: sing the wobbly line again (free, usually best), or install a <strong>free tuner plugin</strong> — <strong>Graillon 2 Free</strong> (Auburn Sounds) or <strong>MAutoPitch</strong> (MeldaProduction), both Mac AU, both with the same two controls (KEY + speed). After installing: <span class="path">Add → More plugins → Manage plugins → Find plugins</span>, then load it after compression, before reverb. Pitcher can also be bought on its own from Image-Line, much cheaper than the full upgrade.
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Character effects — a different voice entirely</h3>
+              <div class="tw">
+                <table>
+                  <thead><tr><th>Sound</th><th>How</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Telephone / radio</strong></td><td><strong>Fruity Filter</strong> or EQ: cut everything below 500 Hz and above 3 kHz. Classic for one verse or an intro line.</td></tr>
+                    <tr><td><strong>Megaphone / grit</strong></td><td><strong>Fruity Blood Overdrive</strong>, gently — adds fur and aggression. Great doubled quietly under a clean take.</td></tr>
+                    <tr><td><strong>Robot / vocoder</strong></td><td><strong>Fruity Vocoder</strong> (included in your copy) with a 3x Osc chord as the carrier — the Daft Punk voice. Full wiring in the Advanced card below.</td></tr>
+                    <tr><td><strong>Whisper double</strong></td><td>Record the line again <em>whispered</em>, lay it exactly under the sung take, quietly. Intimacy on demand.</td></tr>
+                    <tr><td><strong>Dreamy wash</strong></td><td>Reverb WET at 50%+ with a long decay — the voice dissolves into the room. Bridges, outros.</td></tr>
+                    <tr><td><strong>Shimmer width</strong></td><td><strong>Fruity Chorus</strong>, subtle — thickens and widens a thin-feeling take.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Doubles &amp; harmonies — the free upgrade</h3>
+              <p>The biggest chorus-thickener costs nothing but a second take. Where every voice sits:</p>
+              <figure class="diagram" data-svg="stackDiagram"></figure>
+              <ul>
+                <li><strong>The double:</strong> record the same line again, as identically as you can. Pan one take left, one right, both slightly quieter than the lead. This is THE sound of a pop chorus.</li>
+                <li><strong>The harmony:</strong> sing the line again a third higher — every note moved two letter-names up the scale:</li>
+              </ul>
+              <figure class="diagram" data-svg="harmonyRoll"></figure>
+              <ul>
+                <li><strong>Only in the chorus.</strong> Verses stay one voice — the arrival of the doubles IS the chorus lift.</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">Three flavours, one foundation</span>
+              <h3>R&amp;B vocals — the three recipes</h3>
+              <p>All three sit on the polish chain plus the vocal stack above; the flavour is what changes. The <strong>Shape my voice</strong> walk builds each one with you.</p>
+              <div class="tw">
+                <table>
+                  <thead><tr><th>Flavour</th><th>The recipe in one line</th><th>Sounds like</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Silky classic</strong></td><td>Deeper compression (5–6 dB), warm EQ with no air shelf, short plate at ~12–15%, a disciplined 5-voice stack — runs on the lead only</td><td>Brandy, H.E.R.</td></tr>
+                    <tr><td><strong>Airy neo-soul</strong></td><td>Light compression (2–3 dB), breaths kept in, plate with 30–40 ms pre-delay, subtle chorus width, a whispered layer under the lead</td><td>SZA, Erykah Badu</td></tr>
+                    <tr><td><strong>Dark trap-soul</strong></td><td>Pitcher gloss, no air at all, long-decay/low-wet damped hall, nervous 1/8 delays with thrown words, an octave-down shadow double, wide ad-libs</td><td>The Weeknd, Brent Faiyaz</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="note tip">
+                <b>What makes any of them R&amp;B</b>
+                The stack. Pop doubles a chorus; R&amp;B <em>builds architecture</em> out of voices — unisons, thirds, fifths, whispers, octaves, ad-libs in every gap. Master the stack once and all three flavours are settings on top of it.
+              </div>
+            </div>
+
+            <div class="adv-banner"><b>ADVANCED</b><span>Synthetic voices: sing something real, then turn a copy of it into a machine. Everything here uses plugins already in your copy.</span></div>
+
+            <div class="card advanced">
+              <span class="eyebrow">Sing it human, robotise the copy</span>
+              <h3>Synthetic backing voices — three levels of robot</h3>
+              <p>The trick behind almost every "robot voice" on a record: the <em>lead</em> stays human, and a <strong>copy</strong> of it gets transformed and tucked underneath as a backing texture. Three levels, from easy to full Daft Punk:</p>
+              <p><strong>Level 1 — the hard-tuned shadow (5 minutes).</strong> Duplicate the vocal clip onto its own mixer track. On that track, load your free tuner (Graillon / MAutoPitch — the ones from the Pitch card), set it to the song's key and <strong>maximum correction speed</strong>, and shift the formant knob down a touch. Instantly synthetic. Sit it just under the lead in the chorus, or pan two copies wide.</p>
+              <p><strong>Level 2 — the metallic ghost.</strong> On a vocal copy: the telephone EQ (cut below 500 Hz and above 3 kHz) → <strong>Fruity Blood Overdrive</strong> gently → <strong>Fruity Flanger</strong>. A radio-transmission voice that sounds great answering the lead in the gaps.</p>
+              <p><strong>Level 3 — the full vocoder.</strong> Your words pushed through a synth's tone — you speak, the chord talks:</p>
+              <figure class="diagram" data-svg="vocoderRoute"></figure>
+              <ol class="steps">
+                <li><p>Vocal clip on mixer track A. On another channel, a <strong>3x Osc</strong> (or FLEX synth) playing a <strong>held chord</strong> — your song's chords, long notes — routed to mixer track B.</p></li>
+                <li><p>In the Mixer, click track <strong>B</strong> (the synth), then <span class="path">right-click track A's routing arrow → Sidechain to this track</span> — the synth is now feeding track A invisibly.</p></li>
+                <li><p>Load <strong>Fruity Vocoder</strong> on track <strong>A</strong> (the voice). In its input settings, set the <strong>carrier to the sidechain</strong> — the voice is the modulator, the synth is the throat.</p></li>
+                <li><p>Press play and sing (or use the recorded clip): the chord speaks your words. Silence? Swap which input is MOD and which is CAR — it's the #1 gotcha.</p></li>
+                <li><p>Use it as a <strong>backing pad</strong>: vocoder singing the chorus hook, human lead on top. That's the modern synthetic-choir sound.</p></li>
+              </ol>
+              <div class="note tip">
+                <b>The synthetic choir recipe</b>
+                Whisper take + Level 1 tuned shadow + Level 3 vocoder pad, all quiet, all behind the human lead. Massive, futuristic, and every piece of it came from her own voice.
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ============================================ 06 SONG -->
+        <section id="song">
+          <div class="sec-head"><span class="sec-num">07</span><h2>Building a song</h2></div>
+          <p class="sec-intro">You sing and you play. That's already the hard part. This is the order that makes the rest fall into place.</p>
+
+          <div class="cards">
+
+            <div class="card">
+              <span class="eyebrow">The worked example — every decision already made</span>
+              <h3>Project One: a whole R&amp;B song, start to finish</h3>
+              <figure class="diagram" data-svg="projectMap"></figure>
+              <p>The <strong>Project One</strong> card at the top of the page builds one complete silky R&amp;B slow jam with you — 70 BPM, A minor, four white-key chords (Am7 → Fmaj7 → Cmaj7 → Em7) — through all eight stages above, ending with a balanced, exported WAV on your phone. The session plan it follows:</p>
+              <div class="tw">
+                <table>
+                  <thead><tr><th>Stage</th><th>What gets made</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Drums</strong></td><td>The slow-jam pattern, humanised, in three versions: verse · chorus · fill</td></tr>
+                    <tr><td><strong>Piano</strong></td><td>The four chords, exact notes given, drawn or played, then humanised</td></tr>
+                    <tr><td><strong>Bass</strong></td><td>An 808 on the chord roots (A · F · C · E), locked to the kick</td></tr>
+                    <tr><td><strong>Guitar</strong></td><td>A picked arpeggio for verse 2, off-beat chops for the choruses</td></tr>
+                    <tr><td><strong>Extras</strong></td><td>A low warm pad (choruses) and one music-box sparkle in the gaps</td></tr>
+                    <tr><td><strong>Arrange</strong></td><td>Intro → verses → choruses → bridge → final chorus → outro, with fills, a crash, and one bar of silence</td></tr>
+                    <tr><td><strong>Voice</strong></td><td>Lead, doubles L/R, a third-up harmony, a whisper layer, ad-libs — then the silky chain</td></tr>
+                    <tr><td><strong>Ship</strong></td><td>Balance (voice on top, master out of the red), Cmd+S, export to WAV, AirDrop to the phone</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="note tip">
+                <b>Then Project Two is yours</b>
+                Same eight stages, your key, your tempo, your words. The point of Project One is that the second time, the process is already in your hands.
+              </div>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">This order is the point</span>
+              <h3>Build it in this sequence</h3>
+              <ol class="steps calm">
+                <li><p><strong>Tempo and key come from your voice.</strong> Sing the chorus. Find the tempo that feels right and the key where the highest note is comfortable — not just reachable. Set both in FL <em>first</em>.</p></li>
+                <li><p><strong>The drum beat.</strong> One bar in the step sequencer is your engine — see <a href="#beats" style="color:var(--accent-deep)">Making beats</a>.</p></li>
+                <li><p><strong>Piano chords over the beat.</strong> Four chords, one bar each, is a complete verse. This is the spine of the song.</p></li>
+                <li><p><strong>Then bass.</strong> Just the lowest note of each chord, landing with the kick. It sounds too simple to matter and it is the single biggest step towards sounding like a real record.</p></li>
+                <li><p><strong>Then guitar and colour</strong> — chops, arpeggios, pads, shakers. One new sound per section, and the middle stays clear for your voice.</p></li>
+              </ol>
+              <div class="note tip">
+                <b>The guided version, in three levels</b>
+                The <strong>Build a song</strong> card at the top walks this whole sequence interactively — Beginner (first full track), Intermediate (guitar, layers, fills, the pre-chorus build), Advanced (tempo changes, transitions, automation). Each level ends with a quick self-test, and each assumes the one before.
+              </div>
+              <div class="note stop">
+                <b>Why the order matters</b>
+                This is exactly why loops from sample sites rarely fit. They were made in someone else's key at someone else's tempo, so you end up bending your song to fit a loop. Build the parts to your song instead and the problem disappears entirely.
+              </div>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">So it's not one beat the whole way through</span>
+              <h3>Making the song move</h3>
+              <p>A track that never changes speed or weight reads as amateur long before anyone notices the sounds. Three tools, cheapest first:</p>
+              <h4>1. Perceived speed — change the drums, not the BPM</h4>
+              <p>Hats to 16ths and a busier kick make a chorus feel <strong>faster</strong> at the same tempo. Moving the snare from beats 2&nbsp;&amp;&nbsp;4 to just beat 3 makes the same BPM feel <strong>half-speed and heavy</strong> — devastating for a bridge or the first half of a final chorus. This is where almost all "speeding up" in records actually happens.</p>
+              <h4>2. Real tempo changes — automate the BPM itself</h4>
+              <figure class="diagram" data-svg="tempoCurve"></figure>
+              <p>Right-click the BPM display → <span class="path">Create automation clip</span>. A ramped +4–6&nbsp;BPM into the final chorus reads as excitement; easing the last bars down 20–30 BPM ends the song like a live band. Set tempo automation <strong>before</strong> recording vocals — audio doesn't stretch as gracefully as MIDI.</p>
+              <h4>3. Section changes — one event per boundary</h4>
+              <p>Every border needs one thing to change: a drop-out bar, a fill, a reverse crash, a filter opening, a layer in or out. The verse beat should be the chorus beat <em>with pieces deleted</em>, and the last bar before each chorus is the fill bar. All drawn out in <a href="#beats" style="color:var(--accent-deep)">Making beats</a> and taught step-by-step in the Advanced walk.</p>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">The last ten minutes</span>
+              <h3>Mastering, the beginner version</h3>
+              <p>Mastering is the final polish that makes the finished song loud and even enough to sit next to other records. It happens on the <strong>Master strip</strong> in the Mixer, using its effect slots:</p>
+              <figure class="diagram" data-svg="mixerMaster"></figure>
+              <ol class="steps calm">
+                <li><p><strong>Click the Master strip</strong> in the Mixer (F9), then load into its slots on the right:</p></li>
+                <li><p><strong>Slot 1 — Fruity Parametric EQ 2.</strong> Two gentle moves at most: a small dip around 200–300&nbsp;Hz if the song sounds muddy, a small lift on the top shelf for air. If a move is obvious, it's too big.</p></li>
+                <li><p><strong>Slot 2 — Fruity Limiter.</strong> The default limiter setting catches peaks. Raise its gain until your song is about as loud as a reference track you love — and stop the instant it starts sounding squashed or pumping.</p></li>
+                <li><p><strong>Watch the master meter</strong> — it should dance near the top without slamming red. Red = permanent distortion in the export.</p></li>
+                <li><p><strong>File → Export → WAV</strong> for the keeper; MP3 320 for sharing. Play the export on phone speakers and headphones — if it survives both, it's done.</p></li>
+              </ol>
+              <div class="note watch">
+                <b>Mastering can't fix the mix</b>
+                A crowded arrangement, a clipped vocal, or a muddy low end has to be fixed where it happened — mastering only polishes what's already working. If the master needs big moves, the problem is upstream.
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Song structure, with bar counts</h3>
+              <p>A bar is four beats. Almost all pop music is built in blocks of 4, 8 and 16 bars, and following that is what makes an arrangement feel finished rather than random.</p>
+              <figure class="diagram" data-svg="songArc"></figure>
+              <div class="tw">
+                <table>
+                  <thead><tr><th>Part</th><th>Bars</th><th>What it's doing</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Intro</strong></td><td class="num">4 – 8</td><td>Sets the mood. Often just the chords.</td></tr>
+                    <tr><td><strong>Verse 1</strong></td><td class="num">16</td><td>Tells the story. Keep it sparse — you need somewhere to go.</td></tr>
+                    <tr><td><strong>Pre-chorus</strong></td><td class="num">8</td><td>Optional. Builds tension into the chorus.</td></tr>
+                    <tr><td><strong>Chorus</strong></td><td class="num">16</td><td>The big one. Everything comes in.</td></tr>
+                    <tr><td><strong>Verse 2</strong></td><td class="num">16</td><td>Same as verse 1, slightly fuller.</td></tr>
+                    <tr><td><strong>Chorus</strong></td><td class="num">16</td><td>Again.</td></tr>
+                    <tr><td><strong>Bridge</strong></td><td class="num">8</td><td>Something different — new chords, a drop to just voice and piano.</td></tr>
+                    <tr><td><strong>Final chorus</strong></td><td class="num">16</td><td>Biggest version. Add a harmony line.</td></tr>
+                    <tr><td><strong>Outro</strong></td><td class="num">4 – 8</td><td>Wind it down.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="note tip">
+                <b>Arranging is mostly subtraction</b>
+                A chorus doesn't feel big because you added things to it — it feels big because you took things <em>out</em> of the verse before it. If your chorus isn't lifting, thin out the verse rather than piling more onto the chorus.
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Patterns and the Playlist</h3>
+              <figure class="diagram" data-svg="flPlaylist"></figure>
+              <p>FL splits songwriting into two jobs, and understanding the split saves a lot of confusion.</p>
+              <ul>
+                <li><strong>A Pattern</strong> is a short musical idea — a four-bar chord loop, a drum beat, a bass line. You make these in the Channel Rack and Piano roll.</li>
+                <li><strong>The Playlist</strong> is where you drag those patterns out along a timeline to build the actual song.</li>
+              </ul>
+              <p>Make a verse pattern, a chorus pattern, a drum pattern, then arrange them in the Playlist. Change the pattern once and every copy of it in the song updates.</p>
+              <div class="note tip">
+                <b>Name your patterns as you make them</b>
+                Right-click the pattern selector and rename. "Pattern 7" means nothing by tomorrow; "Verse chords" costs two seconds.
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ============================================ 07 BEATS -->
+        <section id="beats">
+          <div class="sec-head"><span class="sec-num">08</span><h2>Making beats</h2></div>
+          <p class="sec-intro">Everything about building the drums and low end under your songs — the tool, the patterns, and the tricks that make a beat feel human. Or let the <strong>Make me a beat</strong> wizard at the top build one with you.</p>
+
+          <div class="cards">
+
+            <div class="card">
+              <h3>The step sequencer: FL's beat machine</h3>
+              <p>Beats in FL are made by <strong>clicking squares</strong>, not playing keys. Each drum gets a row of 16 squares — one bar, four squares per beat. Click a square and the drum hits there. That's the whole mechanism.</p>
+              <figure class="diagram" data-svg="rackSteps"></figure>
+              <ol class="steps calm">
+                <li><p>Open the Channel Rack (<code>F6</code>). Kick, Clap, Hat and Snare channels are there in a new project.</p></li>
+                <li><p>Click squares to place hits. Right-click removes them.</p></li>
+                <li><p>Press <code>Space</code>. The pattern loops so you hear every change instantly.</p></li>
+                <li><p>To swap a drum sound: right-click the channel name → Replace, or drag a sound from the Browser onto it.</p></li>
+              </ol>
+              <div class="note tip">
+                <b>The squares are the same grids drawn below</b>
+                Every pattern in the library underneath is drawn exactly as the step sequencer shows it. Copy the filled squares and you have the beat.
+              </div>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">Meet the whole kit before you build with it</span>
+              <h3>Every drum, explained</h3>
+              <p>A drum kit preset spreads the whole kit across the keys — and every drum has one job. Know the jobs and you can build any beat from scratch instead of copying grids:</p>
+              <figure class="diagram" data-svg="drumKitFull"></figure>
+              <div class="tw">
+                <table>
+                  <thead><tr><th>Drum</th><th>Sounds like</th><th>Its job</th><th>Where it usually goes</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Kick</strong></td><td>Boom / punch in the chest</td><td>The heartbeat — the floor of the whole song</td><td>Always step 1; then 2–4 more hits define the genre</td></tr>
+                    <tr><td><strong>808</strong></td><td>A long, pitched boom</td><td>Kick and bass fused into one — it plays your chord roots</td><td>On the kick steps, one note per chord (trap, R&amp;B)</td></tr>
+                    <tr><td><strong>Snare</strong></td><td>A sharp crack</td><td>The backbeat — the clap-along moment</td><td>Steps 5 &amp; 13 (or just 9 for half-time)</td></tr>
+                    <tr><td><strong>Clap</strong></td><td>Hands, wider and softer than a snare</td><td>Backbeat, or layered ON the snare for width</td><td>Same steps as the snare</td></tr>
+                    <tr><td><strong>Rim click</strong></td><td>A woody tick</td><td>The quiet backbeat — instant late-night ballad</td><td>Wherever the snare would go, in soft sections</td></tr>
+                    <tr><td><strong>Snap</strong></td><td>Finger snap</td><td>Softest backbeat of all — bedroom-pop verses</td><td>Snare steps, quiet songs</td></tr>
+                    <tr><td><strong>Closed hi-hat</strong></td><td>Tick tick tick</td><td>The engine — it carries the speed of the song</td><td>Every other step (8ths) or every step (16ths)</td></tr>
+                    <tr><td><strong>Pedal hat</strong></td><td>A soft "chick"</td><td>A gentler engine for verses</td><td>Where closed hats would go, softer sections</td></tr>
+                    <tr><td><strong>Open hi-hat</strong></td><td>Tsss — it rings on</td><td>The breath — off-beat lift, dance-floor energy</td><td>Off-beats: steps 3, 7, 11, 15 (sparingly!)</td></tr>
+                    <tr><td><strong>Ride</strong></td><td>Ting-ting on a washy cymbal</td><td>Hat-substitute with more air — choruses, jazzier feels</td><td>Where hats would go, in big open sections</td></tr>
+                    <tr><td><strong>Crash</strong></td><td>A big splash that rings for a bar</td><td>The arrival — announces a new section</td><td>Step 1 of the first chorus bar. Once.</td></tr>
+                    <tr><td><strong>Toms (low/mid/high)</strong></td><td>Round pitched drums</td><td>Fills — the roll that falls into the next section</td><td>Steps 13–16 of a fill bar, rolling high→low or low→high</td></tr>
+                    <tr><td><strong>Shaker</strong></td><td>A soft shh-shh</td><td>The hat's gentle cousin — motion without brightness</td><td>16ths under slow R&amp;B and ballads</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="note tip">
+                <b>How to build any beat from nothing</b>
+                Layer in this order, listening after each: ① kick pattern → ② backbeat (snare / clap / rim — pick ONE personality) → ③ engine (hats or shaker) → ④ one breath (an open hat somewhere) → ⑤ fills only at section ends. Five decisions, in that order, is every beat in the library below.
+              </div>
+            </div>
+
+            <div class="card" id="patterncards">
+              <h3>The pattern library</h3>
+              <p><strong>Seventeen beats</strong> that cover most of what sits under a vocal, each with the tempo range it lives at — including five slower R&amp;B grooves (slow jam, 12/8 sway, neo-soul, trap-soul, quiet storm). The bold numbers are the four main beats of the bar. Learn the first two, steal the rest as needed.</p>
+              <div id="patterns"></div>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">Five flavours of slow</span>
+              <h3>Slow R&amp;B — choosing between the five grooves</h3>
+              <p>All five live between 58 and 82 BPM and all five leave the middle open for a singer — the differences are personality. Match the groove to the song's mood:</p>
+              <div class="tw">
+                <table>
+                  <thead><tr><th>Groove</th><th>BPM</th><th>Personality</th><th>Reach for it when…</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Slow jam (half-time)</strong></td><td>58–70</td><td>Classic, warm, spacious</td><td>A love song, held notes, the vocal IS the show</td></tr>
+                    <tr><td><strong>12/8 sway</strong></td><td>60–75</td><td>Rocking, old-school soul</td><td>The song sways in threes — try counting "ONE-and-a, TWO-and-a" along with her demo</td></tr>
+                    <tr><td><strong>Neo-soul (drunk feel)</strong></td><td>68–82</td><td>Loose, human, jazzy</td><td>Conversational vocals, rich chords, laid-back attitude</td></tr>
+                    <tr><td><strong>Trap-soul (slow burn)</strong></td><td>65–75</td><td>Dark, modern, moody</td><td>Tuned vocals, 808 weight, late-night lyrics</td></tr>
+                    <tr><td><strong>Quiet storm (rim &amp; shaker)</strong></td><td>60–72</td><td>Candle-lit, barely there</td><td>The most intimate verses — a whisper of a beat</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>The shared DNA, whichever you pick: <strong>swing higher than feels safe</strong> (20–35%), <strong>ghost notes</strong> at ~25% velocity doing the real seduction, and <strong>space left empty on purpose</strong>. A slow groove dies from one extra drum sooner than a fast one does. All five grids are drawn in the library above; the <strong>Make me a beat</strong> wizard's "Slow R&amp;B / late-night" lane builds them with you.</p>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">The moment that makes or breaks the song</span>
+              <h3>When the chorus hits: the drum lift</h3>
+              <p>A chorus should feel bigger and <em>faster</em> — but on records the tempo almost never changes. The felt speed-up is the drums getting <strong>denser</strong>. Here is the whole manoeuvre, drawn:</p>
+              <figure class="diagram" data-svg="chorusLift"></figure>
+              <ol class="steps calm">
+                <li><p><strong>The fill announces it.</strong> In the last bar of the verse: snare on steps 13-14-15-16, hats cleared out of the way. (Or a tom roll falling low→high into the chorus.)</p></li>
+                <li><p><strong>Crash on arrival.</strong> Step 1 of the first chorus bar, once. It rings over the first two beats and stamps "NEW SECTION" on the song.</p></li>
+                <li><p><strong>Hats double.</strong> Verse hats on every other cell become chorus hats on <em>every</em> cell. This single move is the "speed-up" your ear hears — same tempo, twice the motion.</p></li>
+                <li><p><strong>The open hat breathes</strong> on the off-beats (3, 7, 11, 15) — the chorus gains air as well as speed.</p></li>
+                <li><p><strong>One or two extra kicks</strong> (try steps 4 and 12) so the floor moves more underneath her longest notes.</p></li>
+                <li><p><strong>Alternative drama:</strong> instead of a fill, <em>delete everything</em> for the last half-bar of the verse — one beat of silence, then the chorus lands on top of the crash. Free goosebumps.</p></li>
+              </ol>
+              <div class="note watch">
+                <b>If the song genuinely speeds up</b>
+                Some songs do push the tempo at the chorus, on purpose. Do it with automation, not by hand: <span class="path">right-click the BPM display → Create automation clip</span>, and raise it <strong>2–4 BPM at most</strong> into the final chorus — a lift that size reads as excitement. More reads as a mistake. The drawn walkthrough is in <a href="#song" style="color:var(--accent-deep)">Building a song</a> under tempo changes.
+              </div>
+              <div class="note tip">
+                <b>Slow R&amp;B lifts differently</b>
+                At 60–75 BPM a full hat-doubling can trample the mood. Lift gently instead: double the <em>shaker</em> rather than the hats, add the crash, add ONE extra kick — and let the vocal stack (doubles and harmonies arriving) do the heavy lifting. In this genre the chorus gets <em>fuller</em> more than it gets faster.
+              </div>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">The trap &amp; drill signature</span>
+              <h3>Hi-hat rolls</h3>
+              <p>That rapid-fire <em>tikatikatika</em> in trap and drill isn't a special sound — it's the same hi-hat placed on <strong>smaller subdivisions</strong> for a moment. In FL: right-click the Hat channel → <span class="path">Fill each 2 steps</span> for 8ths, then for a roll, zoom the grid finer (the little dropdown sets steps per beat) or open the Piano roll and paint 1/32 notes for half a beat.</p>
+              <figure class="diagram" data-svg="hatRoll"></figure>
+              <p>Two rules make rolls sound professional rather than chaotic: <strong>use them sparingly</strong> — one roll at the end of a 4- or 8-bar phrase, not constantly — and <strong>ramp the velocity</strong> so the roll swells in, quiet to loud.</p>
+            </div>
+
+            <div class="card">
+              <h3>The kick and the bass are one instrument</h3>
+              <p>The most common reason a beginner beat sounds thin: the kick and the bass ignore each other. They share the same low territory, so they have to take turns or lock together.</p>
+              <figure class="diagram" data-svg="interlock"></figure>
+              <ul>
+                <li><strong>The bass notes come from your chords.</strong> Whatever chord is playing, the bass plays its root note. C chord → C bass. You already made these decisions when you chose the chords.</li>
+                <li><strong>Simplest lock:</strong> bass note lands exactly on each kick hit. Tight, punchy, works everywhere.</li>
+                <li><strong>808 style</strong> (trap, R&amp;B): the bass IS the low boom — a long 808 note per chord, sliding between roots. In FLEX, search "808".</li>
+                <li><strong>If the low end sounds muddy,</strong> the kick and a long bass note are overlapping. Shorten the bass note so it gets out of the kick's way, and it cleans up instantly.</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Making it human</h3>
+              <ul>
+                <li><strong>Velocity is the big one.</strong> Real drummers never hit twice identically. In the Channel Rack, the graph editor button (top-right) shows a bar under each step — drag some hi-hats quieter. Alternating loud/soft hats transforms a beat on its own.</li>
+                <li><strong>Ghost notes:</strong> very quiet snare hits between the main ones (the R&amp;B pattern above shows them faded). Barely audible, hugely felt.</li>
+                <li><strong>Swing:</strong> the knob at the top of the Channel Rack pushes off-beats late. 15–25% makes a stiff beat groove; 0% suits driving pop; more turns it into a shuffle.</li>
+                <li><strong>A fill every 8 bars:</strong> snare on steps 13-14-15-16 of the last bar before a section change announces the chorus.</li>
+                <li><strong>Drop the drums out</strong> for one bar before a big chorus. Free drama.</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">Rule one for a singer's beats</span>
+              <h3>The beat serves the voice</h3>
+              <p>You're not making instrumentals — you're making room for a singer. Where each element sits, high to low:</p>
+              <figure class="diagram" data-svg="vocalSpace"></figure>
+              <ul>
+                <li><strong>The middle belongs to the voice.</strong> Kick and 808 live low, hats and shakers live high — they frame the voice without touching it. Busy mid-range instruments (big synth chords, dense guitars) are what fight a vocal.</li>
+                <li><strong>Busy voice, simple beat.</strong> During fast or wordy vocal lines, drums stay plain. Save the rolls and fills for the gaps <em>between</em> vocal phrases — that's call and response, and it's what pro productions do constantly.</li>
+                <li><strong>Verse thinner, chorus fuller.</strong> Copy the beat pattern, then <em>remove</em> pieces for the verse version: maybe just kick and a shaker. The chorus hits harder because the verse got out of its way.</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Drum sounds: what to use and where to get more</h3>
+              <div class="tw">
+                <table>
+                  <thead><tr><th>Source</th><th>Cost</th><th>Notes</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>FL's own packs</strong> (Browser → Packs)</td><td>Included</td><td>Kicks, snares, hats, claps ready to drag onto channels. Start here.</td></tr>
+                    <tr><td><strong>FPC</strong></td><td>Included</td><td>Full kits with velocity response. Right-click a pad to swap any single sound.</td></tr>
+                    <tr><td><strong>FLEX "808" presets</strong></td><td>Included</td><td>The long booming bass for trap/R&amp;B beats.</td></tr>
+                    <tr><td><strong>MT Power Drum Kit 2</strong></td><td>Free</td><td>Realistic acoustic kit with draggable MIDI grooves — best for rock/ballad feels.</td></tr>
+                    <tr><td><strong>Cymatics / 99Sounds free packs</strong></td><td>Free (email signup)</td><td>Well-made one-shot packs. Download, unzip, drag the .wav files into the Channel Rack.</td></tr>
+                    <tr><td><strong>EZdrummer 3</strong></td><td>~£150</td><td>Only if she outgrows programming: browse real-drummer grooves, drag in, done.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="note tip">
+                <b>One-shots, not loops</b>
+                Download <em>single hits</em> (one kick, one snare) and sequence them yourself — they work at any tempo in any song. Pre-made audio loops are locked to their own tempo and key, which is the exact Looperman problem this guide exists to end.
+              </div>
+            </div>
+
+            <div class="adv-banner"><b>ADVANCED</b><span>Beyond the grid: making drum sounds nobody else has.</span></div>
+
+            <div class="card advanced">
+              <span class="eyebrow">Your drums, actually yours</span>
+              <h3>Layering, resampling, and two-strength hats</h3>
+              <ul>
+                <li><strong>Layer two drums into one.</strong> The classic: a punchy kick for the thump plus a second kick (or a tom, low) for the boom — two channels, hits on the same steps, volumes balanced until they read as ONE drum. Same trick makes snare+clap the standard R&amp;B backbeat.</li>
+                <li><strong>Resample with Edison — the producer's photocopier.</strong> Load <strong>Edison</strong> on the master track, press its record button while your layered drum loops, then drag the recorded clip straight out of Edison into the Channel Rack: your layered stack is now ONE new drum sound, yours forever, reusable in any song.</li>
+                <li><strong>Two-strength hats.</strong> Duplicate the hat channel; make one copy quiet and slightly darker (channel volume down). Main hats on the beat from channel one, the in-between 16ths from the quiet channel — instant professional bounce that velocity alone can't quite reach.</li>
+                <li><strong>Any sound is a drum.</strong> Record yourself hitting a glass, a table, a zip — chop the hit out in Edison, drag it to the rack, sequence it like a shaker. R&amp;B records are full of exactly this.</li>
+              </ul>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ============================================ 08 KEYS -->
+        <section id="keys">
+          <div class="sec-head"><span class="sec-num">09</span><h2>Keys &amp; chords</h2></div>
+          <p class="sec-intro">Choosing a key that flatters your voice, and knowing which chords belong in it.</p>
+
+          <div class="cards">
+
+            <div class="card">
+              <span class="eyebrow">Do this before writing anything else</span>
+              <h3>Finding your key</h3>
+              <p>The key isn't a musical technicality — it decides whether your chorus sounds effortless or strained. Choose it for your voice, not for what's easy to play.</p>
+              <ol class="steps calm">
+                <li><p><strong>Sing the chorus melody in whatever key falls out naturally.</strong> Don't think about it.</p></li>
+                <li><p><strong>Find the highest note in it.</strong> Can you hold it comfortably — and would you still be able to on the fourth take at eleven at night? If not, the key is too high.</p></li>
+                <li><p><strong>Move the whole thing down a step or two and try again.</strong> Keep going until the top note is comfortable rather than merely possible.</p></li>
+                <li><p><strong>Then check the lowest note.</strong> If it's disappearing into nothing, you've gone too far — back up one.</p></li>
+              </ol>
+              <div class="note tip">
+                <b>The test that matters</b>
+                Your best key is where the highest note in the chorus is comfortable and the lowest note is still audible. That window is usually only two or three keys wide, and finding it is the difference between a vocal that soars and one that sounds like hard work.
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>The chords in each key</h3>
+              <p>Every key has six chords that naturally belong together. Pick any of them in any order and it will sound right. Roman numerals are just shorthand for "the first chord", "the fourth chord" — they let a progression be described once and used in any key.</p>
+              <div class="tw">
+                <table class="chordgrid">
+                  <thead><tr><th>Key</th><th>I</th><th>ii</th><th>iii</th><th>IV</th><th>V</th><th>vi</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>C</strong></td><td>C</td><td>Dm</td><td>Em</td><td>F</td><td>G</td><td>Am</td></tr>
+                    <tr><td><strong>G</strong></td><td>G</td><td>Am</td><td>Bm</td><td>C</td><td>D</td><td>Em</td></tr>
+                    <tr><td><strong>D</strong></td><td>D</td><td>Em</td><td>F♯m</td><td>G</td><td>A</td><td>Bm</td></tr>
+                    <tr><td><strong>A</strong></td><td>A</td><td>Bm</td><td>C♯m</td><td>D</td><td>E</td><td>F♯m</td></tr>
+                    <tr><td><strong>E</strong></td><td>E</td><td>F♯m</td><td>G♯m</td><td>A</td><td>B</td><td>C♯m</td></tr>
+                    <tr><td><strong>F</strong></td><td>F</td><td>Gm</td><td>Am</td><td>B♭</td><td>C</td><td>Dm</td></tr>
+                    <tr><td><strong>B♭</strong></td><td>B♭</td><td>Cm</td><td>Dm</td><td>E♭</td><td>F</td><td>Gm</td></tr>
+                    <tr><td><strong>E♭</strong></td><td>E♭</td><td>Fm</td><td>Gm</td><td>A♭</td><td>B♭</td><td>Cm</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p><strong>To read it:</strong> find your key on the left, then read across. A progression written as <strong>I–V–vi–IV</strong> is, in the key of G, <strong>G–D–Em–C</strong>.</p>
+            </div>
+
+            <div class="card">
+              <h3>Progressions worth knowing</h3>
+              <div class="tw">
+                <table>
+                  <thead><tr><th>Numerals</th><th>In C</th><th>Sounds like</th></tr></thead>
+                  <tbody>
+                    <tr><td class="num"><strong>I – V – vi – IV</strong></td><td class="num">C – G – Am – F</td><td>The most-used progression in pop. Bright, uplifting, endlessly reliable.</td></tr>
+                    <tr><td class="num"><strong>vi – IV – I – V</strong></td><td class="num">Am – F – C – G</td><td>The same four chords starting elsewhere. Wistful, emotional — ballad territory.</td></tr>
+                    <tr><td class="num"><strong>I – vi – IV – V</strong></td><td class="num">C – Am – F – G</td><td>Classic and slightly nostalgic. Doo-wop, early rock, film moments.</td></tr>
+                    <tr><td class="num"><strong>ii – V – I</strong></td><td class="num">Dm – G – C</td><td>Sophisticated resolution. Jazz and soul lean on it heavily.</td></tr>
+                    <tr><td class="num"><strong>I – IV</strong></td><td class="num">C – F</td><td>Just two chords. Plenty of great songs never need more.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="note tip">
+                <b>A trick worth stealing</b>
+                Use the same four chords for the verse and the chorus, but start the chorus on a different one. Same harmony, and it feels like the song has lifted into a new place.
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Making chords sound good rather than correct</h3>
+              <ul>
+                <li><strong>Don't play every chord in the same hand position.</strong> Moving each chord to whichever shape is nearest your last one — inversions — is what stops a progression sounding like a beginner exercise.</li>
+                <li><strong>Leave the bottom to the bass.</strong> If a bass part is playing the root note, your left hand doesn't need to. Play the chords higher up and the whole thing opens out.</li>
+                <li><strong>Hold chords through the bar</strong> in verses; play them more rhythmically in choruses. Same chords, more energy.</li>
+                <li><strong>Add the 7th for colour.</strong> Am7 instead of Am, Cmaj7 instead of C. One extra note, instantly more grown-up.</li>
+              </ul>
+            </div>
+
+            <div class="adv-banner"><b>ADVANCED</b><span>The chord colours that make R&amp;B sound like R&amp;B.</span></div>
+
+            <div class="card advanced">
+              <span class="eyebrow">One more note each</span>
+              <h3>9ths, slash chords, and the gospel move</h3>
+              <ul>
+                <li><strong>The 9th — the R&amp;B note.</strong> On any 7th chord, add the note <em>two above the root</em>: Am7 (A·C·E·G) becomes <strong>Am9</strong> by adding B. Cmaj7 becomes Cmaj9 by adding D. That soft cloudy lushness in neo-soul chords is mostly 9ths.</li>
+                <li><strong>Slash chords — a different bass under the same chord.</strong> Written C/E, meaning "C chord, but with E as the lowest note." In FL: keep the right-hand chord, move the BASS channel's note. Walking the bass down stepwise under held chords (C → C/B → Am7) is the smoothest sound in pop.</li>
+                <li><strong>The gospel slide.</strong> Approach any chord from one key below: the chord before lands a semitone under, then slides up. In the Piano roll, place a short copy of the chord one row down, right before the real one. Instant church.</li>
+                <li><strong>Try them safely:</strong> everything above works inside Project One's four chords — Am9, F/A, Cmaj9, the slide into Em7 — before you spend them on your own songs.</li>
+              </ul>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ============================================ 09 FIX -->
+        <section id="fix">
+          <div class="sec-head"><span class="sec-num">10</span><h2>Fix it</h2></div>
+          <p class="sec-intro">The guided fixers at the top of the page ask you questions and narrow down — these are the same fixes flat on the page, causes most-likely first.</p>
+
+          <div class="cards">
+
+            <div class="card fault">
+              <p class="symptom">No sound at all</p>
+              <p class="odds">Nine times out of ten it's one of the first three.</p>
+              <ol class="steps">
+                <li><p><strong>Are the headphones in the Scarlett?</strong> Not the Mac. And is the MONITOR knob turned up?</p></li>
+                <li><p><strong>Is FL pointed at the Scarlett?</strong> <span class="path">Options → Audio Settings → Device → Scarlett Solo USB</span>.</p></li>
+                <li><p><strong>Is the Mac's output set to the Scarlett?</strong> <span class="path">System Settings → Sound → Output</span>.</p></li>
+                <li><p><strong>Is the master volume up in FL?</strong> Top-right of the toolbar, and the master track in the Mixer.</p></li>
+                <li><p><strong>Is anything muted or soloed?</strong> A soloed channel silences everything else and it's easy to leave on by accident.</p></li>
+                <li><p><strong>Restart FL Studio.</strong> If the Scarlett was plugged in after FL opened, it may not have been found.</p></li>
+              </ol>
+            </div>
+
+            <div class="card fault">
+              <p class="symptom">The keyboard does nothing</p>
+              <p class="odds">Almost always number 1 or number 2.</p>
+              <ol class="steps">
+                <li><p><strong>Have you enabled it?</strong> <span class="path">Options → MIDI Settings</span>, click the keyboard in the <em>Input</em> list, click <strong>Enable</strong>. It sits there listed but silent until you do — which looks identical to being broken.</p></li>
+                <li><p><strong>Did you plug it in after opening FL Studio?</strong> FL only looks for keyboards at startup. Close and reopen FL, or use the rescan option in MIDI Settings.</p></li>
+                <li><p><strong>Does the Port column show a dash?</strong> Set it to <code>0</code>.</p></li>
+                <li><p><strong>Set the controller type to <em>Generic Controller</em></strong> if it isn't already.</p></li>
+                <li><p><strong>Have you selected a channel?</strong> The keyboard plays the currently selected channel. None selected, no sound.</p></li>
+                <li><p><strong>Try a different cable.</strong> Charge-only USB cables are extremely common and produce exactly this symptom.</p></li>
+                <li><p><strong>Check the Mac sees it at all.</strong> <span class="path">Applications → Utilities → Audio MIDI Setup</span> → <span class="path">Window → Show MIDI Studio</span>. If the keyboard isn't there either, it's the cable or port, not FL Studio.</p></li>
+              </ol>
+            </div>
+
+            <div class="card fault">
+              <p class="symptom">The microphone records silence</p>
+              <p class="odds">On a Mac, this is nearly always permissions.</p>
+              <ol class="steps">
+                <li><p><strong>Grant microphone permission.</strong> <span class="path">System Settings → Privacy &amp; Security → Microphone</span> → FL Studio on → <strong>then quit and reopen FL Studio</strong>. Skipping the restart is why people think this didn't work.</p></li>
+                <li><p><strong>Not in that list at all?</strong> Launch FL once in Rosetta mode so macOS prompts — see <a href="#setup" style="color:var(--accent-deep)">First-time setup</a>.</p></li>
+                <li><p><strong>Is 48V on?</strong> Your RØDE is a condenser — without 48V it's almost completely silent.</p></li>
+                <li><p><strong>Is the gain up?</strong> The ring around Gain 1 should light green when you sing.</p></li>
+                <li><p><strong>Is the mixer track's input set?</strong> It must point at Solo Input 1.</p></li>
+                <li><p><strong>Is the track armed?</strong> The record dot at the bottom of the mixer track.</p></li>
+                <li><p><strong>Do you have Fruity Edition?</strong> It cannot record audio at all. <span class="path">Help → About</span> to check.</p></li>
+              </ol>
+            </div>
+
+            <div class="card fault">
+              <p class="symptom">Crackling, popping or stuttering</p>
+              <p class="odds">The computer can't keep up. Give it more time or less work.</p>
+              <ol class="steps">
+                <li><p><strong>Raise the buffer length.</strong> <span class="path">Options → Audio Settings</span> → try 512, then 1024. Fixes it most of the time.</p></li>
+                <li><p><strong>Close everything else.</strong> Browsers with many tabs are the usual culprit.</p></li>
+                <li><p><strong>Plug the Mac into power.</strong> On battery, macOS throttles the processor and audio suffers first.</p></li>
+                <li><p><strong>Is the Scarlett on a hub?</strong> Plug it straight into the Mac.</p></li>
+                <li><p><strong>Freeze or bounce finished parts</strong> so their plugins stop using processor.</p></li>
+              </ol>
+            </div>
+
+            <div class="card fault">
+              <p class="symptom">A delay between pressing a key and hearing it</p>
+              <p class="odds">This is latency, and it's a setting, not a fault.</p>
+              <ol class="steps">
+                <li><p><strong>Lower the buffer length</strong> to 128 or 256. Under about 10 ms feels instant.</p></li>
+                <li><p><strong>Turn off heavy effects while recording</strong>, especially reverb and anything on the master. Put them back afterwards.</p></li>
+                <li><p><strong>For singing, use DIRECT MONITOR</strong> on the Scarlett instead. That path skips the computer completely, so there is no delay to fix.</p></li>
+              </ol>
+            </div>
+
+            <div class="card fault">
+              <p class="symptom">Your voice sounds doubled or echoey while singing</p>
+              <p class="odds">One cause, one fix.</p>
+              <ol class="steps">
+                <li><p><strong>You're monitoring twice.</strong> DIRECT MONITOR on the Scarlett and input monitoring in FL are both feeding you the same voice, a few milliseconds apart.</p></li>
+                <li><p><strong>Turn input monitoring off in FL</strong> for that track, keep DIRECT MONITOR on. Full explanation in <a href="#voice" style="color:var(--accent-deep)">Recording your voice</a>.</p></li>
+              </ol>
+            </div>
+
+            <div class="card fault">
+              <p class="symptom">The recording is distorted or crunchy</p>
+              <p class="odds">Too loud somewhere. Find where.</p>
+              <ol class="steps">
+                <li><p><strong>Turn Gain 1 down.</strong> If the ring goes red while you sing, that's clipping and it's permanent — no plugin removes it.</p></li>
+                <li><p><strong>Is INST on for the piano?</strong> It should be off — it's a guitar boost and distorts line-level signals.</p></li>
+                <li><p><strong>Aim for green, never red.</strong> Quieter is always recoverable; distorted never is.</p></li>
+              </ol>
+            </div>
+
+            <div class="card fault">
+              <p class="symptom">A downloaded loop doesn't fit the song</p>
+              <p class="odds">It never will, and that's not your fault.</p>
+              <ol class="steps">
+                <li><p><strong>It was made at a different tempo in a different key.</strong> FL can stretch and pitch it, but it degrades and still won't sit properly.</p></li>
+                <li><p><strong>Look for MIDI, or single hits, rather than audio loops.</strong> Both adapt to your song automatically.</p></li>
+                <li><p><strong>Better still, build the part yourself</strong> — <a href="#beats" style="color:var(--accent-deep)">Making beats</a> and <a href="#song" style="color:var(--accent-deep)">Building a song</a> are exactly this.</p></li>
+              </ol>
+            </div>
+
+          </div>
+
+          <div class="fallback">
+            <h3>Not in here?</h3>
+            <p>Search the web with your question already narrowed to your exact setup.</p>
+            <div class="btns">
+              <a class="btn primary" id="googleBtn" href="https://www.google.com/search?q=FL+Studio+Mac+Focusrite+Scarlett+Solo" target="_blank" rel="noopener">Search the web</a>
+              <a class="btn" href="https://support.image-line.com/" target="_blank" rel="noopener">FL Studio support</a>
+              <a class="btn" href="https://support.focusrite.com/" target="_blank" rel="noopener">Focusrite support</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================ 10 WORDS -->
+        <section id="words">
+          <div class="sec-head"><span class="sec-num">11</span><h2>Words explained</h2></div>
+          <p class="sec-intro">Every term you'll run into, in plain English.</p>
+
+          <div class="cards">
+            <div class="card">
+              <dl class="gloss">
+                <div class="gterm"><dt>808</dt><dd>A long, booming bass note — named after the Roland TR-808 drum machine that invented the sound. In trap and R&amp;B the 808 is both the bass line and part of the drums.</dd></div>
+                <div class="gterm"><dt>AIR</dt><dd>The Solo's built-in brightness lift for vocals — a gentle boost to the sparkle frequencies, done in the hardware before recording.</dd></div>
+                <div class="gterm"><dt>Audio interface</dt><dd>The box between your instruments and computer — your Scarlett Solo. Converts real sound into computer data and back.</dd></div>
+                <div class="gterm"><dt>Bar</dt><dd>Four beats. Music is counted in bars, and songs are built in blocks of 4, 8 and 16 of them.</dd></div>
+                <div class="gterm"><dt>BPM</dt><dd>Beats per minute — the tempo. A ballad is around 70, most pop sits between 100 and 130.</dd></div>
+                <div class="gterm"><dt>Buffer</dt><dd>How big a chunk of sound your Mac processes at once. Small = less delay, more strain; large = more delay, smoother playback.</dd></div>
+                <div class="gterm"><dt>Channel Rack</dt><dd>FL Studio's list of the instruments in your project, each with its row of step-sequencer squares. Your keyboard plays whichever one is selected.</dd></div>
+                <div class="gterm"><dt>Clipping</dt><dd>Recording something so loud it distorts. Permanent — nothing repairs it. The red gain ring is the warning.</dd></div>
+                <div class="gterm"><dt>Condenser / dynamic mic</dt><dd>Two kinds of microphone. A condenser (your RØDE) is sensitive and detailed and needs 48V power. A dynamic is tougher, needs no power, and forgives a noisy room.</dd></div>
+                <div class="gterm"><dt>Core Audio</dt><dd>The Mac's built-in audio system — why your Scarlett works with no drivers. The Windows equivalent, ASIO, doesn't exist on a Mac and you don't need it.</dd></div>
+                <div class="gterm"><dt>DAW</dt><dd>Digital Audio Workstation — the software you make music in. FL Studio is one; so are Logic and Ableton.</dd></div>
+                <div class="gterm"><dt>Direct Monitor</dt><dd>The Scarlett button that sends your voice straight to your headphones without the computer round-trip, so there's no delay while you sing.</dd></div>
+                <div class="gterm"><dt>Gain</dt><dd>How much the Scarlett amplifies your microphone. Too low is noisy, too high distorts. Green ring good, red ring too late.</dd></div>
+                <div class="gterm"><dt>Ghost note</dt><dd>A very quiet drum hit between the main ones — barely heard, strongly felt. The cheapest way to make a beat groove.</dd></div>
+                <div class="gterm"><dt>Half-time</dt><dd>A drum feel where the snare lands half as often, making the same tempo feel slow and heavy. Trap is built on it.</dd></div>
+                <div class="gterm"><dt>Headroom</dt><dd>The gap between your loudest moment and the point of distortion. Leaving some is what stops a great take being ruined.</dd></div>
+                <div class="gterm"><dt>Key</dt><dd>The home note of a song and the family of chords built around it. Choose it to suit your voice.</dd></div>
+                <div class="gterm"><dt>Compression</dt><dd>Automatically turning down the loud moments so the whole performance sits at an even level. The reason record vocals never disappear behind the band.</dd></div>
+                <div class="gterm"><dt>Delay</dt><dd>Distinct echoes of the voice, usually timed to the song’s tempo. An effect you hear, where reverb is a space you feel.</dd></div>
+                <div class="gterm"><dt>Latency</dt><dd>The delay between doing something and hearing it. Set by the buffer. Under 10 ms feels instant; over 20 ms feels wrong.</dd></div>
+                <div class="gterm"><dt>Limiter</dt><dd>An effect that stops sound going past a ceiling, letting you raise the overall loudness safely. The last thing on the Master when mastering — Fruity Limiter in FL.</dd></div>
+                <div class="gterm"><dt>Mastering</dt><dd>The final polish on the finished song — gentle EQ and limiting on the Master strip so it's loud and even enough to sit beside other records. Minutes, not hours, at this level.</dd></div>
+                <div class="gterm"><dt>MIDI</dt><dd>Note instructions, not sound. Endlessly editable — change the notes, tempo, key or instrument afterwards without re-recording.</dd></div>
+                <div class="gterm"><dt>Mixer</dt><dd>Where every sound's volume, effects and routing live. Audio recording happens here too.</dd></div>
+                <div class="gterm"><dt>One-shot</dt><dd>A single recorded hit — one kick, one snare — that you sequence yourself. The opposite of a loop, and the right thing to download.</dd></div>
+                <div class="gterm"><dt>Pattern</dt><dd>A short musical block in FL — a drum beat, a chord loop. You arrange copies of these in the Playlist to make the song.</dd></div>
+                <div class="gterm"><dt>Phantom power / 48V</dt><dd>Power the Scarlett sends up the mic cable to a condenser microphone. Essential for your RØDE.</dd></div>
+                <div class="gterm"><dt>Piano roll</dt><dd>The grid where MIDI notes appear as blocks you can drag, lengthen and delete. Where you fix wrong notes and paint hat rolls.</dd></div>
+                <div class="gterm"><dt>Playlist</dt><dd>FL's timeline, where patterns and audio are arranged into the finished song.</dd></div>
+                <div class="gterm"><dt>Plugin</dt><dd>Software that makes or changes sound. FLEX and FPC are instruments; reverb and compressors are effects.</dd></div>
+                <div class="gterm"><dt>Preset / patch</dt><dd>A specific saved sound inside a plugin — "Grand Piano", "Warm Pad".</dd></div>
+                <div class="gterm"><dt>Reverb</dt><dd>The sound of a space — room, plate or hall — around the voice. The WET knob sets how much; vocals usually want 15–25%.</dd></div>
+                <div class="gterm"><dt>Pitch correction</dt><dd>Nudging sung notes onto exact pitch — invisibly (slow, NewTone/Pitcher) or as the hard quantised pop effect (fast Pitcher).</dd></div>
+                <div class="gterm"><dt>Sample rate</dt><dd>How many times per second the sound is measured. 44100 or 48000. Pick one, don't change it mid-project.</dd></div>
+                <div class="gterm"><dt>Step sequencer</dt><dd>The rows of 16 squares in the Channel Rack. Click a square, the drum plays there. How most beats get made.</dd></div>
+                <div class="gterm"><dt>Swing</dt><dd>Pushing the off-beats slightly late so a rigid beat grooves. A knob at the top of the Channel Rack.</dd></div>
+                <div class="gterm"><dt>Take</dt><dd>One recorded attempt. Record several; choose later.</dd></div>
+                <div class="gterm"><dt>Velocity</dt><dd>How hard a note was played. Varying it is what stops programmed parts sounding robotic.</dd></div>
+                <div class="gterm"><dt>XLR</dt><dd>The three-pin cable microphones use. Locks into place with a click.</dd></div>
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================ 11 CHEAT -->
+        <section id="cheat">
+          <div class="sec-head"><span class="sec-num">12</span><h2>Cheat sheet</h2></div>
+          <p class="sec-intro">The settings and shortcuts worth having in one place.</p>
+
+          <div class="cards">
+
+            <div class="card">
+              <h3>Settings, at a glance</h3>
+              <div class="tw">
+                <table>
+                  <thead><tr><th>Setting</th><th>Where</th><th>Value</th></tr></thead>
+                  <tbody>
+                    <tr><td>Audio device</td><td class="num">Options → Audio Settings</td><td>Scarlett Solo USB</td></tr>
+                    <tr><td>Buffer — recording</td><td class="num">Options → Audio Settings</td><td class="num">128 – 256</td></tr>
+                    <tr><td>Buffer — mixing</td><td class="num">Options → Audio Settings</td><td class="num">512 – 2048</td></tr>
+                    <tr><td>Sample rate</td><td class="num">Options → Audio Settings</td><td class="num">44100 or 48000</td></tr>
+                    <tr><td>Keyboard</td><td class="num">Options → MIDI Settings</td><td>Select input → Enable</td></tr>
+                    <tr><td>Controller type</td><td class="num">Options → MIDI Settings</td><td>Generic Controller</td></tr>
+                    <tr><td>Port (if blank)</td><td class="num">Options → MIDI Settings</td><td class="num">0</td></tr>
+                    <tr><td>Mic permission</td><td class="num">System Settings → Privacy &amp; Security</td><td>FL Studio on, then restart FL</td></tr>
+                    <tr><td>Mac output</td><td class="num">System Settings → Sound</td><td>Scarlett Solo USB</td></tr>
+                    <tr><td>48V</td><td>Scarlett front panel</td><td>On (your mic is a condenser)</td></tr>
+                    <tr><td>AIR</td><td>Scarlett front panel</td><td>To taste on vocals</td></tr>
+                    <tr><td>INST</td><td>Scarlett front panel</td><td>Off (piano is line-level)</td></tr>
+                    <tr><td>Gain rings</td><td>Scarlett front panel</td><td>Green = good, red = ruined take</td></tr>
+                    <tr><td>DIRECT MONITOR</td><td>Scarlett front panel</td><td>On while recording vocals; FL input monitoring off</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Keyboard shortcuts worth learning</h3>
+              <div class="tw">
+                <table>
+                  <thead><tr><th>Keys</th><th>Does</th></tr></thead>
+                  <tbody>
+                    <tr><td class="num">⌘S</td><td><strong>Save the project (.flp).</strong> After every part you like — a lost hour of work is the #1 beginner quit-trigger</td></tr>
+                    <tr><td class="num">⌘R</td><td><strong>Export the song</strong> (File → Export → WAV) — the real, playable song file. MP3 in the same window for sending to people</td></tr>
+                    <tr><td class="num">Space</td><td>Play / stop</td></tr>
+                    <tr><td class="num">R</td><td>Arm recording</td></tr>
+                    <tr><td class="num">L</td><td>Switch between Pattern mode and Song mode</td></tr>
+                    <tr><td class="num">F5</td><td>Show the Playlist</td></tr>
+                    <tr><td class="num">F6</td><td>Show the Channel Rack</td></tr>
+                    <tr><td class="num">F7</td><td>Show the Piano roll</td></tr>
+                    <tr><td class="num">F9</td><td>Show the Mixer</td></tr>
+                    <tr><td class="num">Cmd + Z</td><td>Undo</td></tr>
+                    <tr><td class="num">Cmd + S</td><td>Save — do this constantly</td></tr>
+                    <tr><td class="num">Cmd + click a knob</td><td>Reset it to its default</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Habits that save whole afternoons</h3>
+              <ul>
+                <li><strong>Save with a new version number each session</strong> — <code>song v1</code>, <code>song v2</code>. When you break something at midnight, yesterday's version is still there.</li>
+                <li><strong>Name every pattern and mixer track as you create it.</strong> Two seconds each, and it's the difference between a project you can come back to and one you can't.</li>
+                <li><strong>Set tempo and key before you record anything.</strong> Changing them later is possible for MIDI and painful for audio.</li>
+                <li><strong>Keep one project as your template</strong> — audio settings, drum channels, a piano channel, mixer tracks already named. Start every song from it.</li>
+                <li><strong>Take your headphones off every half hour.</strong> Ears stop hearing accurately long before they feel tired, and mixes made on tired ears are always too bright.</li>
+                <li><strong>Finish things.</strong> A finished song you don't love teaches you more than a perfect eight bars you never get past.</li>
+              </ul>
+            </div>
+
+          </div>
+        </section>
+
+        <div class="noresults" id="noresults">
+          <div class="card">
+            <h3>Nothing here matches that</h3>
+            <p>Try a simpler word — <em>buffer</em>, <em>48V</em>, <em>trap</em>, <em>key</em>, <em>latency</em> — or search the web with your setup already built into the question.</p>
+            <div class="btns" style="justify-content:flex-start">
+              <a class="btn primary" id="googleBtn2" href="https://www.google.com/search?q=FL+Studio+Mac+Focusrite+Scarlett+Solo" target="_blank" rel="noopener">Search the web for this</a>
+            </div>
+          </div>
+        </div>
+
+        <footer>
+          <p><strong>Studio Sidekick</strong> — written for a Mac running FL Studio 2026 with a Focusrite Scarlett Solo 3rd gen, a RØDE condenser microphone and a USB MIDI keyboard.</p>
+          <p>Settings, menu paths and Mac permission steps checked against Image-Line's and Focusrite's own documentation, August 2026. Menu names occasionally move between FL Studio versions — if a path here doesn't match what's on screen, the setting will be close by under the same menu.</p>
+        </footer>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================== WIZARD OVERLAY -->
+<div class="wiz-overlay" id="wiz" hidden role="dialog" aria-modal="true" aria-label="Guided help">
+  <div class="wiz-top">
+    <button class="wiz-back" id="wizBack">← Back</button>
+    <span class="wiz-flowname" id="wizFlow"></span>
+    <button class="wiz-close" id="wizClose">Close ✕</button>
+  </div>
+  <div class="wiz-body" id="wizBody"></div>
+</div>
