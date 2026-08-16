@@ -219,6 +219,54 @@
   .flowcard .fc-title { font-family: var(--display); font-weight: 700; font-size: var(--fs-md); line-height: 1.25; }
   .flowcard .fc-sub { font-size: var(--fs-xs); color: var(--ink-soft); line-height: 1.45; }
   .flowcard.fix .fc-kicker { color: var(--stop); }
+  .flowcard { position: relative; }
+  .flowcard .fc-done {
+    position: absolute; top: 12px; right: 14px;
+    font-size: 11px; font-weight: 800; letter-spacing: .04em;
+    color: var(--good); background: color-mix(in srgb, var(--good) 12%, var(--surface));
+    border: 1px solid color-mix(in srgb, var(--good) 45%, var(--line));
+    border-radius: 999px; padding: 3px 9px;
+  }
+  .flowcard.done-flow { border-color: color-mix(in srgb, var(--good) 40%, var(--line)); }
+
+  /* ---- the first-song roadmap ---- */
+  .roadmap {
+    background: var(--accent-wash);
+    border: 1.5px solid var(--accent);
+    border-radius: 15px;
+    padding: 20px 22px;
+    margin-bottom: 18px;
+    box-shadow: var(--shadow-card);
+  }
+  .roadmap .rm-kicker {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .09em;
+    font-weight: 800; color: var(--accent-deep);
+  }
+  .roadmap h2 {
+    font-family: var(--display); font-size: var(--fs-lg); font-weight: 700;
+    margin: 4px 0 2px; letter-spacing: -0.01em;
+  }
+  #hubprog { margin: 0 0 10px; font-size: var(--fs-xs); font-weight: 700; color: var(--good); min-height: 1em; }
+  .rm-steps { display: flex; flex-wrap: wrap; gap: 10px; }
+  .rm-step {
+    flex: 1 1 170px; display: flex; align-items: flex-start; gap: 10px;
+    background: var(--surface); border: 1px solid var(--line-strong); border-radius: 11px;
+    padding: 12px 14px; text-align: left; cursor: pointer;
+    font-family: var(--body); color: var(--ink);
+    transition: border-color .12s ease, transform .12s ease;
+  }
+  .rm-step:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .rm-step.last { cursor: default; }
+  .rm-step.last:hover { border-color: var(--line-strong); transform: none; }
+  .rm-step b {
+    flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%;
+    background: var(--accent); color: #fff; font-size: 13px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center; margin-top: 1px;
+  }
+  .rm-step.last b { background: var(--ink-faint); }
+  .rm-step span { display: block; font-size: var(--fs-xs); font-weight: 700; line-height: 1.35; }
+  .rm-step span i { display: block; font-style: normal; font-weight: 500; color: var(--ink-soft); margin-top: 2px; }
+  .wiz-aced { color: var(--good); font-weight: 700; font-size: var(--fs-xs); margin: 6px 0 0; }
 
   /* ============================================================ SECTIONS */
 
@@ -672,6 +720,18 @@
 
         <!-- ============================================ HUB -->
         <section id="help" class="hub">
+          <div class="roadmap">
+            <span class="rm-kicker">New here? This is the whole journey</span>
+            <h2>Your first song, step by step</h2>
+            <p id="hubprog"></p>
+            <div class="rm-steps">
+              <button class="rm-step" data-flow="setup"><b>1</b><span>Set everything up<i>one time, about 15 minutes</i></span></button>
+              <button class="rm-step" data-flow="record"><b>2</b><span>Record a rough vocal<i>phone-memo rough is fine</i></span></button>
+              <button class="rm-step" data-flow="song"><b>3</b><span>Build the song under it<i>Beginner level — drums, piano, arrange</i></span></button>
+              <button class="rm-step" data-flow="voicefx"><b>4</b><span>Shape your voice<i>the polish chain</i></span></button>
+              <span class="rm-step last"><b>5</b><span>Balance, save, export<i>built into the end of step 3 — you leave with a real song file</i></span></span>
+            </div>
+          </div>
           <div class="hub-grid" id="hubgrid">
             <button class="flowcard" data-flow="setup">
               <span class="fc-kicker">Guided walk</span>
@@ -751,22 +811,26 @@
             </div>
 
             <div class="card">
-              <h3>The one thing to check before you plan anything</h3>
-              <p><strong>Which edition of FL Studio do you have?</strong> Find it under <span class="path">Help → About</span>.</p>
+              <h3>Your FL Studio is Producer Edition — here's what that means</h3>
+              <p>Your copy (check any time under <span class="path">Help → About</span>) records audio fully — everything in this app works on it. The editions, for context:</p>
               <div class="tw">
                 <table>
                   <thead><tr><th>Edition</th><th>Can it record your voice?</th></tr></thead>
                   <tbody>
                     <tr><td><strong>Fruity</strong></td><td>No — it cannot record audio at all</td></tr>
-                    <tr><td><strong>Producer</strong></td><td>Yes</td></tr>
-                    <tr><td><strong>Signature</strong></td><td>Yes, plus vocal tools (Pitcher, Newtone, Gross Beat)</td></tr>
+                    <tr><td><strong>Producer</strong> ← you are here</td><td><strong>Yes</strong> — full recording, mixing, and every effect this app uses</td></tr>
+                    <tr><td><strong>Signature</strong></td><td>Yes, plus FL's own tuning tools (Pitcher, NewTone)</td></tr>
                     <tr><td><strong>All Plugins</strong></td><td>Yes, plus everything else</td></tr>
                   </tbody>
                 </table>
               </div>
-              <div class="note watch">
-                <b>If you have Fruity Edition</b>
-                No amount of troubleshooting will make it record your voice — the feature simply isn't in it. You need Producer or above. Upgrades are priced as the difference, so nothing you've already paid is wasted.
+              <div class="note tip">
+                <b>The only gap, and its free fix</b>
+                Tuned-pop vocal effects (Pitcher/NewTone) are Signature-only — but free plugins cover it on Producer. The routes are in <a href="#voicefx" style="color:var(--accent-deep)">Shaping your voice</a> under Pitch.
+              </div>
+              <div class="note tip">
+                <b>What this app deliberately doesn't teach</b>
+                The words and melodies. You already sing and write — that part is yours. Everything here is the production side: getting your voice recorded beautifully and building the music underneath it.
               </div>
             </div>
 
@@ -1778,6 +1842,8 @@
                 <table>
                   <thead><tr><th>Keys</th><th>Does</th></tr></thead>
                   <tbody>
+                    <tr><td class="num">⌘S</td><td><strong>Save the project (.flp).</strong> After every part you like — a lost hour of work is the #1 beginner quit-trigger</td></tr>
+                    <tr><td class="num">⌘R</td><td><strong>Export the song</strong> (File → Export → WAV) — the real, playable song file. MP3 in the same window for sending to people</td></tr>
                     <tr><td class="num">Space</td><td>Play / stop</td></tr>
                     <tr><td class="num">R</td><td>Arm recording</td></tr>
                     <tr><td class="num">L</td><td>Switch between Pattern mode and Song mode</td></tr>
@@ -4050,7 +4116,7 @@
   });
   N("suDone", {
     done: true, q: "That's the whole rig working.",
-    d: "<p>Everything from here is music, not setup. Two good next moves:</p><p>• <strong>Make me a beat</strong> — build your first drum pattern in about five minutes<br>• <strong>Start a song</strong> — find your key and tempo from your voice, then build outwards</p>",
+    d: "<p>Everything from here is music, not setup. Two good next moves:</p><p>• <strong>Make me a beat</strong> — build your first drum pattern in about five minutes<br>• <strong>Start a song</strong> — find your key and tempo from your voice, then build outwards</p><p>One habit to install before you make anything: <kbd>Cmd+S</kbd> saves the project. Press it after every part you like — a crash that eats an hour of work is the #1 reason beginners quit, and it's entirely preventable.</p>",
     goFlows: ["beat", "song"]
   });
 
@@ -4407,7 +4473,8 @@
   });
   N("rDone", {
     done: true, q: "Vocal down.",
-    d: "<p>Small habits that raise every future take: record the loud chorus first, stand a fixed hand's width away, and sing near a curtain or wardrobe rather than the middle of a bare room.</p>"
+    d: "<p>Small habits that raise every future take: record the loud chorus first, stand a fixed hand's width away, and sing near a curtain or wardrobe rather than the middle of a bare room.</p><p>Press <kbd>Cmd+S</kbd> right now — a take this good deserves saving. Then the two natural next moves are below: make the voice sound like a record, or build the song underneath it.</p>",
+    goFlows: ["voicefx", "song"]
   });
 
   /* ============================================================
@@ -4502,13 +4569,13 @@
   /* ---------------- BEGINNER ---------------- */
 
   N("b_1", {
-    step: "Beginner · step 1 of 6", q: "Tempo and key first — from your voice",
+    step: "Beginner · step 1 of 8", q: "Tempo and key first — from your voice",
     v: function () { return SVGX.flToolbar("bpm"); },
     d: "<p>Before any instrument: sing the chorus and tap along on your leg — that tap speed is your BPM. Set it at the top of FL: roughly <strong>70</strong> ballad, <strong>90–110</strong> mid-tempo, <strong>115–128</strong> upbeat.</p><p>Then the key: find the chorus's <strong>highest note</strong> and make sure it's comfortable — not just reachable — even on a fourth take. Too much strain? Shift everything down a step. The chord table for your key is in <a href='#keys'>Keys &amp; chords</a>.</p>",
     opts: [{ t: "Tempo set, key chosen — next", cls: "primary", next: "b_2" }]
   });
   N("b_2", {
-    step: "Beginner · step 2 of 6", q: "The drum beat",
+    step: "Beginner · step 2 of 8", q: "The drum beat",
     v: function () {
       var chans = PATTERNS.basicpop.rows.map(function (r) { return { name: r.label, led: false, steps: r.steps }; });
       chans.push({ name: "FLEX — Grand Piano", led: false, steps: [] });
@@ -4521,7 +4588,7 @@
     ]
   });
   N("b_3", {
-    step: "Beginner · step 3 of 6", q: "Piano chords over the beat",
+    step: "Beginner · step 3 of 8", q: "Piano chords over the beat",
     v: function () { return SVGX.flPianoRoll(null); },
     d: "<p>Four chords, one bar each, is a complete verse. The picture below is exactly what that looks like in FL's Piano roll — one bar each of C, Am, F, G. Stuck for chords? <strong>I–V–vi–IV</strong> in your key (<a href='#keys'>the table</a>) has powered a thousand hits.</p>" +
       act([
@@ -4537,13 +4604,13 @@
     ]
   });
   N("b_4", {
-    step: "Beginner · step 4 of 6", q: "Bass: the lowest note of each chord",
+    step: "Beginner · step 4 of 8", q: "Bass: the lowest note of each chord",
     v: function () { return SVGX.interlock(); },
     d: "<p>New FLEX channel, pick a bass, play <strong>just the root of each chord</strong>, low. C chord → C bass. That's genuinely the whole job, and it's the single biggest step toward sounding like a record.</p><p>Land the bass notes with the kick drum and the low end locks together.</p>",
     opts: [{ t: "Bass in — next", cls: "primary", next: "b_5" }]
   });
   N("b_5", {
-    step: "Beginner · step 5 of 6", q: "Arrange it in the Playlist",
+    step: "Beginner · step 5 of 8", q: "Arrange it in the Playlist",
     v: function () { return SVGX.flPlaylist() + '<div style="margin-top:14px">' + SVGX.songArc() + "</div>"; },
     d: "<p>The Playlist is the song's timeline — you paint copies of your patterns onto it, like the picture below.</p>" +
       act([
@@ -4557,9 +4624,35 @@
     opts: [{ t: "Arranged — next", cls: "primary", next: "b_6" }]
   });
   N("b_6", {
-    step: "Beginner · step 6 of 6", q: "Sing over it — roughly, on purpose",
+    step: "Beginner · step 6 of 8", q: "Sing over it — roughly, on purpose",
     d: "<p>Loop the arrangement and sing the song over it, phone-memo rough. You're checking three things: the <strong>key</strong> still suits your voice with instruments underneath, the <strong>tempo</strong> feels right at full length, and the sections are the right lengths for the words.</p><p>Fix any of those <em>now</em> — they're one-click changes while everything is MIDI. Then it's quiz time.</p>",
-    opts: [{ t: "Checked — quick quiz", cls: "primary", next: "bq1" }]
+    opts: [{ t: "Checked — next", cls: "primary", next: "bMix" }]
+  });
+  N("bMix", {
+    step: "Beginner · step 7 of 8", q: "Balance it: the voice sits ON TOP",
+    v: function () { return SVGX.flMixer("vocal"); },
+    d: "<p>The difference between \"a beginner track\" and \"sounds like a record\" is almost never the sounds — it's the balance. One pass, ears only:</p>" +
+      act([
+        "Loop the <strong>fullest chorus</strong> and press <kbd>F9</kbd> for the Mixer",
+        "Push the <strong>vocal track's fader</strong> up until the voice clearly rides on top of everything",
+        "If the beat fights it, pull the <strong>drum and instrument faders down</strong> — don't push the vocal into the red",
+        "Watch the <strong>Master meter</strong>: if it touches red, drag ALL faders down together and balance again — red on the master distorts the export",
+        "Sanity-check on two systems: your headphones AND your phone's speaker. If the voice survives the phone speaker, the balance is right"
+      ]),
+    opts: [{ t: "The voice is on top — next", cls: "primary", next: "bExp" }]
+  });
+  N("bExp", {
+    step: "Beginner · step 8 of 8", q: "Save it — then turn it into a real song file",
+    d: "<p>Two different things, both essential. <strong>Saving</strong> keeps the project so you can keep working on it. <strong>Exporting</strong> makes the actual song file you can play anywhere and send to anyone.</p>" +
+      act([
+        "<kbd>Cmd+S</kbd> — save the project (a <strong>.flp</strong> file). Name it properly: <em>SongName v1</em>. From today onward: Cmd+S after every part you like",
+        "<span class='path'>File → Export → WAV file…</span> (or <kbd>Cmd+R</kbd>)",
+        "Name it, click <strong>Start</strong>, leave the settings at their defaults",
+        "Find the WAV in Finder and <strong>AirDrop it to your phone</strong>",
+        "Now go listen to it where you normally listen to music. That's YOUR song in the queue"
+      ]) +
+      "<p>WAV is full quality; choose MP3 in the same export window when you want a smaller file to message to someone.</p>",
+    opts: [{ t: "Exported — quick quiz", cls: "primary", next: "bq1" }]
   });
   N("bq1", {
     step: "Beginner · check 1 of 3", q: "What gets set before anything is recorded?",
@@ -4600,45 +4693,61 @@
   /* ---------------- INTERMEDIATE ---------------- */
 
   N("i_1", {
-    step: "Intermediate · step 1 of 7", q: "Guitar, three ways — from your keyboard",
+    step: "Intermediate · step 1 of 9", q: "Guitar, three ways — from your keyboard",
     v: function () { return patternGridHTML("gtr_chop", false) + patternGridHTML("gtr_drive", false) + patternGridHTML("gtr_arp", false); },
     d: "<p>Add a FLEX channel and search its guitars (acoustic, clean electric, muted). You don't strum a keyboard — you play guitar <em>rhythms</em>. The three that cover almost everything:</p><p><strong>Off-beat chops</strong> for bounce, <strong>driving eighths</strong> for energy, <strong>picked arpeggio</strong> for delicate verses. Draw them in the Piano roll on your chord notes, or play them live.</p>",
     opts: [{ t: "Guitar in — next", cls: "primary", next: "i_2" }]
   });
   N("i_2", {
-    step: "Intermediate · step 2 of 7", q: "Colour layers — one new sound per section",
+    step: "Intermediate · step 2 of 9", q: "Colour layers — one new sound per section",
     v: function () { return SVGX.vocalSpace(); },
     d: "<p>Now the supporting cast, added sparingly:</p><ul><li><strong>Pad or strings</strong> — long held chords, quiet, chorus only. Felt more than heard.</li><li><strong>Shaker or tambourine</strong> — 8th notes through the chorus adds motion for free.</li><li><strong>A second hat or perc</strong> — pan it slightly left or right for width.</li></ul><p>The discipline: <strong>each section introduces at most one new sound</strong>, and the middle of the picture stays clear for your voice.</p>",
     opts: [{ t: "Layered — next", cls: "primary", next: "i_3" }]
   });
   N("i_3", {
-    step: "Intermediate · step 3 of 7", q: "The verse beat and the chorus beat must differ",
+    step: "Intermediate · step 3 of 9", q: "The verse beat and the chorus beat must differ",
     d: "<p>One drum pattern all the way through is the #1 tell of a beginner track. The fix costs two minutes:</p><ul><li>Right-click your pattern → <strong>Clone</strong></li><li>In the clone, <strong>delete</strong> — drop the hats entirely, or keep just kick and a shaker. That's the <strong>verse</strong> beat.</li><li>The full pattern is the <strong>chorus</strong> beat. Swap them in the Playlist.</li></ul><p>Verses breathe, choruses hit. Same tempo, totally different energy.</p>",
     opts: [{ t: "Two beats — next", cls: "primary", next: "i_4" }]
   });
   N("i_4", {
-    step: "Intermediate · step 4 of 7", q: "Fills and crashes — the punctuation",
+    step: "Intermediate · step 4 of 9", q: "Fills and crashes — the punctuation",
     v: function () { return patternGridHTML("fill_bar", false); },
     d: "<p>Clone your verse beat once more and make the <strong>fill bar</strong> — it replaces the last bar before each chorus. The snare run says \"here it comes\", the crash on the next downbeat says \"it's here\".</p><p>Put a crash on step 1 of every chorus. It's the cheapest drama in music.</p>",
     opts: [{ t: "Fills placed — next", cls: "primary", next: "i_5" }]
   });
   N("i_5", {
-    step: "Intermediate · step 5 of 7", q: "The pre-chorus build",
+    step: "Intermediate · step 5 of 9", q: "The pre-chorus build",
     v: function () { return SVGX.sweepCurve(); },
     d: "<p>The last 4–8 bars before a chorus should climb. Pick two:</p><ul><li>Hats go from 8ths to <strong>16ths</strong> in the last 2 bars</li><li>An <strong>open hat</strong> or riser sound swells in</li><li>Bass starts pumping 8th notes instead of holding</li><li>And the killer: a <strong>drop-out bar</strong> — everything stops for one bar, then the chorus slams in with the crash</li></ul>",
     opts: [{ t: "It builds — next", cls: "primary", next: "i_6" }]
   });
   N("i_6", {
-    step: "Intermediate · step 6 of 7", q: "Humanise the whole thing",
+    step: "Intermediate · step 6 of 9", q: "Humanise the whole thing",
     v: function () { return SVGX.hatRoll(); },
     d: "<ul><li><strong>Velocity</strong> — in the Channel Rack's graph editor, drag hats to alternate loud/soft. This single move transforms a beat.</li><li><strong>Swing</strong> — the knob at the top of the rack, 15–25% for anything with groove</li><li><strong>Ghost snares</strong> — very quiet hits before the main ones (the R&amp;B grid in <a href='#beats'>Making beats</a> shows where)</li></ul>",
     opts: [{ t: "It grooves — next", cls: "primary", next: "i_7" }]
   });
   N("i_7", {
-    step: "Intermediate · step 7 of 7", q: "The full-structure pass",
+    step: "Intermediate · step 7 of 9", q: "The full-structure pass",
     v: function () { return SVGX.songArc(); },
     d: "<p>Lay out the whole song: intro → verse → pre → chorus → verse 2 → chorus → bridge → final chorus → outro (bar counts in <a href='#song'>Building a song</a>). Now walk it start to finish asking one question per boundary: <em>does something change here?</em> A new layer in, a layer out, a fill, a drop — every section border needs one event.</p>",
-    opts: [{ t: "Done — quiz me", cls: "primary", next: "iq1" }]
+    opts: [{ t: "Done — next", cls: "primary", next: "iMix" }]
+  });
+  N("iMix", {
+    step: "Intermediate · step 8 of 9", q: "The balance pass",
+    v: function () { return SVGX.flMixer("vocal"); },
+    d: "<p>Before any listening verdict: balance. Loop the fullest chorus, <kbd>F9</kbd>, vocal fader up until the voice clearly sits on top, everything that fights it comes down. Master meter never touches red — if it does, all faders down together. Then check the mix survives your phone's speaker as well as headphones.</p>",
+    opts: [{ t: "Balanced — next", cls: "primary", next: "iExp" }]
+  });
+  N("iExp", {
+    step: "Intermediate · step 9 of 9", q: "Save, export, listen like a listener",
+    d: act([
+        "<kbd>Cmd+S</kbd> — and make version saves as you go: <em>SongName v2</em>, <em>v3</em>… so you can always step back",
+        "<span class='path'>File → Export → WAV file…</span> (<kbd>Cmd+R</kbd>) → Start",
+        "AirDrop it to your phone and play it in the places you actually listen — speaker, car, earbuds",
+        "Write down the ONE thing that bothers you most on each listen. That list is your next session's plan"
+      ]),
+    opts: [{ t: "Exported — quiz me", cls: "primary", next: "iq1" }]
   });
   N("iq1", {
     step: "Intermediate · check 1 of 3", q: "The verse drum beat comes from…",
@@ -5304,8 +5413,8 @@
     setup:   { name: "Set everything up", start: "su1", steps: ["su1", "su2", "su3", "su4", "su5", "su6", "su7", "su8", "su9", "su10"] },
     beat:    { name: "Make me a beat", start: "b0" },
     song:    { name: "Build a song", start: "so0" },
-    songB:   { name: "Build a song — Beginner", start: "b_1", steps: ["b_1", "b_2", "b_3", "b_4", "b_5", "b_6", "bq1", "bq2", "bq3"] },
-    songI:   { name: "Build a song — Intermediate", start: "i_1", steps: ["i_1", "i_2", "i_3", "i_4", "i_5", "i_6", "i_7", "iq1", "iq2", "iq3"] },
+    songB:   { name: "Build a song — Beginner", start: "b_1", steps: ["b_1", "b_2", "b_3", "b_4", "b_5", "b_6", "bMix", "bExp", "bq1", "bq2", "bq3"] },
+    songI:   { name: "Build a song — Intermediate", start: "i_1", steps: ["i_1", "i_2", "i_3", "i_4", "i_5", "i_6", "i_7", "iMix", "iExp", "iq1", "iq2", "iq3"] },
     songA:   { name: "Build a song — Advanced", start: "a_1", steps: ["a_1", "a_2", "a_3", "a_4", "a_5", "a_6", "a_7", "a_8", "aq1", "aq2", "aq3"] },
     record:  { name: "Record my voice", start: "r1", steps: ["r1", "r2", "r3", "r4", "r5", "r6"] },
     piano:   { name: "Play piano sounds (MIDI)", start: "p_1", steps: ["p_1", "p_2", "p_3", "p_4", "p_5"] },
@@ -5321,11 +5430,12 @@
      ============================================================ */
 
   var wiz = $("wiz"), wizBody = $("wizBody"), wizFlowEl = $("wizFlow");
-  var curFlow = null, history = [];
+  var curFlow = null, curFlowId = null, history = [];
 
   function openFlow(flowId) {
     curFlow = FLOWS[flowId];
     if (!curFlow) return;
+    curFlowId = flowId;
     history = [];
     wizFlowEl.textContent = curFlow.name;
     wiz.hidden = false;
@@ -5347,6 +5457,8 @@
   function showNode(id, isBack) {
     var node = NODES[id];
     if (!node) return;
+    if (/q\d+y$/.test(id)) store("ss-quiz-" + id.slice(0, -1), "1");
+    if (node.done && curFlowId) { store("ss-done-" + curFlowId, "1"); updateHubProgress(); }
     if (!isBack) history.push(id);
     $("wizBack").disabled = history.length <= 1;
 
@@ -5371,6 +5483,7 @@
     } else {
       h += '<h2 class="wiz-q">' + node.q + "</h2>";
       if (node.d) h += '<div class="wiz-d">' + node.d + "</div>";
+      if (/q\d+$/.test(id) && read("ss-quiz-" + id) === "1") h += '<p class="wiz-aced">✓ You got this one right last time.</p>';
     }
 
     if (node.v) {
@@ -5426,9 +5539,36 @@
   // exposed for automated graph auditing (no runtime behaviour depends on this)
   window.SS = { NODES: NODES, FLOWS: FLOWS, openFlow: openFlow };
 
-  Array.prototype.forEach.call(document.querySelectorAll(".flowcard"), function (c) {
+  Array.prototype.forEach.call(document.querySelectorAll(".flowcard, .rm-step[data-flow]"), function (c) {
     c.addEventListener("click", function () { openFlow(c.getAttribute("data-flow")); });
   });
+
+  /* ---- progress memory: badge completed walks on the hub ---- */
+  var GUIDED = ["setup", "beat", "song", "record", "piano", "voicefx"];
+  function flowDone(f) {
+    if (f === "song") return ["songB", "songI", "songA"].some(function (x) { return read("ss-done-" + x) === "1"; });
+    return read("ss-done-" + f) === "1";
+  }
+  function updateHubProgress() {
+    Array.prototype.forEach.call(document.querySelectorAll(".flowcard"), function (c) {
+      var f = c.getAttribute("data-flow");
+      var d = flowDone(f);
+      c.classList.toggle("done-flow", d);
+      if (d && !c.querySelector(".fc-done")) {
+        var s = document.createElement("span");
+        s.className = "fc-done";
+        s.textContent = "✓ done";
+        c.appendChild(s);
+      }
+    });
+    var levels = ["songB", "songI", "songA"].filter(function (x) { return read("ss-done-" + x) === "1"; }).length;
+    var songCard = document.querySelector('.flowcard[data-flow="song"] .fc-done');
+    if (songCard && levels) songCard.textContent = "✓ " + levels + " of 3 levels";
+    var n = GUIDED.filter(flowDone).length;
+    var el = document.getElementById("hubprog");
+    if (el) el.textContent = n === 0 ? "" : (n === GUIDED.length ? "All " + GUIDED.length + " guided walks finished — you know this rig now." : "You\u2019ve finished " + n + " of " + GUIDED.length + " guided walks \u2713");
+  }
+  updateHubProgress();
 
   /* ============================================================
      Page behaviour (theme, drawer, checklist, search, nav)
