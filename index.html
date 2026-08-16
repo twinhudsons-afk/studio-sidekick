@@ -958,7 +958,7 @@
               <h3>Drums work completely differently</h3>
               <p>On a trumpet or piano preset, every key is the same instrument at a different pitch. On a <strong>drum kit</strong>, every key is a <em>different drum</em>:</p>
               <figure class="diagram" data-svg="drumMap"></figure>
-              <p>So you play drums with a small handful of low keys, not with melodies. Different kits shuffle this slightly — play up the bottom two octaves once and you'll learn any kit in about thirty seconds.</p>
+              <p>So you play drums with a small handful of low keys, not with melodies. Different kits shuffle this slightly — play up the bottom two octaves once and you'll learn any kit in about thirty seconds. The <strong>complete kit</strong> — every drum labelled with its job — is drawn out in <a href="#beats" style="color:var(--accent-deep)">Making beats</a>.</p>
               <div class="note tip">
                 <b>You don't have to play drums at all</b>
                 The step sequencer lets you click drums in, one square at a time — see <a href="#beats" style="color:var(--accent-deep)">Making beats</a>. It's easier and more accurate than playing them.
@@ -980,6 +980,45 @@
               <div class="note tip">
                 <b>Slow it right down</b>
                 If a part is too fast to play cleanly, halve the tempo, record it comfortably, then put the tempo back. The notes speed up perfectly. Everybody does this and nobody mentions it.
+              </div>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">Pin this one — it's the map everything else uses</span>
+              <h3>The keyboard map: which keys do which job</h3>
+              <p>A full piano has 88 keys, but a song only uses them in <strong>three working zones</strong>. Learn the zones once and you always know where your hands belong:</p>
+              <figure class="diagram" data-svg="kbZones"></figure>
+              <ul>
+                <li><strong>BASS ZONE (the low left).</strong> One note at a time, played with the left hand — the roots of your chords, or a long 808. Two notes down here at once turns to mud; the low end is a one-note-at-a-time neighbourhood.</li>
+                <li><strong>CHORD ZONE (the middle).</strong> Where full chords sound rich without being boomy. Piano chords, warm pads, guitar strums — the bed of the song lives here, played around <strong>middle C and just below</strong>.</li>
+                <li><strong>MELODY ZONE (the upper right).</strong> Riffs, hooks, lead lines — and crucially, <strong>where a singer's voice already lives</strong>. Which cuts both ways, next point.</li>
+              </ul>
+              <div class="note watch">
+                <b>Matching the keys to her voice</b>
+                Sing a comfortable note, then hunt along the melody zone until a key plays the <em>same</em> note — that's where her voice sits on this map. Two rules follow: write melodies <strong>in that region</strong> so they're singable, and keep busy <em>instruments</em> out of it while she's singing — a piano riff on her exact notes fights her for the same space. Play instrumental answers an octave up, or save them for the gaps between vocal lines. (Choosing the whole song's key to flatter her voice is <a href="#keys" style="color:var(--accent-deep)">section 09</a>.)
+              </div>
+              <div class="note tip">
+                <b>Your keyboard is a window onto this map</b>
+                A 25- or 49-key keyboard shows only a slice of the picture above. The <strong>OCTAVE + / −</strong> buttons on it slide the window up and down the map — the same physical key can be bass, chord or melody depending on where the window sits. If a preset suddenly sounds like a chipmunk or an earthquake, the window is just parked in the wrong zone: tap OCTAVE the other way.
+              </div>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">Start to finish, no steps skipped</span>
+              <h3>Making a MIDI sound: the complete routine</h3>
+              <p>This is the full ritual for getting ANY instrument sound out of the keyboard — the same seven moves every time, whatever the sound. Once this is automatic, the whole instrument side of FL is yours:</p>
+              <ol class="steps">
+                <li><p><strong>Open the Channel Rack</strong> (<code>F6</code>) and click the <strong>+</strong> at the bottom → <strong>FLEX</strong>. A new channel appears holding FLEX.</p></li>
+                <li><p><strong>Pick the sound.</strong> In FLEX, browse the categories on the left (Keys, Guitar, Bass, Brass, Strings, Pads, Synth, 808) or type in the search box. <strong>Single-click a preset to hear it</strong> demoed; <strong>double-click to load it</strong>. The category names ARE the zone guide: Bass and 808 presets expect the bass zone, Keys/Pads expect the chord zone, most Lead/Synth presets expect the melody zone.</p></li>
+                <li><p><strong>Select the channel</strong> — click its name so the little lime strip to its right lights up. The keyboard plays <em>whichever channel carries that strip</em>, always. Silence when you play almost always means the wrong channel is selected.</p></li>
+                <li><p><strong>Find the zone.</strong> Play a few keys. Wrong register? <strong>OCTAVE + / −</strong> on the keyboard until the sound sits where it should (a bass preset down low, a lead up high).</p></li>
+                <li><p><strong>Play with dynamics.</strong> The keyboard senses how hard you press — <strong>velocity</strong>. On good presets soft playing doesn't just get quieter, it gets <em>warmer and rounder</em>, and hard playing gets brighter and sharper. A felt-piano pad stroked softly and hammered hard are two different instruments. Try both before deciding a preset is wrong.</p></li>
+                <li><p><strong>Record it:</strong> tempo first, metronome on, press record, play (the full checklist is the card above). Keep held notes held — the note lasts as long as your finger stays down, and short stabby presses on a pad or string sound is the most common beginner tell.</p></li>
+                <li><p><strong>Tidy in the Piano roll</strong> (<code>F7</code>): drag wrong notes onto the right ones, drag note ends to fix lengths — and if the timing is loose, press <code>Alt+Q</code> (<strong>quantize</strong>) to snap the starts to the grid. For anything that should feel human, quantize at strength ~50% rather than 100% so it tightens without going robotic.</p></li>
+              </ol>
+              <div class="note tip">
+                <b>Then repeat, one channel per sound</b>
+                Piano chords first (chord zone), bass next (bass zone, following the kick), melody line last (melody zone, in the gaps around the voice). Three passes of the same seven moves and you've built the whole instrumental bed of a song.
               </div>
             </div>
 
@@ -1059,20 +1098,28 @@
 
             <div class="card">
               <span class="eyebrow">Learn this order once — it never changes</span>
-              <h3>The vocal chain</h3>
+              <h3>The vocal chain — what it is and why it exists</h3>
+              <p>A recording of your voice comes out of the mic <strong>dry</strong>: no space around it, loud notes loud, quiet words vanishing, the room rumble still in it. Nobody releases that. Every vocal you've ever heard on a record has passed through a row of small tools first — and that row is the <strong>chain</strong>. Think of water through pipes: the voice flows in one end, each tool changes exactly one thing, and it comes out the other end sounding like a record.</p>
               <figure class="diagram" data-svg="vocalChain"></figure>
-              <p>All vocal effects live on the vocal's <strong>mixer track</strong> — press <span class="path">F9</span>, click the vocal track, and load effects into its slots on the right, top to bottom in the order above:</p>
+              <p>Each stage fixes one problem, and each hands a cleaner voice to the next — which is why the order never changes: <strong>EQ</strong> fixes the <em>tone</em>, <strong>compression</strong> fixes the <em>evenness</em>, <strong>reverb</strong> adds the <em>space</em>, <strong>delay</strong> adds <em>echoes</em> when you want them. The four cards below take each stage apart properly.</p>
+              <p>Where it physically lives: press <span class="path">F9</span>, click the vocal's mixer track, and load each effect into the slots on the right — the voice enters at slot 1 and flows downward, so <strong>top-to-bottom is the order</strong>:</p>
               <figure class="diagram" data-svg="mixerVocal"></figure>
               <div class="note tip">
-                <b>Why this order</b>
-                EQ fixes the tone, compression evens the level, and only then does reverb put the finished voice into a space. Reverb applied to a muddy, uneven voice just gives you muddy, uneven echoes.
+                <b>Why this order — the one-line version</b>
+                Every tool reacts to what it's fed. Fix the tone first and the compressor squeezes <em>voice</em>, not rumble; even the level and the reverb echoes <em>clarity</em>, not mud. Reverb applied to a muddy, uneven voice just gives you muddy, uneven echoes — reverb is a photocopier for whatever you feed it.
+              </div>
+              <div class="note tip">
+                <b>Want it as a guided tour?</b>
+                The <strong>Shape my voice</strong> card at the top has a "What IS the vocal chain?" path — five screens, one per stage, in plain words, then it builds the whole chain on your actual vocal with you.
               </div>
             </div>
 
             <div class="card">
               <h3>EQ — tidy the tone first</h3>
+              <p>Every sound is made of <strong>frequencies</strong> — lows you feel in your chest, highs that sparkle — and an EQ is a volume control for each region separately. A voice spreads across this whole map, and each region has its own personality:</p>
+              <figure class="diagram" data-svg="freqMap"></figure>
               <figure class="diagram" data-svg="eqCurve"></figure>
-              <p>Load <strong>Fruity parametric EQ 2</strong> into slot 1. Four moves cover almost every voice:</p>
+              <p>Load <strong>Fruity parametric EQ 2</strong> into slot 1. Four moves cover almost every voice — each one is a block on the map above:</p>
               <ul>
                 <li><strong>Cut everything below ~90 Hz.</strong> There's no voice down there — only mic-stand rumble and room boom.</li>
                 <li><strong>A small dip around 250 Hz</strong> if the voice sounds boxy or muddy.</li>
@@ -1096,8 +1143,10 @@
             <div class="card">
               <span class="eyebrow">Room · plate · hall</span>
               <h3>Reverb — put the voice in a space</h3>
+              <p>Sing in a bathroom and thousands of tiny echoes blur into a wash — that wash is reverb, and the plugin fakes it so a bedroom recording can live in any room you like. This is what a reverb is actually made of, and what each knob controls:</p>
+              <figure class="diagram" data-svg="reverbAnatomy"></figure>
               <figure class="diagram" data-svg="reverbWindow"></figure>
-              <p>Load <strong>Fruity Reeverb 2</strong> in slot 3. The <strong>WET knob is the one that matters</strong> — it sets how much of the effect you hear. Vocals usually sit between 15% and 25%: you should <em>feel</em> the space more than hear it.</p>
+              <p>Load <strong>Fruity Reeverb 2</strong> in slot 3. The <strong>WET knob is the one that matters</strong> — it sets how tall the reverb cloud is next to the dry voice. Vocals usually sit between 15% and 25%: you should <em>feel</em> the space more than hear it.</p>
               <ul>
                 <li><strong>Verses drier, choruses wetter</strong> — automate WET up for the chorus and the song opens like a door.</li>
                 <li><strong>PRE-DELAY around 20 ms</strong> keeps the words clear by letting each syllable land before its reverb starts.</li>
@@ -1120,8 +1169,8 @@
                 <li><strong>The modern pop sheen:</strong> <strong>Pitcher</strong> on the mixer track, set to your song's key. Slow correction speed = invisible polish; fast = the hard, quantised pop shimmer, as a deliberate style.</li>
               </ul>
               <div class="note watch">
-                <b>Edition check</b>
-                Pitcher and NewTone come with <strong>Signature Edition and up</strong> — Producer Edition doesn't include them (<span class="path">Help → About</span> to check). They can be bought individually, or the upgrade is priced as the difference.
+                <b>Your copy is Producer Edition</b>
+                Pitcher and NewTone only come with <strong>Signature Edition and up</strong>, so they're not in your copy. The working routes on Producer: sing the wobbly line again (free, usually best), or install a <strong>free tuner plugin</strong> — <strong>Graillon 2 Free</strong> (Auburn Sounds) or <strong>MAutoPitch</strong> (MeldaProduction), both Mac AU, both with the same two controls (KEY + speed). After installing: <span class="path">Add → More plugins → Manage plugins → Find plugins</span>, then load it after compression, before reverb. Pitcher can also be bought on its own from Image-Line, much cheaper than the full upgrade.
               </div>
             </div>
 
@@ -1304,10 +1353,83 @@
               </div>
             </div>
 
+            <div class="card">
+              <span class="eyebrow">Meet the whole kit before you build with it</span>
+              <h3>Every drum, explained</h3>
+              <p>A drum kit preset spreads the whole kit across the keys — and every drum has one job. Know the jobs and you can build any beat from scratch instead of copying grids:</p>
+              <figure class="diagram" data-svg="drumKitFull"></figure>
+              <div class="tw">
+                <table>
+                  <thead><tr><th>Drum</th><th>Sounds like</th><th>Its job</th><th>Where it usually goes</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Kick</strong></td><td>Boom / punch in the chest</td><td>The heartbeat — the floor of the whole song</td><td>Always step 1; then 2–4 more hits define the genre</td></tr>
+                    <tr><td><strong>808</strong></td><td>A long, pitched boom</td><td>Kick and bass fused into one — it plays your chord roots</td><td>On the kick steps, one note per chord (trap, R&amp;B)</td></tr>
+                    <tr><td><strong>Snare</strong></td><td>A sharp crack</td><td>The backbeat — the clap-along moment</td><td>Steps 5 &amp; 13 (or just 9 for half-time)</td></tr>
+                    <tr><td><strong>Clap</strong></td><td>Hands, wider and softer than a snare</td><td>Backbeat, or layered ON the snare for width</td><td>Same steps as the snare</td></tr>
+                    <tr><td><strong>Rim click</strong></td><td>A woody tick</td><td>The quiet backbeat — instant late-night ballad</td><td>Wherever the snare would go, in soft sections</td></tr>
+                    <tr><td><strong>Snap</strong></td><td>Finger snap</td><td>Softest backbeat of all — bedroom-pop verses</td><td>Snare steps, quiet songs</td></tr>
+                    <tr><td><strong>Closed hi-hat</strong></td><td>Tick tick tick</td><td>The engine — it carries the speed of the song</td><td>Every other step (8ths) or every step (16ths)</td></tr>
+                    <tr><td><strong>Pedal hat</strong></td><td>A soft "chick"</td><td>A gentler engine for verses</td><td>Where closed hats would go, softer sections</td></tr>
+                    <tr><td><strong>Open hi-hat</strong></td><td>Tsss — it rings on</td><td>The breath — off-beat lift, dance-floor energy</td><td>Off-beats: steps 3, 7, 11, 15 (sparingly!)</td></tr>
+                    <tr><td><strong>Ride</strong></td><td>Ting-ting on a washy cymbal</td><td>Hat-substitute with more air — choruses, jazzier feels</td><td>Where hats would go, in big open sections</td></tr>
+                    <tr><td><strong>Crash</strong></td><td>A big splash that rings for a bar</td><td>The arrival — announces a new section</td><td>Step 1 of the first chorus bar. Once.</td></tr>
+                    <tr><td><strong>Toms (low/mid/high)</strong></td><td>Round pitched drums</td><td>Fills — the roll that falls into the next section</td><td>Steps 13–16 of a fill bar, rolling high→low or low→high</td></tr>
+                    <tr><td><strong>Shaker</strong></td><td>A soft shh-shh</td><td>The hat's gentle cousin — motion without brightness</td><td>16ths under slow R&amp;B and ballads</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="note tip">
+                <b>How to build any beat from nothing</b>
+                Layer in this order, listening after each: ① kick pattern → ② backbeat (snare / clap / rim — pick ONE personality) → ③ engine (hats or shaker) → ④ one breath (an open hat somewhere) → ⑤ fills only at section ends. Five decisions, in that order, is every beat in the library below.
+              </div>
+            </div>
+
             <div class="card" id="patterncards">
               <h3>The pattern library</h3>
-              <p>Twelve beats that cover most of what sits under a vocal, each with the tempo range it lives at. The bold numbers are the four main beats of the bar. Learn the first two, steal the rest as needed.</p>
+              <p><strong>Seventeen beats</strong> that cover most of what sits under a vocal, each with the tempo range it lives at — including five slower R&amp;B grooves (slow jam, 12/8 sway, neo-soul, trap-soul, quiet storm). The bold numbers are the four main beats of the bar. Learn the first two, steal the rest as needed.</p>
               <div id="patterns"></div>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">Five flavours of slow</span>
+              <h3>Slow R&amp;B — choosing between the five grooves</h3>
+              <p>All five live between 58 and 82 BPM and all five leave the middle open for a singer — the differences are personality. Match the groove to the song's mood:</p>
+              <div class="tw">
+                <table>
+                  <thead><tr><th>Groove</th><th>BPM</th><th>Personality</th><th>Reach for it when…</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Slow jam (half-time)</strong></td><td>58–70</td><td>Classic, warm, spacious</td><td>A love song, held notes, the vocal IS the show</td></tr>
+                    <tr><td><strong>12/8 sway</strong></td><td>60–75</td><td>Rocking, old-school soul</td><td>The song sways in threes — try counting "ONE-and-a, TWO-and-a" along with her demo</td></tr>
+                    <tr><td><strong>Neo-soul (drunk feel)</strong></td><td>68–82</td><td>Loose, human, jazzy</td><td>Conversational vocals, rich chords, laid-back attitude</td></tr>
+                    <tr><td><strong>Trap-soul (slow burn)</strong></td><td>65–75</td><td>Dark, modern, moody</td><td>Tuned vocals, 808 weight, late-night lyrics</td></tr>
+                    <tr><td><strong>Quiet storm (rim &amp; shaker)</strong></td><td>60–72</td><td>Candle-lit, barely there</td><td>The most intimate verses — a whisper of a beat</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>The shared DNA, whichever you pick: <strong>swing higher than feels safe</strong> (20–35%), <strong>ghost notes</strong> at ~25% velocity doing the real seduction, and <strong>space left empty on purpose</strong>. A slow groove dies from one extra drum sooner than a fast one does. All five grids are drawn in the library above; the <strong>Make me a beat</strong> wizard's "Slow R&amp;B / late-night" lane builds them with you.</p>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">The moment that makes or breaks the song</span>
+              <h3>When the chorus hits: the drum lift</h3>
+              <p>A chorus should feel bigger and <em>faster</em> — but on records the tempo almost never changes. The felt speed-up is the drums getting <strong>denser</strong>. Here is the whole manoeuvre, drawn:</p>
+              <figure class="diagram" data-svg="chorusLift"></figure>
+              <ol class="steps calm">
+                <li><p><strong>The fill announces it.</strong> In the last bar of the verse: snare on steps 13-14-15-16, hats cleared out of the way. (Or a tom roll falling low→high into the chorus.)</p></li>
+                <li><p><strong>Crash on arrival.</strong> Step 1 of the first chorus bar, once. It rings over the first two beats and stamps "NEW SECTION" on the song.</p></li>
+                <li><p><strong>Hats double.</strong> Verse hats on every other cell become chorus hats on <em>every</em> cell. This single move is the "speed-up" your ear hears — same tempo, twice the motion.</p></li>
+                <li><p><strong>The open hat breathes</strong> on the off-beats (3, 7, 11, 15) — the chorus gains air as well as speed.</p></li>
+                <li><p><strong>One or two extra kicks</strong> (try steps 4 and 12) so the floor moves more underneath her longest notes.</p></li>
+                <li><p><strong>Alternative drama:</strong> instead of a fill, <em>delete everything</em> for the last half-bar of the verse — one beat of silence, then the chorus lands on top of the crash. Free goosebumps.</p></li>
+              </ol>
+              <div class="note watch">
+                <b>If the song genuinely speeds up</b>
+                Some songs do push the tempo at the chorus, on purpose. Do it with automation, not by hand: <span class="path">right-click the BPM display → Create automation clip</span>, and raise it <strong>2–4 BPM at most</strong> into the final chorus — a lift that size reads as excitement. More reads as a mistake. The drawn walkthrough is in <a href="#song" style="color:var(--accent-deep)">Building a song</a> under tempo changes.
+              </div>
+              <div class="note tip">
+                <b>Slow R&amp;B lifts differently</b>
+                At 60–75 BPM a full hat-doubling can trample the mood. Lift gently instead: double the <em>shaker</em> rather than the hats, add the crash, add ONE extra kick — and let the vocal stack (doubles and harmonies arriving) do the heavy lifting. In this genre the chorus gets <em>fuller</em> more than it gets faster.
+              </div>
             </div>
 
             <div class="card">
@@ -1733,6 +1855,24 @@
 
   function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
 
+  /* unique-id gradient factory — gradients are defined adjacent to their use so
+     nothing depends on cross-SVG defs (which break inside hidden sections) */
+  var UID = 0;
+  function lingrad(stops, vertical) {
+    var id = "sxg" + (++UID);
+    var m = '<linearGradient id="' + id + '" x1="0" y1="0" x2="' + (vertical ? "0" : "1") + '" y2="' + (vertical ? "1" : "0") + '">';
+    stops.forEach(function (st) { m += '<stop offset="' + st[0] + '" stop-color="' + st[1] + '"' + (st[2] !== undefined ? ' stop-opacity="' + st[2] + '"' : "") + "/>"; });
+    m += "</linearGradient>";
+    return { id: id, m: m };
+  }
+  function radgrad(stops, fx, fy) {
+    var id = "sxg" + (++UID);
+    var m = '<radialGradient id="' + id + '"' + (fx !== undefined ? ' fx="' + fx + '" fy="' + fy + '"' : "") + ">";
+    stops.forEach(function (st) { m += '<stop offset="' + st[0] + '" stop-color="' + st[1] + '"' + (st[2] !== undefined ? ' stop-opacity="' + st[2] + '"' : "") + "/>"; });
+    m += "</radialGradient>";
+    return { id: id, m: m };
+  }
+
   // callout: a labelled ring around a control + caption pill above the panel
   function ring(cx, cy, r) {
     return '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="var(--focus)" stroke-width="3" stroke-dasharray="7 5"/>' +
@@ -1767,16 +1907,45 @@
   };
 
   function knob(x, y, r, haloColor) {
-    var s = '';
-    if (haloColor) s += '<circle cx="' + x + '" cy="' + y + '" r="' + (r + 6) + '" fill="none" stroke="' + haloColor + '" stroke-width="4.5" opacity=".95"/>';
-    s += '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="#D6D3CE" stroke="#8F8B86" stroke-width="1.4"/>';
-    s += '<circle cx="' + x + '" cy="' + y + '" r="' + (r - 5) + '" fill="#C3C0BA"/>';
-    s += '<line x1="' + x + '" y1="' + y + '" x2="' + (x + r * 0.55) + '" y2="' + (y - r * 0.55) + '" stroke="#4A4741" stroke-width="3" stroke-linecap="round"/>';
+    var rim = lingrad([[0, "#EFEDE9"], [0.5, "#C9C6C0"], [1, "#9C978F"]], true);
+    var face = radgrad([[0, "#E2DFDA"], [0.65, "#CBC8C2"], [1, "#ABA7A0"]], "0.35", "0.3");
+    var s = rim.m + face.m;
+    // drop shadow
+    s += '<ellipse cx="' + (x + r * 0.1) + '" cy="' + (y + r * 0.22) + '" rx="' + (r * 1.02) + '" ry="' + (r * 0.94) + '" fill="#000" opacity=".22"/>';
+    // gain halo ring (the light ring around the real Scarlett gain knobs)
+    if (haloColor) {
+      s += '<circle cx="' + x + '" cy="' + y + '" r="' + (r + 8) + '" fill="none" stroke="' + haloColor + '" stroke-width="2" opacity=".35"/>';
+      s += '<circle cx="' + x + '" cy="' + y + '" r="' + (r + 5) + '" fill="none" stroke="' + haloColor + '" stroke-width="4" opacity=".95"/>';
+    }
+    // knurled rim
+    s += '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="url(#' + rim.id + ')" stroke="#7D7870" stroke-width="1.2"/>';
+    for (var k = 0; k < 24; k++) {
+      var a = (k / 24) * Math.PI * 2;
+      s += '<line x1="' + (x + Math.cos(a) * (r - 0.5)) + '" y1="' + (y + Math.sin(a) * (r - 0.5)) + '" x2="' + (x + Math.cos(a) * (r - 3.4)) + '" y2="' + (y + Math.sin(a) * (r - 3.4)) + '" stroke="#84807A" stroke-width="1.1" opacity=".65"/>';
+    }
+    // face + dome highlight
+    s += '<circle cx="' + x + '" cy="' + y + '" r="' + (r - 4.5) + '" fill="url(#' + face.id + ')" stroke="#918D86" stroke-width="0.8"/>';
+    s += '<ellipse cx="' + (x - r * 0.28) + '" cy="' + (y - r * 0.34) + '" rx="' + (r * 0.42) + '" ry="' + (r * 0.3) + '" fill="#FFFFFF" opacity=".38"/>';
+    // pointer
+    s += '<line x1="' + (x + r * 0.18) + '" y1="' + (y - r * 0.18) + '" x2="' + (x + r * 0.58) + '" y2="' + (y - r * 0.58) + '" stroke="#3A3733" stroke-width="' + Math.max(2.4, r * 0.12) + '" stroke-linecap="round"/>';
     return s;
   }
   function btn(x, y, r, on, onColor) {
-    return '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="' + (on ? (onColor || '#FFD34D') : '#7E1712') + '" stroke="#5C110D" stroke-width="1.5"/>' +
-           (on ? '<circle cx="' + x + '" cy="' + y + '" r="' + (r + 4) + '" fill="none" stroke="' + (onColor || '#FFD34D') + '" stroke-width="1.5" opacity=".55"/>' : '');
+    var c = onColor || "#FFD34D";
+    var s = '<ellipse cx="' + (x + 1) + '" cy="' + (y + 1.6) + '" rx="' + (r + 1) + '" ry="' + r + '" fill="#000" opacity=".28"/>';
+    if (on) {
+      var g = radgrad([[0, "#FFFFFF"], [0.25, c], [1, c]], "0.4", "0.35");
+      s += g.m;
+      s += '<circle cx="' + x + '" cy="' + y + '" r="' + (r + 6) + '" fill="' + c + '" opacity=".14"/>';
+      s += '<circle cx="' + x + '" cy="' + y + '" r="' + (r + 3) + '" fill="' + c + '" opacity=".3"/>';
+      s += '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="url(#' + g.id + ')" stroke="#5C110D" stroke-width="1.3"/>';
+    } else {
+      var g2 = radgrad([[0, "#93261E"], [0.6, "#7E1712"], [1, "#5E100C"]], "0.38", "0.32");
+      s += g2.m;
+      s += '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="url(#' + g2.id + ')" stroke="#4A0D09" stroke-width="1.3"/>';
+      s += '<ellipse cx="' + (x - r * 0.3) + '" cy="' + (y - r * 0.35) + '" rx="' + (r * 0.4) + '" ry="' + (r * 0.26) + '" fill="#FFFFFF" opacity=".18"/>';
+    }
+    return s;
   }
   function flabel(x, y, t, size) {
     return '<text x="' + x + '" y="' + y + '" text-anchor="middle" font-family="var(--body)" font-size="' + (size || 9.5) + '" font-weight="700" letter-spacing=".08em" fill="#FBEBE9">' + esc(t) + '</text>';
@@ -1788,18 +1957,41 @@
     var st = opts.states || {};
     var s = '<svg viewBox="0 0 700 250" role="img" aria-label="Scarlett Solo front panel">';
 
-    // chassis
-    s += '<rect x="34" y="46" width="632" height="168" rx="16" fill="#C6362C"/>';
-    s += '<rect x="34" y="46" width="632" height="168" rx="16" fill="none" stroke="#8E211A" stroke-width="2.5"/>';
-    s += '<rect x="40" y="52" width="620" height="10" rx="5" fill="#D8564C" opacity=".5"/>';
-    s += '<text x="52" y="204" font-family="var(--display)" font-size="12" font-weight="700" fill="#F4C9C4" letter-spacing=".04em">Scarlett Solo</text>';
+    // chassis — anodised red with a vertical sheen, like the real 3rd-gen shell
+    var ch = lingrad([[0, "#DA5044"], [0.12, "#CE4136"], [0.5, "#C0332A"], [0.88, "#A82A21"], [1, "#96241C"]], true);
+    s += ch.m;
+    s += '<rect x="38" y="52" width="632" height="168" rx="16" fill="#000" opacity=".25"/>';
+    s += '<rect x="34" y="46" width="632" height="168" rx="16" fill="url(#' + ch.id + ')"/>';
+    s += '<rect x="34" y="46" width="632" height="168" rx="16" fill="none" stroke="#7E1D16" stroke-width="2.5"/>';
+    s += '<rect x="36.5" y="48.5" width="627" height="163" rx="14" fill="none" stroke="#E8776C" stroke-width="1" opacity=".5"/>';
+    s += '<rect x="40" y="52" width="620" height="12" rx="6" fill="#E8776C" opacity=".35"/>';
+    // brushed-metal hint
+    for (var bl2 = 0; bl2 < 5; bl2++) s += '<line x1="44" y1="' + (72 + bl2 * 30) + '" x2="656" y2="' + (72 + bl2 * 30) + '" stroke="#FFFFFF" opacity=".03" stroke-width="6"/>';
+    // corner screws
+    [[52, 62], [648, 62], [52, 198], [648, 198]].forEach(function (sc) {
+      s += '<circle cx="' + sc[0] + '" cy="' + sc[1] + '" r="4.5" fill="#7E1D16" stroke="#5E120D" stroke-width="1"/>';
+      s += '<line x1="' + (sc[0] - 2.4) + '" y1="' + (sc[1] - 2.4) + '" x2="' + (sc[0] + 2.4) + '" y2="' + (sc[1] + 2.4) + '" stroke="#4A0D09" stroke-width="1.1"/>';
+    });
+    s += '<text x="66" y="205" font-family="var(--display)" font-size="12.5" font-weight="700" fill="#F7D4CF" letter-spacing=".05em">Scarlett Solo</text>';
+    s += '<text x="66" y="192" font-family="var(--body)" font-size="7.5" font-weight="600" fill="#E8A39B" letter-spacing=".14em">FOCUSRITE</text>';
 
-    // input 1 XLR
-    s += '<circle cx="' + FP.xlr.x + '" cy="' + FP.xlr.y + '" r="' + FP.xlr.r + '" fill="#2E2A28" stroke="#191614" stroke-width="2"/>';
-    s += '<circle cx="' + FP.xlr.x + '" cy="' + FP.xlr.y + '" r="' + (FP.xlr.r - 9) + '" fill="#3C3835"/>';
-    s += '<circle cx="' + (FP.xlr.x - 9) + '" cy="' + (FP.xlr.y + 7) + '" r="4" fill="#15120F"/>';
-    s += '<circle cx="' + (FP.xlr.x + 9) + '" cy="' + (FP.xlr.y + 7) + '" r="4" fill="#15120F"/>';
-    s += '<circle cx="' + FP.xlr.x + '" cy="' + (FP.xlr.y - 10) + '" r="4" fill="#15120F"/>';
+    // input 1: combo XLR — chrome bezel, recessed well, 3 gold pins + jack hole
+    var bez = lingrad([[0, "#EAE8E4"], [0.5, "#B8B4AE"], [1, "#8F8B84"]], true);
+    s += bez.m;
+    s += '<circle cx="' + FP.xlr.x + '" cy="' + (FP.xlr.y + 2) + '" r="' + FP.xlr.r + '" fill="#000" opacity=".3"/>';
+    s += '<circle cx="' + FP.xlr.x + '" cy="' + FP.xlr.y + '" r="' + FP.xlr.r + '" fill="url(#' + bez.id + ')" stroke="#6E6A63" stroke-width="1.4"/>';
+    s += '<circle cx="' + FP.xlr.x + '" cy="' + FP.xlr.y + '" r="' + (FP.xlr.r - 5) + '" fill="#211D1B" stroke="#0F0D0B" stroke-width="1.6"/>';
+    s += '<circle cx="' + FP.xlr.x + '" cy="' + FP.xlr.y + '" r="' + (FP.xlr.r - 10) + '" fill="#332F2C"/>';
+    // latch notch at top
+    s += '<rect x="' + (FP.xlr.x - 5) + '" y="' + (FP.xlr.y - FP.xlr.r + 1) + '" width="10" height="7" rx="2" fill="#181512"/>';
+    // gold pins with highlights
+    [[-9, 7], [9, 7], [0, -10]].forEach(function (pp) {
+      s += '<circle cx="' + (FP.xlr.x + pp[0]) + '" cy="' + (FP.xlr.y + pp[1]) + '" r="4.6" fill="#0D0B09"/>';
+      s += '<circle cx="' + (FP.xlr.x + pp[0]) + '" cy="' + (FP.xlr.y + pp[1]) + '" r="3" fill="#C9A55A"/>';
+      s += '<circle cx="' + (FP.xlr.x + pp[0] - 1) + '" cy="' + (FP.xlr.y + pp[1] - 1) + '" r="1" fill="#EFDCAE" opacity=".8"/>';
+    });
+    // centre jack hole (it's a combo socket on the real unit)
+    s += '<circle cx="' + FP.xlr.x + '" cy="' + (FP.xlr.y + 1) + '" r="5.5" fill="#0D0B09"/>';
     s += flabel(FP.xlr.x, 74, "INPUT 1 · MIC", 10);
 
     // gain 1 + labels + buttons
@@ -1810,9 +2002,16 @@
     s += btn(FP.air.x, FP.air.y, FP.air.r, !!st.air, "#FFD34D");
     s += flabel(FP.air.x, 192, "AIR");
 
-    // input 2 jack + gain 2 + INST
-    s += '<circle cx="' + FP.jack2.x + '" cy="' + FP.jack2.y + '" r="' + FP.jack2.r + '" fill="#2E2A28" stroke="#191614" stroke-width="2"/>';
-    s += '<circle cx="' + FP.jack2.x + '" cy="' + FP.jack2.y + '" r="7" fill="#15120F"/>';
+    // input 2 jack + gain 2 + INST — chrome hex nut around the socket
+    var hex = "";
+    for (var hx = 0; hx < 6; hx++) {
+      var ha = Math.PI / 6 + hx * Math.PI / 3;
+      hex += (hx ? "L" : "M") + (FP.jack2.x + Math.cos(ha) * (FP.jack2.r + 3)) + " " + (FP.jack2.y + Math.sin(ha) * (FP.jack2.r + 3)) + " ";
+    }
+    s += '<path d="' + hex + 'Z" fill="url(#' + bez.id + ')" stroke="#6E6A63" stroke-width="1.2"/>';
+    s += '<circle cx="' + FP.jack2.x + '" cy="' + FP.jack2.y + '" r="' + (FP.jack2.r - 2) + '" fill="#211D1B" stroke="#0F0D0B" stroke-width="1.4"/>';
+    s += '<circle cx="' + FP.jack2.x + '" cy="' + FP.jack2.y + '" r="7" fill="#0D0B09"/>';
+    s += '<circle cx="' + (FP.jack2.x - 3) + '" cy="' + (FP.jack2.y - 4) + '" r="2" fill="#FFFFFF" opacity=".14"/>';
     s += flabel(FP.jack2.x, 196, "INPUT 2");
     s += knob(FP.gain2.x, FP.gain2.y, FP.gain2.r, st.halo2 || null);
     s += flabel(FP.gain2.x, 145, "GAIN");
@@ -1832,9 +2031,12 @@
     s += flabel(FP.direct.x, 70, "DIRECT", 9);
     s += flabel(FP.direct.x, 81, "MONITOR", 9);
 
-    // phones
-    s += '<circle cx="' + FP.phones.x + '" cy="' + FP.phones.y + '" r="' + FP.phones.r + '" fill="#2E2A28" stroke="#191614" stroke-width="2"/>';
-    s += '<circle cx="' + FP.phones.x + '" cy="' + FP.phones.y + '" r="7" fill="#15120F"/>';
+    // phones — chrome bezel like the jack
+    s += '<circle cx="' + FP.phones.x + '" cy="' + (FP.phones.y + 1.5) + '" r="' + (FP.phones.r + 2) + '" fill="#000" opacity=".28"/>';
+    s += '<circle cx="' + FP.phones.x + '" cy="' + FP.phones.y + '" r="' + (FP.phones.r + 2) + '" fill="url(#' + bez.id + ')" stroke="#6E6A63" stroke-width="1.2"/>';
+    s += '<circle cx="' + FP.phones.x + '" cy="' + FP.phones.y + '" r="' + (FP.phones.r - 3) + '" fill="#211D1B" stroke="#0F0D0B" stroke-width="1.4"/>';
+    s += '<circle cx="' + FP.phones.x + '" cy="' + FP.phones.y + '" r="7" fill="#0D0B09"/>';
+    s += '<circle cx="' + (FP.phones.x - 4) + '" cy="' + (FP.phones.y - 5) + '" r="2.2" fill="#FFFFFF" opacity=".14"/>';
     // headphone glyph
     s += '<path d="M ' + (FP.phones.x - 9) + ' ' + (FP.phones.y + 33) + ' a 9 9 0 0 1 18 0" fill="none" stroke="#F4C9C4" stroke-width="2"/>' +
          '<rect x="' + (FP.phones.x - 11) + '" y="' + (FP.phones.y + 31) + '" width="4.5" height="7" rx="2" fill="#F4C9C4"/>' +
@@ -1861,17 +2063,33 @@
 
   SVGX.backPanel = function () {
     var s = '<svg viewBox="0 0 700 170" role="img" aria-label="Scarlett Solo back panel">';
-    s += '<rect x="34" y="30" width="632" height="112" rx="14" fill="#A32A22"/>';
-    s += '<rect x="34" y="30" width="632" height="112" rx="14" fill="none" stroke="#7A1F19" stroke-width="2.5"/>';
+    var ch = lingrad([[0, "#C2382D"], [0.5, "#A82A21"], [1, "#8E211A"]], true);
+    var bez = lingrad([[0, "#EAE8E4"], [0.5, "#B8B4AE"], [1, "#8F8B84"]], true);
+    s += ch.m + bez.m;
+    s += '<rect x="37" y="34" width="632" height="112" rx="14" fill="#000" opacity=".25"/>';
+    s += '<rect x="34" y="30" width="632" height="112" rx="14" fill="url(#' + ch.id + ')"/>';
+    s += '<rect x="34" y="30" width="632" height="112" rx="14" fill="none" stroke="#6E1A14" stroke-width="2.5"/>';
+    s += '<rect x="38" y="34" width="624" height="8" rx="4" fill="#E8776C" opacity=".3"/>';
+    [[52, 44], [648, 44], [52, 128], [648, 128]].forEach(function (sc) {
+      s += '<circle cx="' + sc[0] + '" cy="' + sc[1] + '" r="4" fill="#6E1A14" stroke="#521310" stroke-width="1"/>';
+      s += '<line x1="' + (sc[0] - 2.1) + '" y1="' + (sc[1] - 2.1) + '" x2="' + (sc[0] + 2.1) + '" y2="' + (sc[1] + 2.1) + '" stroke="#3E0E0B" stroke-width="1"/>';
+    });
     // Kensington
-    s += '<rect x="80" y="76" width="26" height="12" rx="5" fill="#2E2A28"/>' + flabel(93, 112, "LOCK");
-    // line outs
-    s += '<circle cx="290" cy="84" r="17" fill="#EDEAE5" stroke="#8F8B86" stroke-width="2"/><circle cx="290" cy="84" r="6" fill="#15120F"/>';
-    s += '<circle cx="350" cy="84" r="17" fill="#EDEAE5" stroke="#8F8B86" stroke-width="2"/><circle cx="350" cy="84" r="6" fill="#15120F"/>';
+    s += '<rect x="80" y="76" width="26" height="12" rx="5" fill="#211D1B" stroke="#0F0D0B" stroke-width="1.4"/>' + flabel(93, 112, "LOCK");
+    // line outs — chrome bezels with black wells
+    [290, 350].forEach(function (lx) {
+      s += '<circle cx="' + lx + '" cy="86" r="18" fill="#000" opacity=".25"/>';
+      s += '<circle cx="' + lx + '" cy="84" r="17" fill="url(#' + bez.id + ')" stroke="#6E6A63" stroke-width="1.4"/>';
+      s += '<circle cx="' + lx + '" cy="84" r="12" fill="#211D1B" stroke="#0F0D0B" stroke-width="1.2"/>';
+      s += '<circle cx="' + lx + '" cy="84" r="6" fill="#0D0B09"/>';
+      s += '<circle cx="' + (lx - 4) + '" cy="79" r="2" fill="#FFFFFF" opacity=".16"/>';
+    });
     s += flabel(320, 52, "LINE OUTPUTS  L · R", 10);
     s += flabel(320, 118, "(speakers, if you add them)", 9);
-    // USB-C
-    s += '<rect x="560" y="74" width="42" height="18" rx="9" fill="#2E2A28" stroke="#191614" stroke-width="2"/>';
+    // USB-C — steel port with inner tongue
+    s += '<rect x="558" y="72" width="46" height="22" rx="11" fill="url(#' + bez.id + ')" stroke="#6E6A63" stroke-width="1.4"/>';
+    s += '<rect x="562" y="76" width="38" height="14" rx="7" fill="#15120F"/>';
+    s += '<rect x="568" y="81" width="26" height="4" rx="2" fill="#4A453F"/>';
     s += flabel(581, 52, "USB-C", 10);
     s += flabel(581, 118, "one cable to the Mac", 9);
     s += ring(581, 83, 30);
@@ -1884,21 +2102,56 @@
   function nodeBox(x, y, w, h, label, sub, tone) {
     var fill = tone === "red" ? "var(--accent-wash)" : "var(--surface-sunk)";
     var strokeC = tone === "red" ? "var(--accent)" : "var(--line-strong)";
-    var s = '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="11" fill="' + fill + '" stroke="' + strokeC + '" stroke-width="1.8"/>';
+    var s = '<rect x="' + (x + 2.5) + '" y="' + (y + 3.5) + '" width="' + w + '" height="' + h + '" rx="11" fill="var(--ink)" opacity=".10"/>';
+    s += '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="11" fill="' + fill + '" stroke="' + strokeC + '" stroke-width="1.8"/>';
+    s += '<rect x="' + (x + 3) + '" y="' + (y + 2.5) + '" width="' + (w - 6) + '" height="' + (h / 2.6) + '" rx="8" fill="#FFFFFF" opacity=".22"/>';
+    if (tone === "red") s += '<rect x="' + x + '" y="' + y + '" width="5" height="' + h + '" rx="2.5" fill="var(--accent)"/>';
     s += '<text x="' + (x + w / 2) + '" y="' + (y + (sub ? h / 2 - 4 : h / 2 + 5)) + '" text-anchor="middle" font-family="var(--display)" font-size="15" font-weight="700" fill="var(--ink)">' + esc(label) + '</text>';
     if (sub) s += '<text x="' + (x + w / 2) + '" y="' + (y + h / 2 + 16) + '" text-anchor="middle" font-family="var(--body)" font-size="11.5" fill="var(--ink-soft)">' + esc(sub) + '</text>';
     return s;
   }
   function wire(x1, y1, x2, y2, label, midYOffset) {
     var mx = (x1 + x2) / 2, my = (y1 + y2) / 2 + (midYOffset || 0);
-    var s = '<path d="M ' + x1 + ' ' + y1 + ' C ' + (x1 + 55) + ' ' + y1 + ', ' + (x2 - 55) + ' ' + y2 + ', ' + x2 + ' ' + y2 + '" fill="none" stroke="var(--ink-faint)" stroke-width="2.2"/>';
-    s += '<circle cx="' + x2 + '" cy="' + y2 + '" r="4" fill="var(--ink-faint)"/>';
+    var s = '<path d="M ' + x1 + ' ' + y1 + ' C ' + (x1 + 55) + ' ' + y1 + ', ' + (x2 - 55) + ' ' + y2 + ', ' + (x2 - 9) + ' ' + y2 + '" fill="none" stroke="var(--ink-faint)" stroke-width="2.4"/>';
+    s += '<path d="M ' + (x2 - 11) + ' ' + (y2 - 5.5) + ' L ' + x2 + ' ' + y2 + ' L ' + (x2 - 11) + ' ' + (y2 + 5.5) + ' Z" fill="var(--ink-faint)"/>';
     if (label) {
       var w = label.length * 6.6 + 18;
       s += '<rect x="' + (mx - w / 2) + '" y="' + (my - 12) + '" width="' + w + '" height="22" rx="11" fill="var(--surface)" stroke="var(--line-strong)" stroke-width="1.2"/>';
       s += '<text x="' + mx + '" y="' + (my + 3.5) + '" text-anchor="middle" font-family="var(--mono)" font-size="10.5" font-weight="600" fill="var(--ink-mid)">' + esc(label) + '</text>';
     }
     return s;
+  }
+
+  /* little device glyphs for the map */
+  function icoMic(x, y) {
+    return '<g stroke="var(--ink-mid)" stroke-width="2" fill="none">' +
+      '<rect x="' + (x - 6) + '" y="' + (y - 14) + '" width="12" height="18" rx="6" fill="var(--ink-mid)"/>' +
+      '<path d="M ' + (x - 10) + ' ' + (y - 2) + ' a 10 10 0 0 0 20 0"/>' +
+      '<line x1="' + x + '" y1="' + (y + 8) + '" x2="' + x + '" y2="' + (y + 14) + '"/>' +
+      '<line x1="' + (x - 6) + '" y1="' + (y + 14) + '" x2="' + (x + 6) + '" y2="' + (y + 14) + '"/></g>';
+  }
+  function icoKeys(x, y, black) {
+    var g = '<g>';
+    for (var i = 0; i < 5; i++) g += '<rect x="' + (x - 20 + i * 8) + '" y="' + (y - 10) + '" width="7" height="22" rx="1.5" fill="var(--surface)" stroke="var(--ink-mid)" stroke-width="1.2"/>';
+    if (black) [0, 1, 3].forEach(function (i) { g += '<rect x="' + (x - 15 + i * 8) + '" y="' + (y - 10) + '" width="5" height="13" rx="1" fill="var(--ink-mid)"/>'; });
+    return g + '</g>';
+  }
+  function icoLaptop(x, y) {
+    return '<g><rect x="' + (x - 16) + '" y="' + (y - 12) + '" width="32" height="20" rx="2.5" fill="var(--surface)" stroke="var(--ink-mid)" stroke-width="1.8"/>' +
+      '<rect x="' + (x - 12) + '" y="' + (y - 8) + '" width="24" height="12" rx="1" fill="var(--accent)" opacity=".35"/>' +
+      '<path d="M ' + (x - 21) + ' ' + (y + 11) + ' L ' + (x + 21) + ' ' + (y + 11) + ' L ' + (x + 17) + ' ' + (y + 8) + ' L ' + (x - 17) + ' ' + (y + 8) + ' Z" fill="var(--ink-mid)"/></g>';
+  }
+  function icoPhones(x, y) {
+    return '<g fill="none" stroke="var(--ink-mid)" stroke-width="2.2">' +
+      '<path d="M ' + (x - 11) + ' ' + (y + 4) + ' a 11 11 0 0 1 22 0"/>' +
+      '<rect x="' + (x - 14) + '" y="' + (y + 2) + '" width="6" height="10" rx="3" fill="var(--ink-mid)"/>' +
+      '<rect x="' + (x + 8) + '" y="' + (y + 2) + '" width="6" height="10" rx="3" fill="var(--ink-mid)"/></g>';
+  }
+  function icoScarlett(x, y) {
+    var g = '<g><rect x="' + (x - 17) + '" y="' + (y - 9) + '" width="34" height="19" rx="4" fill="#C0332A" stroke="#8E211A" stroke-width="1.4"/>';
+    g += '<circle cx="' + (x - 8) + '" cy="' + y + '" r="4" fill="#D6D3CE" stroke="#8F8B86" stroke-width="1"/>';
+    g += '<circle cx="' + (x + 6) + '" cy="' + y + '" r="5.5" fill="#D6D3CE" stroke="#8F8B86" stroke-width="1"/>';
+    return g + '</g>';
   }
 
   SVGX.connectionMap = function (hl) {
@@ -1909,11 +2162,19 @@
     s += nodeBox(300, 96, 180, 78, "Scarlett Solo", "audio translator", "red");
     s += nodeBox(560, 150, 176, 78, "Mac", "FL Studio", "red");
     s += nodeBox(310, 300, 160, 62, "Headphones", "listen here");
+    // device glyphs sitting above their boxes
+    s += icoMic(50, 24);
+    s += icoKeys(56, 156, false);
+    s += icoKeys(56, 286, true);
+    s += icoScarlett(336, 82);
+    s += icoLaptop(596, 132);
+    s += icoPhones(338, 282);
     s += wire(174, 71, 300, 118, "XLR");
     s += wire(174, 201, 300, 152, "jack");
     s += wire(480, 135, 560, 172, "USB-C");
-    s += wire(194, 331, 560, 206, "USB — straight to the Mac");
-    s += '<path d="M 390 174 L 390 300" fill="none" stroke="var(--ink-faint)" stroke-width="2.2"/><circle cx="390" cy="300" r="4" fill="var(--ink-faint)"/>';
+    s += wire(194, 331, 560, 206, "USB — straight to the Mac", -46);
+    s += '<path d="M 390 174 L 390 291" fill="none" stroke="var(--ink-faint)" stroke-width="2.4"/>';
+    s += '<path d="M 384.5 289 L 390 300 L 395.5 289 Z" fill="var(--ink-faint)"/>';
     if (hl === "kbd") s += ring(97, 331, 92) + pill(240, 386, "This cable skips the Scarlett");
     s += '</svg>';
     return s;
@@ -2012,21 +2273,32 @@
   };
 
   function flWindow(w, h, title, inner) {
+    var tg = lingrad([[0, "#525B65"], [0.5, FLC.title], [1, "#3F474F"]], true);
     var s = '<svg viewBox="0 0 ' + w + " " + h + '" role="img" aria-label="' + esc(title) + '">';
+    s += tg.m;
+    s += '<rect x="11" y="10" width="' + (w - 16) + '" height="' + (h - 12) + '" rx="6" fill="#000" opacity=".28"/>';
     s += '<rect x="8" y="6" width="' + (w - 16) + '" height="' + (h - 12) + '" rx="6" fill="' + FLC.body + '" stroke="' + FLC.edge + '" stroke-width="2"/>';
-    s += '<rect x="8" y="6" width="' + (w - 16) + '" height="27" rx="6" fill="' + FLC.title + '"/>';
-    s += '<rect x="8" y="24" width="' + (w - 16) + '" height="9" fill="' + FLC.title + '"/>';
+    s += '<rect x="8" y="6" width="' + (w - 16) + '" height="27" rx="6" fill="url(#' + tg.id + ')"/>';
+    s += '<rect x="8" y="24" width="' + (w - 16) + '" height="9" fill="url(#' + tg.id + ')"/>';
+    s += '<line x1="10" y1="33.5" x2="' + (w - 10) + '" y2="33.5" stroke="#20262C" stroke-width="1"/>';
+    s += '<line x1="10" y1="8" x2="' + (w - 10) + '" y2="8" stroke="#6B7480" stroke-width="1" opacity=".6"/>';
     s += '<path d="M 22 17 L 30 17 L 26 22 Z" fill="' + FLC.dim + '"/>';
     s += '<text x="40" y="24" font-family="var(--body)" font-size="12" font-weight="600" fill="' + FLC.txt + '">' + esc(title) + '</text>';
     // window buttons top-right
     s += '<g fill="' + FLC.dim + '"><rect x="' + (w - 58) + '" y="16" width="9" height="2.5" /><rect x="' + (w - 42) + '" y="13" width="8" height="8" fill="none" stroke="' + FLC.dim + '" stroke-width="1.6"/><path d="M ' + (w - 26) + ' 13 l 8 8 M ' + (w - 18) + ' 13 l -8 8" stroke="' + FLC.dim + '" stroke-width="1.6"/></g>';
     s += inner;
+    // resize grip
+    s += '<g stroke="' + FLC.line + '" stroke-width="1.2" opacity=".7"><line x1="' + (w - 20) + '" y1="' + (h - 10) + '" x2="' + (w - 10) + '" y2="' + (h - 20) + '"/><line x1="' + (w - 16) + '" y1="' + (h - 10) + '" x2="' + (w - 10) + '" y2="' + (h - 16) + '"/></g>';
     s += '</svg>';
     return s;
   }
   function lcd(x, y, w, h, text, size) {
+    var fs = size || 13;
     return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="4" fill="' + FLC.lcdBg + '" stroke="' + FLC.edge + '" stroke-width="1.4"/>' +
-           '<text x="' + (x + w / 2) + '" y="' + (y + h / 2 + (size || 13) * 0.36) + '" text-anchor="middle" font-family="var(--mono)" font-size="' + (size || 13) + '" font-weight="700" fill="' + FLC.lcd + '">' + esc(text) + '</text>';
+           '<rect x="' + (x + 1.5) + '" y="' + (y + 1.5) + '" width="' + (w - 3) + '" height="' + (h - 3) + '" rx="3" fill="none" stroke="#000" stroke-width="1" opacity=".5"/>' +
+           '<rect x="' + (x + 2) + '" y="' + (y + 2) + '" width="' + (w - 4) + '" height="' + ((h - 4) / 2.4) + '" rx="2" fill="#FFFFFF" opacity=".05"/>' +
+           '<text x="' + (x + w / 2) + '" y="' + (y + h / 2 + fs * 0.36) + '" text-anchor="middle" font-family="var(--mono)" font-size="' + fs + '" font-weight="700" fill="' + FLC.lcd + '" stroke="' + FLC.lcd + '" stroke-width="2.6" opacity=".18">' + esc(text) + '</text>' +
+           '<text x="' + (x + w / 2) + '" y="' + (y + h / 2 + fs * 0.36) + '" text-anchor="middle" font-family="var(--mono)" font-size="' + fs + '" font-weight="700" fill="' + FLC.lcd + '">' + esc(text) + '</text>';
   }
   function flRow(x, y, w, label, value, hl) {
     var s = '<text x="' + x + '" y="' + (y + 4) + '" font-family="var(--body)" font-size="12.5" fill="' + FLC.dim + '">' + esc(label) + '</text>';
@@ -2037,8 +2309,17 @@
     return s;
   }
   function miniKnob(x, y, r) {
-    return '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="' + FLC.knob + '" stroke="' + FLC.ring + '" stroke-width="1.4"/>' +
-           '<line x1="' + x + '" y1="' + y + '" x2="' + x + '" y2="' + (y - r + 2) + '" stroke="' + FLC.txt + '" stroke-width="1.6" stroke-linecap="round"/>';
+    var g = radgrad([[0, "#454D55"], [0.7, FLC.knob], [1, "#242A30"]], "0.35", "0.3");
+    var s = g.m;
+    // value arc, like FL's lit knob rings
+    var a0 = Math.PI * 0.75, a1 = Math.PI * 1.62;
+    s += '<path d="M ' + (x + Math.cos(a0) * (r + 2.5)) + ' ' + (y + Math.sin(a0) * (r + 2.5)) +
+         ' A ' + (r + 2.5) + ' ' + (r + 2.5) + ' 0 0 1 ' + (x + Math.cos(a1) * (r + 2.5)) + ' ' + (y + Math.sin(a1) * (r + 2.5)) +
+         '" fill="none" stroke="' + FLC.or + '" stroke-width="2" stroke-linecap="round" opacity=".85"/>';
+    s += '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="url(#' + g.id + ')" stroke="' + FLC.ring + '" stroke-width="1.3"/>';
+    s += '<ellipse cx="' + (x - r * 0.3) + '" cy="' + (y - r * 0.35) + '" rx="' + (r * 0.4) + '" ry="' + (r * 0.28) + '" fill="#FFFFFF" opacity=".12"/>';
+    s += '<line x1="' + x + '" y1="' + (y - r * 0.25) + '" x2="' + x + '" y2="' + (y - r + 2) + '" stroke="' + FLC.txt + '" stroke-width="1.7" stroke-linecap="round"/>';
+    return s;
   }
 
   /* hl: 'device' | 'buffer' */
@@ -2414,6 +2695,163 @@
     return s;
   };
 
+  /* ---------- keyboard zones: which keys do which job ---------- */
+  SVGX.kbZones = function () {
+    var s = '<svg viewBox="0 0 760 360" role="img" aria-label="The keyboard, split into its working zones">';
+    var x0 = 26, y0 = 120, ww = 34, wh = 110, nWhite = 21; // C2..B4 = 3 octaves
+    var wg = lingrad([[0, "#FFFFFF"], [0.85, "#F2F0EC"], [1, "#DEDAD4"]], true);
+    var bg = lingrad([[0, "#3A3733"], [0.5, "#16130F"], [1, "#000000"]], true);
+    s += wg.m + bg.m;
+    // zone bands above the keys
+    var zones = [
+      { from: 0, to: 7, n: "BASS ZONE", sub: "808s & bass — one note at a time", col: "var(--accent)" },
+      { from: 7, to: 14, n: "CHORD ZONE", sub: "piano chords, pads, guitar", col: "#7A6FB8" },
+      { from: 14, to: 21, n: "MELODY ZONE", sub: "riffs, leads, hooks", col: "#3E8FB8" }
+    ];
+    zones.forEach(function (z) {
+      var zx = x0 + z.from * ww, zw = (z.to - z.from) * ww - 2;
+      s += '<rect x="' + zx + '" y="34" width="' + zw + '" height="52" rx="9" fill="' + z.col + '" opacity=".16"/>';
+      s += '<rect x="' + zx + '" y="34" width="' + zw + '" height="52" rx="9" fill="none" stroke="' + z.col + '" stroke-width="1.8"/>';
+      s += '<text x="' + (zx + zw / 2) + '" y="55" text-anchor="middle" font-family="var(--display)" font-size="13.5" font-weight="800" fill="var(--ink)">' + z.n + '</text>';
+      s += '<text x="' + (zx + zw / 2) + '" y="73" text-anchor="middle" font-family="var(--body)" font-size="10" fill="var(--ink-soft)">' + z.sub + '</text>';
+      s += '<line x1="' + (zx + zw / 2) + '" y1="88" x2="' + (zx + zw / 2) + '" y2="' + (y0 - 6) + '" stroke="' + z.col + '" stroke-width="1.6" stroke-dasharray="4 4" opacity=".7"/>';
+    });
+    // white keys
+    var names = ["C2", "D2", "E2", "F2", "G2", "A2", "B2", "C3", "D3", "E3", "F3", "G3", "A3", "B3", "C4", "D4", "E4", "F4", "G4", "A4", "B4"];
+    for (var i = 0; i < nWhite; i++) {
+      var x = x0 + i * ww;
+      var isMidC = names[i] === "C4";
+      s += '<rect x="' + x + '" y="' + y0 + '" width="' + (ww - 2.5) + '" height="' + wh + '" rx="4" fill="url(#' + wg.id + ')" stroke="' + (isMidC ? "var(--accent)" : "#B9B4AC") + '" stroke-width="' + (isMidC ? 2.2 : 1.2) + '"/>';
+      if (names[i][0] === "C") s += '<text x="' + (x + ww / 2 - 1) + '" y="' + (y0 + wh - 9) + '" text-anchor="middle" font-family="var(--mono)" font-size="10" font-weight="' + (isMidC ? 800 : 500) + '" fill="' + (isMidC ? "var(--accent-deep)" : "#9A958D") + '">' + names[i] + '</text>';
+    }
+    // black keys (pattern per octave at white indices +0(C#),+1(D#),+3(F#),+4(G#),+5(A#))
+    for (var oct = 0; oct < 3; oct++) {
+      [0, 1, 3, 4, 5].forEach(function (k) {
+        var wi = oct * 7 + k;
+        var bx = x0 + (wi + 1) * ww - 12;
+        s += '<rect x="' + (bx + 1.5) + '" y="' + (y0 + 1) + '" width="21" height="66" rx="3" fill="#000" opacity=".3"/>';
+        s += '<rect x="' + bx + '" y="' + y0 + '" width="21" height="65" rx="3" fill="url(#' + bg.id + ')"/>';
+        s += '<rect x="' + (bx + 3) + '" y="' + (y0 + 2) + '" width="15" height="30" rx="2.5" fill="#FFFFFF" opacity=".1"/>';
+      });
+    }
+    // middle C flag
+    s += '<path d="M ' + (x0 + 14 * ww + ww / 2 - 1) + ' ' + (y0 + wh + 6) + ' l 0 12" stroke="var(--accent)" stroke-width="2"/>';
+    s += pill(x0 + 14 * ww + ww / 2 - 1, y0 + wh + 30, "MIDDLE C — home base");
+    // vocal range bracket
+    var vx1 = x0 + 12 * ww, vx2 = x0 + 21 * ww - 4;
+    s += '<path d="M ' + vx1 + ' ' + (y0 + wh + 52) + ' l 0 8 L ' + vx2 + ' ' + (y0 + wh + 60) + ' l 0 -8" fill="none" stroke="#3E8FB8" stroke-width="2.2"/>';
+    s += '<text x="500" y="' + (y0 + wh + 80) + '" text-anchor="middle" font-family="var(--body)" font-size="11" font-weight="700" fill="#3E8FB8">a singer’s range sits about here — write melodies where you sing</text>';
+    s += '<text x="380" y="' + (y0 + wh + 104) + '" text-anchor="middle" font-family="var(--body)" font-size="11" fill="var(--ink-soft)">Your keyboard shows fewer keys than this — the OCTAVE +/− buttons slide its window up and down this map.</text>';
+    return s + '</svg>';
+  };
+
+  /* ---------- the FULL drum kit on the keys — every drum, colour-coded ---------- */
+  SVGX.drumKitFull = function () {
+    var s = '<svg viewBox="0 0 760 350" role="img" aria-label="The full drum kit laid across the keyboard">';
+    var x0 = 40, y0 = 120, ww = 52, wh = 96;
+    var wg = lingrad([[0, "#FFFFFF"], [0.85, "#F2F0EC"], [1, "#DEDAD4"]], true);
+    var bg = lingrad([[0, "#3A3733"], [0.5, "#16130F"], [1, "#000000"]], true);
+    s += wg.m + bg.m;
+    var FAM = { low: "var(--accent)", crack: "#7A6FB8", metal: "#C99A2E", tom: "#3E8FB8", perc: "#4E9E6A" };
+    // white keys C..C (8) with labels below
+    var whites = [
+      { n: "C", d: "KICK", fam: "low", why: "the heartbeat" },
+      { n: "D", d: "SNARE", fam: "crack", why: "the backbeat crack" },
+      { n: "E", d: "SNAP", fam: "crack", why: "softer finger-snap" },
+      { n: "F", d: "TOM low", fam: "tom", why: "fills, rolling down" },
+      { n: "G", d: "TOM mid", fam: "tom", why: "fills" },
+      { n: "A", d: "TOM high", fam: "tom", why: "fills, rolling up" },
+      { n: "B", d: "RIDE", fam: "metal", why: "washy ting-ting" },
+      { n: "C", d: "CRASH", fam: "metal", why: "the big arrival" }
+    ];
+    whites.forEach(function (w, i) {
+      var x = x0 + i * ww;
+      s += '<rect x="' + x + '" y="' + y0 + '" width="' + (ww - 3) + '" height="' + wh + '" rx="5" fill="url(#' + wg.id + ')" stroke="#B9B4AC" stroke-width="1.3"/>';
+      s += '<text x="' + (x + ww / 2 - 1) + '" y="' + (y0 + wh - 8) + '" text-anchor="middle" font-family="var(--mono)" font-size="10.5" fill="#9A958D">' + w.n + '</text>';
+      // label chip below
+      var cy = y0 + wh + 16 + (i % 2) * 40;
+      s += '<line x1="' + (x + ww / 2 - 1) + '" y1="' + (y0 + wh + 2) + '" x2="' + (x + ww / 2 - 1) + '" y2="' + (cy - 2) + '" stroke="' + FAM[w.fam] + '" stroke-width="1.6" stroke-dasharray="3 3" opacity=".8"/>';
+      s += '<rect x="' + (x - 2) + '" y="' + cy + '" width="' + (ww + 1) + '" height="20" rx="10" fill="' + FAM[w.fam] + '"/>';
+      s += '<text x="' + (x + ww / 2 - 1) + '" y="' + (cy + 13.5) + '" text-anchor="middle" font-family="var(--body)" font-size="9" font-weight="800" fill="#fff">' + w.d + '</text>';
+      s += '<text x="' + (x + ww / 2 - 1) + '" y="' + (cy + 33) + '" text-anchor="middle" font-family="var(--body)" font-size="8" fill="var(--ink-soft)">' + w.why + '</text>';
+    });
+    // black keys with their drums, labels above
+    var blacks = [
+      { after: 0, d: "RIM", fam: "crack", why: "tick — ballad backbeat" },
+      { after: 1, d: "CLAP", fam: "crack", why: "snare's best friend" },
+      { after: 3, d: "CLOSED HAT", fam: "metal", why: "the tick-tick engine" },
+      { after: 4, d: "PEDAL HAT", fam: "metal", why: "soft chick" },
+      { after: 5, d: "OPEN HAT", fam: "metal", why: "tsss — the offbeat breath" }
+    ];
+    blacks.forEach(function (b, j) {
+      var bx = x0 + (b.after + 1) * ww - 16;
+      s += '<rect x="' + (bx + 1.5) + '" y="' + (y0 + 1) + '" width="29" height="58" rx="4" fill="#000" opacity=".3"/>';
+      s += '<rect x="' + bx + '" y="' + y0 + '" width="29" height="57" rx="4" fill="url(#' + bg.id + ')"/>';
+      s += '<rect x="' + (bx + 4) + '" y="' + (y0 + 2) + '" width="21" height="26" rx="3" fill="#FFFFFF" opacity=".1"/>';
+      var cy = 26 + (j % 2) * 38;
+      s += '<line x1="' + (bx + 14) + '" y1="' + (cy + 22) + '" x2="' + (bx + 14) + '" y2="' + (y0 - 2) + '" stroke="' + FAM[b.fam] + '" stroke-width="1.6" stroke-dasharray="3 3" opacity=".8"/>';
+      var pw = b.d.length * 6.4 + 18;
+      s += '<rect x="' + (bx + 14 - pw / 2) + '" y="' + cy + '" width="' + pw + '" height="19" rx="9.5" fill="' + FAM[b.fam] + '"/>';
+      s += '<text x="' + (bx + 14) + '" y="' + (cy + 13) + '" text-anchor="middle" font-family="var(--body)" font-size="8.5" font-weight="800" fill="#fff">' + b.d + '</text>';
+      s += '<text x="' + (bx + 14) + '" y="' + (cy + 32) + '" text-anchor="middle" font-family="var(--body)" font-size="8" fill="var(--ink-soft)">' + b.why + '</text>';
+    });
+    // family legend
+    var leg = [["low", "LOW — the power"], ["crack", "BACKBEAT — the crack"], ["metal", "CYMBALS — the motion"], ["tom", "TOMS — the fills"]];
+    var lx0 = 62, ly0 = 322;
+    leg.forEach(function (l, i) {
+      var lx = lx0 + i * 168;
+      s += '<circle cx="' + lx + '" cy="' + ly0 + '" r="6" fill="' + FAM[l[0]] + '"/>';
+      s += '<text x="' + (lx + 12) + '" y="' + (ly0 + 4) + '" font-family="var(--body)" font-size="10.5" font-weight="600" fill="var(--ink-soft)">' + l[1] + '</text>';
+    });
+    return s + '</svg>';
+  };
+
+  /* ---------- verse → chorus: what the drums do at the lift ---------- */
+  SVGX.chorusLift = function () {
+    var s = '<svg viewBox="0 0 760 490" role="img" aria-label="How the drums change when the chorus arrives">';
+    var rows = ["Kick", "Snare", "Cl. hat", "Op. hat", "Crash"];
+    var verse = [[1, 7, 9], [5, 13], [1, 3, 5, 7, 9, 11, 13, 15], [], []];
+    var chorus = [[1, 4, 7, 9, 12], [5, 13], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], [3, 7, 11, 15], [1]];
+    var fill = [13, 14, 15, 16]; // snare fill cells at the end of the verse
+    function grid(gy, title, data, isChorus, added) {
+      var g = '<text x="40" y="' + (gy - 10) + '" font-family="var(--display)" font-size="14.5" font-weight="800" fill="var(--ink)">' + title + '</text>';
+      var x0 = 110, cw = 36, rh = 30;
+      rows.forEach(function (rn, r) {
+        var y = gy + r * rh;
+        g += '<text x="' + (x0 - 10) + '" y="' + (y + 19) + '" text-anchor="end" font-family="var(--body)" font-size="10.5" font-weight="600" fill="var(--ink-soft)">' + rn + '</text>';
+        for (var c = 1; c <= 16; c++) {
+          var x = x0 + (c - 1) * cw + (c > 4 ? 5 : 0) + (c > 8 ? 5 : 0) + (c > 12 ? 5 : 0);
+          var on = data[r].indexOf(c) > -1;
+          var isNew = isChorus && added[r] && added[r].indexOf(c) > -1;
+          var isFill = !isChorus && r === 1 && fill.indexOf(c) > -1;
+          if (on || isFill) {
+            var col = isNew ? "#C99A2E" : isFill ? "#D9A24C" : "var(--accent)";
+            g += '<rect x="' + x + '" y="' + (y + 2) + '" width="' + (cw - 8) + '" height="' + (rh - 8) + '" rx="5" fill="' + col + '"' + (isFill ? ' opacity=".8"' : "") + '/>';
+            if (isFill) g += '<rect x="' + x + '" y="' + (y + 2) + '" width="' + (cw - 8) + '" height="' + (rh - 8) + '" rx="5" fill="none" stroke="#8A5F1E" stroke-width="1.4" stroke-dasharray="4 3"/>';
+          } else {
+            g += '<rect x="' + x + '" y="' + (y + 2) + '" width="' + (cw - 8) + '" height="' + (rh - 8) + '" rx="5" fill="var(--surface-sunk)" stroke="var(--line)" stroke-width="0.8"/>';
+          }
+        }
+      });
+      return g;
+    }
+    s += grid(58, "LAST BAR OF THE VERSE", verse, false, null);
+    // fill annotation — above the grid, clear of the cells
+    s += '<text x="560" y="40" text-anchor="middle" font-family="var(--body)" font-size="10.5" font-weight="700" fill="#8A5F1E">the FILL — snare roll announcing the chorus</text>';
+    s += '<path d="M 620 46 L 620 84" stroke="#8A5F1E" stroke-width="1.8" stroke-dasharray="4 3"/>';
+    s += '<path d="M 615 80 L 620 89 L 625 80 Z" fill="#8A5F1E"/>';
+    // arrow between
+    s += '<path d="M 380 222 L 380 248" stroke="var(--accent)" stroke-width="3"/>';
+    s += '<path d="M 372 246 L 380 258 L 388 246 Z" fill="var(--accent)"/>';
+    s += '<text x="398" y="243" font-family="var(--body)" font-size="11" font-weight="700" fill="var(--accent-deep)">the lift</text>';
+    var addedRows = [[4, 12], [], [2, 4, 6, 8, 10, 12, 14, 16], [3, 7, 11, 15], [1]];
+    s += grid(288, "FIRST BAR OF THE CHORUS", chorus, true, addedRows);
+    // legend
+    s += '<circle cx="120" cy="466" r="6" fill="var(--accent)"/><text x="132" y="470" font-family="var(--body)" font-size="10.5" fill="var(--ink-soft)">already there</text>';
+    s += '<circle cx="240" cy="466" r="6" fill="#C99A2E"/><text x="252" y="470" font-family="var(--body)" font-size="10.5" fill="var(--ink-soft)">NEW in the chorus — hats double, open hat breathes, crash on 1, kick busier</text>';
+    return s + '</svg>';
+  };
+
   /* ---------- hat roll ---------- */
 
   SVGX.hatRoll = function () {
@@ -2512,25 +2950,165 @@
     return s;
   };
 
-  /* ---------- The vocal chain: order matters ---------- */
+  /* ---------- The vocal chain: order matters — the full annotated signal flow.
+     Each stage card shows WHAT THE SOUND LOOKS LIKE as it leaves that stage. ---------- */
   SVGX.vocalChain = function () {
-    var s = '<svg viewBox="0 0 760 210" role="img" aria-label="The vocal effects chain in order">';
-    var steps = [
-      { n: "Your voice", sub: "recorded dry", tone: "red" },
-      { n: "1 · EQ", sub: "tidy the tone" },
-      { n: "2 · Compress", sub: "even the volume" },
-      { n: "3 · Reverb", sub: "put it in a space" },
-      { n: "4 · Delay", sub: "echoes, if wanted" }
+    var s = '<svg viewBox="0 0 760 400" role="img" aria-label="The vocal effects chain — what each stage does to the sound">';
+    var stages = [
+      { n: "Your voice", plug: "recorded dry", knob: "sing close & green", viz: "dry", tone: "red" },
+      { n: "1 · EQ", plug: "Parametric EQ 2", knob: "moves of 2–3 dB", viz: "eq" },
+      { n: "2 · Compress", plug: "Fruity Limiter", knob: "THRES → 3–4 dB dip", viz: "comp" },
+      { n: "3 · Reverb", plug: "Fruity Reeverb 2", knob: "WET ≈ 20%", viz: "verb" },
+      { n: "4 · Delay", plug: "Fruity Delay 3", knob: "sync 1/4 · mix low", viz: "delay" }
     ];
-    var x = 20;
-    steps.forEach(function (st, i) {
-      var w = i === 0 ? 130 : 142;
-      s += nodeBox(x, 60, w, 64, st.n, st.sub, st.tone);
-      if (i < steps.length - 1) s += wire(x + w, 92, x + w + 10, 92, "");
-      x += w + 10;
+    var cw = 136, gap = 14, x0 = 15, top = 34, chd = 150;
+    function viz(kind, x, y, w, h) {
+      var v = '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="5" fill="#171C21" stroke="#20262C" stroke-width="1.2"/>';
+      var base = y + h / 2, aw = w - 16, ax = x + 8;
+      if (kind === "dry") {
+        var hh = [7, 20, 5, 13, 25, 6, 17, 4, 23, 9, 14, 6];
+        hh.forEach(function (v2, i) {
+          v += '<rect x="' + (ax + i * (aw / 12)) + '" y="' + (base - v2) + '" width="' + (aw / 12 - 2.5) + '" height="' + (v2 * 2) + '" rx="1.5" fill="#F0A43C" opacity=".92"/>';
+        });
+      } else if (kind === "eq") {
+        v += '<line x1="' + ax + '" y1="' + base + '" x2="' + (ax + aw) + '" y2="' + base + '" stroke="#3A424B" stroke-width="1"/>';
+        v += '<path d="M ' + ax + ' ' + (y + h - 6) + ' C ' + (ax + aw * 0.12) + ' ' + (y + h - 6) + ', ' + (ax + aw * 0.14) + ' ' + base + ', ' + (ax + aw * 0.26) + ' ' + base +
+             ' C ' + (ax + aw * 0.36) + ' ' + base + ', ' + (ax + aw * 0.36) + ' ' + (base + 6) + ', ' + (ax + aw * 0.46) + ' ' + (base + 6) +
+             ' C ' + (ax + aw * 0.58) + ' ' + (base + 6) + ', ' + (ax + aw * 0.62) + ' ' + base + ', ' + (ax + aw * 0.74) + ' ' + (base - 5) +
+             ' C ' + (ax + aw * 0.86) + ' ' + (base - 9) + ', ' + (ax + aw * 0.9) + ' ' + (base - 10) + ', ' + (ax + aw) + ' ' + (base - 11) +
+             '" fill="none" stroke="#F0A43C" stroke-width="2.4" stroke-linecap="round"/>';
+        v += '<text x="' + (ax + 4) + '" y="' + (y + 12) + '" font-family="var(--body)" font-size="7.5" fill="#98A1A9">cut lows · lift presence</text>';
+      } else if (kind === "comp") {
+        var he = [14, 17, 13, 15, 18, 14, 16, 13, 17, 15, 16, 14];
+        he.forEach(function (v2, i) {
+          v += '<rect x="' + (ax + i * (aw / 12)) + '" y="' + (base - v2) + '" width="' + (aw / 12 - 2.5) + '" height="' + (v2 * 2) + '" rx="1.5" fill="#AFC96A" opacity=".95"/>';
+        });
+        v += '<line x1="' + ax + '" y1="' + (base - 19) + '" x2="' + (ax + aw) + '" y2="' + (base - 19) + '" stroke="#D9534F" stroke-width="1.2" stroke-dasharray="4 3"/>';
+        v += '<text x="' + (ax + 4) + '" y="' + (base - 23) + '" font-family="var(--body)" font-size="7.5" fill="#D9534F">ceiling</text>';
+      } else if (kind === "verb") {
+        var hv = [15, 18, 14, 17];
+        hv.forEach(function (v2, i) {
+          v += '<rect x="' + (ax + i * 9) + '" y="' + (base - v2) + '" width="6.5" height="' + (v2 * 2) + '" rx="1.5" fill="#AFC96A"/>';
+        });
+        v += '<path d="M ' + (ax + 40) + ' ' + (base - 15) + ' C ' + (ax + 62) + ' ' + (base - 13) + ', ' + (ax + 80) + ' ' + (base - 5) + ', ' + (ax + aw) + ' ' + (base - 1) +
+             ' L ' + (ax + aw) + ' ' + (base + 1) + ' C ' + (ax + 80) + ' ' + (base + 5) + ', ' + (ax + 62) + ' ' + (base + 13) + ', ' + (ax + 40) + ' ' + (base + 15) + ' Z" fill="#6FBFE0" opacity=".45"/>';
+        v += '<text x="' + (ax + aw - 4) + '" y="' + (y + 12) + '" text-anchor="end" font-family="var(--body)" font-size="7.5" fill="#6FBFE0">the tail</text>';
+      } else if (kind === "delay") {
+        var taps = [[0, 18], [0.3, 12], [0.58, 8], [0.84, 5]];
+        taps.forEach(function (t, i) {
+          v += '<rect x="' + (ax + t[0] * (aw - 12)) + '" y="' + (base - t[1]) + '" width="9" height="' + (t[1] * 2) + '" rx="2" fill="#F0A43C" opacity="' + (1 - i * 0.2) + '"/>';
+          if (i) v += '<path d="M ' + (ax + taps[i - 1][0] * (aw - 12) + 11) + ' ' + (base - 20) + ' Q ' + (ax + (taps[i - 1][0] + t[0]) / 2 * (aw - 12) + 5) + ' ' + (base - 27) + ' ' + (ax + t[0] * (aw - 12) + 3) + ' ' + (base - 20) + '" fill="none" stroke="#98A1A9" stroke-width="1" opacity=".6"/>';
+        });
+        v += '<text x="' + (ax + 4) + '" y="' + (y + h - 5) + '" font-family="var(--body)" font-size="7.5" fill="#98A1A9">each echo quieter, on the beat</text>';
+      }
+      return v;
+    }
+    stages.forEach(function (st, i) {
+      var x = x0 + i * (cw + gap);
+      var isVoice = st.tone === "red";
+      s += '<rect x="' + (x + 2.5) + '" y="' + (top + 3.5) + '" width="' + cw + '" height="' + chd + '" rx="12" fill="var(--ink)" opacity=".10"/>';
+      s += '<rect x="' + x + '" y="' + top + '" width="' + cw + '" height="' + chd + '" rx="12" fill="' + (isVoice ? "var(--accent-wash)" : "var(--surface-sunk)") + '" stroke="' + (isVoice ? "var(--accent)" : "var(--line-strong)") + '" stroke-width="1.8"/>';
+      s += '<text x="' + (x + cw / 2) + '" y="' + (top + 26) + '" text-anchor="middle" font-family="var(--display)" font-size="14.5" font-weight="800" fill="var(--ink)">' + esc(st.n) + '</text>';
+      s += '<text x="' + (x + cw / 2) + '" y="' + (top + 43) + '" text-anchor="middle" font-family="var(--mono)" font-size="9.5" fill="' + (isVoice ? "var(--accent-deep)" : "var(--ink-soft)") + '">' + esc(st.plug) + '</text>';
+      s += viz(st.viz, x + 10, top + 52, cw - 20, 62);
+      // the one knob that matters
+      s += '<rect x="' + (x + 8) + '" y="' + (top + 121) + '" width="' + (cw - 16) + '" height="21" rx="10.5" fill="var(--surface)" stroke="var(--line-strong)" stroke-width="1"/>';
+      s += '<text x="' + (x + cw / 2) + '" y="' + (top + 135) + '" text-anchor="middle" font-family="var(--body)" font-size="9.5" font-weight="700" fill="var(--accent-deep)">' + esc(st.knob) + '</text>';
+      if (i < stages.length - 1) {
+        var axr = x + cw + gap / 2;
+        s += '<path d="M ' + (x + cw + 1) + ' ' + (top + chd / 2) + ' L ' + (x + cw + gap - 4) + ' ' + (top + chd / 2) + '" stroke="var(--accent)" stroke-width="2.6"/>';
+        s += '<path d="M ' + (x + cw + gap - 5) + ' ' + (top + chd / 2 - 5) + ' L ' + (x + cw + gap + 1) + ' ' + (top + chd / 2) + ' L ' + (x + cw + gap - 5) + ' ' + (top + chd / 2 + 5) + ' Z" fill="var(--accent)"/>';
+      }
     });
-    s += '<text x="380" y="170" text-anchor="middle" font-family="var(--body)" font-size="12.5" fill="var(--ink-soft)">The order is the recipe: fix the tone <em>before</em> evening it out, and add space <em>after</em> both —</text>';
-    s += '<text x="380" y="192" text-anchor="middle" font-family="var(--body)" font-size="12.5" fill="var(--ink-soft)">reverb applied to a muddy, uneven voice just makes muddy, uneven echoes.</text>';
+    // where it lives: the mixer slot mapping
+    var my = top + chd + 26;
+    s += '<text x="380" y="' + (my - 2) + '" text-anchor="middle" font-family="var(--body)" font-size="12" font-weight="700" fill="var(--ink)">Where the chain lives: the vocal track’s mixer slots (press F9) — top to bottom IS the order</text>';
+    var slots = ["Slot 1 · Fruity parametric EQ 2", "Slot 2 · Fruity Limiter (COMP)", "Slot 3 · Fruity Reeverb 2", "Slot 4 · Fruity Delay 3"];
+    slots.forEach(function (sl, k) {
+      var sy = my + 10 + k * 30;
+      s += '<rect x="220" y="' + sy + '" width="320" height="24" rx="5" fill="var(--surface-sunk)" stroke="var(--line-strong)" stroke-width="1.2"/>';
+      s += '<circle cx="236" cy="' + (sy + 12) + '" r="4" fill="#AFC96A" stroke="#87A244" stroke-width="1"/>';
+      s += '<text x="250" y="' + (sy + 16) + '" font-family="var(--mono)" font-size="10.5" font-weight="600" fill="var(--ink-mid)">' + esc(sl) + '</text>';
+      var stgIdx = k + 1, sx = x0 + stgIdx * (cw + gap) + cw / 2;
+      s += '<path d="M ' + sx + ' ' + (top + chd + 4) + ' C ' + sx + ' ' + (my + 2) + ', ' + (k % 2 ? 560 : 200) + ' ' + (sy + 12) + ', ' + (k % 2 ? 543 : 217) + ' ' + (sy + 12) + '" fill="none" stroke="var(--ink-faint)" stroke-width="1.2" stroke-dasharray="4 4" opacity=".55"/>';
+    });
+    s += '<text x="380" y="' + (my + 10 + 4 * 30 + 16) + '" text-anchor="middle" font-family="var(--body)" font-size="12" fill="var(--ink-soft)">Why this order: fix the tone, then even the level — and only THEN add space. Reverb on a muddy, uneven voice is muddy, uneven echoes.</text>';
+    s += '</svg>';
+    return s;
+  };
+
+  /* ---------- The frequency map of a voice — what lives where ---------- */
+  SVGX.freqMap = function () {
+    var s = '<svg viewBox="0 0 760 280" role="img" aria-label="The frequency map of a voice">';
+    var gx = 46, gw = 680, gy = 190;
+    var bands = [
+      { f: "under 90 Hz", n: "Rumble", act: "CUT it", x: 0, w: 0.11, tone: "cut", note: "room boom, no voice" },
+      { f: "90–250 Hz", n: "Warmth", act: "keep", x: 0.11, w: 0.15, tone: "keep", note: "the chest of the voice" },
+      { f: "250–500 Hz", n: "Mud", act: "small dip", x: 0.26, w: 0.13, tone: "risk", note: "boxy, woolly when too loud" },
+      { f: "500 Hz–2 kHz", n: "Body", act: "leave alone", x: 0.39, w: 0.2, tone: "keep", note: "the words themselves" },
+      { f: "2–5 kHz", n: "Presence", act: "gentle lift", x: 0.59, w: 0.16, tone: "good", note: "“closer to the speaker”" },
+      { f: "5–8 kHz", n: "Sibilance", act: "watch it", x: 0.75, w: 0.1, tone: "risk", note: "harsh “ess” sounds live here" },
+      { f: "10 kHz +", n: "Air", act: "small shelf up", x: 0.85, w: 0.15, tone: "good", note: "sparkle — AIR button ground" }
+    ];
+    var cols = { cut: "var(--ink-faint)", keep: "color-mix(in srgb, var(--accent) 40%, var(--surface-sunk))", risk: "#D9A24C", good: "var(--accent)" };
+    // the voice-energy curve behind
+    s += '<path d="M ' + gx + ' ' + (gy - 8) + ' C ' + (gx + gw * 0.1) + ' ' + (gy - 30) + ', ' + (gx + gw * 0.18) + ' ' + (gy - 96) + ', ' + (gx + gw * 0.33) + ' ' + (gy - 100) +
+         ' C ' + (gx + gw * 0.5) + ' ' + (gy - 104) + ', ' + (gx + gw * 0.62) + ' ' + (gy - 74) + ', ' + (gx + gw * 0.74) + ' ' + (gy - 48) +
+         ' C ' + (gx + gw * 0.86) + ' ' + (gy - 26) + ', ' + (gx + gw * 0.94) + ' ' + (gy - 14) + ', ' + (gx + gw) + ' ' + (gy - 10) +
+         ' L ' + (gx + gw) + ' ' + gy + ' L ' + gx + ' ' + gy + ' Z" fill="var(--accent)" opacity=".12"/>';
+    bands.forEach(function (b, i) {
+      var bx = gx + b.x * gw, bw = b.w * gw - 3;
+      s += '<rect x="' + bx + '" y="' + (gy - 64) + '" width="' + bw + '" height="64" rx="7" fill="' + cols[b.tone] + '" opacity="' + (b.tone === "cut" ? ".55" : b.tone === "keep" ? ".85" : ".8") + '" stroke="var(--line-strong)" stroke-width="1"/>';
+      var lab = b.tone === "good" || b.tone === "cut";
+      s += '<text x="' + (bx + bw / 2) + '" y="' + (gy - 38) + '" text-anchor="middle" font-family="var(--display)" font-size="12.5" font-weight="800" fill="' + (b.tone === "good" ? "#fff" : "var(--ink)") + '">' + esc(b.n) + '</text>';
+      s += '<text x="' + (bx + bw / 2) + '" y="' + (gy - 20) + '" text-anchor="middle" font-family="var(--body)" font-size="9.5" font-weight="700" fill="' + (b.tone === "good" ? "rgba(255,255,255,.9)" : "var(--ink-mid)") + '">' + esc(b.act) + '</text>';
+      s += '<text x="' + (bx + bw / 2) + '" y="' + (gy + 18) + '" text-anchor="middle" font-family="var(--mono)" font-size="9" fill="var(--ink-faint)">' + esc(b.f) + '</text>';
+      // stagger the notes above so they never collide; clamp so edge notes stay on the canvas
+      var ny = (i % 2 === 0) ? gy - 84 : gy - 106;
+      var nx = Math.min(Math.max(bx + bw / 2, 104), 618);
+      s += '<line x1="' + (bx + bw / 2) + '" y1="' + (ny + 6) + '" x2="' + (bx + bw / 2) + '" y2="' + (gy - 66) + '" stroke="var(--ink-faint)" stroke-width="1" stroke-dasharray="3 3" opacity=".5"/>';
+      s += '<text x="' + nx + '" y="' + ny + '" text-anchor="middle" font-family="var(--body)" font-size="9.5" fill="var(--ink-soft)">' + esc(b.note) + '</text>';
+    });
+    s += '<line x1="' + gx + '" y1="' + gy + '" x2="' + (gx + gw) + '" y2="' + gy + '" stroke="var(--line-strong)" stroke-width="1.6"/>';
+    s += '<text x="380" y="248" text-anchor="middle" font-family="var(--body)" font-size="12" fill="var(--ink-soft)">Low notes on the left, sparkle on the right. Every EQ move in the polish recipe is one of these blocks —</text>';
+    s += '<text x="380" y="266" text-anchor="middle" font-family="var(--body)" font-size="12" fill="var(--ink-soft)">cut what isn’t voice, dip the mud, lift presence and air a touch. That’s the whole science.</text>';
+    s += '</svg>';
+    return s;
+  };
+
+  /* ---------- Anatomy of a reverb: direct sound, pre-delay, tail ---------- */
+  SVGX.reverbAnatomy = function () {
+    var s = '<svg viewBox="0 0 760 270" role="img" aria-label="What a reverb is made of">';
+    var gx = 70, gw = 640, base = 180;
+    s += '<line x1="' + gx + '" y1="' + base + '" x2="' + (gx + gw) + '" y2="' + base + '" stroke="var(--line-strong)" stroke-width="1.6"/>';
+    s += '<text x="' + (gx + gw) + '" y="' + (base + 20) + '" text-anchor="end" font-family="var(--mono)" font-size="10" fill="var(--ink-faint)">time →</text>';
+    // direct sound
+    s += '<rect x="' + gx + '" y="' + (base - 120) + '" width="16" height="120" rx="4" fill="var(--accent)"/>';
+    s += '<text x="' + (gx + 8) + '" y="' + (base - 130) + '" text-anchor="middle" font-family="var(--body)" font-size="11" font-weight="800" fill="var(--ink)">the word itself</text>';
+    // pre-delay gap
+    var pdEnd = gx + 88;
+    s += '<path d="M ' + (gx + 22) + ' ' + (base - 96) + ' L ' + (pdEnd - 4) + ' ' + (base - 96) + '" stroke="var(--accent-deep)" stroke-width="2"/>';
+    s += '<path d="M ' + (gx + 27) + ' ' + (base - 101) + ' L ' + (gx + 21) + ' ' + (base - 96) + ' L ' + (gx + 27) + ' ' + (base - 91) + ' Z" fill="var(--accent-deep)"/>';
+    s += '<path d="M ' + (pdEnd - 9) + ' ' + (base - 101) + ' L ' + (pdEnd - 3) + ' ' + (base - 96) + ' L ' + (pdEnd - 9) + ' ' + (base - 91) + ' Z" fill="var(--accent-deep)"/>';
+    s += '<text x="' + (pdEnd + 62) + '" y="' + (base - 108) + '" text-anchor="middle" font-family="var(--body)" font-size="10.5" font-weight="700" fill="var(--accent-deep)">← PRE-DELAY (~20 ms)</text>';
+    s += '<text x="' + (pdEnd + 78) + '" y="' + (base - 92) + '" text-anchor="middle" font-family="var(--body)" font-size="9" fill="var(--ink-soft)">the silent gap that keeps words clear</text>';
+    // early reflections
+    [[0, 46], [10, 38], [22, 52], [34, 30]].forEach(function (er) {
+      s += '<rect x="' + (pdEnd + er[0]) + '" y="' + (base - er[1]) + '" width="7" height="' + er[1] + '" rx="2" fill="var(--accent)" opacity=".55"/>';
+    });
+    s += '<text x="' + (pdEnd + 24) + '" y="' + (base - 62) + '" text-anchor="middle" font-family="var(--body)" font-size="9.5" fill="var(--ink-soft)">first echoes off the walls</text>';
+    // the tail
+    var tx = pdEnd + 52;
+    s += '<path d="M ' + tx + ' ' + (base - 58) + ' C ' + (tx + 120) + ' ' + (base - 44) + ', ' + (tx + 260) + ' ' + (base - 16) + ', ' + (gx + gw - 10) + ' ' + (base - 2) +
+         ' L ' + (gx + gw - 10) + ' ' + base + ' L ' + tx + ' ' + base + ' Z" fill="var(--accent)" opacity=".28"/>';
+    s += '<path d="M ' + tx + ' ' + (base - 58) + ' C ' + (tx + 120) + ' ' + (base - 44) + ', ' + (tx + 260) + ' ' + (base - 16) + ', ' + (gx + gw - 10) + ' ' + (base - 2) + '" fill="none" stroke="var(--accent)" stroke-width="2.4"/>';
+    s += '<text x="' + (tx + 170) + '" y="' + (base - 52) + '" text-anchor="middle" font-family="var(--display)" font-size="13" font-weight="800" fill="var(--ink)">the tail — the “room” you hear</text>';
+    // decay arrow
+    s += '<path d="M ' + tx + ' ' + (base + 26) + ' L ' + (gx + gw - 14) + ' ' + (base + 26) + '" stroke="var(--ink-faint)" stroke-width="1.8"/>';
+    s += '<path d="M ' + (gx + gw - 16) + ' ' + (base + 21) + ' L ' + (gx + gw - 8) + ' ' + (base + 26) + ' L ' + (gx + gw - 16) + ' ' + (base + 31) + ' Z" fill="var(--ink-faint)"/>';
+    s += '<text x="' + (tx + (gw - (tx - gx)) / 2) + '" y="' + (base + 44) + '" text-anchor="middle" font-family="var(--body)" font-size="10.5" font-weight="700" fill="var(--ink-mid)">DECAY — how long the room rings (plate ~1.5 s · hall 2.5 s+)</text>';
+    // knob legend
+    s += '<text x="380" y="250" text-anchor="middle" font-family="var(--body)" font-size="12" fill="var(--ink-soft)">WET = how tall this whole cloud is next to the word · DAMPING = how quickly the tail loses its brightness.</text>';
     s += '</svg>';
     return s;
   };
@@ -2588,14 +3166,26 @@
              " C " + (gx + 390) + " " + mid + ", " + (gx + 400) + " " + (mid - 16) + ", " + (gx + 445) + " " + (mid - 16) +
              " C " + (gx + 490) + " " + (mid - 16) + ", " + (gx + 500) + " " + (mid - 24) + ", " + (gx + gw) + " " + (mid - 26) +
              '" fill="none" stroke="' + FLC.or + '" stroke-width="3" stroke-linecap="round"/>';
+    // spectrum wash under the curve, like the real EQ2 analyser
+    inner += '<path d="M ' + gx + " " + gy + " C " + (gx + 40) + " " + gy + ", " + (gx + 60) + " " + mid + ", " + (gx + 105) + " " + mid +
+             " C " + (gx + 150) + " " + mid + ", " + (gx + 155) + " " + (mid + 22) + ", " + (gx + 198) + " " + (mid + 22) +
+             " C " + (gx + 245) + " " + (mid + 22) + ", " + (gx + 260) + " " + mid + ", " + (gx + 330) + " " + mid +
+             " C " + (gx + 390) + " " + mid + ", " + (gx + 400) + " " + (mid - 16) + ", " + (gx + 445) + " " + (mid - 16) +
+             " C " + (gx + 490) + " " + (mid - 16) + ", " + (gx + 500) + " " + (mid - 24) + ", " + (gx + gw) + " " + (mid - 26) +
+             ' L ' + (gx + gw) + ' ' + gy + ' L ' + gx + ' ' + gy + ' Z" fill="' + FLC.or + '" opacity=".13"/>';
+    // numbered band handles, like EQ2's draggable dots
+    [[gx + 105, mid, "1"], [gx + 198, mid + 22, "2"], [gx + 445, mid - 16, "3"], [gx + 570, mid - 25, "4"]].forEach(function (bd) {
+      inner += '<circle cx="' + bd[0] + '" cy="' + bd[1] + '" r="9" fill="' + FLC.lcdBg + '" stroke="' + FLC.or + '" stroke-width="2"/>';
+      inner += '<text x="' + bd[0] + '" y="' + (bd[1] + 3.5) + '" text-anchor="middle" font-family="var(--mono)" font-size="10" font-weight="800" fill="' + FLC.or + '">' + bd[2] + '</text>';
+    });
     // labels
     function tag(x, y, t) {
       return '<text x="' + x + '" y="' + y + '" text-anchor="middle" font-family="var(--body)" font-size="9.5" font-weight="700" fill="' + FLC.txt + '">' + t + "</text>";
     }
-    inner += tag(gx + 70, gy - gh + 20, "cut the rumble");
-    inner += tag(gx + 198, mid + 46, "less mud (250 Hz)");
-    inner += tag(gx + 445, mid - 32, "presence (3 kHz)");
-    inner += tag(gx + 560, mid - 44, "air (10 kHz+)");
+    inner += tag(gx + 70, gy - gh + 20, "1 · cut the rumble");
+    inner += tag(gx + 198, mid + 48, "2 · less mud (250 Hz)");
+    inner += tag(gx + 445, mid - 34, "3 · presence (3 kHz)");
+    inner += tag(gx + 560, mid - 44, "4 · air (10 kHz+)");
     return flWindow(720, 230, "Fruity parametric EQ 2 — a vocal curve", inner);
   };
 
@@ -2613,6 +3203,14 @@
     var after = before.map(function (h) { return 22 + h * 0.45; });
     s += '<text x="150" y="34" text-anchor="middle" font-family="var(--display)" font-size="14" font-weight="700" fill="var(--ink)">Before</text>';
     s += wave(70, before, "var(--ink-faint)");
+    // threshold line + pull-down arrows on the peaks
+    s += '<line x1="62" y1="80" x2="242" y2="80" stroke="var(--stop)" stroke-width="1.6" stroke-dasharray="5 4"/>';
+    s += '<text x="246" y="84" font-family="var(--body)" font-size="9.5" font-weight="700" fill="var(--stop)">THRES</text>';
+    [4, 8].forEach(function (i) {
+      var px = 70 + i * 14 + 4.5;
+      s += '<path d="M ' + px + ' 58 L ' + px + ' 72" stroke="var(--stop)" stroke-width="2"/>';
+      s += '<path d="M ' + (px - 4) + ' 69 L ' + px + ' 77 L ' + (px + 4) + ' 69 Z" fill="var(--stop)"/>';
+    });
     s += '<text x="150" y="188" text-anchor="middle" font-family="var(--body)" font-size="11.5" fill="var(--ink-soft)">quiet words vanish, loud notes poke out</text>';
     s += '<path d="M 280 105 L 330 105" stroke="var(--accent)" stroke-width="3" marker-end="none"/><path d="M 322 97 L 336 105 L 322 113 Z" fill="var(--accent)"/>';
     s += '<text x="308" y="88" text-anchor="middle" font-family="var(--body)" font-size="10.5" font-weight="700" fill="var(--accent-deep)">compressor</text>';
@@ -3058,6 +3656,11 @@
     flexWindow: function () { return SVGX.flexWindow(); },
     rackHumanise: function () { return SVGX.rackHumanise(); },
     vocalChain: function () { return SVGX.vocalChain(); },
+    freqMap: function () { return SVGX.freqMap(); },
+    reverbAnatomy: function () { return SVGX.reverbAnatomy(); },
+    kbZones: function () { return SVGX.kbZones(); },
+    drumKitFull: function () { return SVGX.drumKitFull(); },
+    chorusLift: function () { return SVGX.chorusLift(); },
     reverbWindow: function () { return SVGX.reverbWindow(); },
     eqCurve: function () { return SVGX.eqCurve(); },
     compDiagram: function () { return SVGX.compDiagram(); },
@@ -3210,6 +3813,56 @@
       ],
       note: "Crash cymbal on step 1 of the first bar of the chorus, and it turns into a moment."
     },
+    rnb_slowjam: {
+      name: "Slow jam (half-time)", bpm: "58–70",
+      use: "The classic baby-making tempo. Half-time backbeat — one snare per bar carries everything.",
+      rows: [
+        { label: "Kick", steps: [1, 8] },
+        { label: "Snare", steps: [9], ghost: [15] },
+        { label: "Hi-hat", steps: [1, 3, 5, 7, 9, 11, 13, 15] }
+      ],
+      note: "Hats soft, swing at ~20%. The ghost snare on 15 pulls the bar round to the next one. Space IS the style — resist filling it."
+    },
+    rnb_68: {
+      name: "12/8 sway (slow dance)", bpm: "60–75",
+      use: "The swaying, waltz-in-slow-motion feel of old-school soul ballads.",
+      rows: [
+        { label: "Kick", steps: [1, 10] },
+        { label: "Snare", steps: [9] },
+        { label: "Hi-hat", steps: [1, 4, 7, 10, 13, 16] }
+      ],
+      note: "The hats every THREE cells (1-4-7…) make the sway — that spacing turns straight time into a 12/8 rock-a-bye feel. Count “ONE-and-a, TWO-and-a” along with it."
+    },
+    rnb_neosoul: {
+      name: "Neo-soul (drunk feel)", bpm: "68–82",
+      use: "Loose, behind-the-beat, human. The D’Angelo / Erykah pocket.",
+      rows: [
+        { label: "Kick", steps: [1, 8, 12] },
+        { label: "Snare", steps: [5, 13], ghost: [4, 11] },
+        { label: "Hi-hat", steps: [1, 3, 5, 7, 9, 11, 13, 15] }
+      ],
+      note: "Swing up HIGH — 25–35%, more than feels safe. Ghost hits just before the snares at ~25% velocity. It should feel like it’s almost falling over but never does."
+    },
+    rnb_trapsoul: {
+      name: "Trap-soul (slow burn)", bpm: "65–75",
+      use: "The late-night Weeknd / Brent Faiyaz bed — trap furniture at ballad speed.",
+      rows: [
+        { label: "Kick / 808", steps: [1, 8, 13] },
+        { label: "Snare / clap", steps: [9] },
+        { label: "Hi-hat", steps: [1, 3, 5, 7, 9, 11, 13, 15] }
+      ],
+      note: "Every kick gets an 808 note on the chord root. ONE sparse hat roll per 8 bars, not per bar — at this tempo restraint reads as expensive."
+    },
+    rnb_quietstorm: {
+      name: "Quiet storm (rim & shaker)", bpm: "60–72",
+      use: "Candle-lit. The rim click instead of a snare is the whole mood.",
+      rows: [
+        { label: "Kick", steps: [1, 11] },
+        { label: "Rim click", steps: [5, 13] },
+        { label: "Shaker", steps: [1, 3, 5, 7, 9, 11, 13, 15], ghost: [2, 6, 10, 14] }
+      ],
+      note: "Swap any snare for a rim click and a song instantly moves closer to midnight. The ghost shaker cells are quiet in-between hits — a gentle 16th shimmer. Open hat once at the start of every second bar if it needs breath."
+    },
     /* wizard-only patterns (not in the main library list) */
     gtr_chop: {
       name: "Guitar: off-beat chops", bpm: "any",
@@ -3245,7 +3898,7 @@
     }
   };
 
-  var PATTERN_ORDER = ["basicpop", "ballad", "fourfloor", "push", "boombap", "laidback", "rnb", "trap", "drill", "dembow", "driving8", "anthem"];
+  var PATTERN_ORDER = ["basicpop", "ballad", "fourfloor", "push", "boombap", "laidback", "rnb", "rnb_slowjam", "rnb_68", "rnb_neosoul", "rnb_trapsoul", "rnb_quietstorm", "trap", "drill", "dembow", "driving8", "anthem"];
 
   function patternGridHTML(id, compact) {
     var p = PATTERNS[id];
@@ -3608,8 +4261,8 @@
     ]
   });
   N("ms5", {
-    q: "One last check: your FL edition",
-    d: "<p><strong>Help → About</strong>. If it says <strong>Fruity Edition</strong>, audio recording isn't a setting that's off — the feature isn't in that edition at all. You'd need Producer Edition or above (upgrades are priced as the difference).</p>",
+    q: "One last check: the FL edition",
+    d: "<p><strong>Help → About</strong>. Your copy should say <strong>Producer Edition</strong> — recording is fully included there, so this won’t be your problem. But if it somehow says <strong>Fruity Edition</strong> (a different install or account), audio recording isn’t a setting that’s off — the feature isn’t in that edition at all.</p>",
     opts: [
       { t: "It's Fruity — mystery solved", next: "ms5b" },
       { t: "It's Producer or higher", next: "msFall" }
@@ -4118,7 +4771,8 @@
       { t: "Slow ballad", s: "Spacious and emotional", next: "bt1_ballad" },
       { t: "Hip hop / R&B", s: "Head-nod groove, smooth", next: "bt1_rnb" },
       { t: "Dance / house", s: "Four-on-the-floor energy", next: "bt1_dance" },
-      { t: "Trap / drill", s: "Heavy 808s, rolling hats", next: "bt1_trap" }
+      { t: "Trap / drill", s: "Heavy 808s, rolling hats", next: "bt1_trap" },
+      { t: "Slow R&B / late-night", s: "Slow jams, neo-soul, quiet storm — five grooves", next: "bt1_rnbslow" }
     ]
   });
 
@@ -4132,13 +4786,15 @@
     dance:  { label: "Dance / house", bpm: "120–126", bpmSet: "124", pat: "fourfloor", alt: "driving8",
               hum: "<ul><li>The open hat on the off-beats (steps 3, 7, 11, 15) IS the genre — make it slightly loud</li><li>Layer a clap on top of the snare for width</li><li>Drop the kick out for the last bar before a chorus, then slam it back in</li></ul>" },
     trap:   { label: "Trap / drill", bpm: "136–146", bpmSet: "140", pat: "trap", alt: "drill",
-              hum: "<ul><li>Every kick gets an <strong>808 note</strong> on the same step, pitched to your chord roots — in FLEX, search \"808\"</li><li>One <strong>hat roll</strong> at the end of each 4- or 8-bar phrase, velocity swelling in — see the roll card in Making beats</li><li>Try the <strong>drill</strong> variant with its early snare for the off-balance UK feel</li></ul>" }
+              hum: "<ul><li>Every kick gets an <strong>808 note</strong> on the same step, pitched to your chord roots — in FLEX, search \"808\"</li><li>One <strong>hat roll</strong> at the end of each 4- or 8-bar phrase, velocity swelling in — see the roll card in Making beats</li><li>Try the <strong>drill</strong> variant with its early snare for the off-balance UK feel</li></ul>" },
+    rnbslow: { label: "Slow R&B", bpm: "58–75", bpmSet: "66", pat: "rnb_slowjam", alt: "rnb_neosoul",
+              hum: "<ul><li><strong>Swing 20–30%</strong> — slow R&B lives further behind the beat than anything else you’ll make</li><li>Ghost hits (snare or shaker at ~25% velocity) are the difference between empty and intimate</li><li>Swap the snare for a <strong>rim click</strong> to go full quiet-storm, or add an 808 on the kicks for trap-soul</li><li>All five slow grooves are drawn in the library: slow jam, 12/8 sway, neo-soul, trap-soul, quiet storm — try each under the same 8 bars of singing and keep the one that fits her phrasing</li></ul>" }
   };
 
   Object.keys(GENRES).forEach(function (g) {
     var G = GENRES[g];
     N("bt1_" + g, {
-      step: "Step 1 of 4 — " + G.label, q: "Set the tempo: around " + G.bpmSet + " BPM",
+      step: "Step 1 of 5 — " + G.label, q: "Set the tempo: around " + G.bpmSet + " BPM",
       v: function () { return SVGX.flToolbar("bpm"); },
       d: "<p>This feel lives at <strong>" + G.bpm + " BPM</strong>. You're heading for about <strong>" + G.bpmSet + "</strong> — sequencing at roughly the right speed lets your ears judge it fairly.</p>" +
         act([
@@ -4149,7 +4805,7 @@
       opts: [{ t: "Tempo set — next", cls: "primary", next: "bt2_" + g }]
     });
     N("bt2_" + g, {
-      step: "Step 2 of 4 — " + G.label, q: "Click this pattern into the Channel Rack",
+      step: "Step 2 of 5 — " + G.label, q: "Click this pattern into the Channel Rack",
       v: function () {
         var chans = PATTERNS[G.pat].rows.map(function (r) { return { name: r.label, led: false, steps: r.steps }; });
         chans.push({ name: "FLEX — Grand Piano", led: false, steps: [] });
@@ -4166,7 +4822,7 @@
       opts: [{ t: "It's looping — next", cls: "primary", next: "bt3_" + g }]
     });
     N("bt3_" + g, {
-      step: "Step 3 of 4 — " + G.label, q: "Make it human",
+      step: "Step 3 of 5 — " + G.label, q: "Make it human",
       v: g === "trap" ? function () { return SVGX.hatRoll(); } : function () { return SVGX.rackHumanise(); },
       d: G.hum + (g === "trap"
         ? act([
@@ -4183,7 +4839,7 @@
       opts: [{ t: "Grooving — next", cls: "primary", next: "bt4_" + g }]
     });
     N("bt4_" + g, {
-      step: "Step 4 of 4 — " + G.label, q: "Verse version, chorus version",
+      step: "Step 4 of 5 — " + G.label, q: "Verse version, chorus version",
       v: function () { return SVGX.songArc(); },
       d: "<p>One beat all the way through is the #1 beginner tell. You'll make a thinner copy for the verses — the full one becomes the chorus.</p>" +
         act([
@@ -4192,8 +4848,24 @@
           "<strong>Right-click each pattern's name → Rename</strong>: call them \"Beat — verse\" and \"Beat — chorus\" now, while you remember which is which",
           "Also worth a try as a variation: the <strong>" + PATTERNS[G.alt].name + "</strong> grid from the library"
         ]),
-      opts: [{ t: "Done", cls: "good", next: "bDone" }]
+      opts: [{ t: "Verse & chorus made — one more thing", cls: "primary", next: "btChorus" }]
     });
+  });
+
+  N("btChorus", {
+    step: "Step 5 of 5 — when the chorus hits", q: "The chorus has to LIFT — here’s exactly what changes",
+    v: function () { return SVGX.chorusLift(); },
+    d: "<p>A chorus usually <em>feels</em> faster — but the tempo almost never changes. The speed-up you hear on records is the drums getting <strong>denser</strong>, not quicker. The diagram shows the whole trick; here it is as moves:</p>" +
+      act([
+        "<strong>The fill announces it:</strong> in the LAST bar of the verse pattern, add snare on steps <strong>13–14–15–16</strong> and clear the hats from those steps",
+        "<strong>Crash on arrival:</strong> in the chorus pattern, add a <strong>crash cymbal on step 1</strong> — add a Crash channel if you don’t have one (right-click a channel → Insert)",
+        "<strong>Double the hats:</strong> verse hats on every other cell (1,3,5…) become chorus hats on <strong>every cell</strong> — this is the ‘speed-up’ your ears hear",
+        "<strong>Open hat breathes:</strong> add the open hat on the off-beats — steps <strong>3, 7, 11, 15</strong>",
+        "<strong>One or two extra kicks</strong> (try steps 4 and 12) so the floor moves more",
+        "Slow R&B exception: lift LESS — double the shaker instead of the hats, add the crash, and let the vocal stack do the rest"
+      ]) +
+      "<p>If a song genuinely speeds up (some do, on purpose): <strong>right-click the BPM display → Create automation clip</strong> and raise it by only <strong>2–4 BPM</strong> into the final chorus — more sounds like a mistake. The full walkthrough is in <a href='#song' style='color:var(--accent-deep)'>Building a song</a> under tempo changes.</p>",
+    opts: [{ t: "Done — the beat breathes", cls: "good", next: "bDone" }]
   });
 
   N("bDone", {
@@ -4209,8 +4881,9 @@
   N("v0", {
     q: "What should your voice sound like?",
     v: function () { return SVGX.vocalChain(); },
-    d: "<p>Pick the destination — I'll set up the exact effects with you. If this is your first time here, start with the polish: it's the chain above, and it's the foundation every other sound builds on.</p>",
+    d: "<p>Pick the destination — I'll set up the exact effects with you. If this is your first time here, start with the polish: it's the chain drawn below, and it's the foundation every other sound builds on.</p>",
     opts: [
+      { t: "What IS the vocal chain?", s: "The guided tour — what each effect actually does to your voice, in plain words", next: "vc1" },
       { t: "Polished, like a record", s: "The standard vocal chain: EQ → compression → reverb → delay. Start here", cls: "primary", next: "vs1" },
       { t: "Big ballad space", s: "Long hall reverb, dreamy echoes — the held-note chorus sound", next: "vbal1" },
       { t: "Modern pop sheen", s: "Pitch correction — from invisible polish to the hard tuned effect", next: "vpop1" },
@@ -4218,6 +4891,63 @@
       { t: "Doubles & harmonies", s: "The free chorus-thickener every record uses", next: "vdh1" },
       { t: "R&B vocals — three flavours", s: "Silky classic, airy neo-soul, dark trap-soul", next: "rb0" }
     ]
+  });
+
+  /* ---- A0: the deep dive — what the chain actually is ---- */
+  N("vc1", {
+    step: "The chain · 1 of 5", q: "What a “chain” actually means",
+    v: function () { return SVGX.vocalChain(); },
+    d: "<p>When you record your voice, FL saves it exactly as the mic heard it — <strong>dry</strong>: no space around it, every loud note loud, every quiet word quiet, the room rumble still in it. Nobody releases that. Every voice you’ve ever heard on a record has been passed through a row of small tools first.</p>" +
+      "<p>That row is the <strong>chain</strong>. Think of it like water through pipes: your voice flows in one end, passes through each tool <em>in order</em>, and comes out the other end sounding like a record. Each tool changes exactly ONE thing:</p>" +
+      "<ul><li><strong>EQ</strong> changes the <em>tone</em> — which parts of the voice are louder or quieter, from deep chest to sparkly air</li><li><strong>Compression</strong> changes the <em>evenness</em> — quiet words come up, loud notes come down</li><li><strong>Reverb</strong> changes the <em>space</em> — it puts the voice in a room</li><li><strong>Delay</strong> adds <em>echoes</em> — distinct repeats, when you want them</li></ul>" +
+      "<p>The chain lives on the vocal’s <strong>mixer track</strong> (press <kbd>F9</kbd>). The slots down the right-hand side are the pipe — the voice enters at slot 1 and flows downward, so <strong>top-to-bottom is the order</strong>. That’s why the diagram below maps each stage to a numbered slot.</p>",
+    opts: [{ t: "So why this order? — next", cls: "primary", next: "vc2" }]
+  });
+  N("vc2", {
+    step: "The chain · 2 of 5", q: "Stage 1: EQ — the tone map",
+    v: function () { return SVGX.freqMap(); },
+    d: "<p>Every sound is made of <strong>frequencies</strong> — low ones you feel in your chest, high ones that sparkle. A voice spreads across the whole map drawn below, and an <strong>EQ</strong> (equaliser) is simply a volume control for each region separately.</p>" +
+      "<p>Reading the map left to right: below 90 Hz there’s <em>no voice at all</em> — just mic-stand rumble, so we cut it. The 250 Hz region turns “boxy” when it piles up — a small dip clears it. The middle is the words themselves — leave it alone. Around 3 kHz lives <strong>presence</strong> — a gentle lift moves the singer closer to the listener’s ear. And 10 kHz up is <strong>air</strong> — the expensive-sounding sparkle (the Scarlett’s AIR button lives up here too).</p>" +
+      "<p><strong>What wrong sounds like:</strong> cut too much low and she turns thin, like a phone call. Boost too much air and every “s” turns sharp and spitty (that harsh region is 5–8 kHz — sibilance). That’s why every move stays at 2–3 dB: EQ done right is invisible.</p>" +
+      "<p>Why it goes <strong>first</strong>: every tool after this one reacts to what it’s fed. Fix the tone first and the compressor squeezes <em>voice</em>, not rumble; the reverb echoes <em>clarity</em>, not mud.</p>",
+    opts: [{ t: "Stage 2: compression — next", cls: "primary", next: "vc3" }]
+  });
+  N("vc3", {
+    step: "The chain · 3 of 5", q: "Stage 2: compression — the invisible hand on the fader",
+    v: function () { return SVGX.compDiagram(); },
+    d: "<p>Singers are dynamic — a belted chorus can be TEN times louder than a breathy verse word. On a record that would mean quiet words vanish behind the beat and loud notes jump out and hurt. A <strong>compressor</strong> is an invisible hand that turns the volume down the instant you get loud, and lets go when you get quiet again — hundreds of times a second, faster than any human could.</p>" +
+      "<p>Its controls in plain words:</p>" +
+      "<ul><li><strong>THRESHOLD (THRES)</strong> — the line where the hand starts pushing. Lower line = more of the voice gets caught. This is the knob you actually use</li><li><strong>RATIO</strong> — how hard it pushes once you cross the line. 3:1–4:1 is the vocal zone</li><li><strong>ATTACK</strong> — how fast the hand grabs. Too fast squashes the crisp start of words</li><li><strong>RELEASE</strong> — how fast it lets go. Too fast and you hear it “breathing”</li></ul>" +
+      "<p>The recipe: sing the loudest chorus line, lower THRES until the meter dips <strong>3–4 dB</strong> on the big moments, leave the rest at the defaults. <strong>What wrong sounds like:</strong> the voice “pumping” like it’s being squeezed, or her breaths suddenly as loud as words — both mean back the threshold off.</p>" +
+      "<p>Why it comes <strong>after EQ</strong>: compression reacts to everything it hears. If the rumble is still in there, the compressor squeezes the whole voice every time a truck goes past.</p>",
+    opts: [{ t: "Stage 3: reverb — next", cls: "primary", next: "vc4" }]
+  });
+  N("vc4", {
+    step: "The chain · 4 of 5", q: "Stage 3: reverb — what a “space” is made of",
+    v: function () { return SVGX.reverbAnatomy(); },
+    d: "<p>Sing in a bathroom and the sound bounces off every wall, thousands of tiny echoes arriving so close together they blur into a wash. That wash is <strong>reverb</strong>. The plugin fakes it — which means you can record in a bedroom and place the voice in any room you like.</p>" +
+      "<p>The anatomy drawn below is what the knobs control:</p>" +
+      "<ul><li><strong>PRE-DELAY</strong> — the silent gap between the word and its reverb. ~20 ms keeps every word clear; without it the room swallows the consonants</li><li><strong>DECAY</strong> — how long the room rings. Short (~1.2 s) = tight and modern; long (3 s+) = cathedral ballad</li><li><strong>DAMPING</strong> — how fast the tail loses its brightness, like curtains on the walls. More damping = darker, moodier space</li><li><strong>WET</strong> — how loud the whole cloud is next to the dry voice. THE knob: 15–25% for a lead. You should <em>feel</em> the room, not hear an obvious effect</li></ul>" +
+      "<p>The three room shapes: <strong>Room</strong> = small and intimate (verses). <strong>Plate</strong> = no room at all, a smooth flattering studio invention — THE default vocal choice. <strong>Hall</strong> = big and dramatic (ballad choruses). <strong>What wrong sounds like:</strong> the voice drowning far away — too wet; or lyrics smearing into each other — decay too long for the song’s speed.</p>" +
+      "<p>Why it comes <strong>after</strong> EQ and compression: reverb is a photocopier for whatever you feed it. Feed it mud and unevenness, and it prints mud and unevenness onto every wall of the room.</p>",
+    opts: [{ t: "Stage 4: delay — next", cls: "primary", next: "vc5" }]
+  });
+  N("vc5", {
+    step: "The chain · 5 of 5", q: "Stage 4: delay — and the whole chain together",
+    v: function () { return SVGX.delayTaps(); },
+    d: "<p><strong>Delay vs reverb</strong>, once and forever: reverb is a <em>space you feel</em> — a blur. Delay is an <em>echo you hear</em> — distinct repeats of the word, in time with the song. Plenty of finished songs stop at reverb; delay is the optional fourth stage for when you want the echo as a feature.</p>" +
+      "<ul><li><strong>Slapback</strong> — one fast echo: instant attitude</li><li><strong>1/4-note echo</strong> — repeats that land on the beat (use the tempo-sync icon): dreamy and big</li><li><strong>The throw</strong> — the delay turned up for just the LAST word of a line, echoing into the gap. The most record-sounding trick in this whole app</li></ul>" +
+      "<p>And that’s the chain: <strong>EQ fixes the tone → compression fixes the evenness → reverb adds the space → delay adds echoes.</strong> Each stage hands a cleaner voice to the next — which is the whole reason the order never changes. Everything else in the voice menu (ballads, pop sheen, R&B, characters) is this same chain with different settings on top.</p>",
+    opts: [
+      { t: "Build it on my vocal now", cls: "primary", next: "vs1" },
+      { t: "Back to the voice menu", next: "v0" },
+      { t: "Done for now", cls: "good", next: "vcDone" }
+    ]
+  });
+  N("vcDone", {
+    done: true, q: "Now the chain makes sense.",
+    d: "<p>When you’re ready to build it for real, the <strong>Polished, like a record</strong> path sets up all four stages on your actual vocal, knob by knob. The full written version lives in <a href='#voicefx' style='color:var(--accent-deep)'>Shaping your voice</a>.</p>",
+    goFlows: ["voicefx", "record"]
   });
 
   /* ---- A: the standard chain ---- */
@@ -4349,23 +5079,29 @@
 
   /* ---- C: modern pop sheen ---- */
   N("vpop1", {
-    step: "Pop sheen · step 1 of 3", q: "First: which FL edition do you have?",
+    step: "Pop sheen · step 1 of 3", q: "First, the honest bit: your FL is Producer Edition",
     v: function () { return SVGX.pitcherWindow(); },
-    d: "<p><span class='path'>Help → About</span>. The tuning tools — <strong>Pitcher</strong> and <strong>NewTone</strong> — come with <strong>Signature Edition and up</strong>. Producer Edition doesn't include them (they can be bought individually, or the upgrade is priced as the difference).</p>",
+    d: "<p>Your copy is <strong>Producer Edition</strong> — it records and mixes everything in this app, but FL’s own tuning tools (<strong>Pitcher</strong> and <strong>NewTone</strong>, shown above) only come with Signature Edition and up. So the tuned-pop sound needs one of the routes on the next screen — all of them work on your copy.</p><p>(If the copy ever gets upgraded, or Pitcher gets bought on its own, the walkthrough for it is right here too.)</p>",
     opts: [
-      { t: "Signature or higher — carry on", cls: "primary", next: "vpop2" },
-      { t: "Producer — what are my options?", next: "vpop1b" }
+      { t: "My options on Producer", cls: "primary", next: "vpop1b" },
+      { t: "We’ve added Pitcher — walk me through it", next: "vpop2" }
     ]
   });
   N("vpop1b", {
-    q: "Producer Edition options",
-    d: "<p>Three routes, honestly ranked:</p><ul><li><strong>Sing it again.</strong> Unfashionable answer, best result — three more takes usually beats software.</li><li><strong>Buy Pitcher or NewTone individually</strong> from Image-Line's site — cheaper than the full upgrade.</li><li><strong>Free third-party autotune</strong> plugins exist (search \"free autotune VST Mac\") and load into FL like any effect — quality varies, fine for the hard robotic effect, less good for invisible correction.</li></ul>",
-    opts: [{ t: "Understood", cls: "good", next: "vpopDone" }]
+    step: "Pop sheen · Producer routes", q: "Four routes to the tuned sound, honestly ranked",
+    d: "<p><strong>1 · Sing it again.</strong> Unfashionable answer, best result — three more takes of the wobbly line usually beats any software, and it’s free.</p>" +
+      "<p><strong>2 · A free tuner plugin.</strong> <strong>Graillon 2 Free</strong> (Auburn Sounds) and <strong>MAutoPitch</strong> (MeldaProduction) are both free, both Mac AU, and both do the two things Pitcher does: set the KEY to your song’s key, and a speed/amount control where slow = invisible polish, fast = the hard tuned effect. Download from the maker’s site, install, then in FL the plugin appears under <span class='path'>Add → More plugins → Manage plugins → Find plugins</span>. Load it in the same slot Pitcher would take: after compression, before reverb.</p>" +
+      "<p><strong>3 · Buy Pitcher on its own</strong> from Image-Line’s site — much cheaper than the full Signature upgrade, and then the walkthrough on the next screen applies exactly.</p>" +
+      "<p><strong>4 · Upgrade to Signature</strong> — priced as the difference, unlocks NewTone (fix one flat note invisibly) as well.</p>",
+    opts: [
+      { t: "Free tuner installed — same principles?", cls: "primary", next: "vpop2" },
+      { t: "Understood — done", cls: "good", next: "vpopDone" }
+    ]
   });
   N("vpop2", {
     step: "Pop sheen · step 2 of 3", q: "Pitcher: from invisible to iconic",
     v: function () { return SVGX.pitcherWindow(); },
-    d: "<p>Pitcher listens to the voice and pulls every note toward the nearest note of your key — the <strong>correction speed</strong> decides the character.</p>" +
+    d: "<p>Pitcher (and Graillon / MAutoPitch — same two controls, different paint) listens to the voice and pulls every note toward the nearest note of your key — the <strong>correction speed</strong> decides the character.</p>" +
       act([
         "On the vocal's mixer track, load <strong>Pitcher</strong> in the slot <strong>after</strong> EQ and compression, <strong>before</strong> reverb",
         "Set the <strong>key</strong> to your song's key — this matters most; the wrong key pulls notes to wrong places",
@@ -4535,7 +5271,7 @@
     v: function () { return SVGX.pitcherWindow(); },
     d: "<p>The late-night sound: pitch-perfect, slightly unreal, sitting in shadow rather than light.</p>" +
       act([
-        "<strong>Pitcher</strong> (Signature) set to your key, speed on the <strong>faster side of subtle</strong> — audibly tuned but not full robot. This gloss is the genre's signature",
+        "A tuner set to your key, speed on the <strong>faster side of subtle</strong> — audibly tuned but not full robot. This gloss is the genre's signature. (Pitcher is Signature-only — on your Producer copy use <strong>Graillon 2 Free</strong> or <strong>MAutoPitch</strong>, both free; the Pop sheen path has the install steps)",
         "<strong>EQ darker:</strong> no air shelf at all; even tilt the top slightly down",
         "<strong>Reverb:</strong> a hall with <strong>long DECAY (2.5 s+) but LOW WET (~12%)</strong> — darkness behind the voice, not wash over it, with DAMPING turned up",
         "No Pitcher? Run the polish chain darker and lean on the next step's echoes — most of the mood survives"
@@ -4769,7 +5505,7 @@
   }
 
   var FLOW_HINTS = [
-    { flow: "beat",    rx: /\b(beat|drum|drums|hat|hats|snare|kick|808|trap|drill|groove|rhythm|percussion)\b/ },
+    { flow: "beat",    rx: /\b(beat|drum|drums|hat|hats|snare|kick|808|trap|drill|groove|rhythm|percussion|fill|fills|shaker|rim|ghost|crash|cymbal\w*|tom|toms|clap|slow\W*jam\w*|quiet\W*storm)\b/ },
     { flow: "record",  rx: /\b(record|recording|vocal|vocals|sing|singing|voice|take|takes)\b/ },
     { flow: "song",    rx: /\b(song|songs|chord|chords|write|writing|tempo|arrange|arranging|melody|bass|beginner|intermediate|advanced|level|speed|faster|slower|build|master\w*|limiter|export|finish\w*)\b/ },
     { flow: "setup",   rx: /\b(setup|set up|connect|connecting|plug|plugged|install|start|first time)\b/ },
@@ -4777,7 +5513,7 @@
     { flow: "kbd",     rx: /\b(keyboard (not|isn|dead|broken)|not working|no midi)\b/ },
     { flow: "piano",   rx: /\b(piano|keys?|keyboard|midi|instrument|preset|sound|flex|notes?|draw|velocity|quantis|quantiz)\b/ },
     { flow: "mic",     rx: /\b(mic|microphone|echo|twice|doubled|distort\w*|quiet|hiss\w*)\b/ },
-    { flow: "voicefx", rx: /\b(reverb|hall|room|plate|delay|echo\w*|effects?|autotune|auto-tune|tune[ds]?|tuning|pitch\w*|harmon\w*|doubl\w*|polish\w*|compress\w*|eq|telephone|robot|vocoder|shimmer|voice|vocal\w*|r&b|rnb|neo-?soul|soul|ad-?libs?|stacks?|whisper|breathy|silky|trap-?soul)\b/ },
+    { flow: "voicefx", rx: /\b(reverb|hall|room|plate|delay|echo\w*|effects?|autotune|auto-tune|tune[ds]?|tuning|pitch\w*|harmon\w*|doubl\w*|polish\w*|compress\w*|eq|frequenc\w*|chain|edition|producer|telephone|robot|vocoder|shimmer|voice|vocal\w*|r&b|rnb|neo-?soul|soul|ad-?libs?|stacks?|whisper|breathy|silky|trap-?soul)\b/ },
     { flow: "glitch",  rx: /\b(crackl\w*|pop(s|ping)?|stutter\w*|delay|lag\w*|latency|glitch\w*)\b/ }
   ];
 
@@ -4918,5 +5654,6 @@
 })();
 
 </script>
+
 </body>
 </html>
